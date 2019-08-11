@@ -12,6 +12,7 @@ import { CheckBoxes, storagePrefix } from '../row-filter';
 import { ErrorPage404, ErrorBoundaryFallback } from '../error';
 import { referenceForModel } from '../../module/k8s';
 import { withFallback } from '../utils/error-boundary';
+import { resourcePath } from '../utils/resource-link'
 import {
   Dropdown,
   Firehose,
@@ -34,10 +35,11 @@ export const CompactExpandButtons = ({expand = false, onExpandChange = _.noop}) 
 </div>;
 
 /** @type {React.SFC<{disabled?: boolean, label: string, onChange: React.ChangeEventHandler<any>, defaultValue: string}}>} */
-export const TextFilter = ({label, onChange, defaultValue, style, className}) => {
+export const TextFilter = ({label, onChange, onEnter, defaultValue, style, className}) => {
   const input = React.useRef();
   const onKeyDown = (e) => {
     const { nodeName } = e.target;
+    if (e.keyCode === 13) onEnter(e.target.value);
     if (nodeName === 'INPUT' || nodeName === 'TEXTAREA' || e.key !== KEYBOARD_SHORTCUTS.focusFilterInput) {
       return;
     }
@@ -177,6 +179,13 @@ export const FireMan_ = connect(null, {filterList})(
       this.updateURL(filterName, options);
     }
 
+    onEnterEvent(value) {
+      //const path = resourcePath(kind, name, namespace);
+      console.log('value', value);
+      console.log('ids', this.state);
+      console.log('props', this.props);
+    }
+
     componentWillMount() {
       const params = new URLSearchParams(window.location.search);
       this.defaultValue = params.get(this.props.textFilter);
@@ -250,7 +259,7 @@ export const FireMan_ = connect(null, {filterList})(
             <CompactExpandButtons expand={this.state.expand} onExpandChange={this.onExpandChange} />
           </div>}
           <div className="co-m-pane__filter-bar-group co-m-pane__filter-bar-group--filter">
-            <TextFilter label={filterLabel} onChange={e => this.applyFilter(textFilter, e.target.value)} defaultValue={this.defaultValue} tabIndex={1} autoFocus={autoFocus} />
+            <TextFilter label={filterLabel} onEnter={value => this.onEnterEvent(value)} onChange={e => this.applyFilter(textFilter, e.target.value)} defaultValue={this.defaultValue} tabIndex={1} autoFocus={autoFocus} />
           </div>
         </div>
         <div className="co-m-pane__body">

@@ -187,7 +187,8 @@ type VMListProps = {
     pods: FirehoseResult<PodKind[]>;
     migrations: FirehoseResult<K8sResourceKind[]>;
     vmis: FirehoseResult<VMIKind[]>;
-  };
+  };,
+  onEnter: any;
 };
 
 type VirtualMachinesPageProps = {

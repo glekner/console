@@ -173,6 +173,7 @@ export const FireMan_ = connect(null, {filterList})(
       if (filterName.indexOf(storagePrefix) === 0) {
         return;
       }
+      console.log('sshei');
       this.state.reduxIDs.forEach(id => this.props.filterList(id, filterName, options));
       this.updateURL(filterName, options);
     }

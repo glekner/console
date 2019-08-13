@@ -7,6 +7,11 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as VirtualModulesPlugin from 'webpack-virtual-modules';
 
 import { resolvePluginPackages, getActivePluginsModule } from '@console/plugin-sdk/src/codegen';
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+
+interface Configuration extends webpack.Configuration {
+  devServer?: WebpackDevServerConfiguration;
+}
 
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
@@ -15,7 +20,7 @@ const NODE_ENV = process.env.NODE_ENV;
 /* Helpers */
 const extractCSS = new MiniCssExtractPlugin({filename: 'app-bundle.css'});
 
-const config: webpack.Configuration = {
+const config: Configuration = {
   entry: ['./polyfills.js', '@console/app', 'monaco-editor-core/esm/vs/editor/editor.worker.js'],
   output: {
     path: path.resolve(__dirname, 'public/dist'),
@@ -134,6 +139,15 @@ const config: webpack.Configuration = {
   ],
   devtool: 'cheap-module-source-map',
   stats: 'minimal',
+  devServer: {
+    publicPath: path.resolve(__dirname, 'public/dist'),
+    port: 8000,
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:9000',
+      '/index.html': 'http://localhost:9000/index.html',
+    },
+  },
 };
 
 /* Production settings */

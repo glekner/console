@@ -50,6 +50,46 @@ const plugin: Plugin<ConsumedExtensions> = [
       required: CEPH_FLAG,
     },
   },
+  {
+    type: 'Dashboards/Tab',
+    properties: {
+      id: 'redux-1',
+      title: 'Redux One',
+      required: CEPH_FLAG,
+    },
+  },
+  {
+    type: 'Dashboards/Tab',
+    properties: {
+      id: 'redux-2',
+      title: 'Redux Two',
+      required: CEPH_FLAG,
+    },
+  },
+  {
+    type: 'Dashboards/Card',
+    properties: {
+      tab: 'redux-2',
+      position: GridPosition.LEFT,
+      loader: () =>
+        import(
+          './components/dashboard-page/storage-dashboard/details-card' /* webpackChunkName: "ceph-storage-details-card" */
+        ).then((m) => m.default),
+      required: CEPH_FLAG,
+    },
+  },
+  {
+    type: 'Dashboards/Card',
+    properties: {
+      tab: 'redux-1',
+      position: GridPosition.LEFT,
+      loader: () =>
+        import(
+          './components/dashboard-page/storage-dashboard/details-card' /* webpackChunkName: "ceph-storage-details-card" */
+        ).then((m) => m.default),
+      required: CEPH_FLAG,
+    },
+  },
   // Ceph Storage Dashboard Left cards
   {
     type: 'Dashboards/Card',

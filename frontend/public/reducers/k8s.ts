@@ -157,8 +157,8 @@ export default (state: K8sState, action: K8sAction): K8sState => {
         selected: null,
       }});
 
-    case ActionType.StopWatchK8s:
-      return state.delete(action.payload.id);
+    case ActionType.StopWatchK8s: return state;
+      // return state.delete(action.payload.id);
 
     case ActionType.Loaded:
       if (!state.getIn([action.payload.id, 'data'])) {

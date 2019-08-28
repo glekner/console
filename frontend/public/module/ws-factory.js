@@ -85,7 +85,7 @@ WSFactory.prototype._reconnect = function() {
     this._connect();
     delay = Math.round(Math.min(1.5 * delay, 60000));
     this._connectionAttempt = setTimeout(attempt, delay);
-    console.log(`attempting reconnect in ${delay / 1000} seconds...`);
+    //(`attempting reconnect in ${delay / 1000} seconds...`);
   };
 
   this._connectionAttempt = setTimeout(attempt, delay);
@@ -104,7 +104,7 @@ WSFactory.prototype._connect = function() {
   }
 
   this.ws.onopen = function() {
-    console.log(`websocket open: ${that.id}`);
+    //(`websocket open: ${that.id}`);
     that._state = 'open';
     that._triggerEvent('open');
     if (that._connectionAttempt) {
@@ -113,13 +113,13 @@ WSFactory.prototype._connect = function() {
     }
   };
   this.ws.onclose = function(evt) {
-    console.log(`websocket closed: ${that.id}`, evt);
+    //(`websocket closed: ${that.id}`, evt);
     that._state = 'closed';
     that._triggerEvent('close', evt);
     that._reconnect();
   };
   this.ws.onerror = function(evt) {
-    console.log(`websocket error: ${that.id}`);
+    //(`websocket error: ${that.id}`);
     that._state = 'error';
     that._triggerEvent('error', evt);
   };
@@ -247,7 +247,7 @@ WSFactory.prototype.bufferSize = function() {
 };
 
 WSFactory.prototype.destroy = function(timedout) {
-  console.log(`destroying websocket: ${this.id}`);
+  //(`destroying websocket: ${this.id}`);
   if (this._state === 'destroyed') {
     return;
   }

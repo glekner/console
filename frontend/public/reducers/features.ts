@@ -72,7 +72,7 @@ export const featureReducer = (state: FeatureState, action: FeatureAction): Feat
         .reduce((nextState, model) => {
           const flag = CRDs[referenceForModel(model)];
           // eslint-disable-next-line no-console
-          console.log(`${flag} was detected.`);
+          // console.log(`${flag} was detected.`);
 
           return nextState.set(flag, true);
         }, state);

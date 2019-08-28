@@ -128,6 +128,7 @@ export const Firehose = connect(
     }
 
     componentWillUnmount() {
+      console.log('UNMOUNTING...');
       this.clear();
     }
 
@@ -140,6 +141,7 @@ export const Firehose = connect(
     }
 
     componentDidUpdate(prevProps) {
+      console.log('UPDATING...')
       const discoveryComplete = !this.props.inFlight && !this.props.loaded && this.firehoses.length === 0;
       const resourcesChanged = _.intersectionWith(prevProps.resources, this.props.resources, _.isEqual).length !== this.props.resources.length;
 

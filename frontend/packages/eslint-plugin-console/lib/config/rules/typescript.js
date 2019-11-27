@@ -75,7 +75,7 @@ module.exports = {
   // ],
 
   // Enforces the use of as Type assertions instead of <Type> assertions
-  '@typescript-eslint/no-angle-bracket-type-assertion': 'error',
+  '@typescript-eslint/consistent-type-assertions': 'error',
 
   // Disallow generic Array constructors
   'no-array-constructor': 'off',
@@ -113,9 +113,6 @@ module.exports = {
   // Disallows non-null assertions using the ! postfix operator
   '@typescript-eslint/no-non-null-assertion': 'error',
 
-  // Forbids an object literal to appear in a type assertion expression
-  '@typescript-eslint/no-object-literal-type-assertion': 'error',
-
   // Disallow the use of parameter properties in class constructors
   '@typescript-eslint/no-parameter-properties': 'off',
 
@@ -126,7 +123,7 @@ module.exports = {
   '@typescript-eslint/no-this-alias': ['error', { allowDestructuring: true }],
 
   // Disallow /// <reference path='' /> comments
-  '@typescript-eslint/no-triple-slash-reference': 'error',
+  '@typescript-eslint/triple-slash-reference': 'error',
 
   // Disallow the use of type aliases
   '@typescript-eslint/no-type-alias': 'off',

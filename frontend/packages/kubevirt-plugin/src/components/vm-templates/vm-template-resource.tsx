@@ -6,12 +6,14 @@ import { getBasicID, prefixedID } from '../../utils';
 import { vmDescriptionModal } from '../modals/vm-description-modal';
 import { BootOrderModal } from '../modals/boot-order-modal';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal';
+import { CpuPinningModal } from '../modals/cpu-pinning-modal/cpu-pinning-modal';
 import { getDescription } from '../../selectors/selectors';
 import {
   getCDRoms,
   getOperatingSystemName,
   getOperatingSystem,
   getWorkloadProfile,
+  getDedicatedCpuBool,
 } from '../../selectors/vm/selectors';
 import { getVMTemplateNamespacedName } from '../../selectors/vm-template/selectors';
 import { vmFlavorModal } from '../modals';
@@ -83,11 +85,13 @@ export const VMTemplateDetailsList: React.FC<VMTemplateResourceListProps> = ({
   canUpdateTemplate,
 }) => {
   const [isBootOrderModalOpen, setBootOrderModalOpen] = React.useState<boolean>(false);
+  const [isCPUPinningModalOpen, setCPUPinningModalOpen] = React.useState<boolean>(false);
 
   const id = getBasicID(template);
   const devices = getDevices(template);
   const cds = getCDRoms(asVM(template));
   const flavorText = getFlavorText(template);
+  const isCPUPinned = getDedicatedCpuBool(asVM(template));
 
   return (
     <dl className="co-m-pane__details">
@@ -125,6 +129,24 @@ export const VMTemplateDetailsList: React.FC<VMTemplateResourceListProps> = ({
         >
           {flavorText}
         </EditButton>
+      </VMDetailsItem>
+
+      <VMDetailsItem
+        title="Resource Scheduling"
+        idValue={prefixedID(id, 'resource-scheduling')}
+        canEdit
+        onEditClick={() => setCPUPinningModalOpen(true)}
+        editButtonId={prefixedID(id, 'resource-scheduling-edit')}
+      >
+        <CpuPinningModal
+          vmLikeEntity={template}
+          isCPUPinned={isCPUPinned}
+          isOpen={isCPUPinningModalOpen}
+          setOpen={setCPUPinningModalOpen}
+        />
+        {isCPUPinned
+          ? 'Isolate this workload on schedule resources (guaranteed policy)'
+          : 'No resource scheduling applied'}
       </VMDetailsItem>
 
       <VMDetailsItem title="Provision Source" idValue={prefixedID(id, 'provisioning-source')}>

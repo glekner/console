@@ -8,9 +8,10 @@ import { VMTemplateLink } from '../vm-templates/vm-template-link';
 import { getBasicID, prefixedID } from '../../utils';
 import { vmDescriptionModal, vmFlavorModal } from '../modals';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal';
+import { CpuPinningModal } from '../modals/cpu-pinning-modal/cpu-pinning-modal';
 import { BootOrderModal } from '../modals/boot-order-modal/boot-order-modal';
 import { getDescription } from '../../selectors/selectors';
-import { getCDRoms } from '../../selectors/vm/selectors';
+import { getCDRoms, getDedicatedCpuBool } from '../../selectors/vm/selectors';
 import { getVMTemplateNamespacedName } from '../../selectors/vm-template/selectors';
 import { getVMStatus } from '../../statuses/vm/vm';
 import { getFlavorText } from '../flavor-text';
@@ -93,6 +94,7 @@ export const VMDetailsList: React.FC<VMResourceListProps> = ({
   canUpdateVM,
 }) => {
   const [isBootOrderModalOpen, setBootOrderModalOpen] = React.useState<boolean>(false);
+  const [isCPUPinningModalOpen, setCPUPinningModalOpen] = React.useState<boolean>(false);
 
   const id = getBasicID(vm);
   const vmStatus = getVMStatus({ vm, vmi, pods, migrations });
@@ -103,6 +105,7 @@ export const VMDetailsList: React.FC<VMResourceListProps> = ({
   const ipAddrs = getVmiIpAddressesString(vmi, vmStatus);
   const workloadProfile = getWorkloadProfile(vm);
   const flavorText = getFlavorText(vm);
+  const isCPUPinned = getDedicatedCpuBool(vm);
 
   return (
     <dl className="co-m-pane__details">
@@ -166,6 +169,24 @@ export const VMDetailsList: React.FC<VMResourceListProps> = ({
         >
           {flavorText}
         </EditButton>
+      </VMDetailsItem>
+
+      <VMDetailsItem
+        title="Resource Scheduling"
+        idValue={prefixedID(id, 'resource-scheduling')}
+        canEdit
+        onEditClick={() => setCPUPinningModalOpen(true)}
+        editButtonId={prefixedID(id, 'resource-scheduling-edit')}
+      >
+        <CpuPinningModal
+          vmLikeEntity={vm}
+          isCPUPinned={isCPUPinned}
+          isOpen={isCPUPinningModalOpen}
+          setOpen={setCPUPinningModalOpen}
+        />
+        {isCPUPinned
+          ? 'Isolate this workload on schedule resources (guaranteed policy)'
+          : 'No resource scheduling applied'}
       </VMDetailsItem>
 
       <VMDetailsItem

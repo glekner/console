@@ -34,6 +34,9 @@
     "**/bower_components": true,
     "**/.cache-loader": true,
     "**/public/dist": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
 
   // TODO support prettier + stylelint

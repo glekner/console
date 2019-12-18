@@ -41,6 +41,7 @@ export const ModalInfoMessage: React.FC<ModalInfoMessageProps> = ({ title, child
 
 type ModalFooterProps = {
   id?: string;
+  className?: string;
   errorMessage?: string;
   isSimpleError?: boolean;
   onSubmit: (e) => void;
@@ -55,6 +56,7 @@ type ModalFooterProps = {
 
 export const ModalFooter: React.FC<ModalFooterProps> = ({
   id,
+  className = 'co-m-btn-bar modal-footer kubevirt-create-nic-modal__buttons',
   errorMessage = null,
   isDisabled = false,
   inProgress = false,
@@ -66,7 +68,7 @@ export const ModalFooter: React.FC<ModalFooterProps> = ({
   infoMessage = null,
   infoTitle = null,
 }) => (
-  <footer className="co-m-btn-bar modal-footer kubevirt-create-nic-modal__buttons">
+  <footer className={className}>
     {errorMessage && isSimpleError && <ModalSimpleErrorMessage message={errorMessage} />}
     {errorMessage && !isSimpleError && <ModalErrorMessage message={errorMessage} />}
     {infoTitle && <ModalInfoMessage title={infoTitle}>{infoMessage}</ModalInfoMessage>}

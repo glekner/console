@@ -30,6 +30,7 @@ export const OSFlavor: React.FC<OSFlavorProps> = React.memo(
     flavorField,
     workloadProfile,
     onChange,
+    openshiftFlag,
   }) => {
     const flavor = iGetFieldValue(flavorField);
     const os = iGetFieldValue(operatinSystemField);
@@ -44,13 +45,13 @@ export const OSFlavor: React.FC<OSFlavorProps> = React.memo(
       concatImmutableLists(iGetLoadedData(commonTemplates), iGetLoadedData(userTemplates)),
     );
 
-    const operatingSystems = ignoreCaseSort(getOperatingSystems(vanillaTemplates, params), [
-      'name',
-    ]);
+    const operatingSystems = openshiftFlag
+      ? ignoreCaseSort(getOperatingSystems(vanillaTemplates, params), ['name'])
+      : [];
 
-    const flavors = flavorSort(getFlavors(vanillaTemplates, params));
+    const flavors = openshiftFlag ? flavorSort(getFlavors(vanillaTemplates, params)) : [];
 
-    const workloadProfiles = getWorkloadProfiles(vanillaTemplates, params);
+    const workloadProfiles = openshiftFlag ? getWorkloadProfiles(vanillaTemplates, params) : [];
 
     let operatingSystemValidation;
     let flavorValidation;
@@ -77,13 +78,20 @@ export const OSFlavor: React.FC<OSFlavorProps> = React.memo(
           field={operatinSystemField}
           fieldType={FormFieldType.SELECT}
           validation={operatingSystemValidation}
-          loadingResources={{
-            userTemplates,
-            commonTemplates,
-          }}
+          loadingResources={
+            openshiftFlag
+              ? {
+                  userTemplates,
+                  commonTemplates,
+                }
+              : {}
+          }
         >
           <FormField>
-            <FormSelect onChange={nullOnEmptyChange(onChange, VMSettingsField.OPERATING_SYSTEM)}>
+            <FormSelect
+              isDisabled
+              onChange={nullOnEmptyChange(onChange, VMSettingsField.OPERATING_SYSTEM)}
+            >
               <FormSelectPlaceholderOption
                 placeholder={getPlaceholder(VMSettingsField.OPERATING_SYSTEM)}
                 isDisabled={!!os}
@@ -98,10 +106,14 @@ export const OSFlavor: React.FC<OSFlavorProps> = React.memo(
           field={flavorField}
           fieldType={FormFieldType.SELECT}
           validation={flavorValidation}
-          loadingResources={{
-            userTemplates,
-            commonTemplates,
-          }}
+          loadingResources={
+            openshiftFlag
+              ? {
+                  userTemplates,
+                  commonTemplates,
+                }
+              : {}
+          }
         >
           <FormField isDisabled={flavor && flavors.length === 1}>
             <FormSelect onChange={nullOnEmptyChange(onChange, VMSettingsField.FLAVOR)}>
@@ -127,5 +139,6 @@ type OSFlavorProps = {
   operatinSystemField: any;
   userTemplate: string;
   workloadProfile: string;
+  openshiftFlag: boolean;
   onChange: (key: string, value: string) => void;
 };

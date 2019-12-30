@@ -23,28 +23,35 @@ export const WorkloadProfile: React.FC<WorkloadProps> = React.memo(
     userTemplate,
     operatingSystem,
     flavor,
+    openshiftFlag,
     onChange,
   }) => {
     const vanillaTemplates = immutableListToShallowJS(
       concatImmutableLists(iGetLoadedData(commonTemplates), iGetLoadedData(userTemplates)),
     );
-    const workloadProfiles = ignoreCaseSort(
-      getWorkloadProfiles(vanillaTemplates, {
-        userTemplate,
-        flavor,
-        os: operatingSystem,
-      }),
-    );
+    const workloadProfiles = openshiftFlag
+      ? ignoreCaseSort(
+          getWorkloadProfiles(vanillaTemplates, {
+            userTemplate,
+            flavor,
+            os: operatingSystem,
+          }),
+        )
+      : ['desktop', 'server'];
 
     return (
       <>
         <FormFieldRow
           field={workloadProfileField}
           fieldType={FormFieldType.SELECT}
-          loadingResources={{
-            userTemplates,
-            commonTemplates,
-          }}
+          loadingResources={
+            openshiftFlag
+              ? {
+                  userTemplates,
+                  commonTemplates,
+                }
+              : {}
+          }
         >
           <FormField>
             <FormSelect onChange={nullOnEmptyChange(onChange, VMSettingsField.WORKLOAD_PROFILE)}>
@@ -76,5 +83,6 @@ type WorkloadProps = {
   userTemplate: string;
   flavor: string;
   operatingSystem: string;
+  openshiftFlag: boolean;
   onChange: (key: string, value: string) => void;
 };

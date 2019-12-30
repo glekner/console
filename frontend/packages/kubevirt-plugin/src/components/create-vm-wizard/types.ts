@@ -156,6 +156,7 @@ export type CommonData = {
 export type CreateVMWizardComponentProps = {
   isProviderImport: boolean;
   isCreateTemplate: boolean;
+  openshiftFlag: boolean;
   dataIDReferences: IDReferences;
   activeNamespace: string;
   reduxID: string;

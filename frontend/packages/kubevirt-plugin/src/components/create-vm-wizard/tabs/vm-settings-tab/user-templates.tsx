@@ -12,6 +12,9 @@ import { iGetFieldValue } from '../../selectors/immutable/vm-settings';
 
 export const UserTemplates: React.FC<UserTemplatesProps> = React.memo(
   ({ userTemplateField, userTemplates, commonTemplates, onChange }) => {
+    console.log('USER TMP', userTemplates);
+    console.log('COMMON TMP', commonTemplates);
+
     const data = iGetLoadedData(userTemplates);
     const names: string[] =
       data &&

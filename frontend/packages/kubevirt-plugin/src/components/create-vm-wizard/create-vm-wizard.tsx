@@ -6,6 +6,8 @@ import { Wizard, WizardStep } from '@patternfly/react-core';
 import { TemplateModel } from '@console/internal/models';
 import { Firehose, history, units } from '@console/internal/components/utils';
 import { k8sGet, TemplateKind } from '@console/internal/module/k8s';
+import { featureReducerName } from '@console/internal/reducers/features';
+import { FLAGS } from '@console/internal/const';
 import { Location } from 'history';
 import { match as RouterMatch } from 'react-router';
 import { getName } from '@console/shared/src';
@@ -63,6 +65,7 @@ import {
   VMWizardStorageType,
   VMWizardTab,
 } from './types';
+import { nativeTemplates } from './native-templates';
 import { CREATE_VM, CREATE_VM_TEMPLATE, TabTitleResolver, IMPORT_VM } from './strings/strings';
 import { vmWizardActions } from './redux/actions';
 import { ActionType } from './redux/types';
@@ -140,7 +143,7 @@ const kubevirtInterOP = async ({
     };
   });
 
-  const storageClassConfigMap = await getStorageClassConfigMap({ k8sGet });
+  const storageClassConfigMap = await getStorageClassConfigMap({ k8sGet }, false);
 
   const dataVolumesToCreate: V1alpha1DataVolume[] = [];
 
@@ -340,6 +343,7 @@ export class CreateVMWizardComponent extends React.Component<CreateVMWizardCompo
   }
 
   finish = async () => {
+    const { openshiftFlag } = this.props;
     this.props.onResultsChanged({ errors: [], requestResults: [] }, null, true, true); // reset
     const { isCreateTemplate } = this.props;
 
@@ -351,12 +355,14 @@ export class CreateVMWizardComponent extends React.Component<CreateVMWizardCompo
     const storages = immutableListToShallowJS(
       iGetIn(this.props.stepData, [VMWizardTab.STORAGE, 'value']),
     );
-    const templates = immutableListToShallowJS(
-      concatImmutableLists(
-        iGetLoadedData(this.props[VMWizardProps.commonTemplates]),
-        iGetLoadedData(this.props[VMWizardProps.userTemplates]),
-      ),
-    );
+    const templates = openshiftFlag
+      ? immutableListToShallowJS(
+          concatImmutableLists(
+            iGetLoadedData(this.props[VMWizardProps.commonTemplates]),
+            iGetLoadedData(this.props[VMWizardProps.userTemplates]),
+          ),
+        )
+      : nativeTemplates;
 
     const {
       interOPVMSettings,
@@ -371,7 +377,6 @@ export class CreateVMWizardComponent extends React.Component<CreateVMWizardCompo
       templates,
       activeNamespace: this.props.activeNamespace,
     });
-
     interOPCreate(
       enhancedK8sMethods,
       templates,
@@ -521,6 +526,7 @@ const wizardStateToProps = (state, { reduxID }) => ({
     acc[propName] = iGetCommonData(state, reduxID, propName);
     return acc;
   }, {}),
+  openshiftFlag: state[featureReducerName].get(FLAGS.OPENSHIFT),
 });
 
 const wizardDispatchToProps = (dispatch, props) => ({

@@ -6,6 +6,8 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
+import { featureReducerName } from '@console/internal/reducers/features';
+import { FLAGS } from '@console/internal/const';
 import { connect } from 'react-redux';
 import { iGet, iGetIn } from '../../../../utils/immutable';
 import { FormFieldMemoRow } from '../../form/form-field-row';
@@ -26,6 +28,7 @@ import { iGetCommonData } from '../../selectors/immutable/selectors';
 import { FormFieldForm } from '../../form/form-field-form';
 import { iGetProvisionSourceStorage } from '../../selectors/immutable/storage';
 import { ProvisionSource } from '../../../../constants/vm/provision-source';
+import { nativeTemplates } from '../../native-templates';
 import { WorkloadProfile } from './workload-profile';
 import { OSFlavor } from './os-flavor';
 import { UserTemplates } from './user-templates';
@@ -54,6 +57,7 @@ export class VMSettingsTabComponent extends React.Component<VMSettingsTabCompone
       updateStorage,
       isReview,
       wizardReduxID,
+      openshiftFlag,
     } = this.props;
 
     return (
@@ -87,8 +91,9 @@ export class VMSettingsTabComponent extends React.Component<VMSettingsTabCompone
           <UserTemplates
             key={VMSettingsField.USER_TEMPLATE}
             userTemplateField={this.getField(VMSettingsField.USER_TEMPLATE)}
-            userTemplates={userTemplates}
-            commonTemplates={commonTemplates}
+            userTemplates={openshiftFlag ? userTemplates : nativeTemplates}
+            commonTemplates={openshiftFlag ? userTemplates : nativeTemplates}
+            openshiftFlag={openshiftFlag}
             onChange={this.props.onFieldChange}
           />
         )}
@@ -129,6 +134,7 @@ export class VMSettingsTabComponent extends React.Component<VMSettingsTabCompone
           userTemplate={this.getFieldValue(VMSettingsField.USER_TEMPLATE)}
           workloadProfile={this.getFieldValue(VMSettingsField.WORKLOAD_PROFILE)}
           onChange={this.props.onFieldChange}
+          openshiftFlag={openshiftFlag}
         />
         <MemoryCPU
           memoryField={this.getField(VMSettingsField.MEMORY)}
@@ -144,6 +150,7 @@ export class VMSettingsTabComponent extends React.Component<VMSettingsTabCompone
           operatingSystem={this.getFieldValue(VMSettingsField.OPERATING_SYSTEM)}
           flavor={this.getFieldValue(VMSettingsField.FLAVOR)}
           onChange={this.props.onFieldChange}
+          openshiftFlag={openshiftFlag}
         />
         <FormFieldMemoRow
           field={this.getField(VMSettingsField.NAME)}
@@ -186,6 +193,7 @@ const stateToProps = (state, { wizardReduxID }) => ({
   commonTemplates: iGetCommonData(state, wizardReduxID, VMWizardProps.commonTemplates),
   userTemplates: iGetCommonData(state, wizardReduxID, VMWizardProps.userTemplates),
   provisionSourceStorage: iGetProvisionSourceStorage(state, wizardReduxID),
+  openshiftFlag: state[featureReducerName].get(FLAGS.OPENSHIFT),
 });
 
 type VMSettingsTabComponentProps = {
@@ -196,6 +204,7 @@ type VMSettingsTabComponentProps = {
   commonTemplates: any;
   userTemplates: any;
   isReview: boolean;
+  openshiftFlag: boolean;
   wizardReduxID: string;
 };
 

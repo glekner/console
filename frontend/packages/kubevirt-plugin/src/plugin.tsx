@@ -47,6 +47,7 @@ type ConsumedExtensions =
   | DashboardsOverviewResourceActivity;
 
 export const FLAG_KUBEVIRT = 'KUBEVIRT';
+export const FLAG_OPENSHIFT = 'OPENSHIFT';
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -72,7 +73,7 @@ const plugin: Plugin<ConsumedExtensions> = [
       componentProps: {
         name: 'Virtual Machine Templates',
         resource: 'vmtemplates',
-        required: FLAG_KUBEVIRT,
+        required: [FLAG_KUBEVIRT, FLAG_OPENSHIFT],
       },
       mergeBefore: 'Deployments',
     },
@@ -86,7 +87,7 @@ const plugin: Plugin<ConsumedExtensions> = [
         resource: models.VirtualMachineModel.plural,
         required: FLAG_KUBEVIRT,
       },
-      mergeBefore: 'Virtual Machine Templates',
+      mergeBefore: 'Deployments',
     },
   },
   {

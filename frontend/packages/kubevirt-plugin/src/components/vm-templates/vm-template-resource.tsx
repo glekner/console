@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ResourceSummary } from '@console/internal/components/utils';
+import { ResourceSummary, LabelList } from '@console/internal/components/utils';
 import { TemplateKind } from '@console/internal/module/k8s';
 import { K8sEntityMap } from '@console/shared/src';
 import { getBasicID, prefixedID } from '../../utils';
@@ -7,6 +7,7 @@ import { vmDescriptionModal } from '../modals/vm-description-modal';
 import { BootOrderModal } from '../modals/boot-order-modal';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal/vm-cdrom-modal';
 import { DedicatedResourcesModal } from '../modals/dedicated-resources-modal/dedicated-resources-modal';
+import NodeSelectorModal from '../modals/node-selector-modal';
 import { getDescription } from '../../selectors/selectors';
 import {
   getCDRoms,
@@ -30,10 +31,10 @@ import {
 } from '../modals/dedicated-resources-modal/consts';
 import { VMTemplateLink } from './vm-template-link';
 import { TemplateSource } from './vm-template-source';
-
-import './_vm-template-resource.scss';
 import { VMWrapper } from '../../k8s/wrapper/vm/vm-wrapper';
 import { getVMTemplateNamespacedName } from '../../selectors/vm-template/selectors';
+import { NODE_SELECTOR_MODAL_TITLE } from '../modals/node-selector-modal/consts';
+import './_vm-template-resource.scss';
 
 export const VMTemplateResourceSummary: React.FC<VMTemplateResourceSummaryProps> = ({
   template,
@@ -139,6 +140,7 @@ export const VMTemplateSchedulingList: React.FC<VMTemplateResourceSummaryProps> 
   const [isDedicatedResourcesModalOpen, setDedicatedResourcesModalOpen] = React.useState<boolean>(
     false,
   );
+  const [isNodeSelectorModalOpen, setIsNodeSelectorModalOpen] = React.useState<boolean>(false);
 
   const id = getBasicID(template);
   const vm = asVM(template);
@@ -149,9 +151,25 @@ export const VMTemplateSchedulingList: React.FC<VMTemplateResourceSummaryProps> 
     memory: vmWrapper.getMemory(),
   });
   const isCPUPinned = isDedicatedCPUPlacement(vm);
+  const nodeSelector = vmWrapper?.getNodeSelector();
 
   return (
     <dl className="co-m-pane__details">
+      <VMDetailsItem
+        title={NODE_SELECTOR_MODAL_TITLE}
+        idValue={prefixedID(id, 'node-selector')}
+        canEdit
+        onEditClick={() => setIsNodeSelectorModalOpen(true)}
+        editButtonId={prefixedID(id, 'node-selectors-edit')}
+      >
+        <NodeSelectorModal
+          vmLikeEntity={template}
+          nodeSelector={nodeSelector}
+          isOpen={isNodeSelectorModalOpen}
+          setOpen={setIsNodeSelectorModalOpen}
+        />
+        <LabelList kind="Node" labels={nodeSelector} />
+      </VMDetailsItem>
       <VMDetailsItem title="Flavor" idValue={prefixedID(id, 'flavor')} isNotAvail={!flavorText}>
         <EditButton
           id={prefixedID(id, 'flavor-edit')}

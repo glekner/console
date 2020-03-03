@@ -50,4 +50,6 @@ export class VMIWrapper extends K8sResourceWrapper<VMIKind> implements VMILikeMe
   getLabeledDevices = () => transformDevices(this.getDisks(), this.getInterfaces());
 
   isDedicatedCPUPlacement = () => this.data.spec?.domain?.cpu?.dedicatedCpuPlacement || false;
+
+  getNodeSelector = () => this.data.spec?.template?.spec?.nodeSelector;
 }

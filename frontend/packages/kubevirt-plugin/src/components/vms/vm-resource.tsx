@@ -15,7 +15,7 @@ import { vmDescriptionModal, vmFlavorModal } from '../modals';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal/vm-cdrom-modal';
 import { DedicatedResourcesModal } from '../modals/dedicated-resources-modal/dedicated-resources-modal';
 import { BootOrderModal } from '../modals/boot-order-modal/boot-order-modal';
-import NodeSelectorModal from '../modals/node-selector-modal';
+import NodeSelectorModal from '../modals/scheduling-modals/node-selector-modal';
 import VMStatusModal from '../modals/vm-status-modal/vm-status-modal';
 import { getDescription } from '../../selectors/selectors';
 import { getFlavorText } from '../flavor-text';
@@ -35,7 +35,7 @@ import { isVMIPaused, getVMINodeName } from '../../selectors/vmi';
 import { VirtualMachineInstanceModel, VirtualMachineModel } from '../../models';
 import { asVMILikeWrapper } from '../../k8s/wrapper/utils/convert';
 import { getVMTemplate } from '../../selectors/vm-template/selectors';
-import { NODE_SELECTOR_MODAL_TITLE } from '../modals/node-selector-modal/consts';
+import { NODE_SELECTOR_MODAL_TITLE } from '../modals/scheduling-modals/shared/consts';
 import './vm-resource.scss';
 
 export const VMDetailsItem: React.FC<VMDetailsItemProps> = ({

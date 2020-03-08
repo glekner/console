@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { MinusCircleIcon } from '@patternfly/react-icons';
 import { TextInput, Button } from '@patternfly/react-core';
+import './label-row.scss';
 
-export const NodeSelectorRow: React.FC<NodeSelectorRowProps> = ({
+export const LabelRow: React.FC<LabelRowProps> = ({
   index,
-  label: { key, value },
+  label: { key, value, effect = '' },
+  showEffect = false,
   onChange,
   onDelete,
 }) => {
   return (
-    <div className="kubevirt-node-selector__selector-row">
+    <div className="kv-label__row">
       <TextInput
-        className="kubevirt-node-selector__selector-row-key"
+        className="kv-label__key"
         placeholder="key"
         isRequired
         type="text"
@@ -20,7 +22,7 @@ export const NodeSelectorRow: React.FC<NodeSelectorRowProps> = ({
         aria-label="selector key"
       />
       <TextInput
-        className="kubevirt-node-selector__selector-row-value"
+        className="kv-label__value"
         placeholder="value"
         isRequired
         isDisabled={!key}
@@ -29,7 +31,19 @@ export const NodeSelectorRow: React.FC<NodeSelectorRowProps> = ({
         onChange={(v) => onChange(index, key, v)}
         aria-label="selector value"
       />
-      <div className="kubevirt-node-selector__selector-delete">
+      {showEffect && (
+        <TextInput
+          className="kv-label__effect"
+          placeholder="effect"
+          isRequired
+          isDisabled={!key}
+          type="text"
+          value={effect}
+          onChange={(v) => onChange(index, key, value, v)}
+          aria-label="selector value"
+        />
+      )}
+      <div className="kv-label__delete">
         <Button onClick={() => onDelete(index)} variant="plain">
           <MinusCircleIcon />
         </Button>
@@ -38,9 +52,10 @@ export const NodeSelectorRow: React.FC<NodeSelectorRowProps> = ({
   );
 };
 
-type NodeSelectorRowProps = {
+type LabelRowProps = {
   index: string;
-  label: { key?: string; value?: string };
-  onChange: (index: string, name: string, value: string) => void;
+  showEffect?: boolean;
+  label: { key?: string; value?: string; effect?: string };
+  onChange: (index: string, name: string, value: string, effect?: string) => void;
   onDelete: (index: any) => void;
 };

@@ -1,0 +1,16 @@
+.kv-labels-list__column-title {
+  display: flex;
+  justify-content: space-around;
+  padding-right: 48px;
+}
+
+.kv-labels-list__buttons {
+  display: flex;
+  justify-content: space-between;
+
+  .co-external-link {
+    display: flex;
+    align-items: center;
+    padding-right: var(--pf-global--spacer--lg);
+  }
+}

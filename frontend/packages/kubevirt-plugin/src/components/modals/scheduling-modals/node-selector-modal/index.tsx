@@ -7,10 +7,10 @@ import {
   Firehose,
 } from '@console/internal/components/utils';
 import { k8sPatch } from '@console/internal/module/k8s';
-import { getVMLikeModel } from '../../../selectors/vm';
-import { getNodeSelectorPatch } from '../../../k8s/patches/vm/vm-node-selector-patches';
-import { VMLikeEntityKind } from '../../../types/vmLike';
-import { NodeSelector } from '../../../types';
+import { getVMLikeModel } from '../../../../selectors/vm';
+import { getNodeSelectorPatch } from '../../../../k8s/patches/vm/vm-node-selector-patches';
+import { VMLikeEntityKind } from '../../../../types/vmLike';
+import { NodeSelector } from '../../../../types';
 import { NSModal } from './node-selector-modal';
 
 const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {

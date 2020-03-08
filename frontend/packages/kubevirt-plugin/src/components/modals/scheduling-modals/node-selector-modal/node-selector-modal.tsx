@@ -1,24 +1,14 @@
 import * as React from 'react';
-import * as _ from 'lodash';
-import { Modal, Button, Text, TextVariants } from '@patternfly/react-core';
-import { PlusCircleIcon } from '@patternfly/react-icons';
+import { Modal } from '@patternfly/react-core';
 import { NodeModel } from '@console/internal/models';
-// import { useDebounce } from '@console/dev-console/src/components/pipelines/pipeline-builder/hooks';
 import { getLabel } from '@console/shared';
-import { FirehoseResult, ExternalLink, resourcePath } from '@console/internal/components/utils';
-import { ModalFooter } from '../modal/modal-footer';
-import { VMLikeEntityKind } from '../../../types/vmLike';
-import { NodeSelector } from '../../../types';
-import { getLoadedData, isLoaded, getLoadError } from '../../../utils';
-import {
-  NODE_SELECTOR_ADD_LABEL,
-  NODE_SELECTOR_MODAL_TITLE,
-  NODE_SELECTOR_LABEL_KEY,
-  NODE_SELECTOR_LABEL_VALUE,
-  NODE_SELECTOR_REQUIRED_LABEL,
-} from './consts';
-import { NodeSelectorRow } from './node-selector-row';
-import { NodeSelectorSummary } from './node-selector-summary';
+import { FirehoseResult } from '@console/internal/components/utils';
+import { ModalFooter } from '../../modal/modal-footer';
+import { VMLikeEntityKind } from '../../../../types/vmLike';
+import { NodeSelector } from '../../../../types';
+import { getLoadedData, isLoaded, getLoadError } from '../../../../utils';
+import { NodeChecker, LabelsList } from '../shared';
+import { NODE_SELECTOR_MODAL_TITLE, NODE_SELECTOR_REQUIRED_LABEL } from '../shared/consts';
 import './node-selector-modal.scss';
 
 export const NSModal = ({
@@ -40,7 +30,6 @@ export const NSModal = ({
   const loadedNodes = getLoadedData(nodes, []);
 
   const [qualifiedNodes, setQualifiedNodes] = React.useState([]);
-
   // Node search 1 sec after user stopped typing
   React.useEffect(() => {
     const debounceNodeSearch = setTimeout(() => {
@@ -85,42 +74,13 @@ export const NSModal = ({
       footer={footer}
       isFooterLeftAligned
     >
-      {_.size(selector) > 0 && (
-        <div className="kubevirt-node-selector__keyvalue-row">
-          <Text className="kubevirt-dedicated-resources__key" component={TextVariants.h4}>
-            {NODE_SELECTOR_LABEL_KEY}
-          </Text>
-          <Text className="kubevirt-dedicated-resources__value" component={TextVariants.h4}>
-            {NODE_SELECTOR_LABEL_VALUE}
-          </Text>
-        </div>
-      )}
-      <div className="kubevirt-node-selector__selector-container">
-        {Object.entries(selector).map(([index, label]) => (
-          <NodeSelectorRow
-            key={index}
-            index={index}
-            label={label}
-            onChange={onLabelChange}
-            onDelete={onLabelDelete}
-          />
-        ))}
-      </div>
-      <div className="kubevirt-node-selector__buttons">
-        <Button
-          className="pf-m-link--align-left"
-          id="vm-node-selector-add-btn"
-          variant="link"
-          onClick={onLabelAdd}
-          icon={<PlusCircleIcon />}
-        >
-          {NODE_SELECTOR_ADD_LABEL}
-        </Button>
-        <ExternalLink text={<div>Explore nodes list</div>} href={resourcePath('Node')} />
-      </div>
-      {_.size(selector) > 0 && (
-        <NodeSelectorSummary qualifiedNodes={qualifiedNodes} isLoading={isLoading} />
-      )}
+      <LabelsList
+        labels={selector}
+        onLabelAdd={onLabelAdd}
+        onLabelChange={onLabelChange}
+        onLabelDelete={onLabelDelete}
+      />
+      <NodeChecker qualifiedNodes={qualifiedNodes} isLoading={isLoading} />
     </Modal>
   );
 };

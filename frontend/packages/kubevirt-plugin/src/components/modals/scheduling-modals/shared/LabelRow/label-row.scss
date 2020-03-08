@@ -1,0 +1,12 @@
+.kv-label__row {
+  display: flex;
+  margin-bottom: var(--pf-global--spacer--sm);
+
+  .kv-label__value {
+    margin-left: var(--pf-global--spacer--sm);
+  }
+
+  .kv-label__effect {
+    margin-left: var(--pf-global--spacer--sm);
+  }
+}

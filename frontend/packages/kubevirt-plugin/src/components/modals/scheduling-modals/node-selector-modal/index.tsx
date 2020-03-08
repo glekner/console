@@ -7,10 +7,10 @@ import {
   Firehose,
 } from '@console/internal/components/utils';
 import { k8sPatch } from '@console/internal/module/k8s';
-import { getVMLikeModel } from '../../../selectors/vm';
-import { getNodeSelectorPatch } from '../../../k8s/patches/vm/vm-node-selector-patches';
-import { VMLikeEntityKind } from '../../../types/vmLike';
-import { NodeSelector } from '../../../types';
+import { getVMLikeModel } from '../../../../selectors/vm';
+import { getNodeSelectorPatches } from '../../../../k8s/patches/vm/vm-scheduling-patches';
+import { VMLikeEntityKind } from '../../../../types/vmLike';
+import { NodeSelector } from '../../../../types';
 import { NSModal } from './node-selector-modal';
 
 const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
@@ -19,9 +19,6 @@ const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
   const [selector, setSelector] = React.useState({
     ...Object.entries(nodeSelector).map(([key, value]) => ({ key, value })),
   }) as any;
-
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [shouldPatch, setShouldPatch] = React.useState<boolean>(false);
   const [showPatchError, setPatchError] = React.useState<boolean>(false);
 
   const onLabelAdd = () =>
@@ -31,19 +28,14 @@ const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
     });
 
   const onLabelChange = (index, key, value) => {
-    setIsLoading(true);
-    setShouldPatch(true);
     setSelector({ ...selector, [index]: { key, value } });
   };
 
   const onLabelDelete = (label) => {
-    setIsLoading(true);
-    setShouldPatch(true);
     setSelector(_.omit(selector, label));
   };
 
   const onClose = () => {
-    setIsLoading(true);
     setSelector({
       ...Object.entries(nodeSelector).map(([key, value]) => ({ key, value })),
     });
@@ -51,18 +43,19 @@ const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
   };
 
   const onSubmit = async () => {
-    if (shouldPatch) {
-      const k8sSelector = Object.assign(
-        {},
-        ...Object.values(selector)
-          .filter(({ key }) => !!key)
-          .map(({ key, value }) => ({ [key]: value })),
-      );
+    const k8sSelector = Object.assign(
+      {},
+      ...Object.values(selector)
+        .filter(({ key }) => !!key)
+        .map(({ key, value }) => ({ [key]: value })),
+    );
+
+    if (!_.isEqual(nodeSelector, k8sSelector)) {
       handlePromise(
         k8sPatch(
           getVMLikeModel(vmLikeEntity),
           vmLikeEntity,
-          await getNodeSelectorPatch(vmLikeEntity, k8sSelector),
+          await getNodeSelectorPatches(vmLikeEntity, k8sSelector),
         ),
       )
         .then(() => setOpen(false))
@@ -85,8 +78,6 @@ const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
     <Firehose resources={resources}>
       <NSModal
         selector={selector}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
         onLabelAdd={onLabelAdd}
         onLabelChange={onLabelChange}
         onLabelDelete={onLabelDelete}

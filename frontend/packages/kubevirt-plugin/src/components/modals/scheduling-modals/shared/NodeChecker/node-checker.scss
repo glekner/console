@@ -1,0 +1,21 @@
+.kv-node-checker__container {
+  display: flex;
+  margin-top: var(--pf-global--spacer--md);
+  justify-content: center;
+  align-items: center;
+  white-space: pre-wrap;
+
+  .kv-node-checker__popover-btn {
+    display: flex;
+    align-items: baseline;
+    padding: 0;
+  }
+}
+
+.kv-node-checker__popover {
+  .co-external-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

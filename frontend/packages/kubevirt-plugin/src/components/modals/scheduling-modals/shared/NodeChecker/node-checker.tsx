@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import { CheckCircleIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 import { Popover, PopoverPosition, Text, TextVariants, Button } from '@patternfly/react-core';
 import {
@@ -9,22 +8,19 @@ import {
   resourcePath,
 } from '@console/internal/components/utils';
 import { NodeKind } from '@console/internal/module/k8s';
-
 import { getName } from '@console/shared';
+import './node-checker.scss';
 
-export const NodeSelectorSummary: React.FC<NodeSelectorSummaryProps> = ({
-  qualifiedNodes,
-  isLoading,
-}) => {
-  const size = _.size(qualifiedNodes);
-  const buttonText = size === 1 ? '1 Node' : `${_.size(qualifiedNodes)} Nodes`;
+export const NodeChecker: React.FC<NodeCheckerProps> = ({ qualifiedNodes, isLoading }) => {
+  const size = qualifiedNodes.length;
+  const buttonText = size === 1 ? '1 Node' : `${size} Nodes`;
   const icon = size > 0 ? <CheckCircleIcon /> : <ExclamationCircleIcon />;
   return (
-    <div className="kubevirt-node-selector__summary-container">
+    <div className="kv-node-checker__container">
       <Popover
-        headerContent={<div>{size} Nodes found</div>}
+        headerContent={<div>{buttonText} found</div>}
         position={PopoverPosition.right}
-        className="kubevirt-node-selector__summary-popover"
+        className="kv-node-checker__popover"
         bodyContent={qualifiedNodes.map((node) => (
           <ExternalLink
             key={getName(node)}
@@ -33,12 +29,12 @@ export const NodeSelectorSummary: React.FC<NodeSelectorSummaryProps> = ({
           />
         ))}
       >
-        <div className="kubevirt-node-selector__summary-node-checker">
+        <div>
           {isLoading ? (
             <LoadingInline />
           ) : (
             <Button
-              className="kubevirt-node-selector__summary-popover-btn"
+              className="kv-node-checker__popover-btn"
               isDisabled={isLoading || size === 0}
               variant="link"
               icon={icon}
@@ -55,7 +51,7 @@ export const NodeSelectorSummary: React.FC<NodeSelectorSummaryProps> = ({
   );
 };
 
-type NodeSelectorSummaryProps = {
+type NodeCheckerProps = {
   qualifiedNodes: NodeKind[];
   isLoading: boolean;
 };

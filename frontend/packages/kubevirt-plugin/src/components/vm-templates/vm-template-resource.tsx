@@ -7,7 +7,7 @@ import { vmDescriptionModal } from '../modals/vm-description-modal';
 import { BootOrderModal } from '../modals/boot-order-modal';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal/vm-cdrom-modal';
 import { DedicatedResourcesModal } from '../modals/dedicated-resources-modal/dedicated-resources-modal';
-import NodeSelectorModal from '../modals/node-selector-modal';
+import NodeSelectorModal from '../modals/scheduling-modals/node-selector-modal';
 import { getDescription } from '../../selectors/selectors';
 import {
   getCDRoms,
@@ -33,7 +33,7 @@ import { VMTemplateLink } from './vm-template-link';
 import { TemplateSource } from './vm-template-source';
 import { VMWrapper } from '../../k8s/wrapper/vm/vm-wrapper';
 import { getVMTemplateNamespacedName } from '../../selectors/vm-template/selectors';
-import { NODE_SELECTOR_MODAL_TITLE } from '../modals/node-selector-modal/consts';
+import { NODE_SELECTOR_MODAL_TITLE } from '../modals/scheduling-modals/shared/consts';
 import './_vm-template-resource.scss';
 
 export const VMTemplateResourceSummary: React.FC<VMTemplateResourceSummaryProps> = ({

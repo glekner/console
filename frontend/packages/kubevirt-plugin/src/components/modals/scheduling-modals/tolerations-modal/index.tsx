@@ -8,61 +8,58 @@ import {
 } from '@console/internal/components/utils';
 import { k8sPatch } from '@console/internal/module/k8s';
 import { getVMLikeModel } from '../../../../selectors/vm';
-import { getNodeSelectorPatch } from '../../../../k8s/patches/vm/vm-scheduling-patches';
+import { getTolerationsPatch } from '../../../../k8s/patches/vm/vm-scheduling-patches';
 import { VMLikeEntityKind } from '../../../../types/vmLike';
-import { NodeSelector } from '../../../../types';
-import { NSModal } from './node-selector-modal';
+import { Toleration } from '../../../../types';
+import { TModal } from './tolerations-modal';
 
-const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
-  const { vmLikeEntity, nodeSelector = {}, handlePromise, setOpen, ...restProps } = props;
+const TolerationsModal: React.FC<TolerationsModalProps> = (props) => {
+  const { vmLikeEntity, initialTolerations = [], handlePromise, setOpen, ...restProps } = props;
 
-  const [selector, setSelector] = React.useState({
-    ...Object.entries(nodeSelector).map(([key, value]) => ({ key, value })),
-  }) as any;
+  const [tolerations, setTolerations] = React.useState({
+    ...Object.values(initialTolerations),
+  });
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [shouldPatch, setShouldPatch] = React.useState<boolean>(false);
   const [showPatchError, setPatchError] = React.useState<boolean>(false);
 
   const onLabelAdd = () =>
-    setSelector({
-      ...selector,
-      [_.size(selector).toString()]: { key: '', value: '' },
+    setTolerations({
+      ...tolerations,
+      [_.size(tolerations).toString()]: { key: '', value: '', effect: 'NoSchedule' },
     });
 
-  const onLabelChange = (index, key, value) => {
+  const onLabelChange = (index, key, value, effect) => {
     setIsLoading(true);
     setShouldPatch(true);
-    setSelector({ ...selector, [index]: { key, value } });
+    setTolerations({ ...tolerations, [index]: { key, value, effect } });
   };
 
   const onLabelDelete = (label) => {
     setIsLoading(true);
     setShouldPatch(true);
-    setSelector(_.omit(selector, label));
+    setTolerations(_.omit(tolerations, label));
   };
 
   const onClose = () => {
     setIsLoading(true);
-    setSelector({
-      ...Object.entries(nodeSelector).map(([key, value]) => ({ key, value })),
+    setTolerations({
+      ...Object.values(initialTolerations),
     });
     setOpen(false);
   };
 
   const onSubmit = async () => {
     if (shouldPatch) {
-      const k8sSelector = Object.assign(
-        {},
-        ...Object.values(selector)
-          .filter(({ key }) => !!key)
-          .map(({ key, value }) => ({ [key]: value })),
-      );
       handlePromise(
         k8sPatch(
           getVMLikeModel(vmLikeEntity),
           vmLikeEntity,
-          await getNodeSelectorPatch(vmLikeEntity, k8sSelector),
+          await getTolerationsPatch(
+            vmLikeEntity,
+            Object.values(tolerations).filter(({ key }) => !!key),
+          ),
         ),
       )
         .then(() => setOpen(false))
@@ -83,8 +80,8 @@ const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
 
   return (
     <Firehose resources={resources}>
-      <NSModal
-        selector={selector}
+      <TModal
+        tolerations={tolerations}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
         onLabelAdd={onLabelAdd}
@@ -99,11 +96,11 @@ const NodeSelectorModal: React.FC<NodeSelectorModalProps> = (props) => {
   );
 };
 
-type NodeSelectorModalProps = HandlePromiseProps & {
+type TolerationsModalProps = HandlePromiseProps & {
   vmLikeEntity: VMLikeEntityKind;
-  nodeSelector: NodeSelector;
+  initialTolerations: Toleration[];
   isOpen: boolean;
   setOpen: (isOpen: boolean) => void;
 };
 
-export default withHandlePromise(NodeSelectorModal);
+export default withHandlePromise(TolerationsModal);

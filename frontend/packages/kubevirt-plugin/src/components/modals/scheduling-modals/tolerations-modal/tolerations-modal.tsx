@@ -5,15 +5,14 @@ import { getLabel } from '@console/shared';
 import { FirehoseResult } from '@console/internal/components/utils';
 import { ModalFooter } from '../../modal/modal-footer';
 import { VMLikeEntityKind } from '../../../../types/vmLike';
-import { NodeSelector } from '../../../../types';
 import { getLoadedData, isLoaded, getLoadError } from '../../../../utils';
 import { NodeChecker, LabelsList } from '../shared';
-import { NODE_SELECTOR_MODAL_TITLE, SCHEDULING_REQUIRED_LABEL } from '../shared/consts';
-import './node-selector-modal.scss';
+import { TOLERATIONS_MODAL_TITLE, SCHEDULING_REQUIRED_LABEL } from '../shared/consts';
+import './tolerations-modal.scss';
 
-export const NSModal = ({
+export const TModal = ({
   nodes,
-  selector,
+  tolerations,
   isLoading,
   setIsLoading,
   onLabelAdd,
@@ -25,7 +24,7 @@ export const NSModal = ({
   inProgress,
   errorMessage,
   showPatchError,
-}: NSModalProps) => {
+}: TModalProps) => {
   const loadError = getLoadError(nodes, NodeModel);
   const loadedNodes = getLoadedData(nodes, []);
 
@@ -34,7 +33,7 @@ export const NSModal = ({
   React.useEffect(() => {
     const debounceNodeSearch = setTimeout(() => {
       if (isLoaded(nodes)) {
-        const labels = Object.values(selector).filter(({ key }) => !!key);
+        const labels = Object.values(tolerations).filter(({ key }) => !!key);
         // look only for schedulable nodes
         labels.push({
           key: SCHEDULING_REQUIRED_LABEL.KEY,
@@ -50,12 +49,12 @@ export const NSModal = ({
     }, 1000);
     return () => clearTimeout(debounceNodeSearch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selector, loadedNodes]);
+  }, [tolerations, loadedNodes]);
 
   const footer = (
     <ModalFooter
-      id="node-selector"
-      className="kubevirt-node-selector__footer"
+      id="tolerations"
+      className="kubevirt-tolerations__footer"
       errorMessage={showPatchError && errorMessage}
       inProgress={!isLoaded(nodes) || inProgress}
       isSimpleError={loadError}
@@ -67,29 +66,30 @@ export const NSModal = ({
 
   return (
     <Modal
-      width="50%"
-      title={NODE_SELECTOR_MODAL_TITLE}
+      width="65%"
+      title={TOLERATIONS_MODAL_TITLE}
       isOpen={isOpen}
       onClose={onClose}
       footer={footer}
       isFooterLeftAligned
     >
       <LabelsList
-        labels={selector}
+        labels={tolerations}
         onLabelAdd={onLabelAdd}
         onLabelChange={onLabelChange}
         onLabelDelete={onLabelDelete}
+        addRowText="Add Toleration"
+        showEffect
       />
       <NodeChecker qualifiedNodes={qualifiedNodes} isLoading={isLoading} />
     </Modal>
   );
 };
 
-type NSModalProps = {
+type TModalProps = {
   isOpen: boolean;
   nodes?: FirehoseResult<VMLikeEntityKind[]>;
-  nodeSelector?: NodeSelector;
-  selector: any;
+  tolerations: any;
   isLoading: boolean;
   inProgress: boolean;
   errorMessage: string;

@@ -12,6 +12,7 @@ import {
   getVolumes,
   isDedicatedCPUPlacement,
   getNodeSelector,
+  getTolerations,
 } from '../../../selectors/vm/selectors';
 import { ensurePath } from '../utils/utils';
 import { VMWizardNetwork, VMWizardStorage } from '../../../components/create-vm-wizard/types';
@@ -70,6 +71,8 @@ export class VMWrapper extends K8sResourceWrapper<VMKind> implements VMILikeMeth
   getLabeledDevices = () => transformDevices(this.getDisks(), this.getInterfaces());
 
   getNodeSelector = () => getNodeSelector(this.data);
+
+  getTolerations = () => getTolerations(this.data);
 
   isDedicatedCPUPlacement = () => isDedicatedCPUPlacement(this.data);
 }

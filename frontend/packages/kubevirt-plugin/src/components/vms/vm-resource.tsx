@@ -16,6 +16,7 @@ import { VMCDRomModal } from '../modals/cdrom-vm-modal/vm-cdrom-modal';
 import { DedicatedResourcesModal } from '../modals/dedicated-resources-modal/dedicated-resources-modal';
 import { BootOrderModal } from '../modals/boot-order-modal/boot-order-modal';
 import NodeSelectorModal from '../modals/scheduling-modals/node-selector-modal';
+import TolerationsModal from '../modals/scheduling-modals/tolerations-modal';
 import VMStatusModal from '../modals/vm-status-modal/vm-status-modal';
 import { getDescription } from '../../selectors/selectors';
 import { getFlavorText } from '../flavor-text';
@@ -35,7 +36,10 @@ import { isVMIPaused, getVMINodeName } from '../../selectors/vmi';
 import { VirtualMachineInstanceModel, VirtualMachineModel } from '../../models';
 import { asVMILikeWrapper } from '../../k8s/wrapper/utils/convert';
 import { getVMTemplate } from '../../selectors/vm-template/selectors';
-import { NODE_SELECTOR_MODAL_TITLE } from '../modals/scheduling-modals/shared/consts';
+import {
+  NODE_SELECTOR_MODAL_TITLE,
+  TOLERATIONS_MODAL_TITLE,
+} from '../modals/scheduling-modals/shared/consts';
 import './vm-resource.scss';
 
 export const VMDetailsItem: React.FC<VMDetailsItemProps> = ({
@@ -222,6 +226,7 @@ export const VMSchedulingList: React.FC<VMSchedulingListProps> = ({
     false,
   );
   const [isNodeSelectorModalOpen, setIsNodeSelectorModalOpen] = React.useState<boolean>(false);
+  const [isTolerationsModalOpen, setIsTolerationsModalOpen] = React.useState<boolean>(false);
 
   const id = getBasicID(vmiLike);
   const flavorText = getFlavorText({
@@ -231,9 +236,32 @@ export const VMSchedulingList: React.FC<VMSchedulingListProps> = ({
   });
   const isCPUPinned = vmiLikeWrapper?.isDedicatedCPUPlacement();
   const nodeSelector = vmiLikeWrapper?.getNodeSelector();
+  const tolerations = vmiLikeWrapper?.getTolerations() || [];
+  const tolerationsToLabels = Object.assign(
+    {},
+    ...tolerations.map(({ key, value }) => ({
+      [key]: value,
+    })),
+  );
 
   return (
     <dl className="co-m-pane__details">
+      <VMDetailsItem
+        title={TOLERATIONS_MODAL_TITLE}
+        idValue={prefixedID(id, 'tolerations')}
+        canEdit={canEdit}
+        onEditClick={() => setIsTolerationsModalOpen(true)}
+        editButtonId={prefixedID(id, 'tolerations-edit')}
+      >
+        <TolerationsModal
+          vmLikeEntity={vm}
+          initialTolerations={tolerations}
+          isOpen={isTolerationsModalOpen}
+          setOpen={setIsTolerationsModalOpen}
+        />
+        <LabelList kind="Node" labels={tolerationsToLabels} />
+      </VMDetailsItem>
+
       <VMDetailsItem
         title={NODE_SELECTOR_MODAL_TITLE}
         idValue={prefixedID(id, 'node-selector')}

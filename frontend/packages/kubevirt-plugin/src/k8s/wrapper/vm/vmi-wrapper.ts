@@ -52,4 +52,6 @@ export class VMIWrapper extends K8sResourceWrapper<VMIKind> implements VMILikeMe
   isDedicatedCPUPlacement = () => this.data.spec?.domain?.cpu?.dedicatedCpuPlacement || false;
 
   getNodeSelector = () => this.data.spec?.template?.spec?.nodeSelector;
+
+  getTolerations = () => this.data.spec?.template?.spec?.tolerations;
 }

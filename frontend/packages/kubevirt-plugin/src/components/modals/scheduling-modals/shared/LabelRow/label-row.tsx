@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { MinusCircleIcon } from '@patternfly/react-icons';
-import { TextInput, Button } from '@patternfly/react-core';
+import { TextInput, Button, FormSelect, FormSelectOption } from '@patternfly/react-core';
+import { EFFECTS } from '../consts';
+
 import './label-row.scss';
 
 export const LabelRow: React.FC<LabelRowProps> = ({
@@ -18,7 +20,7 @@ export const LabelRow: React.FC<LabelRowProps> = ({
         isRequired
         type="text"
         value={key}
-        onChange={(v) => onChange(index, v, value)}
+        onChange={(v) => onChange(index, v, value, effect)}
         aria-label="selector key"
       />
       <TextInput
@@ -28,20 +30,22 @@ export const LabelRow: React.FC<LabelRowProps> = ({
         isDisabled={!key}
         type="text"
         value={value}
-        onChange={(v) => onChange(index, key, v)}
+        onChange={(v) => onChange(index, key, v, effect)}
         aria-label="selector value"
       />
       {showEffect && (
-        <TextInput
+        <FormSelect
           className="kv-label__effect"
-          placeholder="effect"
           isRequired
           isDisabled={!key}
-          type="text"
           value={effect}
           onChange={(v) => onChange(index, key, value, v)}
-          aria-label="selector value"
-        />
+          aria-label="selector effect"
+        >
+          {EFFECTS.map((effectOption) => (
+            <FormSelectOption key={effectOption} value={effectOption} label={effectOption} />
+          ))}
+        </FormSelect>
       )}
       <div className="kv-label__delete">
         <Button onClick={() => onDelete(index)} variant="plain">

@@ -34,6 +34,7 @@ export const getResourcesRequestsCPUCount = (vm: VMKind): string =>
 export const getResourcesLimitsCPUCount = (vm: VMKind): string =>
   vm?.spec?.template?.spec?.domain?.resources?.limits?.cpu;
 export const getNodeSelector = (vm: VMKind) => vm?.spec?.template?.spec?.nodeSelector;
+export const getTolerations = (vm: VMKind) => vm?.spec?.template?.spec?.tolerations;
 export const isDedicatedCPUPlacement = (vm: VMKind) =>
   _.get(vm, 'spec.template.spec.domain.cpu.dedicatedCpuPlacement');
 export const getDisks = (vm: VMKind, defaultValue: V1Disk[] = []): V1Disk[] =>

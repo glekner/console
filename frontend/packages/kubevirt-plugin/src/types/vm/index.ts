@@ -15,7 +15,7 @@ export type VMISpec = {
   readinessProbe: any;
   subdomain: string;
   terminationGracePeriodSeconds: number;
-  tolerations: any[];
+  tolerations: Toleration[];
   volumes?: any[];
 };
 
@@ -95,4 +95,12 @@ export type V1Network = {
 
 export type NodeSelector = {
   [key: string]: string;
+};
+
+export type Toleration = {
+  key?: string;
+  value?: string;
+  effect?: 'NoSchedule' | 'PreferNoSchedule' | 'NoExecute';
+  operator?: 'Exists' | 'Equal';
+  tolerationSeconds?: number;
 };

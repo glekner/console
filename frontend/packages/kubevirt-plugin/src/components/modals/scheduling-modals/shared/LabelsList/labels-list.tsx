@@ -5,10 +5,10 @@ import { PlusCircleIcon } from '@patternfly/react-icons';
 import { ExternalLink, resourcePath } from '@console/internal/components/utils';
 import { LabelRow } from '../LabelRow/label-row';
 import {
-  NODE_SELECTOR_ADD_LABEL,
-  NODE_SELECTOR_LABEL_KEY,
-  NODE_SELECTOR_LABEL_VALUE,
-  NODE_SELECTOR_LABEL_EFFECT,
+  SCHEDULING_ADD_LABEL,
+  SCHEDULING_LABEL_KEY,
+  SCHEDULING_LABEL_VALUE,
+  SCHEDULING_LABEL_EFFECT,
 } from '../consts';
 import './labels-list.scss';
 
@@ -17,52 +17,50 @@ export const LabelsList: React.FC<LabelsListProps> = ({
   onLabelAdd,
   onLabelChange,
   onLabelDelete,
-  addRowText = NODE_SELECTOR_ADD_LABEL,
+  addRowText = SCHEDULING_ADD_LABEL,
   showEffect = false,
-}) => {
-  return (
-    <>
-      {_.size(labels) > 0 && [
-        <div className="kv-labels-list__column-title">
-          <Text className="kv-labels-list__key-title" component={TextVariants.h4}>
-            {NODE_SELECTOR_LABEL_KEY}
+}) => (
+  <>
+    {_.size(labels) > 0 && [
+      <div key="column-title" className="kv-labels-list__column-title">
+        <Text className="kv-labels-list__key-title" component={TextVariants.h4}>
+          {SCHEDULING_LABEL_KEY}
+        </Text>
+        <Text className="kv-labels-list__value-title" component={TextVariants.h4}>
+          {SCHEDULING_LABEL_VALUE}
+        </Text>
+        {showEffect && (
+          <Text className="kv-labels-list__effect-title" component={TextVariants.h4}>
+            {SCHEDULING_LABEL_EFFECT}
           </Text>
-          <Text className="kv-labels-list__value-title" component={TextVariants.h4}>
-            {NODE_SELECTOR_LABEL_VALUE}
-          </Text>
-          {showEffect && (
-            <Text className="kv-labels-list__effect-title" component={TextVariants.h4}>
-              {NODE_SELECTOR_LABEL_EFFECT}
-            </Text>
-          )}
-        </div>,
-        Object.entries(labels).map(([index, label]) => (
-          <LabelRow
-            key={index}
-            index={index}
-            label={label}
-            showEffect={showEffect}
-            onChange={onLabelChange}
-            onDelete={onLabelDelete}
-          />
-        )),
-      ]}
+        )}
+      </div>,
+      Object.entries(labels).map(([index, label]) => (
+        <LabelRow
+          key={index}
+          index={index}
+          label={label}
+          showEffect={showEffect}
+          onChange={onLabelChange}
+          onDelete={onLabelDelete}
+        />
+      )),
+    ]}
 
-      <div className="kv-labels-list__buttons">
-        <Button
-          className="pf-m-link--align-left"
-          id="vm-node-selector-add-btn"
-          variant="link"
-          onClick={onLabelAdd}
-          icon={<PlusCircleIcon />}
-        >
-          {addRowText}
-        </Button>
-        <ExternalLink text={<div>Explore nodes list</div>} href={resourcePath('Node')} />
-      </div>
-    </>
-  );
-};
+    <div className="kv-labels-list__buttons">
+      <Button
+        className="pf-m-link--align-left"
+        id="vm-node-selector-add-btn"
+        variant="link"
+        onClick={onLabelAdd}
+        icon={<PlusCircleIcon />}
+      >
+        {addRowText}
+      </Button>
+      <ExternalLink text={<div>Explore nodes list</div>} href={resourcePath('Node')} />
+    </div>
+  </>
+);
 
 type LabelsListProps = {
   showEffect?: boolean;

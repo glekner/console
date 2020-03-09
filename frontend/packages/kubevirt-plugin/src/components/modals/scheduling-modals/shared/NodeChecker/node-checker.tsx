@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import { CheckCircleIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 import { Popover, PopoverPosition, Text, TextVariants, Button } from '@patternfly/react-core';
 import {
@@ -13,8 +12,8 @@ import { getName } from '@console/shared';
 import './node-checker.scss';
 
 export const NodeChecker: React.FC<NodeCheckerProps> = ({ qualifiedNodes, isLoading }) => {
-  const size = _.size(qualifiedNodes);
-  const buttonText = size === 1 ? '1 Node' : `${_.size(qualifiedNodes)} Nodes`;
+  const size = qualifiedNodes.length;
+  const buttonText = size === 1 ? '1 Node' : `${size} Nodes`;
   const icon = size > 0 ? <CheckCircleIcon /> : <ExclamationCircleIcon />;
   return (
     <div className="kv-node-checker__container">

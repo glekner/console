@@ -13,8 +13,6 @@ import './tolerations-modal.scss';
 export const TModal = ({
   nodes,
   tolerations,
-  isLoading,
-  setIsLoading,
   onLabelAdd,
   onLabelChange,
   onLabelDelete,
@@ -28,6 +26,7 @@ export const TModal = ({
   const loadError = getLoadError(nodes, NodeModel);
   const loadedNodes = getLoadedData(nodes, []);
 
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [qualifiedNodes, setQualifiedNodes] = React.useState([]);
   // Node search 1 sec after user stopped typing
   React.useEffect(() => {
@@ -36,8 +35,8 @@ export const TModal = ({
         const labels = Object.values(tolerations).filter(({ key }) => !!key);
         // look only for schedulable nodes
         labels.push({
-          key: SCHEDULING_REQUIRED_LABEL.KEY,
-          value: SCHEDULING_REQUIRED_LABEL.VALUE,
+          key: SCHEDULING_REQUIRED_LABEL,
+          value: 'true',
         });
 
         const newNodes = loadedNodes.filter((node) =>
@@ -47,7 +46,10 @@ export const TModal = ({
         setIsLoading(false);
       }
     }, 1000);
-    return () => clearTimeout(debounceNodeSearch);
+    return () => {
+      setIsLoading(true);
+      clearTimeout(debounceNodeSearch);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tolerations, loadedNodes]);
 
@@ -90,13 +92,11 @@ type TModalProps = {
   isOpen: boolean;
   nodes?: FirehoseResult<VMLikeEntityKind[]>;
   tolerations: any;
-  isLoading: boolean;
   inProgress: boolean;
   errorMessage: string;
   showPatchError: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onLabelAdd: () => void;
-  onLabelChange: (index: string, key: string, value: string) => void;
+  onLabelChange: (index: string, key: string, value: string, effect?: string) => void;
   onLabelDelete: (index: string) => void;
   onSubmit: () => void;
   onClose: () => void;

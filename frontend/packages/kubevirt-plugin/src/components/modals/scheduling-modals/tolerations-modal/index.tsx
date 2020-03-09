@@ -18,10 +18,8 @@ const TolerationsModal: React.FC<TolerationsModalProps> = (props) => {
 
   const [tolerations, setTolerations] = React.useState({
     ...Object.values(initialTolerations),
-  });
+  }) as any;
 
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [shouldPatch, setShouldPatch] = React.useState<boolean>(false);
   const [showPatchError, setPatchError] = React.useState<boolean>(false);
 
   const onLabelAdd = () =>
@@ -31,19 +29,14 @@ const TolerationsModal: React.FC<TolerationsModalProps> = (props) => {
     });
 
   const onLabelChange = (index, key, value, effect) => {
-    setIsLoading(true);
-    setShouldPatch(true);
     setTolerations({ ...tolerations, [index]: { key, value, effect } });
   };
 
   const onLabelDelete = (label) => {
-    setIsLoading(true);
-    setShouldPatch(true);
     setTolerations(_.omit(tolerations, label));
   };
 
   const onClose = () => {
-    setIsLoading(true);
     setTolerations({
       ...Object.values(initialTolerations),
     });
@@ -51,7 +44,7 @@ const TolerationsModal: React.FC<TolerationsModalProps> = (props) => {
   };
 
   const onSubmit = async () => {
-    if (shouldPatch) {
+    if (!_.isEqual(initialTolerations, tolerations)) {
       handlePromise(
         k8sPatch(
           getVMLikeModel(vmLikeEntity),
@@ -82,8 +75,6 @@ const TolerationsModal: React.FC<TolerationsModalProps> = (props) => {
     <Firehose resources={resources}>
       <TModal
         tolerations={tolerations}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
         onLabelAdd={onLabelAdd}
         onLabelChange={onLabelChange}
         onLabelDelete={onLabelDelete}

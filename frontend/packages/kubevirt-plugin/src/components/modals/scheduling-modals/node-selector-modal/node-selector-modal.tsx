@@ -14,8 +14,6 @@ import './node-selector-modal.scss';
 export const NSModal = ({
   nodes,
   selector,
-  isLoading,
-  setIsLoading,
   onLabelAdd,
   onLabelChange,
   onLabelDelete,
@@ -29,7 +27,9 @@ export const NSModal = ({
   const loadError = getLoadError(nodes, NodeModel);
   const loadedNodes = getLoadedData(nodes, []);
 
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [qualifiedNodes, setQualifiedNodes] = React.useState([]);
+
   // Node search 1 sec after user stopped typing
   React.useEffect(() => {
     const debounceNodeSearch = setTimeout(() => {
@@ -37,8 +37,8 @@ export const NSModal = ({
         const labels = Object.values(selector).filter(({ key }) => !!key);
         // look only for schedulable nodes
         labels.push({
-          key: SCHEDULING_REQUIRED_LABEL.KEY,
-          value: SCHEDULING_REQUIRED_LABEL.VALUE,
+          key: SCHEDULING_REQUIRED_LABEL,
+          value: 'true',
         });
 
         const newNodes = loadedNodes.filter((node) =>
@@ -48,7 +48,10 @@ export const NSModal = ({
         setIsLoading(false);
       }
     }, 1000);
-    return () => clearTimeout(debounceNodeSearch);
+    return () => {
+      setIsLoading(true);
+      clearTimeout(debounceNodeSearch);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selector, loadedNodes]);
 
@@ -90,11 +93,9 @@ type NSModalProps = {
   nodes?: FirehoseResult<VMLikeEntityKind[]>;
   nodeSelector?: NodeSelector;
   selector: any;
-  isLoading: boolean;
   inProgress: boolean;
   errorMessage: string;
   showPatchError: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   onLabelAdd: () => void;
   onLabelChange: (index: string, key: string, value: string) => void;
   onLabelDelete: (index: string) => void;

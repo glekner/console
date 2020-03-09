@@ -4,7 +4,7 @@ import { NodeSelector, Toleration } from '../../../types/vm';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import { getVMLikePatches } from '../vm-template';
 
-export const getNodeSelectorPatch = (
+export const getNodeSelectorPatches = (
   vmLikeEntity: VMLikeEntityKind,
   selectors: NodeSelector,
 ): Patch[] =>

@@ -10,6 +10,7 @@ import {
   getNetworks,
   getVolumes,
   isDedicatedCPUPlacement,
+  getNodeSelector,
 } from '../../../selectors/vm/selectors';
 import { VMWizardNetwork, VMWizardStorage } from '../../../components/create-vm-wizard/types';
 import { VMILikeMethods } from './types';
@@ -51,6 +52,8 @@ export class VMWrapper extends K8sResourceWrapper<VMKind, VMWrapper> implements 
   getVolumes = (defaultValue = []) => getVolumes(this.data, defaultValue);
 
   getLabeledDevices = () => transformDevices(this.getDisks(), this.getInterfaces());
+
+  getNodeSelector = () => getNodeSelector(this.data);
 
   isDedicatedCPUPlacement = () => isDedicatedCPUPlacement(this.data);
 

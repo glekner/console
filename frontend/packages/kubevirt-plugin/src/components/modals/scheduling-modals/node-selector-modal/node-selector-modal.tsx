@@ -8,7 +8,8 @@ import {
   HandlePromiseProps,
 } from '@console/internal/components/utils';
 import { k8sPatch } from '@console/internal/module/k8s';
-import { isLoaded, getLoadedData } from '../../../../utils';
+import { NodeModel } from '@console/internal/models';
+import { isLoaded, getLoadedData, getLoadError } from '../../../../utils';
 import { ModalFooter } from '../../modal/modal-footer';
 import { VMLikeEntityKind } from '../../../../types/vmLike';
 import { getVMLikeModel, getNodeSelector } from '../../../../selectors/vm';
@@ -18,8 +19,8 @@ import { useNodeQualifier } from '../shared/hooks';
 import { LabelsList } from '../../../LabelsList/labels-list';
 import { NODE_SELECTOR_MODAL_TITLE } from '../shared/consts';
 import { nodeSelectorToIDLabels } from './helpers';
-import { useIDLabels } from '../../../../hooks/use-id-labels';
-import { NodeSelectorLabel } from '../shared/types';
+import { useIDEntities } from '../../../../hooks/use-id-entities';
+import { IDLabel } from '../../../LabelsList/types';
 import { useCollisionChecker } from '../../../../hooks/use-collision-checker';
 
 export const NSModal = withHandlePromise(
@@ -33,6 +34,7 @@ export const NSModal = withHandlePromise(
     vmLikeEntityLoading,
   }: NSModalProps) => {
     const vmLikeFinal = getLoadedData(vmLikeEntityLoading, vmLikeEntity);
+    const loadError = getLoadError(nodes, NodeModel);
 
     const [
       selectorLabels,
@@ -40,15 +42,17 @@ export const NSModal = withHandlePromise(
       onLabelAdd,
       onLabelChange,
       onLabelDelete,
-    ] = useIDLabels<NodeSelectorLabel>(nodeSelectorToIDLabels(getNodeSelector(vmLikeEntity)));
+    ] = useIDEntities<IDLabel>(nodeSelectorToIDLabels(getNodeSelector(vmLikeEntity)));
 
-    const [qualifiedNodes, loadError] = useNodeQualifier(selectorLabels, nodes);
+    const qualifiedNodes = useNodeQualifier(selectorLabels, nodes);
 
     const [showCollisionAlert, reload] = useCollisionChecker<VMLikeEntityKind>(
       vmLikeFinal,
       (oldVM: VMLikeEntityKind, newVM: VMLikeEntityKind) =>
         _.isEqual(getNodeSelector(oldVM), getNodeSelector(newVM)),
     );
+
+    const onSelectorLabelAdd = () => onLabelAdd({ id: null, key: '', value: '' } as IDLabel);
 
     const onReload = () => {
       reload();
@@ -80,10 +84,12 @@ export const NSModal = withHandlePromise(
         <ModalTitle>{NODE_SELECTOR_MODAL_TITLE}</ModalTitle>
         <ModalBody>
           <LabelsList
+            kind="Node"
             labels={selectorLabels}
-            onLabelAdd={onLabelAdd}
+            onLabelAdd={onSelectorLabelAdd}
             onLabelChange={onLabelChange}
             onLabelDelete={onLabelDelete}
+            emptyStateAddRowText="Add Label to specify qualifying nodes"
           />
           <NodeChecker qualifiedNodes={qualifiedNodes} />
         </ModalBody>

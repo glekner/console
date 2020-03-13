@@ -1,8 +1,13 @@
-.kv-scheduling-labels__grid {
+.kv-labels-list__grid {
   grid-gap: var(--pf-global--spacer--md);
 }
 
-.co-external-link {
-  display: flex;
+.kv-labels-list__buttons {
   align-items: center;
+  margin-top: var(--pf-global--spacer--md);
+
+  .kv-labels-list__link {
+    display: flex;
+    align-items: center;
+  }
 }

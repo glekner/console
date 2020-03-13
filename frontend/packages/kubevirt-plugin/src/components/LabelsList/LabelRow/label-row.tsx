@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { MinusCircleIcon } from '@patternfly/react-icons';
 import { GridItem, TextInput, Button } from '@patternfly/react-core';
-import { IDLabel } from '../../../hooks/use-id-labels';
+import { IDLabel } from '../types';
 
 export const LabelRow = <T extends IDLabel>({ label, onChange, onDelete }: LabelRowProps<T>) => {
   const { id, key, value } = label;

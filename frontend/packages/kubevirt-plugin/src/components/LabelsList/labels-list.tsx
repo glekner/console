@@ -10,27 +10,29 @@ import {
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import { ExternalLink, resourcePath } from '@console/internal/components/utils';
+import { K8sResourceKindReference } from '@console/internal/module/k8s';
 import { LabelRow } from './LabelRow/label-row';
 import { ADD_LABEL, LABEL_KEY, LABEL_VALUE } from './consts';
-import { IDLabel } from '../../hooks/use-id-labels';
+import { IDLabel } from './types';
 import './labels-list.scss';
 
 export const LabelsList = <T extends IDLabel>({
   labels,
+  kind = '',
   onLabelAdd,
   onLabelChange,
   onLabelDelete,
-  newLabel = { id: -1, key: '', value: '' } as T,
   addRowText = ADD_LABEL,
+  emptyStateAddRowText = ADD_LABEL,
 }: LabelsListProps<T>) => (
   <>
-    <Grid className="kv-scheduling-labels__grid">
+    <Grid className="kv-labels-list__grid">
       {labels.length > 0 && [
         <React.Fragment key="label-title-row">
-          <GridItem span={7}>
+          <GridItem span={6}>
             <Text component={TextVariants.h4}>{LABEL_KEY}</Text>
           </GridItem>
-          <GridItem span={5}>
+          <GridItem span={6}>
             <Text component={TextVariants.h4}>{LABEL_VALUE}</Text>
           </GridItem>
         </React.Fragment>,
@@ -44,21 +46,27 @@ export const LabelsList = <T extends IDLabel>({
         )),
       ]}
     </Grid>
-    <Split>
+    <Split className="kv-labels-list__buttons">
       <SplitItem>
         <Button
           className="pf-m-link--align-left"
-          id="vm-node-selector-add-btn"
+          id="vm-labels-list-add-btn"
           variant="link"
-          onClick={() => onLabelAdd(newLabel)}
+          onClick={() => onLabelAdd()}
           icon={<PlusCircleIcon />}
         >
-          {labels.length > 0 ? addRowText : `${addRowText} to specify qualifying nodes`}
+          {labels.length > 0 ? addRowText : emptyStateAddRowText}
         </Button>
       </SplitItem>
       <SplitItem isFilled />
       <SplitItem>
-        <ExternalLink text={<div>Explore nodes list</div>} href={resourcePath('Node')} />
+        {kind && (
+          <ExternalLink
+            additionalClassName="kv-labels-list__link"
+            text={<div>{`Explore ${kind} list`}</div>}
+            href={resourcePath(kind)}
+          />
+        )}
       </SplitItem>
     </Split>
   </>
@@ -66,9 +74,11 @@ export const LabelsList = <T extends IDLabel>({
 
 type LabelsListProps<T> = {
   labels: T[];
+  kind?: K8sResourceKindReference;
   newLabel?: T;
   addRowText?: string;
-  onLabelAdd: (label: T) => void;
+  emptyStateAddRowText?: string;
+  onLabelAdd: () => void;
   onLabelChange: (label: T) => void;
   onLabelDelete: (id: number) => void;
 };

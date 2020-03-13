@@ -2,20 +2,20 @@ import * as React from 'react';
 import { FirehoseResult } from '@console/internal/components/utils';
 import { NodeKind, K8sResourceKind } from '@console/internal/module/k8s';
 import { getLabels } from '@console/shared';
-import { NodeModel } from '@console/internal/models';
-import { getLoadedData, isLoaded, getLoadError } from '../../../../utils';
-import { NodeSelectorLabel } from './types';
+import { getLoadedData, isLoaded } from '../../../../utils';
+import { IDLabel } from '../../../LabelsList/types';
 
-export const useNodeQualifier = <T extends NodeSelectorLabel>(
+export const useNodeQualifier = <T extends IDLabel>(
   labels: T[],
   nodes: FirehoseResult<K8sResourceKind[]>,
-): [NodeKind[], string] => {
-  const loadError = getLoadError(nodes, NodeModel);
+): NodeKind[] => {
   const loadedNodes = getLoadedData(nodes, []);
+  const isNodesLoaded = isLoaded(nodes);
+
   const [qualifiedNodes, setQualifiedNodes] = React.useState([]);
 
   React.useEffect(() => {
-    if (isLoaded(nodes)) {
+    if (isNodesLoaded) {
       const filteredLabels = labels.filter(({ key }) => !!key);
       const newNodes = [];
       loadedNodes.forEach((node) => {
@@ -26,8 +26,7 @@ export const useNodeQualifier = <T extends NodeSelectorLabel>(
       });
       setQualifiedNodes(newNodes);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [labels, loadedNodes]);
+  }, [labels, loadedNodes, isNodesLoaded]);
 
-  return [qualifiedNodes, loadError];
+  return qualifiedNodes;
 };

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Checkbox, Modal, Text, TextVariants } from '@patternfly/react-core';
+import { Button, ButtonVariant, Checkbox, Modal, Text, TextVariants } from '@patternfly/react-core';
 import { k8sPatch } from '@console/internal/module/k8s';
 import { NodeModel } from '@console/internal/models';
-import { getLabel } from '@console/shared';
 import {
   Firehose,
   withHandlePromise,
@@ -10,24 +9,35 @@ import {
   FirehoseResult,
   Label,
 } from '@console/internal/components/utils';
-import { ModalFooter } from '../modal/modal-footer';
-import { getVMLikeModel, isDedicatedCPUPlacement, asVM } from '../../../selectors/vm';
-import { getDedicatedCpuPatch } from '../../../k8s/patches/vm/vm-cpu-patches';
-import { VMLikeEntityKind } from '../../../types/vmLike';
-import { getLoadedData, isLoaded, getLoadError } from '../../../utils';
-import { RESOURCE_NO_NODES_AVAILABLE, DEDICATED_RESOURCES } from './consts';
+import { ModalFooter } from '../../modal/modal-footer';
+import { getVMLikeModel, isDedicatedCPUPlacement, asVM } from '../../../../selectors/vm';
+import { getDedicatedCpuPatch } from '../../../../k8s/patches/vm/vm-cpu-patches';
+import { VMLikeEntityKind } from '../../../../types/vmLike';
+import { isLoaded, getLoadError } from '../../../../utils';
+import { DEDICATED_RESOURCES, DEDICATED_RESOURCES_LABELS } from './consts';
 import './dedicated-resources-modal.scss';
+import { useNodeQualifier } from '../shared/hooks';
+import { NodeChecker } from '../shared/NodeChecker/node-checker';
+import { useCollisionChecker } from '../../../../hooks/use-collision-checker';
 
 const ResourceModal = withHandlePromise<ResourceModalProps>(
   ({ vmLikeEntity, nodes, isOpen, setOpen, handlePromise, inProgress, errorMessage }) => {
-    const isLoading = !isLoaded(nodes);
     const loadError = getLoadError(nodes, NodeModel);
     const isCPUPinned = isDedicatedCPUPlacement(asVM(vmLikeEntity));
-    const loadedNodes = getLoadedData(nodes, []);
 
     const [isPinned, setIsPinned] = React.useState<boolean>(isCPUPinned);
     const [showPatchError, setPatchError] = React.useState<boolean>(false);
-    const isNodeAvailable = loadedNodes.some((node) => getLabel(node, 'cpumanager') === 'true');
+    const qualifiedNodes = useNodeQualifier(DEDICATED_RESOURCES_LABELS, nodes);
+
+    const [showCollisionAlert, reload] = useCollisionChecker<VMLikeEntityKind>(
+      isDedicatedCPUPlacement(asVM(vmLikeEntity)),
+      (oldBool: VMLikeEntityKind, newBool: VMLikeEntityKind) => oldBool === newBool,
+    );
+
+    const onReload = () => {
+      reload();
+      setIsPinned(isDedicatedCPUPlacement(asVM(vmLikeEntity)));
+    };
 
     const submit = async () => {
       if (isPinned !== isCPUPinned) {
@@ -48,13 +58,23 @@ const ResourceModal = withHandlePromise<ResourceModalProps>(
       <ModalFooter
         id="dedicated-resources"
         className="kubevirt-dedicated-resources__footer"
-        warningMessage={!loadError && !isNodeAvailable && RESOURCE_NO_NODES_AVAILABLE}
         errorMessage={showPatchError && errorMessage}
-        inProgress={inProgress || isLoading}
-        isSimpleError={!isNodeAvailable}
+        inProgress={inProgress || !isLoaded(nodes)}
+        isSimpleError={!!loadError}
         onSubmit={submit}
         onCancel={() => setOpen(false)}
         submitButtonText="Save"
+        infoTitle={showCollisionAlert && 'Node Selector has been updated outside this flow.'}
+        infoMessage={
+          <>
+            Saving these changes will override any Node Selector previously saved.
+            <br />
+            <Button variant={ButtonVariant.link} isInline onClick={onReload}>
+              Reload Node Selector
+            </Button>
+            .
+          </>
+        }
       />
     );
 
@@ -71,7 +91,7 @@ const ResourceModal = withHandlePromise<ResourceModalProps>(
           className="kubevirt-dedicated-resources__checkbox"
           label="Schedule this workload with dedicated resources (guaranteed policy)"
           isChecked={isPinned}
-          isDisabled={isLoading}
+          isDisabled={!isLoaded(nodes)}
           onChange={(flag) => setIsPinned(flag)}
           id="dedicated-resources-checkbox"
         />
@@ -79,6 +99,7 @@ const ResourceModal = withHandlePromise<ResourceModalProps>(
           Available only on Nodes with labels{' '}
           <Label kind={NodeModel.kind} name="cpumanager" value="true" expand />
         </Text>
+        <NodeChecker qualifiedNodes={qualifiedNodes} />
       </Modal>
     );
   },

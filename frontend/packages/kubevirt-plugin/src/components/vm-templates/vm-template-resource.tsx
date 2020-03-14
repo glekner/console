@@ -6,7 +6,7 @@ import { getBasicID, prefixedID } from '../../utils';
 import { vmDescriptionModal } from '../modals/vm-description-modal';
 import { BootOrderModal } from '../modals/boot-order-modal';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal/vm-cdrom-modal';
-import { DedicatedResourcesModal } from '../modals/dedicated-resources-modal/dedicated-resources-modal';
+import { DedicatedResourcesModal } from '../modals/scheduling-modals/dedicated-resources-modal/dedicated-resources-modal';
 import nodeSelectorModal from '../modals/scheduling-modals/node-selector-modal';
 import { getDescription } from '../../selectors/selectors';
 import {
@@ -28,7 +28,7 @@ import {
   RESOURCE_PINNED,
   RESOURCE_NOT_PINNED,
   DEDICATED_RESOURCES,
-} from '../modals/dedicated-resources-modal/consts';
+} from '../modals/scheduling-modals/dedicated-resources-modal/consts';
 import { VMTemplateLink } from './vm-template-link';
 import { TemplateSource } from './vm-template-source';
 import { VMWrapper } from '../../k8s/wrapper/vm/vm-wrapper';

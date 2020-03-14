@@ -13,7 +13,7 @@ import { VMTemplateLink } from '../vm-templates/vm-template-link';
 import { getBasicID, prefixedID } from '../../utils';
 import { vmDescriptionModal, vmFlavorModal } from '../modals';
 import { VMCDRomModal } from '../modals/cdrom-vm-modal/vm-cdrom-modal';
-import { DedicatedResourcesModal } from '../modals/dedicated-resources-modal/dedicated-resources-modal';
+import { DedicatedResourcesModal } from '../modals/scheduling-modals/dedicated-resources-modal/dedicated-resources-modal';
 import { BootOrderModal } from '../modals/boot-order-modal/boot-order-modal';
 import nodeSelectorModal from '../modals/scheduling-modals/node-selector-modal';
 import VMStatusModal from '../modals/vm-status-modal/vm-status-modal';
@@ -27,7 +27,7 @@ import {
   RESOURCE_PINNED,
   RESOURCE_NOT_PINNED,
   DEDICATED_RESOURCES,
-} from '../modals/dedicated-resources-modal/consts';
+} from '../modals/scheduling-modals/dedicated-resources-modal/consts';
 import { getOperatingSystemName, getOperatingSystem } from '../../selectors/vm';
 import { getVmiIpAddresses } from '../../selectors/vmi/ip-address';
 import { findVMIPod } from '../../selectors/pod/selectors';

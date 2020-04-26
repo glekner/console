@@ -275,7 +275,7 @@ export const VMSchedulingList: React.FC<VMSchedulingListProps> = ({
               affinityModal({ vmLikeEntity: vm, blocking: true, modalClassName: 'modal-lg' })
             }
           >
-            {affinityWrapperCount} {'Affinity rules'}
+            {affinityWrapperCount} {'Affinity rules!!!'}
           </VMDetailsItem>
         </dl>
       </div>

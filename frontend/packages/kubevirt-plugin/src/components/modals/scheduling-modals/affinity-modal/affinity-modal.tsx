@@ -134,7 +134,7 @@ export const AffinityModal = withHandlePromise<AffinityModalProps>(
           <SplitItem className="affinity-modal__add-btn">
             {!isEditing && (
               <Button onClick={() => onAffinityClickAdd()} variant="secondary">
-                Add Affinity
+                Add Affinity!
               </Button>
             )}
           </SplitItem>

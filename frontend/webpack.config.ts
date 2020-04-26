@@ -5,6 +5,7 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as VirtualModulesPlugin from 'webpack-virtual-modules';
+import * as ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import { resolvePluginPackages, getActivePluginsModule } from '@console/plugin-sdk/src/codegen';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
@@ -60,12 +61,37 @@ const config: Configuration = {
         test: /(\.jsx?)|(\.tsx?)$/,
         exclude: /node_modules\/(?!(bitbucket|ky)\/)/,
         use: [
-          { loader: 'cache-loader' },
+          // { loader: 'cache-loader' },
+          // {
+          //   loader: 'thread-loader',
+          //   options: {
+          //     // Leave one core spare for fork-ts-checker-webpack-plugin
+          //     workers: require('os').cpus().length - 1,
+          //   },
+          // },
           {
-            loader: 'thread-loader',
+            loader: 'babel-loader',
             options: {
-              // Leave one core spare for fork-ts-checker-webpack-plugin
-              workers: require('os').cpus().length - 1,
+              presets: [
+                [
+                  '@babel/preset-react',
+                  {
+                    modules: false,
+                  },
+                ],
+                '@babel/preset-env',
+              ],
+              plugins: [
+                '@babel/plugin-syntax-dynamic-import',
+                [
+                  '@babel/plugin-transform-runtime',
+                  {
+                    regenerator: true,
+                  },
+                ],
+                'react-refresh/babel',
+              ],
+              ignore: ['node_modules/bitbucket'],
             },
           },
           {
@@ -142,6 +168,7 @@ const config: Configuration = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/^lodash$/, 'lodash-es'),
+    new ReactRefreshWebpackPlugin({ forceEnable: true }),
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
     new HtmlWebpackPlugin({
       filename: './tokener.html',

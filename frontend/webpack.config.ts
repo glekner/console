@@ -24,6 +24,7 @@ const CHECK_CYCLES = process.env.CHECK_CYCLES || 'false';
 /* Helpers */
 const extractCSS = new MiniCssExtractPlugin({ filename: 'app-bundle.[contenthash].css' });
 const overpassTest = /overpass-.*\.(woff2?|ttf|eot|otf)(\?.*$|$)/;
+const isDevelopment = NODE_ENV !== 'production';
 
 const config: Configuration = {
   entry: [
@@ -61,26 +62,18 @@ const config: Configuration = {
         test: /(\.jsx?)|(\.tsx?)$/,
         exclude: /node_modules\/(?!(bitbucket|ky)\/)/,
         use: [
-          // { loader: 'cache-loader' },
-          // {
-          //   loader: 'thread-loader',
-          //   options: {
-          //     // Leave one core spare for fork-ts-checker-webpack-plugin
-          //     workers: require('os').cpus().length - 1,
-          //   },
-          // },
+          { loader: 'cache-loader' },
+          {
+            loader: 'thread-loader',
+            options: {
+              // Leave one core spare for fork-ts-checker-webpack-plugin
+              workers: require('os').cpus().length - 1,
+            },
+          },
           {
             loader: 'babel-loader',
             options: {
-              presets: [
-                [
-                  '@babel/preset-react',
-                  {
-                    modules: false,
-                  },
-                ],
-                '@babel/preset-env',
-              ],
+              presets: ['@babel/preset-env'],
               plugins: [
                 '@babel/plugin-syntax-dynamic-import',
                 [
@@ -89,7 +82,7 @@ const config: Configuration = {
                     regenerator: true,
                   },
                 ],
-                'react-refresh/babel',
+                isDevelopment && 'react-refresh/babel',
               ],
               ignore: ['node_modules/bitbucket'],
             },
@@ -168,7 +161,7 @@ const config: Configuration = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/^lodash$/, 'lodash-es'),
-    new ReactRefreshWebpackPlugin({ forceEnable: true }),
+    isDevelopment && new ReactRefreshWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
     new HtmlWebpackPlugin({
       filename: './tokener.html',

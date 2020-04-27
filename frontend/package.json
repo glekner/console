@@ -146,6 +146,7 @@
     "type-fest": "0.13.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.3.0-beta.5",
     "@types/classnames": "^2.2.7",
     "@types/enzyme": "3.10.x",

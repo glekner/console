@@ -33,7 +33,7 @@ export const LabelsList = ({
         {kind && (
           <ExternalLink
             additionalClassName="kv-labels-list__link"
-            text={<div>{`Explore ${kind} list`}</div>}
+            text={<div>{`Explore ${kind} list lol`}</div>}
             href={resourcePath(kind)}
           />
         )}

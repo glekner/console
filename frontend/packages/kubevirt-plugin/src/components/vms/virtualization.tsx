@@ -10,7 +10,7 @@ import { VirtualMachineTemplatesPage } from '../vm-templates/vm-template';
 import { VirtualMachineModel } from '../../models';
 
 export const WrappedVirtualizationPage: React.FC<VirtualizationPageProps> = (props) => {
-  const title = 'Virtualization';
+  const title = 'Virtualization lol';
 
   const obj = { loaded: true, data: { kind: VirtualMachineModel.kind } };
   const pages = [

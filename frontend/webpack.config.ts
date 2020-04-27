@@ -42,7 +42,6 @@ const config: Configuration = {
     writeToDisk: true,
     progress: true,
     hot: HOT_RELOAD !== 'false',
-    // hotOnly: true,
     inline: HOT_RELOAD !== 'false',
   },
   resolve: {

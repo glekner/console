@@ -42,6 +42,7 @@ const config: Configuration = {
     writeToDisk: true,
     progress: true,
     hot: HOT_RELOAD !== 'false',
+    // hotOnly: true,
     inline: HOT_RELOAD !== 'false',
   },
   resolve: {
@@ -73,18 +74,7 @@ const config: Configuration = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
-              plugins: [
-                '@babel/plugin-syntax-dynamic-import',
-                [
-                  '@babel/plugin-transform-runtime',
-                  {
-                    regenerator: true,
-                  },
-                ],
-                isDevelopment && 'react-refresh/babel',
-              ],
-              ignore: ['node_modules/bitbucket'],
+              plugins: [isDevelopment && 'react-refresh/babel'],
             },
           },
           {
@@ -161,7 +151,6 @@ const config: Configuration = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/^lodash$/, 'lodash-es'),
-    isDevelopment && new ReactRefreshWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
     new HtmlWebpackPlugin({
       filename: './tokener.html',
@@ -180,6 +169,7 @@ const config: Configuration = {
     }),
     new webpack.IgnorePlugin(/prettier/),
     extractCSS,
+    isDevelopment && new ReactRefreshWebpackPlugin(),
   ],
   devtool: 'cheap-module-source-map',
   stats: 'minimal',

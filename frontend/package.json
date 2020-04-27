@@ -147,10 +147,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/runtime": "^7.9.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.3.0-beta.5",
     "@types/classnames": "^2.2.7",
     "@types/enzyme": "3.10.x",

@@ -1,1 +1,1 @@
-export * from './PopupKebabMenu';
+export { PopupKebabMenu } from './PopupKebabMenu';

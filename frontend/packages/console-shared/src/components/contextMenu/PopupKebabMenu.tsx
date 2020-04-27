@@ -5,7 +5,7 @@ import { DropdownMenu } from '@patternfly/react-core';
 import { history, KebabItem, KebabOption } from '@console/internal/components/utils';
 import './PopupKebabMenu.scss';
 
-export interface PopupKebabMenuProps {
+interface PopupKebabMenuProps {
   kebabOptions: KebabOption[];
   className?: string;
   onClose?(): void;

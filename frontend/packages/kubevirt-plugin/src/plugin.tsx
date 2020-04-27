@@ -114,7 +114,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     properties: {
       section: 'Workloads',
       componentProps: {
-        name: 'Virtualization',
+        name: 'VirtualizationG',
         resource: 'virtualization',
       },
       mergeBefore: 'Deployments',

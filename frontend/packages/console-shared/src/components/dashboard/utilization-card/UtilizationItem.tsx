@@ -8,11 +8,8 @@ import {
 } from '@console/internal/components/graphs/area';
 import { DataPoint } from '@console/internal/components/graphs';
 import { ByteDataTypes } from 'packages/console-shared/src/graph-helper/data-utils';
-import {
-  YellowExclamationTriangleIcon,
-  RedExclamationCircleIcon,
-  ColoredIconProps,
-} from '../../status';
+import { YellowExclamationTriangleIcon, RedExclamationCircleIcon } from '../../status';
+import { ColoredIconProps } from '../../status/icons';
 
 export enum LIMIT_STATE {
   ERROR = 'ERROR',

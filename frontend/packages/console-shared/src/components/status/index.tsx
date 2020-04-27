@@ -7,7 +7,6 @@ export {
   BlueSyncIcon,
   RedResourcesFullIcon,
   YellowResourcesAlmostFullIcon,
-  ColoredIconProps,
 } from './icons';
 
 export {

@@ -3,6 +3,7 @@ import { navFactory } from '@console/internal/components/utils';
 import { DetailsPage } from '@console/internal/components/factory';
 import { PodModel, TemplateModel } from '@console/internal/models';
 import { VMDisksFirehose } from '../vm-disks';
+import { UploadImageFirehose } from '../vm-disks/upload-image';
 import { VMNics } from '../vm-nics';
 import {
   DataVolumeModel,
@@ -77,9 +78,16 @@ export const VirtualMachinesDetailsPage: React.FC<VirtualMachinesDetailsPageProp
     component: VMEnvironmentFirehose,
   };
 
+  const uploadPage = {
+    href: 'upload-image',
+    name: 'Upload Image',
+    component: UploadImageFirehose,
+  };
+
   const pages = [
     dashboardPage,
     overviewPage,
+    uploadPage,
     navFactory.editYaml(),
     environmentPage,
     navFactory.events(VMEvents),

@@ -10,6 +10,8 @@ import { V1alpha1DataVolume } from '../../types/vm/disk/V1alpha1DataVolume';
 export const UploadImage: React.FC<UploadImageProps> = ({ dataVolumes, namespace }) => {
   const { init, status, error, token } = useUploadPVC(dataVolumes, namespace, 'rook-ceph');
   const [loading, setLoading] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
+
   const createDataVolume = async () => {
     setLoading(true);
     await init();
@@ -49,7 +51,7 @@ export const UploadImage: React.FC<UploadImageProps> = ({ dataVolumes, namespace
       </div>
       <TextContent>
         <Text component={TextVariants.h4}>{`Status: ${status?.phase}`}</Text>
-        <Text component={TextVariants.h4}>{`Progress: ${status?.progress}`}</Text>
+        <Text component={TextVariants.h4}>{`Progress: ${progress}`}</Text>
         <Text component={TextVariants.h4}>{`TOKEN: ${token}`}</Text>
         <Text component={TextVariants.h4}>{`error: ${error}`}</Text>
       </TextContent>

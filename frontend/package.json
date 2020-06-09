@@ -85,6 +85,7 @@
     "@patternfly/react-topology": "2.14.58",
     "@patternfly/react-virtualized-extension": "1.4.59",
     "abort-controller": "3.0.0",
+    "axios": "^0.19.2",
     "classnames": "2.x",
     "comlink": "^4.3.0",
     "core-js": "2.x",

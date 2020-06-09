@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import { getName } from '@console/shared';
 import { k8sCreate } from '@console/internal/module/k8s';
 import { FirehoseResult } from '@console/internal/components/utils';
@@ -20,17 +21,19 @@ export const useUploadPVC = (
   dvs: FirehoseResult<V1alpha1DataVolume[]>,
   namespace: string,
   storageClassName: string,
+  url = 'https://cdi-uploadproxy-cdi.apps.ostest.test.metalkube.org/v1alpha1/upload-async',
 ) => {
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const [dvName, setDVName] = useState('');
+  const [image, setImage] = useState<Blob>(new Blob());
   const [createdDV, setCreatedDV] = useState(false);
-  const [status, setStatus] = useState<V1alpha1DataVolumeStatus>({
-    phase: 'Pending',
-    progress: '0',
-  });
+  const [status, setStatus] = useState<V1alpha1DataVolumeStatus>({ phase: 'Pending' });
+  const [progress, setProgress] = useState(0);
+  const initUpload = useRef(false);
 
-  const init = async () => {
+  const init = async (initImage: Blob) => {
+    setImage(initImage);
     const loadedDataVolumes = getLoadedData(dvs, []);
     const dataVolumeName = getAvailableDVName(loadedDataVolumes);
     setDVName(dataVolumeName);
@@ -99,5 +102,24 @@ export const useUploadPVC = (
     }
   }, [dvName, namespace, status, token]);
 
-  return { init, status, token, error };
+  // upload image
+  useEffect(() => {
+    if (image && token && !initUpload.current) {
+      initUpload.current = true;
+      const reader = new FileReader();
+      reader.onloadend = (ev) => {
+        axios
+          .post(url, ev.target.result, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            onUploadProgress: (e) => setProgress(Math.floor((e.loaded / image.size) * 100)),
+          })
+          .then(() => setProgress(100))
+          .catch((err) => setError(err));
+      };
+      reader.readAsArrayBuffer(image);
+    }
+  }, [image, token, url]);
+  return { init, status, progress, error };
 };

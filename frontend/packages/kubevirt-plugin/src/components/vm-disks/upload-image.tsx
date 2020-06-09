@@ -6,11 +6,13 @@ import { VMLikeEntityTabProps } from '../vms/types';
 import { useUploadPVC } from './use-upload-pvc';
 import { getNamespace } from '@console/shared';
 import { V1alpha1DataVolume } from '../../types/vm/disk/V1alpha1DataVolume';
+import { useCDIUpload } from '@console/shared/src/cdi-upload-worker/useUploadWorker';
 
 export const UploadImage: React.FC<UploadImageProps> = ({ dataVolumes, namespace }) => {
   const { init, status, error, token } = useUploadPVC(dataVolumes, namespace, 'rook-ceph');
   const [loading, setLoading] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
+  const { total } = useCDIUpload(17, 4);
 
   const createDataVolume = async () => {
     setLoading(true);
@@ -54,6 +56,7 @@ export const UploadImage: React.FC<UploadImageProps> = ({ dataVolumes, namespace
         <Text component={TextVariants.h4}>{`Progress: ${progress}`}</Text>
         <Text component={TextVariants.h4}>{`TOKEN: ${token}`}</Text>
         <Text component={TextVariants.h4}>{`error: ${error}`}</Text>
+        <Text component={TextVariants.h4}>{`total: ${total}`}</Text>
       </TextContent>
     </div>
   );

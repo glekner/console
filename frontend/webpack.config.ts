@@ -5,6 +5,7 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as VirtualModulesPlugin from 'webpack-virtual-modules';
+import * as WorkerPlugin from 'worker-plugin';
 
 import { resolvePluginPackages, getActivePluginsModule } from '@console/plugin-sdk/src/codegen';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
@@ -141,6 +142,7 @@ const config: Configuration = {
     runtimeChunk: true,
   },
   plugins: [
+    new WorkerPlugin(),
     new webpack.NormalModuleReplacementPlugin(/^lodash$/, 'lodash-es'),
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
     new HtmlWebpackPlugin({

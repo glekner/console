@@ -3,40 +3,32 @@ import axios from 'axios';
 import { getName } from '@console/shared';
 import { k8sCreate } from '@console/internal/module/k8s';
 import { FirehoseResult } from '@console/internal/components/utils';
-import { getLoadedData } from '../../utils';
-import { DataVolumeModel, UploadTokenRequestModel } from '../../models';
-import { V1alpha1DataVolume } from '../../types/vm/disk/V1alpha1DataVolume';
-import { V1alpha1DataVolumeStatus } from '../../types/vm/disk/V1alpha1DataVolumeStatus';
+import { getLoadedData } from '@console/kubevirt-plugin/src/utils';
+import { DataVolumeModel, UploadTokenRequestModel } from '@console/kubevirt-plugin/src/models';
+import { V1alpha1DataVolume } from '@console/kubevirt-plugin/src/types/vm/disk/V1alpha1DataVolume';
+import { getAvailableDVName } from './helpers';
+import { UPLOAD_URL } from './consts';
 
-const getAvailableDVName = (dvs: V1alpha1DataVolume[]) => {
-  const dvSet = new Set(dvs.map((dv) => getName(dv)));
-  let index = 1;
-  while (dvSet.has(`upload-datavolume-${index}`)) {
-    index++;
-  }
-  return `upload-datavolume-${index}`;
-};
-
-export const useUploadPVC = (
+export const useImageUpload = (
   dvs: FirehoseResult<V1alpha1DataVolume[]>,
-  namespace: string,
-  storageClassName: string,
-  url = 'https://cdi-uploadproxy-cdi.apps.ostest.test.metalkube.org/v1alpha1/upload-async',
+  config: useImageUploadConfig,
 ) => {
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
-  const [dvName, setDVName] = useState('');
+  const [pvcName, setPVCName] = useState('');
   const [image, setImage] = useState<Blob>(new Blob());
   const [createdDV, setCreatedDV] = useState(false);
-  const [status, setStatus] = useState<V1alpha1DataVolumeStatus>({ phase: 'Pending' });
+  const [status, setStatus] = useState('Pending');
   const [progress, setProgress] = useState(0);
   const initUpload = useRef(false);
+
+  const { namespace, storageClassName, size } = config;
 
   const init = async (initImage: Blob) => {
     setImage(initImage);
     const loadedDataVolumes = getLoadedData(dvs, []);
     const dataVolumeName = getAvailableDVName(loadedDataVolumes);
-    setDVName(dataVolumeName);
+    setPVCName(dataVolumeName);
 
     const dataVolume = {
       apiVersion: 'cdi.kubevirt.io/v1alpha1',
@@ -54,7 +46,7 @@ export const useUploadPVC = (
           accessModes: ['ReadWriteOnce'],
           resources: {
             requests: {
-              storage: '1Gi',
+              storage: size, // based on file size?
             },
           },
         },
@@ -70,25 +62,25 @@ export const useUploadPVC = (
   useEffect(() => {
     if (createdDV) {
       const loadedDataVolumes = getLoadedData(dvs, []);
-      const dv = loadedDataVolumes.find((datavolume) => getName(datavolume) === dvName);
+      const dv = loadedDataVolumes.find((datavolume) => getName(datavolume) === pvcName);
       if (dv) {
-        setStatus(dv?.status);
+        setStatus(dv?.status?.phase);
       }
     }
-  }, [createdDV, dvName, dvs]);
+  }, [createdDV, pvcName, dvs]);
 
   // create token
   useEffect(() => {
-    if (status?.phase === 'UploadReady' && !token) {
+    if (status === 'UploadReady' && !token) {
       const tokenRequest = {
         apiVersion: 'upload.cdi.kubevirt.io/v1alpha1',
         kind: UploadTokenRequestModel.kind,
         metadata: {
-          name: dvName,
+          name: pvcName,
           namespace,
         },
         spec: {
-          pvcName: dvName,
+          pvcName,
         },
       };
 
@@ -100,7 +92,7 @@ export const useUploadPVC = (
 
       createToken();
     }
-  }, [dvName, namespace, status, token]);
+  }, [pvcName, namespace, status, token]);
 
   // upload image
   useEffect(() => {
@@ -109,7 +101,7 @@ export const useUploadPVC = (
       const reader = new FileReader();
       reader.onloadend = (ev) => {
         axios
-          .post(url, ev.target.result, {
+          .post(config?.url || UPLOAD_URL, ev.target.result, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -120,6 +112,21 @@ export const useUploadPVC = (
       };
       reader.readAsArrayBuffer(image);
     }
-  }, [image, token, url]);
-  return { init, status, progress, error };
+  }, [config, image, token]);
+
+  return { init, status, progress, pvcName, error };
 };
+
+type useImageUploadConfig = {
+  namespace: string;
+  storageClassName: string;
+  size: string;
+  url?: string;
+};
+
+/* 
+1. Create a Data Volume
+2. Wait for PVC to be bounded to it
+3. Request Upload Token
+4. Upload file
+*/

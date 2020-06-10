@@ -31,6 +31,7 @@ const NOTIFICATION_DRAWER_BREAKPOINT = 1800;
 
 // Edge lacks URLSearchParams
 import 'url-search-params-polyfill';
+import { CDIUploadProvider } from './cdi-upload-provider/cdi-upload-provider';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -125,6 +126,7 @@ class App extends React.PureComponent {
   render() {
     const { isNavOpen, isDrawerInline } = this.state;
     const { productName } = getBrandingDetails();
+    const kubevirtInstalled = true;
 
     return (
       <>
@@ -140,12 +142,23 @@ class App extends React.PureComponent {
             />
           }
         >
-          <ConnectedNotificationDrawer
-            isDesktop={isDrawerInline}
-            onDrawerChange={this._onNotificationDrawerToggle}
-          >
-            <AppContents />
-          </ConnectedNotificationDrawer>
+          {kubevirtInstalled ? (
+            <CDIUploadProvider>
+              <ConnectedNotificationDrawer
+                isDesktop={isDrawerInline}
+                onDrawerChange={this._onNotificationDrawerToggle}
+              >
+                <AppContents />
+              </ConnectedNotificationDrawer>
+            </CDIUploadProvider>
+          ) : (
+            <ConnectedNotificationDrawer
+              isDesktop={isDrawerInline}
+              onDrawerChange={this._onNotificationDrawerToggle}
+            >
+              <AppContents />
+            </ConnectedNotificationDrawer>
+          )}
         </Page>
         <CloudShell />
         <ConsoleNotifier location="BannerBottom" />

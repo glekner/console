@@ -3,7 +3,7 @@ import * as _ from 'lodash-es';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 
-import { Status, FLAGS } from '@console/shared';
+import { Status, FLAGS, getName } from '@console/shared';
 import { connectToFlags } from '../reducers/features';
 import { Conditions } from './conditions';
 import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
@@ -18,6 +18,7 @@ import {
 } from './utils';
 import { ResourceEventStream } from './events';
 import { PersistentVolumeClaimModel } from '../models';
+import { CDIUploadContext } from './cdi-upload-provider/cdi-upload-provider';
 
 const { common, ExpandPVC } = Kebab.factory;
 const menuActions = [
@@ -26,9 +27,15 @@ const menuActions = [
   ...common,
 ];
 
-const PVCStatus = ({ pvc }) => (
-  <Status status={pvc.metadata.deletionTimestamp ? 'Terminating' : pvc.status.phase} />
-);
+const PVCStatus = ({ pvc }) => {
+  const { isUploading, pvcName } = React.useContext(CDIUploadContext);
+
+  return isUploading && getName(pvc) === pvcName ? (
+    <Status status="Uploading" />
+  ) : (
+    <Status status={pvc.metadata.deletionTimestamp ? 'Terminating' : pvc.status.phase} />
+  );
+};
 
 const tableColumnClasses = [
   '', // name

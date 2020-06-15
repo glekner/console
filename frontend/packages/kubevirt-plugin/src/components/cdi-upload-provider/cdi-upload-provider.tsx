@@ -6,6 +6,7 @@ import { Firehose, FirehoseResult } from '@console/internal/components/utils';
 import { DataVolumeModel } from '@console/kubevirt-plugin/src/models';
 import { V1alpha1DataVolume } from '@console/kubevirt-plugin/src/types/vm/disk/V1alpha1DataVolume';
 import { useImageUpload } from './use-upload-pvc';
+import { createUploadToken } from './create-upload-pvc';
 
 export const CDIUploadContext = React.createContext<CDIUploadContextProps>({
   isUploading: false,
@@ -28,12 +29,14 @@ export const CDIUpload: React.FC<UploadImageProps> = ({
   const [fileName, setFileName] = React.useState('');
   const config = { namespace, size: '1Gi', storageClassName: getName(storageClasses?.data?.[0]) };
 
-  const { init, error, status, progress, pvcName } = useImageUpload(dataVolumes, config);
+  const { error, status, progress, pvcName } = useImageUpload(dataVolumes, config);
 
-  const uploadFile = (file: File) => {
+  const uploadFile = async (file: File) => {
     setIsUploading(true);
     setFileName(file?.name);
-    init(file);
+    console.log('ALLOCATING...');
+    const { token } = await createUploadToken(dataVolumes, config);
+    console.log('TOKEN:', token);
   };
 
   return (

@@ -31,7 +31,7 @@ const NOTIFICATION_DRAWER_BREAKPOINT = 1800;
 
 // Edge lacks URLSearchParams
 import 'url-search-params-polyfill';
-import { CDIUploadProvider } from './cdi-upload-provider/cdi-upload-provider';
+import { CDIUploadProvider } from '@console/kubevirt-plugin/src/components/cdi-upload-provider/cdi-upload-provider';
 
 class App extends React.PureComponent {
   constructor(props) {

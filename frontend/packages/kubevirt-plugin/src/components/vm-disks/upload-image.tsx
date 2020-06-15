@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextContent, Text, TextVariants, Progress } from '@patternfly/react-core';
 import { VMLikeEntityTabProps } from '../vms/types';
-import { CDIUploadContext } from '@console/internal/components/cdi-upload-provider/cdi-upload-provider';
+import { CDIUploadContext } from '../cdi-upload-provider/cdi-upload-provider';
 import { LoadingInline } from '@console/internal/components/utils';
 
 export const UploadImage: React.FC = () => {

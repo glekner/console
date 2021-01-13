@@ -86,13 +86,6 @@ const plugin: Plugin<ConsumedExtensions> = [
     },
   },
   {
-    type: 'FeatureFlag/Model',
-    properties: {
-      model: models.VirtualMachineModel,
-      flag: FLAG_KUBEVIRT,
-    },
-  },
-  {
     type: 'NavItem/ResourceNS',
     properties: {
       id: 'virtualization',

@@ -14,7 +14,7 @@ import {
 
 const codeRefSymbol = Symbol('CodeRef');
 
-export const applyCodeRefSymbol = <T extends CodeRef>(ref: T) => {
+export const applyCodeRefSymbol = <T = any>(ref: CodeRef<T>) => {
   ref[codeRefSymbol] = true;
   return ref;
 };

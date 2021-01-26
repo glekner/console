@@ -19,7 +19,8 @@ export const getExecutableCodeRefMock = <T = any>(
   resolvedValue: T,
 ): jest.Mock<ReturnType<CodeRef<T>>> => {
   const ref = jest.fn(() => Promise.resolve(resolvedValue));
-  return applyCodeRefSymbol(ref);
+  applyCodeRefSymbol<T>(ref);
+  return ref;
 };
 
 export const getEntryModuleMocks = (requestedModule: {}): [

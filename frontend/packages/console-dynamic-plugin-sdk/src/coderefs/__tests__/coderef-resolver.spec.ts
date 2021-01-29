@@ -26,9 +26,11 @@ describe('applyCodeRefSymbol', () => {
 
     const updatedRef = applyCodeRefSymbol(ref);
     expect(isExecutableCodeRef(updatedRef)).toBe(true);
+  });
 
-    expect(updatedRef).toBe(ref);
-    expect(isExecutableCodeRef(ref)).toBe(true);
+  it('returns the same function instance', () => {
+    const ref: CodeRef = () => Promise.resolve('qux');
+    expect(applyCodeRefSymbol(ref)).toBe(ref);
   });
 });
 

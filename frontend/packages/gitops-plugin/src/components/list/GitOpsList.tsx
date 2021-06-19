@@ -22,9 +22,7 @@ const GitOpsList: React.FC<GitOpsListProps> = ({ appGroups, emptyStateMsg }) => 
   });
 
   const hasSyncStatus: boolean =
-    appGroups?.some(
-      ({ sync_status }) => sync_status /* eslint-disable-line @typescript-eslint/camelcase */,
-    ) || false;
+    appGroups?.some(({ sync_status }) => sync_status /* eslint-disable-line camelcase */) || false;
   return (
     <div className="odc-gitops-list">
       {!emptyStateMsg && appGroups ? (

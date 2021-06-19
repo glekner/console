@@ -38,7 +38,7 @@ import { exampleForModel, providedAPIForModel } from '..';
 import { ClusterServiceVersionModel } from '../../models';
 import { ClusterServiceVersionKind, ProvidedAPI } from '../../types';
 import { DEFAULT_K8S_SCHEMA } from './const';
-// eslint-disable-next-line @typescript-eslint/camelcase
+// eslint-disable-next-line camelcase
 import { DEPRECATED_CreateOperandForm } from './DEPRECATED_operand-form';
 import { OperandForm } from './operand-form';
 import { OperandYAML } from './operand-yaml';
@@ -95,7 +95,7 @@ export const CreateOperand: React.FC<CreateOperandProps> = ({
       getSchemaErrors(baseSchema).length ||
       hasNoFields((baseSchema?.properties?.spec ?? {}) as JSONSchema6);
     return useFallback
-      ? // eslint-disable-next-line @typescript-eslint/camelcase
+      ? // eslint-disable-next-line camelcase
         [baseSchema, DEPRECATED_CreateOperandForm]
       : [
           _.defaultsDeep({}, DEFAULT_K8S_SCHEMA, _.omit(baseSchema, 'properties.status')),

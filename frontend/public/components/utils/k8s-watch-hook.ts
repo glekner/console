@@ -1,5 +1,5 @@
 import * as React from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: FIXME missing exports due to out-of-sync @types/react-redux version
 import { useSelector, useDispatch, Dispatch } from 'react-redux';
 import { Map as ImmutableMap } from 'immutable';
@@ -18,7 +18,7 @@ import { K8sKind } from '../../module/k8s';
 import { RootState } from '../../redux';
 import { K8sState } from '../../reducers/k8s';
 
-export {
+export type {
   UseK8sWatchResource,
   WatchK8sResult,
   ResourcesObject,

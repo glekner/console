@@ -1,7 +1,7 @@
 import { K8sResourceKind } from '@console/internal/module/k8s';
 import { HelmRelease, HelmChartMetaData, HelmChartEntries } from '../../types/helm-types';
 
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 export const mockHelmReleases: HelmRelease[] = [
   {
     name: 'ghost-test',

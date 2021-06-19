@@ -1,6 +1,6 @@
 import * as React from 'react';
 // FIXME upgrading redux types is causing many errors at this time
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { sortable } from '@patternfly/react-table';
 import i18next from 'i18next';

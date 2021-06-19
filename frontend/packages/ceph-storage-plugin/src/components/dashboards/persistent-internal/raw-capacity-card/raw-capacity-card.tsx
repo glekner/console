@@ -48,8 +48,8 @@ const RawCapacityCard: React.FC = React.memo(() => {
   const loadError = values.every((item) => typeof item === 'undefined' || item === 0);
   const { t } = useTranslation();
 
-  const totalCapacityMetric = values?.[0];
-  const usedCapacityMetric = values?.[1];
+  const totalCapacityMetric = values?.[0] as number;
+  const usedCapacityMetric = values?.[1] as number;
 
   const totalCapacity = humanizeBinaryBytes(totalCapacityMetric);
   const availableCapacity = humanizeBinaryBytes(

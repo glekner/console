@@ -68,6 +68,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "cucumberautocomplete.steps": ["./packages/*/integration-tests/support/step-definitions/*/*.ts"],
   "cucumberautocomplete.strictGherkinCompletion": true,
   "editor.quickSuggestions": true

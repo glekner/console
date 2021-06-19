@@ -16,7 +16,7 @@ import i18next from 'i18next';
 
 export const createModal: CreateModal = (getModalContainer) => {
   const modalContainer = document.getElementById('modal-container');
-  const result = new Promise((resolve) => {
+  const result = new Promise<void>((resolve) => {
     const closeModal = (e?: React.SyntheticEvent) => {
       if (e && e.stopPropagation) {
         e.stopPropagation();

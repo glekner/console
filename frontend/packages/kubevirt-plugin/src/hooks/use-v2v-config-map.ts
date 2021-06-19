@@ -1,5 +1,5 @@
 import * as React from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: FIXME missing exports due to out-of-sync @types/react-redux version
 import { useDispatch } from 'react-redux';
 import { getVmwareConfigMap } from '../k8s/requests/v2v/v2vvmware-configmap';

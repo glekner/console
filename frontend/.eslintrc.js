@@ -61,6 +61,7 @@ module.exports = {
       { varsIgnorePattern: 'React', args: 'after-used' },
     ],
     '@typescript-eslint/no-use-before-define': 2,
+    camelcase: ['warn'],
     'no-var': 2,
     'object-shorthand': ['error', 'properties'],
     'prefer-const': ['error', { destructuring: 'all' }],

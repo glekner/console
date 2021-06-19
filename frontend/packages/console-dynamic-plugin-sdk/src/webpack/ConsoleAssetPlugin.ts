@@ -24,7 +24,7 @@ const emitJSON = (compilation: webpack.Compilation, filename: string, data: any)
   // we just provide the content (source) and its length (size).
 
   // TODO(vojtech): revisit after bumping webpack 5 to latest stable version
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   compilation.emitAsset(filename, {
     source: () => content,
@@ -55,7 +55,7 @@ export class ConsoleAssetPlugin {
     const addErrorsToCompilation = (compilation: webpack.Compilation) => {
       errors.forEach((e) => {
         // TODO(vojtech): revisit after bumping webpack 5 to latest stable version
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         compilation.errors.push(new Error(e));
       });

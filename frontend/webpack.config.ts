@@ -2,7 +2,6 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as VirtualModulesPlugin from 'webpack-virtual-modules';
 import * as ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
@@ -17,6 +16,7 @@ interface Configuration extends webpack.Configuration {
   devServer?: WebpackDevServerConfiguration;
 }
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -190,7 +190,14 @@ const config: Configuration = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/^lodash$/, 'lodash-es'),
-    new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       filename: './tokener.html',
       template: './public/tokener.html',

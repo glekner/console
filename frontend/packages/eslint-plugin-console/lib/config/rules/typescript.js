@@ -12,18 +12,21 @@ module.exports = {
   '@typescript-eslint/await-thenable': 'error',
 
   // Bans “// @ts-ignore” comments from being used
-  '@typescript-eslint/ban-ts-ignore': 'error',
+  '@typescript-eslint/ban-ts-comment': 'error',
 
   // Enforces that types will not to be used
-  '@typescript-eslint/ban-types': 'error',
+  '@typescript-eslint/ban-types': [
+    'error',
+    {
+      extendDefaults: true,
+      types: {
+        '{}': false,
+      },
+    },
+  ],
 
   // Enforce camelCase naming convention
   camelcase: 'off',
-  '@typescript-eslint/camelcase': 'error',
-
-  // Require PascalCased class and interface names
-  '@typescript-eslint/class-name-casing': 'error',
-
   // Require explicit return types on functions and class methods
   '@typescript-eslint/explicit-function-return-type': 'off',
 
@@ -256,4 +259,7 @@ module.exports = {
   // The spread operator/rest parameters should be preferred in Typescript.
   'prefer-rest-params': 'error',
   'prefer-spread': 'error',
+  // disable eslint no-shadow in favour of @typescript-eslint/no-shadow
+  'no-shadow': 'off',
+  '@typescript-eslint/no-shadow': ['error'],
 };

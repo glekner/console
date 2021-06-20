@@ -36,7 +36,7 @@ export const getK8sResourcePath = (model, options) => {
     u += `/${options.path}`;
   }
   if (!_.isEmpty(options.queryParams)) {
-    q = _.map(options.queryParams, function(v, k) {
+    q = _.map(options.queryParams, function (v, k) {
       return `${k}=${v}`;
     });
     u += `?${q.join('&')}`;

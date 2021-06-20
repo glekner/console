@@ -7,15 +7,16 @@ import { humanizeDecimalBytes } from '@console/internal/components/utils';
 import { getHostStorage } from '../../selectors';
 import { BareMetalHostDisk, BareMetalHostKind } from '../../types';
 
-const DisksTableHeader = (t: TFunction) => () => [
-  { title: t('metal3-plugin~Name'), sortField: 'name', transforms: [sortable] },
-  { title: t('metal3-plugin~Size'), sortField: 'sizeBytes', transforms: [sortable] },
-  { title: t('metal3-plugin~Type'), sortField: 'rotational', transforms: [sortable] },
-  { title: t('metal3-plugin~Model'), sortField: 'model', transforms: [sortable] },
-  { title: t('metal3-plugin~Serial Number'), sortField: 'serialNumber', transforms: [sortable] },
-  { title: t('metal3-plugin~Vendor'), sortField: 'vendor', transforms: [sortable] },
-  { title: t('metal3-plugin~HCTL'), sortField: 'hctl', transforms: [sortable] },
-];
+const DisksTableHeader = (t: TFunction) => () =>
+  [
+    { title: t('metal3-plugin~Name'), sortField: 'name', transforms: [sortable] },
+    { title: t('metal3-plugin~Size'), sortField: 'sizeBytes', transforms: [sortable] },
+    { title: t('metal3-plugin~Type'), sortField: 'rotational', transforms: [sortable] },
+    { title: t('metal3-plugin~Model'), sortField: 'model', transforms: [sortable] },
+    { title: t('metal3-plugin~Serial Number'), sortField: 'serialNumber', transforms: [sortable] },
+    { title: t('metal3-plugin~Vendor'), sortField: 'vendor', transforms: [sortable] },
+    { title: t('metal3-plugin~HCTL'), sortField: 'hctl', transforms: [sortable] },
+  ];
 
 const DisksTableRow: RowFunction<BareMetalHostDisk> = ({ obj, index, key, style }) => {
   const { hctl, model, name, rotational, serialNumber, sizeBytes, vendor } = obj;

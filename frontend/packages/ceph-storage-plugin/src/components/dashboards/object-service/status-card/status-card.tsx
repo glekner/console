@@ -83,17 +83,15 @@ const StatusCard: React.FC<DashboardItemProps> = ({
   const isRGWSupported = useFlag(RGW_FLAG);
   const { t } = useTranslation();
 
-  const [secretData, secretLoaded, secretLoadError] = useK8sWatchResource<K8sResourceKind>(
-    secretResource,
-  );
+  const [secretData, secretLoaded, secretLoadError] =
+    useK8sWatchResource<K8sResourceKind>(secretResource);
   const rgwPrefix = React.useMemo(
     () => (isRGWSupported && secretLoaded && !secretLoadError ? decodeRGWPrefix(secretData) : ''),
     [secretData, secretLoaded, secretLoadError, isRGWSupported],
   );
 
-  const rgwResiliencyQuery = dataResiliencyQueryMap[
-    ObjectServiceDashboardQuery.RGW_REBUILD_PROGRESS_QUERY
-  ](rgwPrefix);
+  const rgwResiliencyQuery =
+    dataResiliencyQueryMap[ObjectServiceDashboardQuery.RGW_REBUILD_PROGRESS_QUERY](rgwPrefix);
 
   React.useEffect(() => {
     watchK8sResource(noobaaResource);

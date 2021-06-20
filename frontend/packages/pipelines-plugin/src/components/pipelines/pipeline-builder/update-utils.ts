@@ -129,7 +129,7 @@ const convertFinallyListToTask: UpdateOperationAction<UpdateOperationConvertToTa
 
 const removeAndUpdateTasks = <
   URT extends PipelineBuilderTaskBase,
-  UT extends PipelineBuilderTaskBase
+  UT extends PipelineBuilderTaskBase,
 >(
   removalTaskName: string,
   updateAndRemoveTasks: URT[],
@@ -160,14 +160,12 @@ const deleteListTask: UpdateOperationAction<UpdateOperationDeleteListTaskData> =
     PipelineBuilderListTask,
     PipelineTask
   >(listTaskName, listTasks, tasks);
-  const {
-    updateOnlyTasks: updateFinallyTasks,
-    updateAndRemoveTasks: updateFinallyListTasks,
-  } = removeAndUpdateTasks<PipelineBuilderListTask, PipelineTask>(
-    listTaskName,
-    finallyListTasks,
-    finallyTasks,
-  );
+  const { updateOnlyTasks: updateFinallyTasks, updateAndRemoveTasks: updateFinallyListTasks } =
+    removeAndUpdateTasks<PipelineBuilderListTask, PipelineTask>(
+      listTaskName,
+      finallyListTasks,
+      finallyTasks,
+    );
   return {
     ...taskGrouping,
     tasks: updateOnlyTasks,

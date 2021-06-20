@@ -59,15 +59,18 @@ export const usePrometheusQueries = <R extends any>(
 
   const selectors = React.useMemo(
     () =>
-      queries.map((q) => ({ dashboards }) =>
-        dashboards.getIn([RESULTS_TYPE.PROMETHEUS, timespan ? `${q}@${timespan}` : q]),
+      queries.map(
+        (q) =>
+          ({ dashboards }) =>
+            dashboards.getIn([RESULTS_TYPE.PROMETHEUS, timespan ? `${q}@${timespan}` : q]),
       ),
     [queries, timespan],
   );
 
-  const querySelector = React.useMemo(() => customSelectorCreator(selectors, (...data) => data), [
-    selectors,
-  ]);
+  const querySelector = React.useMemo(
+    () => customSelectorCreator(selectors, (...data) => data),
+    [selectors],
+  );
 
   const queryResults = useSelector<RootState, ImmutableMap<string, any>>(querySelector);
 

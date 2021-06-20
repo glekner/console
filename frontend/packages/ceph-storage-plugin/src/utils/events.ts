@@ -25,12 +25,14 @@ export const isObjectStorageEvent = (event: EventKind): boolean => {
   return objectStorageResources.includes(eventKind);
 };
 
-export const isPersistentStorageEvent = (pvcs: string[]) => (event: EventKind): boolean => {
-  if (isObjectStorageEvent(event)) return false;
-  const eventKind = event?.involvedObject?.kind;
-  const eventNamespace = getNamespace(event);
-  const eventObjectName = event?.involvedObject?.name;
-  return eventKind === PersistentVolumeClaimModel.kind
-    ? pvcs.includes(eventObjectName)
-    : eventNamespace === CEPH_STORAGE_NAMESPACE;
-};
+export const isPersistentStorageEvent =
+  (pvcs: string[]) =>
+  (event: EventKind): boolean => {
+    if (isObjectStorageEvent(event)) return false;
+    const eventKind = event?.involvedObject?.kind;
+    const eventNamespace = getNamespace(event);
+    const eventObjectName = event?.involvedObject?.name;
+    return eventKind === PersistentVolumeClaimModel.kind
+      ? pvcs.includes(eventObjectName)
+      : eventNamespace === CEPH_STORAGE_NAMESPACE;
+  };

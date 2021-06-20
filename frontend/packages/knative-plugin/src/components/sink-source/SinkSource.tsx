@@ -20,9 +20,12 @@ const SinkSource: React.FC<SinkSourceProps> = ({ source, cancel, close }) => {
     spec,
   } = source;
   const isSinkRef = !!spec?.sink?.ref;
-  const { name: sinkName = '', apiVersion = '', kind = '', uri = '' } = isSinkRef
-    ? spec?.sink?.ref
-    : spec?.sink || {};
+  const {
+    name: sinkName = '',
+    apiVersion = '',
+    kind = '',
+    uri = '',
+  } = isSinkRef ? spec?.sink?.ref : spec?.sink || {};
   const sinkKey = sinkName && kind ? `${kind}-${sinkName}` : '';
   const initialValues = {
     formData: {

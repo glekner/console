@@ -19,9 +19,11 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
   const [showSuccessContent, setShowSuccessContent] = React.useState<boolean>(false);
   const textToCopy = React.useMemo(() => {
     const copyTextId = element.getAttribute(MARKDOWN_COPY_BUTTON_ID);
-    return (docContext.querySelector(
-      `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${copyTextId}"]`,
-    ) as HTMLElement).innerText;
+    return (
+      docContext.querySelector(
+        `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${copyTextId}"]`,
+      ) as HTMLElement
+    ).innerText;
   }, [element, docContext, rootSelector]);
 
   useEventListener(

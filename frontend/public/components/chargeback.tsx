@@ -41,11 +41,7 @@ const dataURL = (obj: K8sResourceKind, format = 'json') => {
   return `${window.SERVER_FLAGS.meteringBaseURL}/api/v2/reports/${obj.metadata.namespace}/${obj.metadata.name}/table?format=${format}`;
 };
 
-const removeLastPathElement = (path: string) =>
-  path
-    .split('/')
-    .slice(0, -1)
-    .join('/');
+const removeLastPathElement = (path: string) => path.split('/').slice(0, -1).join('/');
 
 const ChargebackNavBar: React.SFC<{ match: { url: string; path: string } }> = (props) => (
   <div>
@@ -605,18 +601,17 @@ const reportGenerationQueryPages = [
   navFactory.details(ReportGenerationQueriesDetails),
   navFactory.editYaml(),
 ];
-export const ReportGenerationQueriesDetailsPage: React.SFC<ReportGenerationQueriesDetailsPageProps> = (
-  props,
-) => {
-  return (
-    <DetailsPage
-      {...props}
-      kind={ReportGenerationQueryReference}
-      menuActions={menuActions}
-      pages={reportGenerationQueryPages}
-    />
-  );
-};
+export const ReportGenerationQueriesDetailsPage: React.SFC<ReportGenerationQueriesDetailsPageProps> =
+  (props) => {
+    return (
+      <DetailsPage
+        {...props}
+        kind={ReportGenerationQueryReference}
+        menuActions={menuActions}
+        pages={reportGenerationQueryPages}
+      />
+    );
+  };
 
 export type ReportsDetailsProps = {
   obj: any;

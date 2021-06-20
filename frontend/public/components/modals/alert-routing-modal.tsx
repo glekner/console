@@ -162,9 +162,8 @@ export const AlertRoutingModal: React.FC<AlertRoutingModalProps> = ({
   );
 };
 
-export const createAlertRoutingModal = createModalLauncher<AlertRoutingModalProps>(
-  AlertRoutingModal,
-);
+export const createAlertRoutingModal =
+  createModalLauncher<AlertRoutingModalProps>(AlertRoutingModal);
 
 export type AlertRoutingModalProps = {
   cancel: () => void;

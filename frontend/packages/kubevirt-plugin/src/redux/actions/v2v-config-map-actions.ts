@@ -2,9 +2,7 @@ export enum v2vConfigMapActionsNames {
   updateImages = 'UPDATE_IMAGES',
 }
 
-type v2vConfigMapActionsType = (val?: {
-  [key: string]: string;
-}) => {
+type v2vConfigMapActionsType = (val?: { [key: string]: string }) => {
   type: string;
   payload: { [key: string]: string };
 };

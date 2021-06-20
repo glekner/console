@@ -51,10 +51,10 @@ const OperatorBackedServiceNode: React.FC<OperatorBackedServiceNodeProps> = ({
   const width = groupSize ? groupSize.width : 0;
   const height = groupSize ? groupSize.height : 0;
   useAnchor(
-    React.useCallback((node: Node) => new GroupNodeAnchor(node, width, height, 1.5), [
-      width,
-      height,
-    ]),
+    React.useCallback(
+      (node: Node) => new GroupNodeAnchor(node, width, height, 1.5),
+      [width, height],
+    ),
   );
 
   return (

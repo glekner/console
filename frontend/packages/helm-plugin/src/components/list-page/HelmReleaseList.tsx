@@ -47,9 +47,8 @@ const HelmReleaseList: React.FC<HelmReleaseListProps> = ({ namespace }) => {
     }),
     [namespace],
   );
-  const [secretsData, secretsLoaded, secretsLoadError] = useK8sWatchResource<K8sResourceKind[]>(
-    secretResource,
-  );
+  const [secretsData, secretsLoaded, secretsLoadError] =
+    useK8sWatchResource<K8sResourceKind[]>(secretResource);
   const newCount = secretsData?.length ?? 0;
 
   React.useEffect(() => {

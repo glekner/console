@@ -76,10 +76,7 @@ describe('Namespace', () => {
     listPage.rows.clickRowByName('kubernetes');
     detailsPage.isLoaded();
     projectDropdown.shouldContain(defaultProjectName);
-    detailsPage
-      .breadcrumb(0)
-      .contains('Services')
-      .click();
+    detailsPage.breadcrumb(0).contains('Services').click();
     listPage.rows.shouldBeLoaded();
     projectDropdown.shouldContain(allProjectsDropdownLabel);
   });
@@ -96,10 +93,7 @@ describe('Namespace', () => {
     listPage.rows.clickFirstLinkInFirstRow();
     detailsPage.isLoaded();
     projectDropdown.shouldContain(defaultProjectName);
-    detailsPage
-      .breadcrumb(0)
-      .contains('Secrets')
-      .click();
+    detailsPage.breadcrumb(0).contains('Secrets').click();
     listPage.rows.shouldBeLoaded();
     projectDropdown.shouldContain(defaultProjectName);
   });

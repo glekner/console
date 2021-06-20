@@ -100,7 +100,7 @@ const VMConsoles: React.FC<VMConsolesProps> = ({
 
   const consoleType = typeNotSupported || type == null ? getAvailableType() : type;
 
-  const isPaused = isVMIPaused(((vm as any) as VMIKind) || vmi);
+  const isPaused = isVMIPaused((vm as any as VMIKind) || vmi);
 
   return (
     <Stack hasGutter>

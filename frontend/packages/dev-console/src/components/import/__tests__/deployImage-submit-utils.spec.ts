@@ -22,11 +22,8 @@ import {
   internalImageData,
 } from './deployImage-submit-utils-data';
 
-const {
-  ensurePortExists,
-  createOrUpdateDeployment,
-  createOrUpdateDeployImageResources,
-} = submitUtils;
+const { ensurePortExists, createOrUpdateDeployment, createOrUpdateDeployImageResources } =
+  submitUtils;
 
 describe('DeployImage Submit Utils', () => {
   describe('Ensure Port Exists', () => {

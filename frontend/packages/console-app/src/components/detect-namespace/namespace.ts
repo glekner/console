@@ -41,9 +41,11 @@ export const useValuesForNamespaceContext = () => {
     FAVORITE_NAMESPACE_NAME_USERSETTINGS_KEY,
     FAVORITE_NAMESPACE_NAME_LOCAL_STORAGE_KEY,
   );
-  const [lastNamespace, setLastNamespace, lastNamespaceLoaded] = useUserSettingsCompatibility<
-    string
-  >(LAST_NAMESPACE_NAME_USER_SETTINGS_KEY, LAST_NAMESPACE_NAME_LOCAL_STORAGE_KEY);
+  const [lastNamespace, setLastNamespace, lastNamespaceLoaded] =
+    useUserSettingsCompatibility<string>(
+      LAST_NAMESPACE_NAME_USER_SETTINGS_KEY,
+      LAST_NAMESPACE_NAME_LOCAL_STORAGE_KEY,
+    );
 
   const dispatch = useDispatch();
   const setNamespace = React.useCallback(

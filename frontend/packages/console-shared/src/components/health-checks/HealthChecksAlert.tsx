@@ -42,15 +42,12 @@ const HealthChecksAlert: React.FC<HealthChecksAlertProps> = ({ resource }) => {
     kind,
     metadata: { name, namespace, uid },
   } = resource;
-  const [
-    hideHealthCheckAlertFor,
-    setHideHealthCheckAlertFor,
-    loaded,
-  ] = useUserSettingsCompatibility<string[]>(
-    HEALTH_CHECK_CONFIGMAP_KEY,
-    HIDE_HEALTH_CHECK_ALERT_FOR,
-    [],
-  );
+  const [hideHealthCheckAlertFor, setHideHealthCheckAlertFor, loaded] =
+    useUserSettingsCompatibility<string[]>(
+      HEALTH_CHECK_CONFIGMAP_KEY,
+      HIDE_HEALTH_CHECK_ALERT_FOR,
+      [],
+    );
   const { t } = useTranslation();
   const kindForCRDResource = referenceFor(resource);
   const resourceModel = modelFor(kindForCRDResource);

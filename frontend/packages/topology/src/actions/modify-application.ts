@@ -35,8 +35,9 @@ export const EditApplication = (model: K8sKind, obj: K8sResourceKind): KebabOpti
       applicationName: truncateMiddle(obj.metadata.name, { length: RESOURCE_NAME_TRUNCATE_LENGTH }),
     },
     hidden: annotation !== 'OpenShiftWebConsole' || !!isFromDevfile,
-    href: `/edit/ns/${obj.metadata.namespace}?name=${obj.metadata.name}&kind=${obj.kind ||
-      model.kind}`,
+    href: `/edit/ns/${obj.metadata.namespace}?name=${obj.metadata.name}&kind=${
+      obj.kind || model.kind
+    }`,
     accessReview: {
       group: model.apiGroup,
       resource: model.plural,

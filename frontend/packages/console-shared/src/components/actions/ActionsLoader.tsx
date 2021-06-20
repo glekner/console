@@ -29,9 +29,8 @@ const ActionsLoader: React.FC<ActionsLoaderProps> = ({ contextId, scope, childre
     [contextId],
   );
 
-  const [providerExtensions, providerExtensionsResolved] = useResolvedExtensions<ActionProvider>(
-    actionProviderGuard,
-  );
+  const [providerExtensions, providerExtensionsResolved] =
+    useResolvedExtensions<ActionProvider>(actionProviderGuard);
 
   const actionsLoaded =
     providerExtensionsResolved &&

@@ -63,41 +63,43 @@ export const loadDynamicPlugin = (baseURL: string, manifest: ConsolePluginManife
     document.head.appendChild(script);
   });
 
-export const getPluginEntryCallback = (
-  pluginStore: PluginStore,
-  overrideSharedModulesCallback: typeof overrideSharedModules,
-  resolveEncodedCodeRefsCallback: typeof resolveEncodedCodeRefs,
-) => (pluginID: string, entryModule: RemoteEntryModule) => {
-  if (!pluginMap.has(pluginID)) {
-    console.error(`Received callback for unknown plugin ${pluginID}`);
-    return;
-  }
+export const getPluginEntryCallback =
+  (
+    pluginStore: PluginStore,
+    overrideSharedModulesCallback: typeof overrideSharedModules,
+    resolveEncodedCodeRefsCallback: typeof resolveEncodedCodeRefs,
+  ) =>
+  (pluginID: string, entryModule: RemoteEntryModule) => {
+    if (!pluginMap.has(pluginID)) {
+      console.error(`Received callback for unknown plugin ${pluginID}`);
+      return;
+    }
 
-  const pluginData = pluginMap.get(pluginID);
+    const pluginData = pluginMap.get(pluginID);
 
-  if (pluginData.entryCallbackFired) {
-    console.error(`Received callback for already loaded plugin ${pluginID}`);
-    return;
-  }
+    if (pluginData.entryCallbackFired) {
+      console.error(`Received callback for already loaded plugin ${pluginID}`);
+      return;
+    }
 
-  pluginData.entryCallbackFired = true;
+    pluginData.entryCallbackFired = true;
 
-  try {
-    overrideSharedModulesCallback(entryModule);
-  } catch (error) {
-    console.error(`Failed to override shared modules for plugin ${pluginID}`, error);
-    return;
-  }
+    try {
+      overrideSharedModulesCallback(entryModule);
+    } catch (error) {
+      console.error(`Failed to override shared modules for plugin ${pluginID}`, error);
+      return;
+    }
 
-  const resolvedExtensions = resolveEncodedCodeRefsCallback(
-    pluginData.manifest.extensions,
-    entryModule,
-    pluginID,
-    () => pluginStore.setDynamicPluginEnabled(pluginID, false),
-  );
+    const resolvedExtensions = resolveEncodedCodeRefsCallback(
+      pluginData.manifest.extensions,
+      entryModule,
+      pluginID,
+      () => pluginStore.setDynamicPluginEnabled(pluginID, false),
+    );
 
-  pluginStore.addDynamicPlugin(pluginID, pluginData.manifest, resolvedExtensions);
-};
+    pluginStore.addDynamicPlugin(pluginID, pluginData.manifest, resolvedExtensions);
+  };
 
 export const registerPluginEntryCallback = (pluginStore: PluginStore) => {
   window.loadPluginEntry = getPluginEntryCallback(

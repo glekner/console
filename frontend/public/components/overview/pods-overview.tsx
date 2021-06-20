@@ -245,9 +245,10 @@ export const PodsOverviewMultiple: React.SFC<PodsOverviewMultipleProps> = ({
   const [pods, setPods] = React.useState<PodKind[]>([]);
   const [loaded, setLoaded] = React.useState<boolean>(false);
   const [loadError, setLoadError] = React.useState<string>('');
-  const watchedResources = React.useMemo(() => getResourcesToWatchForPods('CronJob', namespace), [
-    namespace,
-  ]);
+  const watchedResources = React.useMemo(
+    () => getResourcesToWatchForPods('CronJob', namespace),
+    [namespace],
+  );
 
   const resources = useK8sWatchResources(watchedResources);
 

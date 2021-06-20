@@ -73,11 +73,15 @@ export const useTaskRunRelatedResources = (
   return useK8sWatchResources<ResourcesType>(tsrRelatedResources);
 };
 
-const isTaskRunMatched = (taskruns): EventFilter => (taskRun: EventInvolvedObject): boolean =>
-  taskRun.kind === TaskRunModel.kind && taskruns.data.find((t) => t.metadata.uid === taskRun.uid);
+const isTaskRunMatched =
+  (taskruns): EventFilter =>
+  (taskRun: EventInvolvedObject): boolean =>
+    taskRun.kind === TaskRunModel.kind && taskruns.data.find((t) => t.metadata.uid === taskRun.uid);
 
-const isPodMatched = (pods): EventFilter => (pod: EventInvolvedObject): boolean =>
-  pod.kind === PodModel.kind && pods.data.find((p) => p.metadata.uid === pod.uid);
+const isPodMatched =
+  (pods): EventFilter =>
+  (pod: EventInvolvedObject): boolean =>
+    pod.kind === PodModel.kind && pods.data.find((p) => p.metadata.uid === pod.uid);
 
 /**
  * Custom hook to return the list of event filters to find the pipelinerun related resources.

@@ -113,13 +113,11 @@ export const PoolResourceComponent: React.FC<ProvisionerProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [poolData, poolDataLoaded, poolDataLoadError] = useK8sWatchResource<StoragePoolKind[]>(
-    cephBlockPoolResource,
-  );
+  const [poolData, poolDataLoaded, poolDataLoadError] =
+    useK8sWatchResource<StoragePoolKind[]>(cephBlockPoolResource);
 
-  const [cephClusters, cephClusterLoaded, cephClusterLoadError] = useK8sWatchResource<
-    CephClusterKind[]
-  >(cephClusterResource);
+  const [cephClusters, cephClusterLoaded, cephClusterLoadError] =
+    useK8sWatchResource<CephClusterKind[]>(cephClusterResource);
 
   const [isOpen, setOpen] = React.useState(false);
   const [poolName, setPoolName] = React.useState('');
@@ -354,9 +352,8 @@ export const StorageClassEncryption: React.FC<ProvisionerProps> = ({
     name: KMSConfigMapCSIName,
   };
 
-  const [csiConfigMap, csiConfigMapLoaded, csiConfigMapLoadError] = useK8sWatchResource<
-    ConfigMapKind
-  >(csiCMWatchResource);
+  const [csiConfigMap, csiConfigMapLoaded, csiConfigMapLoadError] =
+    useK8sWatchResource<ConfigMapKind>(csiCMWatchResource);
 
   React.useEffect(() => {
     if (isKmsSupported && !_.isEmpty(csiConfigMap)) {

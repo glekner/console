@@ -25,11 +25,7 @@ describe('TopologySideBar:', () => {
   it('clicking on close button should call the onClose callback function', () => {
     const onClose = jest.fn();
     const wrapper = shallow(<TopologySideBar show onClose={onClose} />);
-    wrapper
-      .find(CloseButton)
-      .shallow()
-      .find('button')
-      .simulate('click');
+    wrapper.find(CloseButton).shallow().find('button').simulate('click');
     expect(onClose).toHaveBeenCalled();
   });
 });

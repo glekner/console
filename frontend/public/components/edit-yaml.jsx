@@ -571,14 +571,8 @@ export const EditYAML_ = connect(stateToProps)(
             'co-file-dropzone--drop-over': isOver,
           });
 
-          const {
-            errors,
-            success,
-            stale,
-            showSidebar,
-            displayResults,
-            resourceObjects,
-          } = this.state;
+          const { errors, success, stale, showSidebar, displayResults, resourceObjects } =
+            this.state;
           const {
             obj,
             download = true,

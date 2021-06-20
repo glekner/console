@@ -128,9 +128,8 @@ export const PopoverBody = withDashboardResources<DashboardItemProps & PopoverBo
         () => (isOpen ? getResourceToWatch(model, namespace, fieldSelector) : null),
         [fieldSelector, isOpen, model, namespace],
       );
-      const [consumerData, consumerLoaded, consumersLoadError] = useK8sWatchResource<
-        K8sResourceCommon[]
-      >(k8sResource);
+      const [consumerData, consumerLoaded, consumersLoadError] =
+        useK8sWatchResource<K8sResourceCommon[]>(k8sResource);
       React.useEffect(() => {
         if (!isOpen) {
           return () => {};

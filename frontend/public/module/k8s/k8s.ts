@@ -26,9 +26,9 @@ export const getQN: (obj: K8sResourceKind) => string = (obj) => {
 export const k8sBasePath = `${window.SERVER_FLAGS.basePath}api/kubernetes`;
 
 // TODO(alecmerdler): Replace all manual string building with this function
-export const referenceForGroupVersionKind = (group: string) => (version: string) => (
-  kind: string,
-) => [group, version, kind].join('~');
+export const referenceForGroupVersionKind =
+  (group: string) => (version: string) => (kind: string) =>
+    [group, version, kind].join('~');
 
 export const getGroupVersionKind = (
   ref: GroupVersionKind | string,

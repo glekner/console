@@ -27,9 +27,7 @@ export const generateCASecret = (caCertificate: string) => ({
   apiVersion: SecretModel.apiVersion,
   kind: SecretModel.kind,
   metadata: {
-    name: `ocs-kms-ca-secret-${Math.random()
-      .toString(36)
-      .substring(7)}`,
+    name: `ocs-kms-ca-secret-${Math.random().toString(36).substring(7)}`,
     namespace: CEPH_STORAGE_NAMESPACE,
   },
   stringData: {
@@ -41,9 +39,7 @@ export const generateClientSecret = (clientCertificate: string) => ({
   apiVersion: SecretModel.apiVersion,
   kind: SecretModel.kind,
   metadata: {
-    name: `ocs-kms-client-cert-${Math.random()
-      .toString(36)
-      .substring(7)}`,
+    name: `ocs-kms-client-cert-${Math.random().toString(36).substring(7)}`,
     namespace: CEPH_STORAGE_NAMESPACE,
   },
   stringData: {
@@ -55,9 +51,7 @@ export const generateClientKeySecret = (clientKey: string) => ({
   apiVersion: SecretModel.apiVersion,
   kind: SecretModel.kind,
   metadata: {
-    name: `ocs-kms-client-key-${Math.random()
-      .toString(36)
-      .substring(7)}`,
+    name: `ocs-kms-client-key-${Math.random().toString(36).substring(7)}`,
     namespace: CEPH_STORAGE_NAMESPACE,
   },
   stringData: {

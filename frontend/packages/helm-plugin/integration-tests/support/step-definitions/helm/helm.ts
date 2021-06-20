@@ -14,9 +14,7 @@ import {
 import { detailsPage } from '../../../../../integration-tests-cypress/views/details-page';
 
 When('user selects YAML view', () => {
-  cy.document()
-    .its('readyState')
-    .should('eq', 'complete');
+  cy.document().its('readyState').should('eq', 'complete');
   cy.get(catalogPO.installHelmChart.yamlView).click();
   cy.testA11y('Pipeline Builder page - YAML view');
 });

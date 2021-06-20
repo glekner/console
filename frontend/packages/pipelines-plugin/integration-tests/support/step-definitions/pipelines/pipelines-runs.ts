@@ -356,9 +356,7 @@ When('user navigates to Workspaces section', () => {
 When(
   'user clicks on {string} workspace dropdown with Empty Directory selected by default',
   (workspaceName: string) => {
-    cy.get('.modal-content')
-      .contains(workspaceName)
-      .should('be.visible');
+    cy.get('.modal-content').contains(workspaceName).should('be.visible');
     cy.get(pipelinesPO.startPipeline.sharedWorkspace)
       .find('span')
       .should('contain.text', 'Empty Directory');
@@ -378,9 +376,7 @@ When('user selects {string} option from workspace dropdown', (workspaceType: str
 });
 
 When('user clicks Show VolumeClaimTemplate options', () => {
-  cy.get('button')
-    .contains('Show VolumeClaimTemplate options')
-    .click();
+  cy.get('button').contains('Show VolumeClaimTemplate options').click();
 });
 
 When('user selects StorageClass as {string}', (storageClassName: string) => {

@@ -2,12 +2,8 @@ import { constants } from '@patternfly/react-console';
 import { ObjectEnum } from '@console/shared/src/constants/object-enum';
 /* eslint-disable lines-between-class-members */
 
-const {
-  VNC_CONSOLE_TYPE,
-  SERIAL_CONSOLE_TYPE,
-  DESKTOP_VIEWER_CONSOLE_TYPE,
-  RDP_CONSOLE_TYPE,
-} = constants;
+const { VNC_CONSOLE_TYPE, SERIAL_CONSOLE_TYPE, DESKTOP_VIEWER_CONSOLE_TYPE, RDP_CONSOLE_TYPE } =
+  constants;
 
 export class ConsoleType extends ObjectEnum<string> {
   static readonly VNC = new ConsoleType('vnc', VNC_CONSOLE_TYPE);

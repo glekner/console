@@ -862,9 +862,10 @@ const QueryBrowserWrapper_: React.FC<QueryBrowserWrapperProps> = ({
   const disabledSeriesMemoKey = JSON.stringify(
     _.reject(_.map(queries, 'disabledSeries'), _.isEmpty),
   );
-  const disabledSeries = React.useMemo(() => _.map(queries, 'disabledSeries'), [
-    disabledSeriesMemoKey,
-  ]);
+  const disabledSeries = React.useMemo(
+    () => _.map(queries, 'disabledSeries'),
+    [disabledSeriesMemoKey],
+  );
   /* eslint-enable react-hooks/exhaustive-deps */
 
   // Update the URL parameters when the queries shown in the graph change

@@ -212,11 +212,10 @@ const NetworkAttachmentDefinitionFormBase = (props) => {
     [fieldErrors, name, networkType, typeParamsData],
   );
 
-  React.useEffect(() => setLoading(hasSriovNetNodePolicyCRD && !loaded), [
-    hasSriovNetNodePolicyCRD,
-    resources,
-    loaded,
-  ]);
+  React.useEffect(
+    () => setLoading(hasSriovNetNodePolicyCRD && !loaded),
+    [hasSriovNetNodePolicyCRD, resources, loaded],
+  );
 
   return (
     <div className="co-m-pane__body co-m-pane__form">

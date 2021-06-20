@@ -59,9 +59,8 @@ const OngoingActivity = withDashboardResources(
       [data, loaded, loadError, isRGWSupported],
     );
 
-    const rgwResiliencyQuery = dataResiliencyQueryMap[
-      ObjectServiceDashboardQuery.RGW_REBUILD_PROGRESS_QUERY
-    ](rgwPrefix);
+    const rgwResiliencyQuery =
+      dataResiliencyQueryMap[ObjectServiceDashboardQuery.RGW_REBUILD_PROGRESS_QUERY](rgwPrefix);
 
     React.useEffect(() => {
       watchPrometheus(dataResiliencyQueryMap.MCG_REBUILD_PROGRESS_QUERY);

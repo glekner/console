@@ -311,9 +311,8 @@ export const ConnectedNotificationDrawer_: React.FC<ConnectedNotificationDrawerP
   const [isAlertExpanded, toggleAlertExpanded] = React.useState<boolean>(
     !_.isEmpty(criticalAlertList),
   );
-  const [isNonCriticalAlertExpanded, toggleNonCriticalAlertExpanded] = React.useState<boolean>(
-    true,
-  );
+  const [isNonCriticalAlertExpanded, toggleNonCriticalAlertExpanded] =
+    React.useState<boolean>(true);
   const [isClusterUpdateExpanded, toggleClusterUpdateExpanded] = React.useState<boolean>(true);
   const prevDrawerToggleState = usePrevious(isDrawerExpanded);
 

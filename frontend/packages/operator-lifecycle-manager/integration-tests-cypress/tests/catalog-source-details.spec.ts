@@ -52,9 +52,7 @@ describe(`Interacting with CatalogSource page`, () => {
     cy.byTestSelector('details-item-value__Display name').should('have.text', 'Red Hat Operators');
 
     // validate RegistryPollInterval field
-    cy.byTestID('Registry poll interval')
-      .scrollIntoView()
-      .should('be.visible');
+    cy.byTestID('Registry poll interval').scrollIntoView().should('be.visible');
     cy.byTestSelector('details-item-value__Registry poll interval')
       .scrollIntoView()
       .should('be.visible');

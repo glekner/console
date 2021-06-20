@@ -33,9 +33,8 @@ const DroppableTopology = DropTarget(
 
 export const DroppableTopologyComponent = withDragDropContext<DroppableTopologyComponentProps>(
   (props) => {
-    const { setFileUpload, extensions } = React.useContext<FileUploadContextType>(
-      FileUploadContext,
-    );
+    const { setFileUpload, extensions } =
+      React.useContext<FileUploadContextType>(FileUploadContext);
 
     const handleFileDrop = (monitor: DropTargetMonitor) => {
       if (!monitor) {

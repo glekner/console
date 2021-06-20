@@ -34,10 +34,7 @@ describe('ImageVulnerabilitiesTable', () => {
       'container-security~Current version',
       'container-security~Fixed in version',
     ];
-    const headers = wrapper
-      .find(Table)
-      .props()
-      .Header();
+    const headers = wrapper.find(Table).props().Header();
     expectedImageVulnerabilitiesTableHeader.forEach((header, i) => {
       expect(headers[i].title).toBe(header);
     });

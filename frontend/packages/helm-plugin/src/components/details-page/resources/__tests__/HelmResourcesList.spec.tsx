@@ -42,10 +42,7 @@ describe('HelmResourcesList', () => {
       'helm-plugin~Created',
     ];
 
-    const headers = helmResourcesList
-      .find(Table)
-      .props()
-      .Header();
+    const headers = helmResourcesList.find(Table).props().Header();
 
     expectedHelmResourcesHeader.forEach((header, i) => {
       expect(headers[i].title).toBe(header);

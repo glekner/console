@@ -42,10 +42,11 @@ const EditApplication: React.FC<EditApplicationProps> = ({
   const buildSourceType = _.get(initialValues, 'build.source.type', undefined);
   const flowType = getFlowType(buildStrategy, buildSourceType);
   const validationSchema = getValidationSchema(buildStrategy, buildSourceType);
-  const imageStreamsData =
-    appResources.imageStreams && appResources.imageStreams.loaded
+  const imageStreamsData = React.useMemo(() => {
+    return appResources.imageStreams && appResources.imageStreams.loaded
       ? appResources.imageStreams.data
       : [];
+  }, [appResources.imageStreams]);
 
   const [builderImages, setBuilderImages] = React.useState<NormalizedBuilderImages>(null);
 
@@ -101,10 +102,8 @@ const EditApplication: React.FC<EditApplicationProps> = ({
         ? normalizeBuilderImages(imageStreamsData)
         : {};
       if (appResources.buildConfig.loaded && appResources.buildConfig.data) {
-        const {
-          name: imageName,
-          namespace: imageNs,
-        } = appResources.buildConfig.data?.spec?.strategy.sourceStrategy.from;
+        const { name: imageName, namespace: imageNs } =
+          appResources.buildConfig.data?.spec?.strategy.sourceStrategy.from;
         const selectedImage = imageName?.split(':')[0];
         const builderImageExists = imageNs === 'openshift' && allBuilderImages?.[selectedImage];
         if (!builderImageExists) {

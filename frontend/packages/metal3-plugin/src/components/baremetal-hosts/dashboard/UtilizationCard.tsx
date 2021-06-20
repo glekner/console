@@ -39,9 +39,10 @@ const UtilizationCard: React.FC = () => {
   const nodeName = getMachineNodeName(machine);
 
   const queries = React.useMemo(() => getUtilizationQueries(nodeName), [nodeName]);
-  const multilineQueries = React.useMemo(() => getMultilineUtilizationQueries(nodeName), [
-    nodeName,
-  ]);
+  const multilineQueries = React.useMemo(
+    () => getMultilineUtilizationQueries(nodeName),
+    [nodeName],
+  );
 
   const humanizePods = React.useCallback(
     (v) => ({

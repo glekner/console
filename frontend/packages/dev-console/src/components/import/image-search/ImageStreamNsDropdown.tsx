@@ -50,6 +50,7 @@ const ImageStreamNsDropdown: React.FC<{ disabled?: boolean; formContextField?: s
     initialImageStream.namespace,
     initialImageStream.image,
     initialImageStream.tag,
+    initialImageStream,
   ]);
 
   return (

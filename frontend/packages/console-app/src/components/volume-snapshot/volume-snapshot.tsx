@@ -51,63 +51,65 @@ const tableColumnClasses = [
   Kebab.columnClass,
 ];
 
-const Header = (disableItems = {}) => () => {
-  return [
-    {
-      title: i18next.t('console-app~Name'),
-      sortField: 'metadata.name',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[0] },
-    },
-    {
-      title: i18next.t('console-app~Namespace'),
-      sortField: 'metadata.namespace',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[1] },
-      id: 'namespace',
-    },
-    {
-      title: i18next.t('console-app~Status'),
-      sortFunc: 'snapshotStatus',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[2] },
-    },
-    {
-      title: i18next.t('console-app~Size'),
-      sortFunc: 'volumeSnapshotSize',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[3] },
-    },
-    {
-      title: i18next.t('console-app~Source'),
-      sortFunc: 'volumeSnapshotSource',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[4] },
-    },
-    {
-      title: i18next.t('console-app~Snapshot content'),
-      sortField: 'status.boundVolumeSnapshotContentName',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[5] },
-    },
-    {
-      title: i18next.t('console-app~VolumeSnapshotClass'),
-      sortField: 'spec.volumeSnapshotClassName',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[6] },
-    },
-    {
-      title: i18next.t('console-app~Created at'),
-      sortField: 'metadata.creationTimeStamp',
-      transforms: [sortable],
-      props: { className: tableColumnClasses[7] },
-    },
-    {
-      title: '',
-      props: { className: tableColumnClasses[8] },
-    },
-  ].filter((item) => !disableItems[item.title]);
-};
+const Header =
+  (disableItems = {}) =>
+  () => {
+    return [
+      {
+        title: i18next.t('console-app~Name'),
+        sortField: 'metadata.name',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[0] },
+      },
+      {
+        title: i18next.t('console-app~Namespace'),
+        sortField: 'metadata.namespace',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[1] },
+        id: 'namespace',
+      },
+      {
+        title: i18next.t('console-app~Status'),
+        sortFunc: 'snapshotStatus',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[2] },
+      },
+      {
+        title: i18next.t('console-app~Size'),
+        sortFunc: 'volumeSnapshotSize',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[3] },
+      },
+      {
+        title: i18next.t('console-app~Source'),
+        sortFunc: 'volumeSnapshotSource',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[4] },
+      },
+      {
+        title: i18next.t('console-app~Snapshot content'),
+        sortField: 'status.boundVolumeSnapshotContentName',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[5] },
+      },
+      {
+        title: i18next.t('console-app~VolumeSnapshotClass'),
+        sortField: 'spec.volumeSnapshotClassName',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[6] },
+      },
+      {
+        title: i18next.t('console-app~Created at'),
+        sortField: 'metadata.creationTimeStamp',
+        transforms: [sortable],
+        props: { className: tableColumnClasses[7] },
+      },
+      {
+        title: '',
+        props: { className: tableColumnClasses[8] },
+      },
+    ].filter((item) => !disableItems[item.title]);
+  };
 
 const Row: RowFunction<VolumeSnapshotKind> = ({ key, obj, style, index, customData }) => {
   const { name, namespace, creationTimestamp } = obj?.metadata || {};

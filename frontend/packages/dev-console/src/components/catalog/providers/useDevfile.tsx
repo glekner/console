@@ -75,10 +75,10 @@ const useDevfile: ExtensionHook<CatalogItem[]> = (): [CatalogItem[], boolean, an
     return () => (mounted = false);
   }, []);
 
-  const normalizedDevfileSamples = React.useMemo(() => normalizeDevfile(devfileSamples, t), [
-    devfileSamples,
-    t,
-  ]);
+  const normalizedDevfileSamples = React.useMemo(
+    () => normalizeDevfile(devfileSamples, t),
+    [devfileSamples, t],
+  );
 
   const loaded = !!devfileSamples;
 

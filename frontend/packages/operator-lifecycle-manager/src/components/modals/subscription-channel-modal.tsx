@@ -84,9 +84,8 @@ export const SubscriptionChannelModal: React.FC<SubscriptionChannelModalProps> =
   );
 };
 
-export const createSubscriptionChannelModal = createModalLauncher<SubscriptionChannelModalProps>(
-  SubscriptionChannelModal,
-);
+export const createSubscriptionChannelModal =
+  createModalLauncher<SubscriptionChannelModalProps>(SubscriptionChannelModal);
 
 export type SubscriptionChannelModalProps = {
   cancel?: () => void;

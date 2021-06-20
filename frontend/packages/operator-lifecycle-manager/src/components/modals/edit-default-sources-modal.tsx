@@ -23,18 +23,16 @@ const EditDefaultSourcesModal: React.FC<EditDefaultSourcesModalProps> = ({
 }) => {
   const { t } = useTranslation();
   // state to maintain user selection of toggle, maintained as an [] of {defaultCatalogSourceName: <booleanFlagForToggle>}
-  const [
-    userSelectedDefaultSourceToggleState,
-    setUserSelectedDefaultSourceToggleState,
-  ] = React.useState(
-    (operatorHub.spec.sources ?? []).reduce(
-      (acc, source) => ({
-        ...acc,
-        [source.name]: source.disabled,
-      }),
-      {},
-    ),
-  );
+  const [userSelectedDefaultSourceToggleState, setUserSelectedDefaultSourceToggleState] =
+    React.useState(
+      (operatorHub.spec.sources ?? []).reduce(
+        (acc, source) => ({
+          ...acc,
+          [source.name]: source.disabled,
+        }),
+        {},
+      ),
+    );
 
   const submit = React.useCallback(
     (event: React.FormEvent<EventTarget>): void => {

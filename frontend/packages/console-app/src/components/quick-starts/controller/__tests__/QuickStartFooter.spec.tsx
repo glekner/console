@@ -50,12 +50,7 @@ describe('QuickStartFooter', () => {
     const footerButtons = quickStartFooterWrapper.find(Button);
     expect(footerButtons.exists()).toBeTruthy();
     expect(footerButtons.length).toEqual(1);
-    expect(
-      footerButtons
-        .at(0)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Start');
+    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Start');
   });
 
   it('should load Continue and Restart buttons for in progress tours at into page', () => {
@@ -73,18 +68,8 @@ describe('QuickStartFooter', () => {
     const footerButtons = quickStartFooterWrapper.find(Button);
     expect(footerButtons.exists()).toBeTruthy();
     expect(footerButtons.length).toEqual(2);
-    expect(
-      footerButtons
-        .at(0)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Continue');
-    expect(
-      footerButtons
-        .at(1)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Restart');
+    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Continue');
+    expect(footerButtons.at(1).childAt(0).text()).toBe('quickstart~Restart');
   });
 
   it('should load Next and Back buttons for in progress tours in task page', () => {
@@ -102,18 +87,8 @@ describe('QuickStartFooter', () => {
     const footerButtons = quickStartFooterWrapper.find(Button);
     expect(footerButtons.exists()).toBeTruthy();
     expect(footerButtons.length).toEqual(2);
-    expect(
-      footerButtons
-        .at(0)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Next');
-    expect(
-      footerButtons
-        .at(1)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Back');
+    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Next');
+    expect(footerButtons.at(1).childAt(0).text()).toBe('quickstart~Back');
   });
 
   it('should load Close, Back and Restart buttons for completed tours in conclusion page', () => {
@@ -131,23 +106,8 @@ describe('QuickStartFooter', () => {
     const footerButtons = quickStartFooterWrapper.find(Button);
     expect(footerButtons.exists()).toBeTruthy();
     expect(footerButtons.length).toEqual(3);
-    expect(
-      footerButtons
-        .at(0)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Close');
-    expect(
-      footerButtons
-        .at(1)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Back');
-    expect(
-      footerButtons
-        .at(2)
-        .childAt(0)
-        .text(),
-    ).toBe('quickstart~Restart');
+    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Close');
+    expect(footerButtons.at(1).childAt(0).text()).toBe('quickstart~Back');
+    expect(footerButtons.at(2).childAt(0).text()).toBe('quickstart~Restart');
   });
 });

@@ -50,7 +50,7 @@ export const OperatorGroupSelector: React.FC<OperatorGroupSelectorProps> = (prop
       }
       onChange={
         props.onChange ||
-        function() {
+        function () {
           return null;
         }
       }
@@ -134,34 +134,35 @@ export const isSingle = (obj: OperatorGroupKind) =>
  * Determines if a given Operator package has a `Subscription` that makes it available in the given namespace.
  * Finds any `Subscriptions` for the given package, matches them to their `OperatorGroup`, and checks if the `OperatorGroup` is targeting the given namespace or if it is global.
  */
-export const subscriptionFor = (allSubscriptions: SubscriptionKind[] = []) => (
-  allGroups: OperatorGroupKind[] = [],
-) => (pkgName: string) => (ns = '') => {
-  return allSubscriptions
-    .filter((sub) => sub.spec.name === pkgName)
-    .find((sub) =>
-      allGroups.some(
-        (og) =>
-          og.metadata.namespace === sub.metadata.namespace &&
-          (isGlobal(og) || og.status?.namespaces?.includes(ns)),
-      ),
-    );
-};
+export const subscriptionFor =
+  (allSubscriptions: SubscriptionKind[] = []) =>
+  (allGroups: OperatorGroupKind[] = []) =>
+  (pkgName: string) =>
+  (ns = '') => {
+    return allSubscriptions
+      .filter((sub) => sub.spec.name === pkgName)
+      .find((sub) =>
+        allGroups.some(
+          (og) =>
+            og.metadata.namespace === sub.metadata.namespace &&
+            (isGlobal(og) || og.status?.namespaces?.includes(ns)),
+        ),
+      );
+  };
 
-export const installedFor = (allSubscriptions: SubscriptionKind[] = []) => (
-  allGroups: OperatorGroupKind[] = [],
-) => (pkgName: string) => (ns = '') => {
-  return !_.isNil(subscriptionFor(allSubscriptions)(allGroups)(pkgName)(ns));
-};
+export const installedFor =
+  (allSubscriptions: SubscriptionKind[] = []) =>
+  (allGroups: OperatorGroupKind[] = []) =>
+  (pkgName: string) =>
+  (ns = '') => {
+    return !_.isNil(subscriptionFor(allSubscriptions)(allGroups)(pkgName)(ns));
+  };
 
 export const providedAPIsForOperatorGroup = (og: OperatorGroupKind) =>
   (og?.metadata?.annotations?.['olm.providedAPIs'] ?? '')
     .split(',')
     .map((api) => ({
-      group: api
-        .split('.')
-        .slice(2)
-        .join('.'),
+      group: api.split('.').slice(2).join('.'),
       version: api.split('.')[1],
       kind: api.split('.')[0],
     }))

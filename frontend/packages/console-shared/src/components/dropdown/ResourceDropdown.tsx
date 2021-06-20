@@ -108,16 +108,8 @@ class ResourceDropdown extends React.Component<ResourceDropdownProps, State> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: ResourceDropdownProps) {
-    const {
-      loaded,
-      loadError,
-      autoSelect,
-      selectedKey,
-      placeholder,
-      onLoad,
-      title,
-      actionItems,
-    } = nextProps;
+    const { loaded, loadError, autoSelect, selectedKey, placeholder, onLoad, title, actionItems } =
+      nextProps;
     if (!loaded && !loadError) {
       this.setState({ title: <LoadingInline /> });
       return;

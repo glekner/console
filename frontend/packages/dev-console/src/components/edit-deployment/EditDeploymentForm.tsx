@@ -24,10 +24,12 @@ import {
   convertEditFormToDeployment,
 } from './utils/edit-deployment-utils';
 
-const EditDeploymentForm: React.FC<FormikProps<FormikValues> & {
-  heading: string;
-  resource: K8sResourceKind;
-}> = ({
+const EditDeploymentForm: React.FC<
+  FormikProps<FormikValues> & {
+    heading: string;
+    resource: K8sResourceKind;
+  }
+> = ({
   heading,
   resource,
   status,

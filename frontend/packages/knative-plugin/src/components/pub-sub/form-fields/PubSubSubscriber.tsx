@@ -9,9 +9,8 @@ import { knativeServingResourcesServices } from '../../../utils/get-knative-reso
 
 const PubSubSubscriber: React.FC = () => {
   const { t } = useTranslation();
-  const { values, setFieldValue, setFieldTouched, validateForm, setStatus } = useFormikContext<
-    FormikValues
-  >();
+  const { values, setFieldValue, setFieldTouched, validateForm, setStatus } =
+    useFormikContext<FormikValues>();
   const [resourceAlert, setResourceAlert] = React.useState(false);
   const autocompleteFilter = (strText, item): boolean => fuzzy(strText, item?.props?.name);
 

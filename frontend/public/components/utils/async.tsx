@@ -6,9 +6,9 @@ import { LoadingBox } from './status-box';
 /**
  * FIXME: Comparing two functions is not the *best* solution, but we can handle false negatives.
  */
-const sameLoader = (a: () => Promise<React.ComponentType>) => (
-  b: () => Promise<React.ComponentType>,
-) => (a || 'a').toString() === (b || 'b').toString();
+const sameLoader =
+  (a: () => Promise<React.ComponentType>) => (b: () => Promise<React.ComponentType>) =>
+    (a || 'a').toString() === (b || 'b').toString();
 
 enum AsyncComponentError {
   ComponentNotFound = 'COMPONENT_NOT_FOUND',

@@ -39,15 +39,11 @@ When('user selects Create Event Source', () => {
 });
 
 When('user enters Resource APIVERSION as {string}', (apiVersion: string) => {
-  cy.get(eventSourcePO.apiServerSource.apiVersion)
-    .should('be.visible')
-    .type(apiVersion);
+  cy.get(eventSourcePO.apiServerSource.apiVersion).should('be.visible').type(apiVersion);
 });
 
 When('user enters Resource KIND as {string}', (version: string) => {
-  cy.get(eventSourcePO.apiServerSource.kind)
-    .should('be.visible')
-    .type(version);
+  cy.get(eventSourcePO.apiServerSource.kind).should('be.visible').type(version);
 });
 
 When(

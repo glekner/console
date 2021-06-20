@@ -34,9 +34,7 @@ When('user selects {string} from Context Menu', (menuOption: string) => {
 });
 
 When('user clicks on View Monitoring dashboard link', () => {
-  cy.get('a')
-    .contains('View monitoring dashboard')
-    .click({ force: true });
+  cy.get('a').contains('View monitoring dashboard').click({ force: true });
 });
 
 When('user selects {string} from topology sidebar Actions dropdown', (menuOption: string) => {
@@ -128,9 +126,7 @@ Then('user will be taken to Dashboard tab on the Monitoring page', () => {
 
 Then('user wont see Monitoring tab', () => {
   topologySidePane.verify();
-  cy.get(topologyPO.sidePane.tabName)
-    .contains(sideBarTabs.monitoring)
-    .should('not.be.visible');
+  cy.get(topologyPO.sidePane.tabName).contains(sideBarTabs.monitoring).should('not.be.visible');
 });
 
 Then('user will see View Monitoring dashborad link', () => {

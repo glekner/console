@@ -43,9 +43,8 @@ import { useK8sModel } from '@console/shared/src/hooks/useK8sModel';
 const useBreadCrumbsForDetailPage = (
   kindObj: K8sKind,
 ): ResolvedExtension<DetailPageBreadCrumbs> => {
-  const [breadCrumbsExtension, breadCrumbsResolved] = useResolvedExtensions<DetailPageBreadCrumbs>(
-    isDetailPageBreadCrumbs,
-  );
+  const [breadCrumbsExtension, breadCrumbsResolved] =
+    useResolvedExtensions<DetailPageBreadCrumbs>(isDetailPageBreadCrumbs);
   return React.useMemo(
     () =>
       breadCrumbsResolved
@@ -70,9 +69,8 @@ export const DetailsPage = withFallback<DetailsPageProps>(({ pages = [], ...prop
   );
 
   const resourcePageExtensions = useExtensions<ResourceTabPage>(isResourceTabPage);
-  const [dynamicResourcePageExtensions] = useResolvedExtensions<DynamicResourceTabPage>(
-    isDynamicResourceTabPage,
-  );
+  const [dynamicResourcePageExtensions] =
+    useResolvedExtensions<DynamicResourceTabPage>(isDynamicResourceTabPage);
 
   const pluginPages = React.useMemo(
     () => [

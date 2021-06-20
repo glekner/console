@@ -35,9 +35,8 @@ const UpdateBlockPoolModal = withHandlePromise((props: UpdateBlockPoolModalProps
   const { blockPoolConfig, cancel, close, handlePromise, inProgress } = props;
 
   const [state, dispatch] = React.useReducer(blockPoolReducer, blockPoolInitialState);
-  const [cephClusters, isLoaded, loadError] = useK8sWatchResource<CephClusterKind[]>(
-    cephClusterResource,
-  );
+  const [cephClusters, isLoaded, loadError] =
+    useK8sWatchResource<CephClusterKind[]>(cephClusterResource);
   const cephCluster: CephClusterKind = useDeepCompareMemoize(cephClusters[0], true);
 
   const MODAL_TITLE = t('ceph-storage-plugin~Edit BlockPool');

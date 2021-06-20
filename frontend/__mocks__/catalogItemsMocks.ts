@@ -885,8 +885,7 @@ export const catalogListPageProps = {
           links: [
             {
               name: 'Package Server',
-              url:
-                'https://github.com/operator-framework/operator-lifecycle-manager/tree/master/pkg/packageserver',
+              url: 'https://github.com/operator-framework/operator-lifecycle-manager/tree/master/pkg/packageserver',
             },
           ],
           install: {

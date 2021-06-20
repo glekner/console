@@ -39,12 +39,7 @@ import ImageVulnerabilitiesList from './ImageVulnerabilitiesList';
 import { quayURLFor } from './summary';
 import './image-manifest-vuln.scss';
 
-const shortenImage = (img: string) =>
-  img
-    .replace('@sha256', '')
-    .split('/')
-    .slice(1, 3)
-    .join('/');
+const shortenImage = (img: string) => img.replace('@sha256', '').split('/').slice(1, 3).join('/');
 const shortenHash = (hash: string) => hash.slice(7, 18);
 export const totalCount = (obj: ImageManifestVuln) => {
   if (!obj.status) return 0;
@@ -241,51 +236,52 @@ export const ImageManifestVulnTableRow: RowFunction<ImageManifestVuln> = ({
   );
 };
 
-export const ImageManifestVulnTableHeader = (t: TFunction) => () => [
-  {
-    title: t('container-security~Image name'),
-    sortField: 'spec.image',
-    transforms: [sortable],
-    props: { className: tableColumnClasses[0] },
-  },
-  {
-    title: t('container-security~Namespace'),
-    sortField: 'metadata.namespace',
-    transforms: [sortable],
-    props: { className: tableColumnClasses[1] },
-    id: 'namespace',
-  },
-  {
-    title: t('container-security~Highest severity'),
-    sortFunc: 'highestSeverityOrder',
-    transforms: [sortable],
-    props: { className: tableColumnClasses[2] },
-  },
-  {
-    title: t('container-security~Affected Pods'),
-    props: { className: tableColumnClasses[3] },
-    transforms: [sortable],
-    sortFunc: 'affectedPodsOrder',
-  },
-  {
-    title: t('container-security~Fixable'),
-    sortField: 'status.fixableCount',
-    transforms: [sortable],
-    props: { className: tableColumnClasses[4] },
-  },
-  {
-    title: t('container-security~Total'),
-    sortFunc: 'totalOrder',
-    transforms: [sortable],
-    props: { className: tableColumnClasses[5] },
-  },
-  {
-    title: t('container-security~Manifest'),
-    props: { className: tableColumnClasses[6] },
-    transforms: [sortable],
-    sortField: 'spec.manifest',
-  },
-];
+export const ImageManifestVulnTableHeader = (t: TFunction) => () =>
+  [
+    {
+      title: t('container-security~Image name'),
+      sortField: 'spec.image',
+      transforms: [sortable],
+      props: { className: tableColumnClasses[0] },
+    },
+    {
+      title: t('container-security~Namespace'),
+      sortField: 'metadata.namespace',
+      transforms: [sortable],
+      props: { className: tableColumnClasses[1] },
+      id: 'namespace',
+    },
+    {
+      title: t('container-security~Highest severity'),
+      sortFunc: 'highestSeverityOrder',
+      transforms: [sortable],
+      props: { className: tableColumnClasses[2] },
+    },
+    {
+      title: t('container-security~Affected Pods'),
+      props: { className: tableColumnClasses[3] },
+      transforms: [sortable],
+      sortFunc: 'affectedPodsOrder',
+    },
+    {
+      title: t('container-security~Fixable'),
+      sortField: 'status.fixableCount',
+      transforms: [sortable],
+      props: { className: tableColumnClasses[4] },
+    },
+    {
+      title: t('container-security~Total'),
+      sortFunc: 'totalOrder',
+      transforms: [sortable],
+      props: { className: tableColumnClasses[5] },
+    },
+    {
+      title: t('container-security~Manifest'),
+      props: { className: tableColumnClasses[6] },
+      transforms: [sortable],
+      sortField: 'spec.manifest',
+    },
+  ];
 
 export const ImageManifestVulnList: React.FC<ImageManifestVulnListProps> = (props) => {
   const { t } = useTranslation();

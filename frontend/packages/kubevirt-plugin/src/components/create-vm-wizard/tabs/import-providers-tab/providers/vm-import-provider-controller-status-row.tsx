@@ -134,8 +134,8 @@ const vmwareStatusComponentResolver = {
   [PodDeploymentStatus.FAILED.getValue()]: DeploymentFailed,
 };
 
-const VmwareControllerStatusRowComponent: React.FC<VmwareControllerStatusRowComponentProps> = React.memo(
-  ({ id, hasErrors, deployment, deploymentPods, provider }) => {
+const VmwareControllerStatusRowComponent: React.FC<VmwareControllerStatusRowComponentProps> =
+  React.memo(({ id, hasErrors, deployment, deploymentPods, provider }) => {
     const status = getPodDeploymentStatus(
       toShallowJS(deployment, undefined, true),
       immutableListToShallowJS(deploymentPods),
@@ -156,8 +156,7 @@ const VmwareControllerStatusRowComponent: React.FC<VmwareControllerStatusRowComp
         <StatusComponent provider={provider} id={prefixedID(id, 'status')} {...status} />
       </FormRow>
     );
-  },
-);
+  });
 
 type VmwareControllerStatusRowComponentProps = {
   id: string;

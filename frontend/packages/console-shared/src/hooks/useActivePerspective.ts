@@ -15,8 +15,7 @@ export const useActivePerspective = (): [
   PerspectiveType,
   Dispatch<SetStateAction<PerspectiveType>>,
 ] => {
-  const { activePerspective, setActivePerspective } = useContext<PerspectiveContextType>(
-    PerpsectiveContext,
-  );
+  const { activePerspective, setActivePerspective } =
+    useContext<PerspectiveContextType>(PerpsectiveContext);
   return [activePerspective, setActivePerspective];
 };

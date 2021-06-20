@@ -28,7 +28,7 @@ export const hpaValidationSchema = (t: TFunction) =>
             .test(
               'test-less-than-max',
               t('devconsole~Minimum Pods should be less than or equal to Maximum Pods.'),
-              function(minReplicas) {
+              function (minReplicas) {
                 const { maxReplicas } = this.parent;
                 return minReplicas <= maxReplicas;
               },
@@ -39,7 +39,7 @@ export const hpaValidationSchema = (t: TFunction) =>
             .test(
               'test-greater-than-min',
               t('devconsole~Maximum Pods should be greater than or equal to Minimum Pods.'),
-              function(maxReplicas) {
+              function (maxReplicas) {
                 const { minReplicas } = this.parent;
                 return minReplicas <= maxReplicas;
               },
@@ -54,7 +54,7 @@ export const hpaValidationSchema = (t: TFunction) =>
                     .test(
                       'test-for-valid-utilization',
                       t('devconsole~Average utilization must be a positive number.'),
-                      function(avgUtilization) {
+                      function (avgUtilization) {
                         if (!avgUtilization) return true;
                         return /^\d+$/.test(String(avgUtilization));
                       },

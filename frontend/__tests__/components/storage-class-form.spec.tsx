@@ -29,8 +29,8 @@ jest.mock('react-i18next', () => {
 const i18nNS = 'public';
 
 describe(ConnectedStorageClassForm.displayName, () => {
-  const Component: React.ComponentType<StorageClassFormProps &
-    StorageClassFormExtensionProps> = ConnectedStorageClassForm.WrappedComponent as any;
+  const Component: React.ComponentType<StorageClassFormProps & StorageClassFormExtensionProps> =
+    ConnectedStorageClassForm.WrappedComponent as any;
   let wrapper: ShallowWrapper<StorageClassFormProps, StorageClassFormState>;
   let onClose: Spy;
   let watchK8sList: Spy;

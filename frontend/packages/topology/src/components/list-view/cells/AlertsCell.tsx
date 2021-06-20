@@ -101,16 +101,8 @@ const AlertsCell: React.FC<AlertsProps> = ({ item }) => {
     return null;
   }
 
-  const {
-    error,
-    warning,
-    info,
-    buildNew,
-    buildPending,
-    buildRunning,
-    buildFailed,
-    buildError,
-  } = _.groupBy(alerts, 'severity');
+  const { error, warning, info, buildNew, buildPending, buildRunning, buildFailed, buildError } =
+    _.groupBy(alerts, 'severity');
   return (
     <DataListCell id={`${item.getId()}_alerts`}>
       <div className="odc-topology-list-view__alert-cell">

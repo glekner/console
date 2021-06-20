@@ -40,8 +40,8 @@ export const LineChart: React.FC<LineChartProps> = ({
   const filteredData = _.filter(data, (values) => !!values);
   const findMin = (series) => _.minBy(series, 'y');
   const findMax = (series) => _.maxBy(series, 'y');
-  let minY: number = findMin(filteredData.map(findMin))?.['y'] ?? 0;
-  let maxY: number = findMax(filteredData.map(findMax))?.['y'] ?? 0;
+  let minY: number = (findMin(filteredData.map(findMin)) as any)?.y ?? 0;
+  let maxY: number = (findMax(filteredData.map(findMax)) as any)?.y ?? 0;
   if (minY === 0 && maxY === 0) {
     minY = -1;
     maxY = 1;

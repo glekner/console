@@ -168,8 +168,8 @@ export const useSelectedDevfileSample = () => {
     return () => (mounted = false);
   }, []);
 
-  return React.useMemo(() => devfileSamples?.find((sample) => sample.name === devfileName), [
-    devfileSamples,
-    devfileName,
-  ]);
+  return React.useMemo(
+    () => devfileSamples?.find((sample) => sample.name === devfileName),
+    [devfileSamples, devfileName],
+  );
 };

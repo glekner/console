@@ -586,8 +586,9 @@ const ReceiverWrapper: React.FC<ReceiverFormsWrapperProps> = React.memo(({ obj, 
             setLoaded(true);
           } catch (error) {
             setLoadError({
-              message: `Error parsing Alertmanager config.original: ${error.message ||
-                'invalid YAML'}`,
+              message: `Error parsing Alertmanager config.original: ${
+                error.message || 'invalid YAML'
+              }`,
             });
           }
         }

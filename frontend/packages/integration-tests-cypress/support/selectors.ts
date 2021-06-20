@@ -1,6 +1,7 @@
 export {};
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       byTestID(selector: string, options?: object): Chainable<Element>;
       byTestActionID(selector: string): Chainable<Element>;

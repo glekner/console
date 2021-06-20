@@ -85,14 +85,12 @@ export const DeleteHorizontalPodAutoScaler: KebabAction = (
   },
 });
 
-export const hideActionForHPAs = (action: KebabAction): KebabAction => (
-  kind: K8sKind,
-  obj: K8sResourceCommon,
-  resources: RelatedResources,
-) => {
-  const actionOptions = action(kind, obj);
-  return {
-    ...actionOptions,
-    hidden: hasHPAs(resources) || actionOptions.hidden,
+export const hideActionForHPAs =
+  (action: KebabAction): KebabAction =>
+  (kind: K8sKind, obj: K8sResourceCommon, resources: RelatedResources) => {
+    const actionOptions = action(kind, obj);
+    return {
+      ...actionOptions,
+      hidden: hasHPAs(resources) || actionOptions.hidden,
+    };
   };
-};

@@ -102,15 +102,13 @@ const mapStateToProps = (state: RootState) => ({
 export const DetailsCard_ = connect(mapStateToProps)(
   ({ watchK8sResource, stopWatchK8sResource, openshiftFlag }: DetailsCardProps) => {
     const { t } = useTranslation();
-    const { infrastructure, infrastructureLoaded, infrastructureError } = React.useContext(
-      ClusterDashboardContext,
-    );
+    const { infrastructure, infrastructureLoaded, infrastructureError } =
+      React.useContext(ClusterDashboardContext);
     const [k8sVersion, setK8sVersion] = React.useState<Response>();
     const [k8sVersionError, setK8sVersionError] = React.useState();
 
-    const [clusterVersionData, clusterVersionLoaded, clusterVersionError] = useK8sWatchResource<
-      ClusterVersionKind
-    >(clusterVersionResource);
+    const [clusterVersionData, clusterVersionLoaded, clusterVersionError] =
+      useK8sWatchResource<ClusterVersionKind>(clusterVersionResource);
     React.useEffect(() => {
       if (flagPending(openshiftFlag)) {
         return;

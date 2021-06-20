@@ -265,93 +265,94 @@ export const PrometheusUtilizationItem = withDashboardResources<PrometheusUtiliz
   },
 );
 
-export const PrometheusMultilineUtilizationItem = withDashboardResources<
-  PrometheusMultilineUtilizationItemProps
->(
-  ({
-    watchPrometheus,
-    stopWatchPrometheusQuery,
-    prometheusResults,
-    queries,
-    duration,
-    adjustDuration,
-    title,
-    TopConsumerPopovers,
-    humanizeValue,
-    byteDataType,
-    namespace,
-    isDisabled = false,
-  }) => {
-    const { t } = useTranslation();
-
-    const UTILIZATION_QUERY_DURATION = Duration(t);
-
-    const UTILIZATION_QUERY_HOUR_MAP = {
-      [UTILIZATION_QUERY_DURATION.ONE_HR]: ONE_HOUR,
-      [UTILIZATION_QUERY_DURATION.SIX_HR]: 6 * ONE_HOUR,
-      [UTILIZATION_QUERY_DURATION.TWENTY_FOUR_HR]: 24 * ONE_HOUR,
-    };
-
-    const effectiveDuration = React.useMemo(
-      () =>
-        adjustDuration
-          ? adjustDuration(UTILIZATION_QUERY_HOUR_MAP[duration])
-          : UTILIZATION_QUERY_HOUR_MAP[duration],
-      [UTILIZATION_QUERY_HOUR_MAP, adjustDuration, duration],
-    );
-    React.useEffect(() => {
-      if (!isDisabled) {
-        queries.forEach((q) => watchPrometheus(q.query, namespace, effectiveDuration));
-        return () => {
-          queries.forEach((q) => stopWatchPrometheusQuery(q.query, effectiveDuration));
-        };
-      }
-    }, [
+export const PrometheusMultilineUtilizationItem =
+  withDashboardResources<PrometheusMultilineUtilizationItemProps>(
+    ({
       watchPrometheus,
       stopWatchPrometheusQuery,
-      duration,
+      prometheusResults,
       queries,
+      duration,
+      adjustDuration,
+      title,
+      TopConsumerPopovers,
+      humanizeValue,
+      byteDataType,
       namespace,
-      isDisabled,
-      effectiveDuration,
-    ]);
+      isDisabled = false,
+    }) => {
+      const { t } = useTranslation();
 
-    const stats = [];
-    let hasError = false;
-    let isLoading = false;
-    if (!isDisabled) {
-      queries.forEach((query) => {
-        const [response, responseError] = getPrometheusQueryResponse(
-          prometheusResults,
-          query.query,
-          effectiveDuration,
-        );
-        if (responseError) {
-          hasError = true;
-          return false;
-        }
-        if (!response) {
-          isLoading = true;
-          return false;
-        }
-        stats.push(getRangeVectorStats(response, query.desc, null, trimSecondsXMutator)?.[0] || []);
-      });
-    }
+      const UTILIZATION_QUERY_DURATION = Duration(t);
 
-    return (
-      <MultilineUtilizationItem
-        title={title}
-        data={stats}
-        error={hasError}
-        isLoading={isLoading}
-        humanizeValue={humanizeValue}
-        byteDataType={byteDataType}
-        queries={queries}
-        TopConsumerPopovers={TopConsumerPopovers}
-      />
-    );
-  },
-);
+      const UTILIZATION_QUERY_HOUR_MAP = {
+        [UTILIZATION_QUERY_DURATION.ONE_HR]: ONE_HOUR,
+        [UTILIZATION_QUERY_DURATION.SIX_HR]: 6 * ONE_HOUR,
+        [UTILIZATION_QUERY_DURATION.TWENTY_FOUR_HR]: 24 * ONE_HOUR,
+      };
+
+      const effectiveDuration = React.useMemo(
+        () =>
+          adjustDuration
+            ? adjustDuration(UTILIZATION_QUERY_HOUR_MAP[duration])
+            : UTILIZATION_QUERY_HOUR_MAP[duration],
+        [UTILIZATION_QUERY_HOUR_MAP, adjustDuration, duration],
+      );
+      React.useEffect(() => {
+        if (!isDisabled) {
+          queries.forEach((q) => watchPrometheus(q.query, namespace, effectiveDuration));
+          return () => {
+            queries.forEach((q) => stopWatchPrometheusQuery(q.query, effectiveDuration));
+          };
+        }
+      }, [
+        watchPrometheus,
+        stopWatchPrometheusQuery,
+        duration,
+        queries,
+        namespace,
+        isDisabled,
+        effectiveDuration,
+      ]);
+
+      const stats = [];
+      let hasError = false;
+      let isLoading = false;
+      if (!isDisabled) {
+        queries.forEach((query) => {
+          const [response, responseError] = getPrometheusQueryResponse(
+            prometheusResults,
+            query.query,
+            effectiveDuration,
+          );
+          if (responseError) {
+            hasError = true;
+            return false;
+          }
+          if (!response) {
+            isLoading = true;
+            return false;
+          }
+          stats.push(
+            getRangeVectorStats(response, query.desc, null, trimSecondsXMutator)?.[0] || [],
+          );
+        });
+      }
+
+      return (
+        <MultilineUtilizationItem
+          title={title}
+          data={stats}
+          error={hasError}
+          isLoading={isLoading}
+          humanizeValue={humanizeValue}
+          byteDataType={byteDataType}
+          queries={queries}
+          TopConsumerPopovers={TopConsumerPopovers}
+        />
+      );
+    },
+  );
 
 const getQueries = (itemExtensions: DashboardsOverviewUtilizationItem['properties'][]) => {
   const pluginQueries = {};

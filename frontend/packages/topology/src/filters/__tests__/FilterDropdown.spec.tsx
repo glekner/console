@@ -136,12 +136,7 @@ describe(FilterDropdown.displayName, () => {
         opened
       />,
     );
-    expect(
-      wrapper
-        .find(SelectOption)
-        .first()
-        .props().isDisabled,
-    ).toBeTruthy();
+    expect(wrapper.find(SelectOption).first().props().isDisabled).toBeTruthy();
   });
 
   it('should disable expand groups and individual group expands when show groups is false', () => {
@@ -155,17 +150,7 @@ describe(FilterDropdown.displayName, () => {
         opened
       />,
     );
-    expect(
-      wrapper
-        .find(Switch)
-        .at(0)
-        .props().isDisabled,
-    ).toBeTruthy();
-    expect(
-      wrapper
-        .find(SelectOption)
-        .first()
-        .props().isDisabled,
-    ).toBeTruthy();
+    expect(wrapper.find(Switch).at(0).props().isDisabled).toBeTruthy();
+    expect(wrapper.find(SelectOption).first().props().isDisabled).toBeTruthy();
   });
 });

@@ -23,9 +23,7 @@ Then('user is able to see a context menu with option {string}', (option: string)
 
 Then('user enters the uri as {string} in {string} modal', (uri: string, header: string) => {
   modal.modalTitleShouldContain(header);
-  cy.byLegacyTestID('edit-sink-uri')
-    .clear()
-    .type(uri);
+  cy.byLegacyTestID('edit-sink-uri').clear().type(uri);
 });
 
 Then(

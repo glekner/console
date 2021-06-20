@@ -67,10 +67,7 @@ describe('Project Dashboard', () => {
     await crudView.filterForName(testName);
     await browser.wait(waitForCount(crudView.resourceRows, 1));
     expect(crudView.rowForName(testName).isPresent()).toBe(true);
-    await crudView
-      .rowForName(testName)
-      .$('a')
-      .click();
+    await crudView.rowForName(testName).$('a').click();
     await dashboardView.isLoaded();
   });
 
@@ -140,12 +137,7 @@ describe('Project Dashboard', () => {
       const items = projectDashboardView.utilizationItems;
       expect(items.count()).toBe(utilizationItems.length);
       utilizationItems.forEach((item, index) =>
-        expect(
-          items
-            .get(index)
-            .$('h4')
-            .getText(),
-        ).toEqual(item),
+        expect(items.get(index).$('h4').getText()).toEqual(item),
       );
     });
     it('has duration dropdown', () => {
@@ -208,10 +200,7 @@ describe('Project Dashboard', () => {
         until.presenceOf(projectDashboardView.resourceQuotasCard.$('.co-resource-item')),
       );
       expect(
-        projectDashboardView.resourceQuotasCard
-          .$('.co-resource-item')
-          .$('a')
-          .getText(),
+        projectDashboardView.resourceQuotasCard.$('.co-resource-item').$('a').getText(),
       ).toEqual(resourceQuota.metadata.name);
       expect(
         projectDashboardView.resourceQuotasCard.$('.co-resource-quota-chart-row').isDisplayed(),

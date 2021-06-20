@@ -266,11 +266,10 @@ export const ResourceInventoryItem: React.FC<ResourceInventoryItemProps> = ({
     isDynamicDashboardsInventoryItemGroup,
   );
 
-  const groups = React.useMemo(() => (mapper ? mapper(resources, additionalResources) : {}), [
-    mapper,
-    resources,
-    additionalResources,
-  ]);
+  const groups = React.useMemo(
+    () => (mapper ? mapper(resources, additionalResources) : {}),
+    [mapper, resources, additionalResources],
+  );
 
   const top3Groups = React.useMemo(() => {
     const mergedExtensions = [...groupExtensions, ...dynamicGroupExtensions].map(
@@ -337,7 +336,7 @@ type StatusGroup = {
 
 export type StatusGroupMapper<
   T extends K8sResourceCommon = K8sResourceCommon,
-  R extends { [key: string]: K8sResourceCommon[] } = { [key: string]: K8sResourceCommon[] }
+  R extends { [key: string]: K8sResourceCommon[] } = { [key: string]: K8sResourceCommon[] },
 > = (resources: T[], additionalResources?: R) => StatusGroup;
 
 type InventoryItemProps = {

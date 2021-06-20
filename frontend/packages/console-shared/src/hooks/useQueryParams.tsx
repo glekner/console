@@ -10,9 +10,11 @@ export type WithQueryParamsProps = {
   queryParams: URLSearchParams;
 };
 
-export const withQueryParams = <Props extends WithQueryParamsProps>(
-  Component: React.ComponentType<Props>,
-): React.FC<Omit<Props, keyof WithQueryParamsProps>> => (props: Props) => {
-  const queryParams = useQueryParams();
-  return <Component {...props} queryParams={queryParams} />;
-};
+export const withQueryParams =
+  <Props extends WithQueryParamsProps>(
+    Component: React.ComponentType<Props>,
+  ): React.FC<Omit<Props, keyof WithQueryParamsProps>> =>
+  (props: Props) => {
+    const queryParams = useQueryParams();
+    return <Component {...props} queryParams={queryParams} />;
+  };

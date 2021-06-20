@@ -245,7 +245,7 @@ export const isDashboardsOverviewHealthPrometheusSubsystem = (
   e.type === 'Dashboards/Overview/Health/Prometheus';
 
 export interface DashboardsOverviewHealthResourceSubsystem<
-  R extends ResourcesObject = ResourcesObject
+  R extends ResourcesObject = ResourcesObject,
 > extends Extension<ExtensionProperties.DashboardsOverviewHealthResourceSubsystem<R>> {
   type: 'Dashboards/Overview/Health/Resource';
 }

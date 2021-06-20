@@ -91,8 +91,8 @@ const AlertmanagerYAMLEditor: React.FC<AlertmanagerYAMLEditorProps> = ({ obj: se
   );
 };
 
-export const AlertmanagerYAMLEditorWrapper: React.FC<AlertmanagerYAMLEditorWrapperProps> = React.memo(
-  ({ obj, ...props }) => {
+export const AlertmanagerYAMLEditorWrapper: React.FC<AlertmanagerYAMLEditorWrapperProps> =
+  React.memo(({ obj, ...props }) => {
     const { t } = useTranslation();
     return (
       <>
@@ -104,8 +104,7 @@ export const AlertmanagerYAMLEditorWrapper: React.FC<AlertmanagerYAMLEditorWrapp
         </StatusBox>
       </>
     );
-  },
-);
+  });
 
 type AlertmanagerYAMLEditorWrapperProps = {
   obj?: {

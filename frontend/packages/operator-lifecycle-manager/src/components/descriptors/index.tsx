@@ -17,12 +17,12 @@ import {
 
 export const DescriptorDetailsItem = withFallback<DescriptorDetailsItemProps>(
   ({ descriptor, model, obj, onError, schema, type }) => {
-    const { displayName: label, description, value, fullPath } = useCalculatedDescriptorProperties(
-      type,
-      descriptor,
-      schema,
-      obj,
-    );
+    const {
+      displayName: label,
+      description,
+      value,
+      fullPath,
+    } = useCalculatedDescriptorProperties(type, descriptor, schema, obj);
     const descriptorProps = {
       description,
       descriptor,
@@ -160,9 +160,10 @@ export const DescriptorDetailsItemList: React.FC<DescriptorDetailsItemListProps>
   schema,
   type,
 }) => {
-  const groupedDescriptors = React.useMemo(() => groupDescriptorDetails(descriptors), [
-    descriptors,
-  ]);
+  const groupedDescriptors = React.useMemo(
+    () => groupDescriptorDetails(descriptors),
+    [descriptors],
+  );
   return (
     <dl className={`olm-descriptors olm-descriptors--${type}`}>
       {_.map(groupedDescriptors, (group, groupPath) => {

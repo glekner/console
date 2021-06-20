@@ -75,9 +75,10 @@ const OngoingActivity = connect(mapStateToProps)(
       const resourceActivityExtensions = useExtensions<DashboardsOverviewResourceActivity>(
         isDashboardsOverviewResourceActivity,
       );
-      const [dynamicResourceActivityExtensions] = useResolvedExtensions<
-        DynamicDashboardsOverviewResourceActivity
-      >(isDynamicDashboardsOverviewResourceActivity);
+      const [dynamicResourceActivityExtensions] =
+        useResolvedExtensions<DynamicDashboardsOverviewResourceActivity>(
+          isDynamicDashboardsOverviewResourceActivity,
+        );
 
       const resourceActivities = React.useMemo(
         () =>

@@ -16,13 +16,8 @@ import './ssh-form-key.scss';
 const SSHFormKey: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {
-    key,
-    tempSSHKey,
-    updateSSHTempKey,
-    showRestoreKeyButton,
-    setIsValidSSHKey,
-  } = useSSHKeys();
+  const { key, tempSSHKey, updateSSHTempKey, showRestoreKeyButton, setIsValidSSHKey } =
+    useSSHKeys();
   const [filename, setFilename] = React.useState<string>();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [helperText, setHelperText] = React.useState<string>('');

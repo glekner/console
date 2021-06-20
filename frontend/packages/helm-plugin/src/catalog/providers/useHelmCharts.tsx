@@ -25,9 +25,8 @@ const useHelmCharts: ExtensionHook<CatalogItem[]> = ({
     kind: referenceForModel(HelmChartRepositoryModel),
   };
 
-  const [chartRepositories, chartRepositoriesLoaded] = useK8sWatchResource<K8sResourceKind[]>(
-    resourceSelector,
-  );
+  const [chartRepositories, chartRepositoriesLoaded] =
+    useK8sWatchResource<K8sResourceKind[]>(resourceSelector);
 
   React.useEffect(() => {
     let mounted = true;

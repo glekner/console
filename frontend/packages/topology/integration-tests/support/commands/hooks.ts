@@ -1,8 +1,6 @@
 before(() => {
   cy.login();
-  cy.document()
-    .its('readyState')
-    .should('eq', 'complete');
+  cy.document().its('readyState').should('eq', 'complete');
 });
 
 after(() => {

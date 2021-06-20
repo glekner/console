@@ -42,9 +42,7 @@ describe('smoke tests', () => {
 
   describe('visit vm tabs', () => {
     before(() => {
-      cy.byLegacyTestID(vmData.name)
-        .should('exist')
-        .click();
+      cy.byLegacyTestID(vmData.name).should('exist').click();
     });
 
     it('vm overview tab is loaded', () => {

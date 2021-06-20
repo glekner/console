@@ -223,9 +223,7 @@ Given('user has chain of 3 tasks created in series', () => {
   );
   cy.fixture(`pipelines-workspaces/sum-and-multiply-pipeline/sum-and-multiply-pipeline.yaml`).then(
     (yaml) => {
-      cy.get(pipelineBuilderPO.yamlCreatePipeline.yamlEditor)
-        .click()
-        .focused();
+      cy.get(pipelineBuilderPO.yamlCreatePipeline.yamlEditor).click().focused();
       yamlEditor.setEditorContent(yaml);
     },
   );
@@ -389,9 +387,7 @@ And('user enters url under Parameters section {string}', (url: string) => {
 });
 
 And('user adds workspace as {string}', (workspace: string) => {
-  cy.get('[data-test~="workspaces"]')
-    .scrollIntoView()
-    .select(workspace);
+  cy.get('[data-test~="workspaces"]').scrollIntoView().select(workspace);
 });
 
 Given('user has applied yaml {string}', (yamlFile: string) => {
@@ -476,9 +472,7 @@ And('user is at YAML view of Pipeline Builder page', () => {
 
 When('user enters the yaml content from yaml file {string}', (yamlFile: string) => {
   cy.fixture(`pipelines-workspaces/sum-and-multiply-pipeline/${yamlFile}`).then((yaml) => {
-    cy.get(pipelineBuilderPO.yamlCreatePipeline.yamlEditor)
-      .click()
-      .focused();
+    cy.get(pipelineBuilderPO.yamlCreatePipeline.yamlEditor).click().focused();
     yamlEditor.setEditorContent(yaml);
   });
 });

@@ -127,7 +127,7 @@ export type NotificationEntryProps = {
   targetPath?: string;
   timestamp?: string;
   title: string;
-  toggleNotificationDrawer?: () => any;
+  toggleNotificationDrawer?: () => void;
   type: NotificationTypes;
 };
 

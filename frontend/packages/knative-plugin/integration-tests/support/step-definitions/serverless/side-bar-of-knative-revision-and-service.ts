@@ -6,9 +6,7 @@ import {
 
 When('user clicks on the revision of knative service {string}', (serviceName: string) => {
   cy.get('[data-test-id="base-node-handler"]', { timeout: 150000 }).should('be.visible');
-  cy.byLegacyTestID('base-node-handler')
-    .find('g.odc-resource-icon')
-    .click({ force: true });
+  cy.byLegacyTestID('base-node-handler').find('g.odc-resource-icon').click({ force: true });
   cy.log(serviceName);
 });
 

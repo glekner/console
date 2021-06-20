@@ -142,10 +142,10 @@ export const UtilizationCard: React.FC = () => {
     [projectName],
   );
 
-  const networkPopovers = React.useMemo(() => [networkPopoverIn, networkPopoverOut], [
-    networkPopoverIn,
-    networkPopoverOut,
-  ]);
+  const networkPopovers = React.useMemo(
+    () => [networkPopoverIn, networkPopoverOut],
+    [networkPopoverIn, networkPopoverOut],
+  );
 
   return (
     <DashboardCard data-test-id="utilization-card">

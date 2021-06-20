@@ -32,9 +32,8 @@ export const PVCDeleteAlertExtension: React.FC<{ pvc: PersistentVolumeClaimKind 
       matchLabels: { [TEMPLATE_TYPE_LABEL]: TEMPLATE_TYPE_BASE },
     },
   };
-  const [commonTemplates, loadedTemplates, errorTemplates] = useK8sWatchResource<TemplateKind[]>(
-    templatesResource,
-  );
+  const [commonTemplates, loadedTemplates, errorTemplates] =
+    useK8sWatchResource<TemplateKind[]>(templatesResource);
   const [goldenPvcs, loadedPvcs, errorPvcs] = useBaseImages(commonTemplates);
 
   const isGolden = goldenPvcs.find(

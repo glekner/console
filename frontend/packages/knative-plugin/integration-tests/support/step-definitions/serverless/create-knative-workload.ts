@@ -83,9 +83,7 @@ Then('user will be redirected to page with header name {string}', (headerName: s
 });
 
 Then('Knative Service option is displayed under Resources section', () => {
-  cy.get(gitPO.resources.knative)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(gitPO.resources.knative).scrollIntoView().should('be.visible');
 });
 
 Given('user is on Import from Docker file page', () => {

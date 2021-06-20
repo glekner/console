@@ -37,9 +37,7 @@ export const listPage = {
     },
     by: (rowFilter: string) => {
       cy.get('.pf-c-toolbar__content-section').within(() => {
-        cy.byLegacyTestID('filter-dropdown-toggle')
-          .find('button')
-          .click();
+        cy.byLegacyTestID('filter-dropdown-toggle').find('button').click();
         /* PF Filter dropdown menu items are:
            <li id="cluster">
              <a data-test-row-filter="cluster">
@@ -60,11 +58,7 @@ export const listPage = {
       cy.get(`[data-test-rows="resource-row"`).should('have.length', count);
     },
     clickFirstLinkInFirstRow: () => {
-      cy.get(`[data-test-rows="resource-row"]`)
-        .first()
-        .find('a')
-        .first()
-        .click({ force: true }); // after applying row filter, resource rows detached from DOM according to cypress, need to force the click
+      cy.get(`[data-test-rows="resource-row"]`).first().find('a').first().click({ force: true }); // after applying row filter, resource rows detached from DOM according to cypress, need to force the click
     },
     clickKebabAction: (resourceName: string, actionName: string) => {
       cy.get(`[data-test-rows="resource-row"]`)

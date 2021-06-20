@@ -81,8 +81,9 @@ const flatten = ({ vmTemplates, vmCommonTemplates, vms }): VirtualMachineTemplat
   ].filter((template) => template);
 };
 
-const VirtualMachineTemplatesPage: React.FC<VirtualMachineTemplatesPageProps &
-  React.ComponentProps<typeof ListPage>> = (props) => {
+const VirtualMachineTemplatesPage: React.FC<
+  VirtualMachineTemplatesPageProps & React.ComponentProps<typeof ListPage>
+> = (props) => {
   const { t } = useTranslation();
   const { skipAccessReview, noProjectsAvailable, showTitle } = props.customData;
   const namespace = props.match.params.ns;

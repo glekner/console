@@ -10,8 +10,9 @@ export const EditKsvc = (model: K8sKind, obj: K8sResourceKind): KebabOption => {
     labelKind: {
       applicationName: truncateMiddle(obj.metadata.name, { length: RESOURCE_NAME_TRUNCATE_LENGTH }),
     },
-    href: `/edit/ns/${obj.metadata.namespace}?name=${obj.metadata.name}&kind=${obj.kind ||
-      model.kind}`,
+    href: `/edit/ns/${obj.metadata.namespace}?name=${obj.metadata.name}&kind=${
+      obj.kind || model.kind
+    }`,
     accessReview: {
       group: model.apiGroup,
       resource: model.plural,

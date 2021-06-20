@@ -6,10 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { FormFooter } from '@console/shared';
 import NamespaceSection from './NamespaceSection';
 
-const CloudShellSetupForm: React.FC<Pick<
-  FormikProps<FormikValues>,
-  'errors' | 'handleSubmit' | 'handleReset' | 'status' | 'isSubmitting'
->> = ({ errors, handleSubmit, handleReset, status, isSubmitting }) => {
+const CloudShellSetupForm: React.FC<
+  Pick<
+    FormikProps<FormikValues>,
+    'errors' | 'handleSubmit' | 'handleReset' | 'status' | 'isSubmitting'
+  >
+> = ({ errors, handleSubmit, handleReset, status, isSubmitting }) => {
   const { t } = useTranslation();
   return (
     <Form onSubmit={handleSubmit} className="co-m-pane__form">

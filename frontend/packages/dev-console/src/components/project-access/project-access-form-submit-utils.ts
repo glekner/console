@@ -52,7 +52,7 @@ export const getNewRoles = (
       formValues,
       (o1) => !initialRoles.find((o2) => o1.user === o2.user && o1.role === o2.role),
     ),
-    function(user) {
+    function (user) {
       return JSON.stringify([user.user, user.role]);
     },
   );

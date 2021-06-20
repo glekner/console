@@ -54,12 +54,9 @@ describe('Monitoring Dashboard Tab', () => {
     const spygetURLSearchParams = jest.spyOn(link, 'getURLSearchParams');
     spygetURLSearchParams.mockReturnValue({ workloadName: 'dotnet', workloadType: 'Deployment' });
     const wrapper = shallow(<MonitoringDashboard {...monitoringDashboardProps} />);
-    expect(
-      wrapper
-        .find(ConnectedMonitoringDashboardGraph)
-        .first()
-        .props().query,
-    ).toEqual(workloadQuery);
+    expect(wrapper.find(ConnectedMonitoringDashboardGraph).first().props().query).toEqual(
+      workloadQuery,
+    );
   });
 
   it('should render dashboard queries', () => {
@@ -69,12 +66,9 @@ describe('Monitoring Dashboard Tab', () => {
     const spygetURLSearchParams = jest.spyOn(link, 'getURLSearchParams');
     spygetURLSearchParams.mockReturnValue({});
     const wrapper = shallow(<MonitoringDashboard {...monitoringDashboardProps} />);
-    expect(
-      wrapper
-        .find(ConnectedMonitoringDashboardGraph)
-        .first()
-        .props().query,
-    ).toEqual(dashboardQuery);
+    expect(wrapper.find(ConnectedMonitoringDashboardGraph).first().props().query).toEqual(
+      dashboardQuery,
+    );
   });
 
   it('should render Time Range & Refresh Interval dropdowns', () => {
@@ -114,11 +108,6 @@ describe('Monitoring Dashboard Tab', () => {
   it('should render filter dropdown with badge', () => {
     const wrapper = shallow(<MonitoringDashboard {...monitoringDashboardProps} />);
     const filterDropdown = wrapper.find(MonitoringWorkloadFilter);
-    expect(
-      filterDropdown
-        .dive()
-        .find(ResourceDropdown)
-        .props().showBadge,
-    ).toBeTruthy();
+    expect(filterDropdown.dive().find(ResourceDropdown).props().showBadge).toBeTruthy();
   });
 });

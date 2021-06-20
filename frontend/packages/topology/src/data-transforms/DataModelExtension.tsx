@@ -27,11 +27,8 @@ const DataModelExtension: React.FC<DataModelExtensionProps> = ({ dataModelFactor
       };
       dataModelContext.updateExtension(id, extensionContext.current);
 
-      const {
-        getDataModel,
-        isResourceDepicted,
-        getDataModelReconciler,
-      } = dataModelFactory.properties;
+      const { getDataModel, isResourceDepicted, getDataModelReconciler } =
+        dataModelFactory.properties;
       if (getDataModel) {
         getDataModel()
           .then((getter) => {

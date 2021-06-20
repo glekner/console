@@ -185,8 +185,9 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
         frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight}px`;
       } else {
         // Increase by 15px for the case where a horizontal scrollbar might appear
-        frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight +
-          15}px`;
+        frame.style.height = `${
+          frame.contentWindow.document.body.firstElementChild.scrollHeight + 15
+        }px`;
       }
     });
   }, [frame, exactHeight]);

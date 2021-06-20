@@ -73,10 +73,10 @@ export const CreateOperand: React.FC<CreateOperandProps> = ({
           match.params.ns,
         )}/${match.params.plural}`;
 
-  const providedAPI = React.useMemo<ProvidedAPI>(() => providedAPIForModel(csv, model), [
-    csv,
-    model,
-  ]);
+  const providedAPI = React.useMemo<ProvidedAPI>(
+    () => providedAPIForModel(csv, model),
+    [csv, model],
+  );
 
   const baseSchema = React.useMemo(
     () =>

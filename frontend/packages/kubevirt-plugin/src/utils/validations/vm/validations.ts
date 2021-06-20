@@ -1,19 +1,19 @@
 const HEXCH_REGEX = '[0-9A-Fa-f]';
 const MAC_REGEX_COLON_DELIMITER = new RegExp(
   `^((${HEXCH_REGEX}{2}[:]){19}${HEXCH_REGEX}{2})$|` + // 01:23:45:67:89:ab:cd:ef:00:00:01:23:45:67:89:ab:cd:ef:00:00
-  `^((${HEXCH_REGEX}{2}[:]){7}${HEXCH_REGEX}{2})$|` + // 01:23:45:67:89:ab:cd:ef
+    `^((${HEXCH_REGEX}{2}[:]){7}${HEXCH_REGEX}{2})$|` + // 01:23:45:67:89:ab:cd:ef
     `^((${HEXCH_REGEX}{2}[:]){5}${HEXCH_REGEX}{2})$`, // 01:23:45:67:89:ab
 );
 
 const MAC_REGEX_DASH_DELIMITER = new RegExp(
   `^((${HEXCH_REGEX}{2}[-]){19}${HEXCH_REGEX}{2})$|` + // 01-23-45-67-89-ab-cd-ef-00-00-01-23-45-67-89-ab-cd-ef-00-00
-  `^((${HEXCH_REGEX}{2}[-]){7}${HEXCH_REGEX}{2})$|` + // 01-23-45-67-89-ab-cd-ef
+    `^((${HEXCH_REGEX}{2}[-]){7}${HEXCH_REGEX}{2})$|` + // 01-23-45-67-89-ab-cd-ef
     `^((${HEXCH_REGEX}{2}[-]){5}${HEXCH_REGEX}{2})$`, // 01-23-45-67-89-ab
 );
 
 const MAC_REGEX_PERIOD_DELIMITER = new RegExp(
   `^((${HEXCH_REGEX}{4}.){9}${HEXCH_REGEX}{4})$|` + // 0123.4567.89ab.cdef.0000.0123.4567.89ab.cdef.0000
-  `^((${HEXCH_REGEX}{4}.){3}${HEXCH_REGEX}{4})$|` + // 0123.4567.89ab.cdef
+    `^((${HEXCH_REGEX}{4}.){3}${HEXCH_REGEX}{4})$|` + // 0123.4567.89ab.cdef
     `^((${HEXCH_REGEX}{4}.){2}${HEXCH_REGEX}{4})$`, // 0123.4567.89ab
 );
 

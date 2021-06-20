@@ -54,13 +54,12 @@ module.exports = {
     'no-global-strict': 0,
     'no-irregular-whitespace': ['error'],
     'no-prototype-builtins': 0, // Disable with exlint v6 update.
-    'no-shadow': ['error'],
     'no-underscore-dangle': 0,
     '@typescript-eslint/no-unused-vars': [
       'error',
       { varsIgnorePattern: 'React', args: 'after-used' },
     ],
-    '@typescript-eslint/no-use-before-define': 2,
+    '@typescript-eslint/no-use-before-define': 'off',
     camelcase: ['warn'],
     'no-var': 2,
     'object-shorthand': ['error', 'properties'],
@@ -97,5 +96,10 @@ module.exports = {
   },
   globals: {
     process: 'readonly',
+    React: 'readonly',
+    JSX: 'readonly',
+    NodeJS: 'readonly',
+    Subject: 'readonly',
+    Diff: 'readonly',
   },
 };

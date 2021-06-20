@@ -93,8 +93,9 @@ export const getOperandActions = (
     edit: (kind, obj) => {
       const reference = referenceFor(obj);
       const href = kind.namespaced
-        ? `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${csvName ||
-            csvNameFromWindow()}/${reference}/${obj.metadata.name}/yaml`
+        ? `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${
+            csvName || csvNameFromWindow()
+          }/${reference}/${obj.metadata.name}/yaml`
         : `/k8s/cluster/${reference}/${obj.metadata.name}/yaml`;
       return {
         // t('olm~Edit {{item}}')
@@ -119,9 +120,9 @@ export const getOperandActions = (
           kind,
           resource: obj,
           namespace: obj.metadata.namespace,
-          redirectTo: `/k8s/ns/${obj.metadata.namespace}/${
-            ClusterServiceVersionModel.plural
-          }/${csvName || csvNameFromWindow()}/${referenceFor(obj)}`,
+          redirectTo: `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${
+            csvName || csvNameFromWindow()
+          }/${referenceFor(obj)}`,
         }),
       accessReview: {
         group: kind.apiGroup,
@@ -210,10 +211,10 @@ export const OperandTableRow: React.FC<OperandTableRowProps> = ({ obj, index, ro
     isClusterServiceVersionAction,
   );
   const objReference = referenceFor(obj);
-  const actions = React.useMemo(() => getOperandActions(objReference, actionExtensions), [
-    objReference,
-    actionExtensions,
-  ]);
+  const actions = React.useMemo(
+    () => getOperandActions(objReference, actionExtensions),
+    [objReference, actionExtensions],
+  );
   return (
     <TableRow id={obj.metadata.uid} index={index} trKey={rowKey} style={style}>
       <TableData className={tableColumnClasses[0]}>
@@ -492,43 +493,39 @@ export const OperandDetails = connectToModel(({ crd, csv, kindObj, obj }: Operan
     crd?.spec?.versions?.find((v) => v.name === version)?.schema?.openAPIV3Schema ??
     (definitionFor(kindObj) as JSONSchema6);
 
-  const {
-    podStatuses,
-    mainStatusDescriptor,
-    conditionsStatusDescriptors,
-    otherStatusDescriptors,
-  } = (statusDescriptors ?? []).reduce((acc, descriptor) => {
-    // exclude Conditions since they are included in their own section
-    if (descriptor.path === 'conditions') {
-      return acc;
-    }
+  const { podStatuses, mainStatusDescriptor, conditionsStatusDescriptors, otherStatusDescriptors } =
+    (statusDescriptors ?? []).reduce((acc, descriptor) => {
+      // exclude Conditions since they are included in their own section
+      if (descriptor.path === 'conditions') {
+        return acc;
+      }
 
-    if (descriptor['x-descriptors']?.includes(StatusCapability.podStatuses)) {
+      if (descriptor['x-descriptors']?.includes(StatusCapability.podStatuses)) {
+        return {
+          ...acc,
+          podStatuses: [...(acc.podStatuses ?? []), descriptor],
+        };
+      }
+
+      if (isMainStatusDescriptor(descriptor)) {
+        return {
+          ...acc,
+          mainStatusDescriptor: descriptor,
+        };
+      }
+
+      if (descriptor['x-descriptors']?.includes(StatusCapability.conditions)) {
+        return {
+          ...acc,
+          conditionsStatusDescriptors: [...(acc.conditionsStatusDescriptors ?? []), descriptor],
+        };
+      }
+
       return {
         ...acc,
-        podStatuses: [...(acc.podStatuses ?? []), descriptor],
+        otherStatusDescriptors: [...(acc.otherStatusDescriptors ?? []), descriptor],
       };
-    }
-
-    if (isMainStatusDescriptor(descriptor)) {
-      return {
-        ...acc,
-        mainStatusDescriptor: descriptor,
-      };
-    }
-
-    if (descriptor['x-descriptors']?.includes(StatusCapability.conditions)) {
-      return {
-        ...acc,
-        conditionsStatusDescriptors: [...(acc.conditionsStatusDescriptors ?? []), descriptor],
-      };
-    }
-
-    return {
-      ...acc,
-      otherStatusDescriptors: [...(acc.otherStatusDescriptors ?? []), descriptor],
-    };
-  }, {} as any);
+    }, {} as any);
 
   return (
     <div className="co-operand-details co-m-pane">

@@ -96,18 +96,12 @@ describe(EnvironmentPage.name, () => {
     });
 
     it('renders save and reload buttons', () => {
-      expect(
-        wrapper
-          .find({ type: 'submit', variant: 'primary' })
-          .childAt(0)
-          .text(),
-      ).toEqual(`${i18nNS}~Save`);
-      expect(
-        wrapper
-          .find({ type: 'button', variant: 'secondary' })
-          .childAt(0)
-          .text(),
-      ).toEqual(`${i18nNS}~Reload`);
+      expect(wrapper.find({ type: 'submit', variant: 'primary' }).childAt(0).text()).toEqual(
+        `${i18nNS}~Save`,
+      );
+      expect(wrapper.find({ type: 'button', variant: 'secondary' }).childAt(0).text()).toEqual(
+        `${i18nNS}~Reload`,
+      );
     });
   });
 

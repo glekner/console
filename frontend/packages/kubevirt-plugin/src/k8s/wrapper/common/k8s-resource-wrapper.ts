@@ -15,9 +15,12 @@ import { clearRuntimeMetadata, initK8sObject, K8sInitAddon } from './util/k8s-mi
 import { Wrapper } from './wrapper';
 
 export abstract class K8sResourceWrapper<
-  RESOURCE extends K8sResourceCommon,
-  SELF extends K8sResourceWrapper<RESOURCE, SELF>
-> extends Wrapper<RESOURCE, SELF> implements K8sResourceKindMethods {
+    RESOURCE extends K8sResourceCommon,
+    SELF extends K8sResourceWrapper<RESOURCE, SELF>,
+  >
+  extends Wrapper<RESOURCE, SELF>
+  implements K8sResourceKindMethods
+{
   private readonly model: K8sKind;
 
   protected constructor(model: K8sKind, data?: RESOURCE | SELF, copy = false) {
@@ -30,12 +33,12 @@ export abstract class K8sResourceWrapper<
 
   init(data: K8sInitAddon = {}) {
     initK8sObject(this.data, this.model, data);
-    return (this as any) as SELF;
+    return this as any as SELF;
   }
 
   clearRuntimeMetadata() {
     clearRuntimeMetadata(this.data);
-    return (this as any) as SELF;
+    return this as any as SELF;
   }
 
   getModel = () => this.model;
@@ -51,20 +54,20 @@ export abstract class K8sResourceWrapper<
     this.ensurePath('metadata');
     this.data.metadata.name = name;
     delete this.data.metadata.generateName;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   setGenerateName = (generateName: string) => {
     this.ensurePath('metadata');
     this.data.metadata.generateName = generateName;
     delete this.data.metadata.name;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   setNamespace = (namespace: string) => {
     this.ensurePath('metadata');
     this.data.metadata.namespace = namespace;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   addAnotation = (key: string, value: string) => {
@@ -72,7 +75,7 @@ export abstract class K8sResourceWrapper<
       this.ensurePath('metadata.annotations');
       this.data.metadata.annotations[key] = value;
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   removeAnnotation = (key: string) => {
@@ -81,12 +84,12 @@ export abstract class K8sResourceWrapper<
       delete this.data.metadata.annotations[key];
       this.clearIfEmpty('metadata.annotations');
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   removeAnnotations = () => {
     delete this.data.metadata.annotations;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   addLabel = (key: string, value: string) => {
@@ -94,7 +97,7 @@ export abstract class K8sResourceWrapper<
       this.ensurePath('metadata.labels');
       this.data.metadata.labels[key] = value;
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   removeLabel = (key: string) => {
@@ -103,12 +106,12 @@ export abstract class K8sResourceWrapper<
       delete this.data.metadata.labels[key];
       this.clearIfEmpty('metadata.labels');
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   removeLabels = () => {
     delete this.data.metadata.labels;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   addOwnerReferences = (...additionalOwnerReferences: OwnerReference[]) => {
@@ -123,6 +126,6 @@ export abstract class K8sResourceWrapper<
         }
       });
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 }

@@ -37,9 +37,8 @@ const CreateBlockPool: React.FC<CreateBlockPoolProps> = ({ match }) => {
   const { t } = useTranslation();
 
   const [state, dispatch] = React.useReducer(blockPoolReducer, blockPoolInitialState);
-  const [cephClusters, isLoaded, loadError] = useK8sWatchResource<CephClusterKind[]>(
-    cephClusterResource,
-  );
+  const [cephClusters, isLoaded, loadError] =
+    useK8sWatchResource<CephClusterKind[]>(cephClusterResource);
 
   const cephCluster: CephClusterKind = useDeepCompareMemoize(cephClusters[0], true);
 

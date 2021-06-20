@@ -50,49 +50,19 @@ describe('AddPageLayout', () => {
     it('should show default hintBlock if no hintBlock is provided in props', () => {
       wrapper = shallow(<AddPageLayout {...props} />);
 
-      expect(
-        wrapper
-          .find(PageLayout)
-          .dive()
-          .find(Switch)
-          .exists(),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).dive().find(Switch).exists()).toBe(true);
 
-      expect(
-        wrapper
-          .find(PageLayout)
-          .dive()
-          .find(Tooltip)
-          .exists(),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).dive().find(Tooltip).exists()).toBe(true);
     });
 
     it('should show default and additional provided hintBlock from props', () => {
       wrapper = shallow(<AddPageLayout {...props} hintBlock="hintBlock" />);
 
-      expect(
-        wrapper
-          .find(PageLayout)
-          .dive()
-          .find(Switch)
-          .exists(),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).dive().find(Switch).exists()).toBe(true);
 
-      expect(
-        wrapper
-          .find(PageLayout)
-          .dive()
-          .find(Tooltip)
-          .exists(),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).dive().find(Tooltip).exists()).toBe(true);
 
-      expect(
-        wrapper
-          .find(PageLayout)
-          .shallow()
-          .text()
-          .includes('hintBlock'),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).shallow().text().includes('hintBlock')).toBe(true);
     });
   });
 
@@ -106,13 +76,7 @@ describe('AddPageLayout', () => {
       useAddActionExtensionsSpy.mockReturnValue([addActionExtensions, true]);
       useAccessFilterExtensionsSpy.mockReturnValue([addActionExtensions, true]);
       wrapper = shallow(<AddPageLayout {...props} />);
-      expect(
-        wrapper
-          .find(PageLayout)
-          .shallow()
-          .text()
-          .includes(`${i18nNS}Details on`),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).shallow().text().includes(`${i18nNS}Details on`)).toBe(true);
     });
 
     it('should show correct text for switch when it is unchecked', () => {
@@ -120,13 +84,7 @@ describe('AddPageLayout', () => {
       useAddActionExtensionsSpy.mockReturnValue([addActionExtensions, true]);
       useAccessFilterExtensionsSpy.mockReturnValue([addActionExtensions, true]);
       wrapper = shallow(<AddPageLayout {...props} />);
-      expect(
-        wrapper
-          .find(PageLayout)
-          .shallow()
-          .text()
-          .includes(`${i18nNS}Details off`),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).shallow().text().includes(`${i18nNS}Details off`)).toBe(true);
     });
 
     it('should show loading state for switch if add actions have not resolved', () => {
@@ -134,13 +92,7 @@ describe('AddPageLayout', () => {
       useAddActionExtensionsSpy.mockReturnValue([[], false]);
       useAccessFilterExtensionsSpy.mockReturnValue([[], true]);
       wrapper = shallow(<AddPageLayout {...props} />);
-      expect(
-        wrapper
-          .find(PageLayout)
-          .dive()
-          .find(Skeleton)
-          .exists(),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).dive().find(Skeleton).exists()).toBe(true);
     });
 
     it('should show loading state for switch if add actions from access check have not loaded', () => {
@@ -148,13 +100,7 @@ describe('AddPageLayout', () => {
       useAddActionExtensionsSpy.mockReturnValue([addActionExtensions, true]);
       useAccessFilterExtensionsSpy.mockReturnValue([[], false]);
       wrapper = shallow(<AddPageLayout {...props} />);
-      expect(
-        wrapper
-          .find(PageLayout)
-          .dive()
-          .find(Skeleton)
-          .exists(),
-      ).toBe(true);
+      expect(wrapper.find(PageLayout).dive().find(Skeleton).exists()).toBe(true);
     });
   });
 });

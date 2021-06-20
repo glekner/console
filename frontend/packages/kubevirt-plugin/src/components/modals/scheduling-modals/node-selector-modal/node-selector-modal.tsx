@@ -40,13 +40,8 @@ export const NSModal = withHandlePromise(
     const vmLikeFinal = getLoadedData(vmLikeEntityLoading, vmLikeEntity);
     const loadError = getLoadError(nodes, NodeModel);
 
-    const [
-      selectorLabels,
-      setSelectorLabels,
-      onLabelAdd,
-      onLabelChange,
-      onLabelDelete,
-    ] = useIDEntities<IDLabel>(nodeSelectorToIDLabels(getVMLikeNodeSelector(vmLikeEntity)));
+    const [selectorLabels, setSelectorLabels, onLabelAdd, onLabelChange, onLabelDelete] =
+      useIDEntities<IDLabel>(nodeSelectorToIDLabels(getVMLikeNodeSelector(vmLikeEntity)));
 
     const qualifiedNodes = useNodeQualifier(nodes, 'label', selectorLabels);
     const [showCollisionAlert, reload] = useCollisionChecker<VMLikeEntityKind>(

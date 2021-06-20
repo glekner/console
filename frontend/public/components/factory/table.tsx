@@ -380,17 +380,8 @@ export type TableWrapperProps = {
 };
 
 const VirtualBody: React.SFC<VirtualBodyProps> = (props) => {
-  const {
-    customData,
-    Row,
-    height,
-    isScrolling,
-    onChildScroll,
-    data,
-    columns,
-    scrollTop,
-    width,
-  } = props;
+  const { customData, Row, height, isScrolling, onChildScroll, data, columns, scrollTop, width } =
+    props;
 
   const cellMeasurementCache = new CellMeasurerCache({
     fixedWidth: true,

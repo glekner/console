@@ -74,9 +74,8 @@ const CreateKnatifyPage: React.FunctionComponent<CreateKnatifyPageProps> = ({
     [namespace, kind, appName],
   );
 
-  const resources: WatchK8sResults<watchResource> = useK8sWatchResources<watchResource>(
-    watchedResources,
-  );
+  const resources: WatchK8sResults<watchResource> =
+    useK8sWatchResources<watchResource>(watchedResources);
 
   const isResourceLoaded =
     Object.keys(resources).length > 0 &&

@@ -45,11 +45,12 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 }
 
-export const withFallback: WithFallback = (Component, FallbackComponent) => (props) => (
-  <ErrorBoundary FallbackComponent={FallbackComponent}>
-    <Component {...props} />
-  </ErrorBoundary>
-);
+export const withFallback: WithFallback = (Component, FallbackComponent) => (props) =>
+  (
+    <ErrorBoundary FallbackComponent={FallbackComponent}>
+      <Component {...props} />
+    </ErrorBoundary>
+  );
 
 export type WithFallback = <P = {}>(
   Component: React.ComponentType<P>,

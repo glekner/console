@@ -140,10 +140,13 @@ const OCSDisksList: React.FC<TableProps> = React.memo((props) => {
     query: DATA_RESILIENCY_QUERY[StorageDashboardQuery.RESILIENCY_PROGRESS],
   });
   const [tiData, tiLoaded, tiLoadError] = useK8sWatchResource<TemplateInstanceKind[]>(tiResource);
-  const { data: alertsData, loaded: alertsLoaded, loadError: alertsLoadError } = useSelector<
-    RootState,
-    NotificationAlerts
-  >(({ UI }) => UI.getIn(['monitoring', 'notificationAlerts']));
+  const {
+    data: alertsData,
+    loaded: alertsLoaded,
+    loadError: alertsLoadError,
+  } = useSelector<RootState, NotificationAlerts>(({ UI }) =>
+    UI.getIn(['monitoring', 'notificationAlerts']),
+  );
 
   const error = alertsLoadError || cephDiskLoadError || progressLoadError;
   const isLoading = !alertsLoaded || cephDiskLoading || progressLoading;

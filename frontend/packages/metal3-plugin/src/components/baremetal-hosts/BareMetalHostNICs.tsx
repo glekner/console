@@ -7,15 +7,16 @@ import { Table, TableRow, TableData, RowFunction } from '@console/internal/compo
 import { getHostNICs } from '../../selectors';
 import { BareMetalHostNIC, BareMetalHostKind } from '../../types';
 
-const NICsTableHeader = (t: TFunction) => () => [
-  { title: t('metal3-plugin~Name'), sortField: 'name', transforms: [sortable] },
-  { title: t('metal3-plugin~Model'), sortField: 'model', transforms: [sortable] },
-  { title: t('metal3-plugin~PXE'), sortField: 'pxe', transforms: [sortable] },
-  { title: t('metal3-plugin~IP'), sortField: 'ip', transforms: [sortable] },
-  { title: t('metal3-plugin~Speed'), sortField: 'speedGbps', transforms: [sortable] },
-  { title: t('metal3-plugin~MAC Address'), sortField: 'mac', transforms: [sortable] },
-  { title: t('metal3-plugin~VLAN ID'), sortField: 'vlanId', transforms: [sortable] },
-];
+const NICsTableHeader = (t: TFunction) => () =>
+  [
+    { title: t('metal3-plugin~Name'), sortField: 'name', transforms: [sortable] },
+    { title: t('metal3-plugin~Model'), sortField: 'model', transforms: [sortable] },
+    { title: t('metal3-plugin~PXE'), sortField: 'pxe', transforms: [sortable] },
+    { title: t('metal3-plugin~IP'), sortField: 'ip', transforms: [sortable] },
+    { title: t('metal3-plugin~Speed'), sortField: 'speedGbps', transforms: [sortable] },
+    { title: t('metal3-plugin~MAC Address'), sortField: 'mac', transforms: [sortable] },
+    { title: t('metal3-plugin~VLAN ID'), sortField: 'vlanId', transforms: [sortable] },
+  ];
 
 const NICsTableRow: RowFunction<BareMetalHostNIC> = ({ obj: nic, index, key, style }) => {
   const { ip, mac, model, name, pxe, speedGbps, vlanId } = nic;

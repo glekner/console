@@ -15,19 +15,17 @@ export const setCloudShellCommand = (command: string | null) =>
 export const setCloudShellExpanded = (isExpanded: boolean) =>
   action(Actions.SetCloudShellExpanded, { isExpanded });
 
-export const toggleCloudShellExpanded = () => async (
-  dispatch: Dispatch,
-  getState: () => RootState,
-) => {
-  const expanded = isCloudShellExpanded(getState());
-  if (expanded && isCloudShellActive(getState())) {
-    (await import('../../components/cloud-shell/cloudShellConfirmationModal')).default(() =>
-      dispatch(setCloudShellExpanded(false)),
-    );
-  } else {
-    dispatch(setCloudShellExpanded(!expanded));
-  }
-};
+export const toggleCloudShellExpanded =
+  () => async (dispatch: Dispatch, getState: () => RootState) => {
+    const expanded = isCloudShellExpanded(getState());
+    if (expanded && isCloudShellActive(getState())) {
+      (await import('../../components/cloud-shell/cloudShellConfirmationModal')).default(() =>
+        dispatch(setCloudShellExpanded(false)),
+      );
+    } else {
+      dispatch(setCloudShellExpanded(!expanded));
+    }
+  };
 
 export const setCloudShellActive = (isActive: boolean) =>
   action(Actions.SetCloudShellActive, { isActive });

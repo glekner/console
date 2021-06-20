@@ -62,5 +62,5 @@ export type SubsystemHealth = {
 
 export type URLHealthHandler<
   R,
-  T extends K8sResourceCommon | K8sResourceCommon[] = K8sResourceCommon | K8sResourceCommon[]
+  T extends K8sResourceCommon | K8sResourceCommon[] = K8sResourceCommon | K8sResourceCommon[],
 > = (response: R, error: any, additionalResource?: FirehoseResult<T>) => SubsystemHealth;

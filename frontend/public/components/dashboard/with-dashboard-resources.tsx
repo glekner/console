@@ -32,9 +32,9 @@ const mapDispatchToProps: DispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state: RootState) => ({
   [RESULTS_TYPE.URL]: state.dashboards.get(RESULTS_TYPE.URL),
-  [RESULTS_TYPE.PROMETHEUS]: state.dashboards.get(RESULTS_TYPE.PROMETHEUS) as RequestMap<
-    PrometheusResponse
-  >,
+  [RESULTS_TYPE.PROMETHEUS]: state.dashboards.get(
+    RESULTS_TYPE.PROMETHEUS,
+  ) as RequestMap<PrometheusResponse>,
   notificationAlerts: state.UI.getIn(['monitoring', 'notificationAlerts']),
 });
 
@@ -175,9 +175,7 @@ export const withDashboardResources = <P extends DashboardItemProps>(
     },
   );
 
-type DispatchToProps = (
-  dispatch: any,
-) => {
+type DispatchToProps = (dispatch: any) => {
   watchURL: WatchURL;
   stopWatchURL: StopWatchURL;
   watchPrometheusQuery: WatchPrometheus;

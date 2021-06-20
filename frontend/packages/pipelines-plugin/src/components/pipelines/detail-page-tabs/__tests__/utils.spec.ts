@@ -50,9 +50,8 @@ describe('removeEmptyDefaultFromPipelineParams omits empty default values', () =
 
 describe('getPipelineTaskLinks', () => {
   const { pipeline: simplePipeline } = pipelineTestData[PipelineExampleNames.SIMPLE_PIPELINE];
-  const { pipeline: pipelineWithFinally } = pipelineTestData[
-    PipelineExampleNames.PIPELINE_WITH_FINALLY
-  ];
+  const { pipeline: pipelineWithFinally } =
+    pipelineTestData[PipelineExampleNames.PIPELINE_WITH_FINALLY];
   const taskWithoutTaskRef = {
     tasks: [
       {

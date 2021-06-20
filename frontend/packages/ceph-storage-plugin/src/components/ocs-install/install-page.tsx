@@ -50,9 +50,8 @@ const InstallCluster: React.FC<InstallClusterProps> = ({ match }) => {
   };
   const { t } = useTranslation();
   const [isIndepModeSupportedPlatform, setIndepModeSupportedPlatform] = React.useState(false);
-  const [independentReqdKeys, setIndependentReqdKeys] = React.useState<{ [key: string]: string[] }>(
-    null,
-  );
+  const [independentReqdKeys, setIndependentReqdKeys] =
+    React.useState<{ [key: string]: string[] }>(null);
   const [downloadFile, setDownloadFile] = React.useState(null);
   const [clusterServiceVersion, setClusterServiceVersion] = React.useState(null);
   const [csv, csvLoaded, csvError] = useK8sWatchResource<ClusterServiceVersionKind>(csvResource);

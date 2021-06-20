@@ -1,4 +1,6 @@
-/* eslint-disable global-require, @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 export const exposePluginAPI = () => {
   window.api = {

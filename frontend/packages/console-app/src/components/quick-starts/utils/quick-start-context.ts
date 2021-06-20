@@ -246,9 +246,10 @@ export const useValuesForQuickStartContext = (): QuickStartContextValues => {
 
   const activeQuickStartState = allQuickStartStates?.[activeQuickStartID] ?? {};
 
-  const getQuickStartForId = useCallback((id: string) => allQuickStartStates[id], [
-    allQuickStartStates,
-  ]);
+  const getQuickStartForId = useCallback(
+    (id: string) => allQuickStartStates[id],
+    [allQuickStartStates],
+  );
 
   return {
     activeQuickStartID,

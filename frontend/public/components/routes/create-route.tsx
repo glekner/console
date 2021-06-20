@@ -289,15 +289,8 @@ class CreateRouteWithTranslation extends React.Component<CreateRouteProps, Creat
   render() {
     const { t } = this.props;
     const title = t('public~Create Route');
-    const {
-      loaded,
-      services,
-      service,
-      portOptions,
-      targetPort,
-      termination,
-      alternateServices,
-    } = this.state;
+    const { loaded, services, service, portOptions, targetPort, termination, alternateServices } =
+      this.state;
     const serviceOptions = {};
     _.each(
       _.sortBy(services, 'metadata.name'),

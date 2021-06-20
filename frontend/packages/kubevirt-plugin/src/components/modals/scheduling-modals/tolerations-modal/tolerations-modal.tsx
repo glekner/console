@@ -43,15 +43,10 @@ export const TModal = withHandlePromise(
     const vmLikeFinal = getLoadedData(vmLikeEntityLoading, vmLikeEntity);
     const loadError = getLoadError(nodes, NodeModel);
 
-    const [
-      tolerationsLabels,
-      setTolerationsLabels,
-      onLabelAdd,
-      onLabelChange,
-      onLabelDelete,
-    ] = useIDEntities<TolerationLabel>(
-      getVMLikeTolerations(vmLikeEntity)?.map((toleration, id) => ({ ...toleration, id })),
-    );
+    const [tolerationsLabels, setTolerationsLabels, onLabelAdd, onLabelChange, onLabelDelete] =
+      useIDEntities<TolerationLabel>(
+        getVMLikeTolerations(vmLikeEntity)?.map((toleration, id) => ({ ...toleration, id })),
+      );
 
     const qualifiedNodes = useNodeQualifier(nodes, 'taint', tolerationsLabels);
 

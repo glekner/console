@@ -144,21 +144,16 @@ export const vmWizardActions: VMWizardActions = {
         ),
       ),
     ),
-  [ActionType.SetResults]: (
-    id,
-    value: any,
-    isValid: boolean,
-    isLocked: boolean,
-    isPending: boolean,
-  ) => (dispatch) => {
-    dispatch(
-      vmWizardInternalActions[InternalActionType.SetResults](
-        id,
-        value,
-        isValid,
-        isLocked,
-        isPending,
-      ),
-    );
-  },
+  [ActionType.SetResults]:
+    (id, value: any, isValid: boolean, isLocked: boolean, isPending: boolean) => (dispatch) => {
+      dispatch(
+        vmWizardInternalActions[InternalActionType.SetResults](
+          id,
+          value,
+          isValid,
+          isLocked,
+          isPending,
+        ),
+      );
+    },
 };

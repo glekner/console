@@ -393,9 +393,8 @@ type NodesTableRowProps = {
   tableColumns: string[];
 };
 
-const NodesTable: React.FC<NodesTableProps &
-  WithUserSettingsCompatibilityProps<TableColumnsType>> = React.memo(
-  ({ userSettingState: tableColumns, ...props }) => {
+const NodesTable: React.FC<NodesTableProps & WithUserSettingsCompatibilityProps<TableColumnsType>> =
+  React.memo(({ userSettingState: tableColumns, ...props }) => {
     const Row = React.useCallback(
       (rowArgs: RowFunctionArgs<NodeKind>) => (
         <NodesTableRow
@@ -426,8 +425,7 @@ const NodesTable: React.FC<NodesTableProps &
         virtualize
       />
     );
-  },
-);
+  });
 
 type NodesTableProps = React.ComponentProps<typeof Table> & {
   data: NodeKind[];

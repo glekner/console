@@ -26,8 +26,10 @@ import { VMDashboardContext } from '../../vms/vm-dashboard-context';
 
 import './vm-activity.scss';
 
-const combinedVmFilter = (vm: VMILikeEntityKind): EventFilterFuncion => (event) =>
-  getVmEventsFilters(vm).some((filter) => filter(event.involvedObject, event));
+const combinedVmFilter =
+  (vm: VMILikeEntityKind): EventFilterFuncion =>
+  (event) =>
+    getVmEventsFilters(vm).some((filter) => filter(event.involvedObject, event));
 
 const getEventsResource = (namespace: string): FirehoseResource => ({
   isList: true,

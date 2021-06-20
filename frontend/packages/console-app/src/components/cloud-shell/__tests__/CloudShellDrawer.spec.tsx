@@ -20,12 +20,7 @@ describe('CloudShellDrawerComponent', () => {
         <p>Terminal content</p>
       </CloudShellDrawer>,
     );
-    expect(
-      wrapper
-        .find(Drawer)
-        .children()
-        .html(),
-    ).toEqual('<p>Terminal content</p>');
+    expect(wrapper.find(Drawer).children().html()).toEqual('<p>Terminal content</p>');
   });
 
   it('should call onClose when clicked on close button', () => {

@@ -75,10 +75,8 @@ export const OperatorHubSubscribeForm: React.FC<OperatorHubSubscribeFormProps> =
   const [approval, setApproval] = React.useState(InstallPlanApproval.Automatic);
   const [cannotResolve, setCannotResolve] = React.useState(false);
   const [suggestedNamespaceExists, setSuggestedNamespaceExists] = React.useState(false);
-  const [
-    useSuggestedNSForSingleInstallMode,
-    setUseSuggestedNSForSingleInstallMode,
-  ] = React.useState(true);
+  const [useSuggestedNSForSingleInstallMode, setUseSuggestedNSForSingleInstallMode] =
+    React.useState(true);
   const [enableMonitoring, setEnableMonitoring] = React.useState(false);
   const [error, setError] = React.useState('');
   const [consoleOperatorConfig] = useK8sWatchResource<K8sResourceKind>({

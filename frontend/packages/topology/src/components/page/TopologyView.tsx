@@ -113,23 +113,19 @@ export const ConnectedTopologyView: React.FC<ComponentProps> = ({
     [fireTelemetryEvent],
   );
   const appliedFilters = useAppliedDisplayFilters();
-  const [displayFilterExtensions, displayFilterExtensionsResolved] = useResolvedExtensions<
-    TopologyDisplayFilters
-  >(isTopologyDisplayFilter);
-  const [createConnectors, createConnectorsResolved] = useResolvedExtensions<
-    TopologyCreateConnector
-  >(isTopologyCreateConnector);
-  const [extensionDecorators, extensionDecoratorsResolved] = useResolvedExtensions<
-    TopologyDecoratorProvider
-  >(isTopologyDecoratorProvider);
+  const [displayFilterExtensions, displayFilterExtensionsResolved] =
+    useResolvedExtensions<TopologyDisplayFilters>(isTopologyDisplayFilter);
+  const [createConnectors, createConnectorsResolved] =
+    useResolvedExtensions<TopologyCreateConnector>(isTopologyCreateConnector);
+  const [extensionDecorators, extensionDecoratorsResolved] =
+    useResolvedExtensions<TopologyDecoratorProvider>(isTopologyDecoratorProvider);
   const [topologyDecorators, setTopologyDecorators] = React.useState<{
     [key: string]: TopologyDecorator[];
   }>({});
   const [filtersLoaded, setFiltersLoaded] = React.useState<boolean>(false);
   const queryParams = useQueryParams();
-  const { extensions: supportedFileExtensions } = React.useContext<FileUploadContextType>(
-    FileUploadContext,
-  );
+  const { extensions: supportedFileExtensions } =
+    React.useContext<FileUploadContextType>(FileUploadContext);
 
   const searchParams = queryParams.get('searchQuery');
   const fileTypes = supportedFileExtensions.map((ex) => `.${ex}`).toString();

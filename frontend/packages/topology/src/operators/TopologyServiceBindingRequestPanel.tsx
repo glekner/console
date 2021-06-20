@@ -35,9 +35,9 @@ const dispatchToProps = (dispatch): PropsFromDispatch => ({
   onClickTab: (name) => dispatch(UIActions.selectOverviewDetailsTab(name)),
 });
 
-const ConnectedTopologyServiceBindingRequestPanel: React.FC<PropsFromState &
-  PropsFromDispatch &
-  TopologyServiceBindingRequestPanelProps> = ({ edge, onClickTab, selectedDetailsTab }) => {
+const ConnectedTopologyServiceBindingRequestPanel: React.FC<
+  PropsFromState & PropsFromDispatch & TopologyServiceBindingRequestPanelProps
+> = ({ edge, onClickTab, selectedDetailsTab }) => {
   const { t } = useTranslation();
   const sbr = edge.getResource();
   const ResourcesSection = () => <TopologyEdgeResourcesPanel edge={edge} />;

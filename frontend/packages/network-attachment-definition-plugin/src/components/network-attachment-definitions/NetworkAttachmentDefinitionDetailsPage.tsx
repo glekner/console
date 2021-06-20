@@ -11,26 +11,25 @@ const menuActions = [
   ...common,
 ];
 
-export const NetworkAttachmentDefinitionsDetailsPage: React.FC<NetworkAttachmentDefinitionsDetailPageProps> = (
-  props,
-) => {
-  const overviewPage = {
-    href: '', // default landing page
-    name: 'Details',
-    component: NetworkAttachmentDefinitionDetails,
+export const NetworkAttachmentDefinitionsDetailsPage: React.FC<NetworkAttachmentDefinitionsDetailPageProps> =
+  (props) => {
+    const overviewPage = {
+      href: '', // default landing page
+      name: 'Details',
+      component: NetworkAttachmentDefinitionDetails,
+    };
+
+    const pages = [overviewPage, navFactory.editYaml()];
+
+    return (
+      <DetailsPage
+        {...props}
+        pages={pages}
+        kind={referenceForModel(NetworkAttachmentDefinitionModel)}
+        menuActions={menuActions}
+      />
+    );
   };
-
-  const pages = [overviewPage, navFactory.editYaml()];
-
-  return (
-    <DetailsPage
-      {...props}
-      pages={pages}
-      kind={referenceForModel(NetworkAttachmentDefinitionModel)}
-      menuActions={menuActions}
-    />
-  );
-};
 
 type NetworkAttachmentDefinitionsDetailPageProps = {
   name: string;

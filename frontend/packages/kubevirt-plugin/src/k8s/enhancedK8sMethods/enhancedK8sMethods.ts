@@ -61,7 +61,7 @@ export class EnhancedK8sMethods {
 
   k8sWrapperCreate = async <
     U extends K8sResourceCommon,
-    T extends Wrapper<U, T> & K8sResourceKindMethods
+    T extends Wrapper<U, T> & K8sResourceKindMethods,
   >(
     wrapper: T,
     opts?,
@@ -81,7 +81,7 @@ export class EnhancedK8sMethods {
 
   k8sWrapperPatch = async <
     U extends K8sResourceCommon,
-    T extends Wrapper<U, T> & K8sResourceKindMethods
+    T extends Wrapper<U, T> & K8sResourceKindMethods,
   >(
     wrapper: T,
     patches: Patch[],

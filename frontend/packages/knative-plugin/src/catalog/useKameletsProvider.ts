@@ -56,9 +56,8 @@ const useKameletsProvider: ExtensionHook<CatalogItem[]> = ({
     () => ({ kind: referenceForModel(CamelKameletModel), isList: true, namespace, optional: true }),
     [namespace],
   );
-  const [kamelets, kameletsLoaded, kameletsLoadError] = useK8sWatchResource<K8sResourceKind[]>(
-    resource,
-  );
+  const [kamelets, kameletsLoaded, kameletsLoadError] =
+    useK8sWatchResource<K8sResourceKind[]>(resource);
   const normalizedSource = React.useMemo(() => {
     if (!kameletsLoaded || !canCreateKameletBinding) return [];
     const kameletSource = kamelets.filter(

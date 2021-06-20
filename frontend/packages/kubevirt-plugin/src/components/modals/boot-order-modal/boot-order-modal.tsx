@@ -53,9 +53,8 @@ const BootOrderModalComponent = withHandlePromise(
     const bootableDevices = getBootableDevices(vmLikeEntity);
     const { t } = useTranslation();
     const [devices, setDevices] = React.useState<BootableDeviceType[]>(bootableDevices);
-    const [initialDeviceList, setInitialDeviceList] = React.useState<BootableDeviceType[]>(
-      bootableDevices,
-    );
+    const [initialDeviceList, setInitialDeviceList] =
+      React.useState<BootableDeviceType[]>(bootableDevices);
     const [showUpdatedAlert, setUpdatedAlert] = React.useState<boolean>(false);
     const [showPatchError, setPatchError] = React.useState<boolean>(false);
     const vm = asVM(vmLikeEntity);

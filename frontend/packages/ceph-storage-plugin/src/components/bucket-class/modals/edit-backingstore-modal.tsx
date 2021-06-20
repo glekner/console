@@ -181,13 +181,11 @@ const BucketClassEditModal = withHandlePromise<
 
   const onSubmit = () => {
     if (!isNamespaceType) {
-      bucketClass.spec.placementPolicy.tiers[0].backingStores = state.tier1BackingStore.map(
-        getName,
-      );
+      bucketClass.spec.placementPolicy.tiers[0].backingStores =
+        state.tier1BackingStore.map(getName);
       if (policyB?.length) {
-        bucketClass.spec.placementPolicy.tiers[1].backingStores = state.tier2BackingStore.map(
-          getName,
-        );
+        bucketClass.spec.placementPolicy.tiers[1].backingStores =
+          state.tier2BackingStore.map(getName);
       }
     } else {
       switch (state.namespacePolicyType) {
@@ -198,9 +196,8 @@ const BucketClassEditModal = withHandlePromise<
           bucketClass.spec.namespacePolicy.multi.writeResource = getName(
             state.writeNamespaceStore[0],
           );
-          bucketClass.spec.namespacePolicy.multi.readResources = state.readNamespaceStore.map(
-            getName,
-          );
+          bucketClass.spec.namespacePolicy.multi.readResources =
+            state.readNamespaceStore.map(getName);
           break;
         case NamespacePolicyType.CACHE:
           bucketClass.spec.namespacePolicy.cache.hubResource = getName(state.hubNamespaceStore);

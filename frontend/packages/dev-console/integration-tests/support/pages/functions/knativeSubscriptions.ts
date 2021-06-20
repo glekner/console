@@ -14,9 +14,7 @@ export const createKnativeServing = () => {
         .type(operators.ServerlessOperator);
     }
   });
-  cy.get(operatorsPO.installOperators.knativeServingLink)
-    .should('be.visible')
-    .click();
+  cy.get(operatorsPO.installOperators.knativeServingLink).should('be.visible').click();
   detailsPage.titleShouldContain(pageTitle.KnativeServings);
   cy.get('body').then(($body) => {
     if ($body.find('[role="grid"]').length > 0) {
@@ -39,9 +37,7 @@ export const createKnativeEventing = () => {
         .type(operators.ServerlessOperator);
     }
   });
-  cy.get(operatorsPO.installOperators.knativeEventingLink)
-    .should('be.visible')
-    .click();
+  cy.get(operatorsPO.installOperators.knativeEventingLink).should('be.visible').click();
   detailsPage.titleShouldContain(pageTitle.KnativeEventings);
   cy.get('body').then(($body) => {
     if ($body.find('[role="grid"]').length > 0) {

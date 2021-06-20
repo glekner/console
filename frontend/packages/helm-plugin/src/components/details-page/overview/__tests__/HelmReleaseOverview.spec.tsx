@@ -32,12 +32,9 @@ const helmReleaseOverviewProps: React.ComponentProps<typeof HelmReleaseOverview>
 describe('HelmReleaseOverview', () => {
   it('should render the Section Heading for the Overview page', () => {
     const helmReleaseOverview = shallow(<HelmReleaseOverview {...helmReleaseOverviewProps} />);
-    expect(
-      helmReleaseOverview
-        .find(SectionHeading)
-        .at(0)
-        .props().text,
-    ).toEqual('helm-plugin~Helm Release details');
+    expect(helmReleaseOverview.find(SectionHeading).at(0).props().text).toEqual(
+      'helm-plugin~Helm Release details',
+    );
   });
   it('should render the ResourceSummary component', () => {
     const helmReleaseOverview = shallow(<HelmReleaseOverview {...helmReleaseOverviewProps} />);

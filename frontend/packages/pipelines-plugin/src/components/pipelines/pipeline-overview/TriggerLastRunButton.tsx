@@ -27,10 +27,11 @@ const TriggerLastRunButton: React.FC<TriggerLastRunButtonProps> = ({
   const latestRun = usePipelineRunWithUserAnnotation(
     getLatestRun({ data: pipelineRuns }, 'startTimestamp'),
   );
-  const { labelKey, callback, accessReview: utilityAccessReview } = rerunPipelineAndStay(
-    PipelineRunModel,
-    latestRun,
-  );
+  const {
+    labelKey,
+    callback,
+    accessReview: utilityAccessReview,
+  } = rerunPipelineAndStay(PipelineRunModel, latestRun);
   const defaultAccessReview: AccessReviewResourceAttributes = {
     group: PipelineRunModel.apiGroup,
     resource: PipelineRunModel.plural,

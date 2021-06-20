@@ -90,17 +90,15 @@ export const WebhookTriggers: React.FC<WebhookTriggersProps> = (props) => {
     }
     let errors: string[] = [];
     Promise.all(
-      secretNames.map(
-        (webhookName: string): Promise<K8sResourceKind> => {
-          return k8sGet(SecretModel, webhookName, namespace).then(
-            (secret) => secret,
-            (error) => {
-              errors = [...errors, `Error: ${error.message}`];
-              return null;
-            },
-          );
-        },
-      ),
+      secretNames.map((webhookName: string): Promise<K8sResourceKind> => {
+        return k8sGet(SecretModel, webhookName, namespace).then(
+          (secret) => secret,
+          (error) => {
+            errors = [...errors, `Error: ${error.message}`];
+            return null;
+          },
+        );
+      }),
     ).then((secrets) => {
       setSecretErrors(errors);
       setWebhookSecrets(_.compact(secrets));

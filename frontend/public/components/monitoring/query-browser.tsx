@@ -689,15 +689,12 @@ const QueryBrowser_: React.FC<QueryBrowserProps> = ({
           setSamples(newSamples);
         } else {
           const newGraphData = _.map(newResults, (result: PrometheusResult[]) => {
-            return _.map(
-              result,
-              ({ metric, values }): Series => {
-                // If filterLabels is specified, ignore all series that don't match
-                return _.some(filterLabels, (v, k) => _.has(metric, k) && metric[k] !== v)
-                  ? []
-                  : [metric, formatSeriesValues(values, samples, span)];
-              },
-            );
+            return _.map(result, ({ metric, values }): Series => {
+              // If filterLabels is specified, ignore all series that don't match
+              return _.some(filterLabels, (v, k) => _.has(metric, k) && metric[k] !== v)
+                ? []
+                : [metric, formatSeriesValues(values, samples, span)];
+            });
           });
           setGraphData(newGraphData);
 

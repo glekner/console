@@ -18,9 +18,8 @@ export const useMappedVMRestores = (
     namespace,
   };
 
-  const [restores, restoresLoaded, restoresError] = useK8sWatchResource<VMRestore[]>(
-    restoreResource,
-  );
+  const [restores, restoresLoaded, restoresError] =
+    useK8sWatchResource<VMRestore[]>(restoreResource);
 
   return React.useMemo(
     () => [

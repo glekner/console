@@ -72,8 +72,7 @@ describe('ClusterSetupGettingStartedCard', () => {
     expect(wrapper.find(GettingStartedCard).props().moreLink).toEqual({
       id: 'machine-configuration',
       title: 'View all steps in documentation',
-      href:
-        'https://docs.okd.io/latest/post_installation_configuration/machine-configuration-tasks.html',
+      href: 'https://docs.okd.io/latest/post_installation_configuration/machine-configuration-tasks.html',
       external: true,
     });
   });

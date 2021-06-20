@@ -47,10 +47,7 @@ describe('Metrics Query Input', () => {
 
   it('Custom Querey selection should update Dropdown title, show QueryInput and Button in disabled state', () => {
     const wrapper = shallow(<MetricsQueryInput />);
-    wrapper
-      .find(Dropdown)
-      .props()
-      .onChange('#ADD_NEW_QUERY#');
+    wrapper.find(Dropdown).props().onChange('#ADD_NEW_QUERY#');
     expect(wrapper.find(QueryInput)).toHaveLength(1);
     expect(wrapper.find(Button).props().children).toEqual(`${I18N_NS}~Hide PromQL`);
     expect(wrapper.find(Button).props().isDisabled).toBe(true);
@@ -59,10 +56,7 @@ describe('Metrics Query Input', () => {
 
   it('Metric selection should update Dropdown title and show Button in enabled state', () => {
     const wrapper = shallow(<MetricsQueryInput />);
-    wrapper
-      .find(Dropdown)
-      .props()
-      .onChange('PODS_BY_CPU');
+    wrapper.find(Dropdown).props().onChange('PODS_BY_CPU');
     expect(wrapper.find(Button).props().isDisabled).toBe(false);
     expect(wrapper.find(Dropdown).props().title).toEqual(`${I18N_NS}~CPU usage`);
   });

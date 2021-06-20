@@ -54,12 +54,14 @@ export class Status extends React.Component {
       ? fetchQuery(props.query, props.name, props.namespace)
       : props.fetch();
 
-    const ignorePromise = (cb) => (...args) => {
-      if (clock !== this.clock) {
-        return;
-      }
-      cb(...args);
-    };
+    const ignorePromise =
+      (cb) =>
+      (...args) => {
+        if (clock !== this.clock) {
+          return;
+        }
+        cb(...args);
+      };
     promise
       .then(ignorePromise(({ short, long, status }) => this.setState({ short, long, status })))
       .catch(ignorePromise(() => this.setState({ short: 'BAD', long: 'Error', status: 'ERROR' })))

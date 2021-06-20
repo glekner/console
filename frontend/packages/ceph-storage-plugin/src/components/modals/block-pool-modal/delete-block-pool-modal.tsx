@@ -42,12 +42,10 @@ const DeleteBlockPoolModal = withHandlePromise((props: DeleteBlockPoolModalProps
   const [state, dispatch] = React.useReducer(blockPoolReducer, blockPoolInitialState);
   const [scNames, setScNames] = React.useState<string>();
 
-  const [cephClusters, isLoaded, loadError] = useK8sWatchResource<CephClusterKind[]>(
-    cephClusterResource,
-  );
-  const [scResources, scLoaded, scLoadError] = useK8sGet<ListKind<OcsStorageClassKind>>(
-    StorageClassModel,
-  );
+  const [cephClusters, isLoaded, loadError] =
+    useK8sWatchResource<CephClusterKind[]>(cephClusterResource);
+  const [scResources, scLoaded, scLoadError] =
+    useK8sGet<ListKind<OcsStorageClassKind>>(StorageClassModel);
   const [pvcResources, pvcLoaded, pvcLoadError] = useK8sGet<ListKind<PersistentVolumeClaimKind>>(
     PersistentVolumeClaimModel,
   );

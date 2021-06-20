@@ -17,9 +17,8 @@ const VMDetailsItemTemplate: React.FC<VMDetailsItemTemplateProps> = ({ name, nam
     name,
     namespace,
   };
-  const [template, loadedTemplates, errorTemplates] = useK8sWatchResource<TemplateKind>(
-    templatesResource,
-  );
+  const [template, loadedTemplates, errorTemplates] =
+    useK8sWatchResource<TemplateKind>(templatesResource);
 
   return (
     <VMDetailsItem

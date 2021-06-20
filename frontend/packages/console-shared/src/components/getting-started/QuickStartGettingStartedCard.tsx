@@ -69,9 +69,8 @@ export const QuickStartGettingStartedCard: React.FC<QuickStartGettingStartedCard
   featured,
 }) => {
   const { t } = useTranslation();
-  const { allQuickStartStates, setActiveQuickStart } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { allQuickStartStates, setActiveQuickStart } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
   return (
     <QuickStartsLoader>

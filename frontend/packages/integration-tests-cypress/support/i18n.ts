@@ -3,6 +3,7 @@ import { listPage } from '../views/list-page';
 
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       isPseudoLocalized(): Chainable<Element>;
       testI18n(selectors?: string[], testIDs?: string[]): Chainable<Element>;

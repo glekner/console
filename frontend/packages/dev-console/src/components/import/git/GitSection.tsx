@@ -39,17 +39,13 @@ const GitSection: React.FC<GitSectionProps> = ({
 }) => {
   const { t } = useTranslation();
   const inputRef = React.useRef<HTMLInputElement>();
+  const { values, errors, setFieldValue, setFieldTouched, touched, dirty, isSubmitting } =
+    useFormikContext<FormikValues>();
   const {
-    values,
-    errors,
-    setFieldValue,
-    setFieldTouched,
-    touched,
-    dirty,
-    isSubmitting,
-  } = useFormikContext<FormikValues>();
-  const { url: defaultSampleURL, dir: defaultSampleDir, ref: defaultSampleRef } =
-    defaultSample || {};
+    url: defaultSampleURL,
+    dir: defaultSampleDir,
+    ref: defaultSampleRef,
+  } = defaultSample || {};
   const defaultSampleTagObj = React.useMemo(
     () =>
       defaultSampleURL

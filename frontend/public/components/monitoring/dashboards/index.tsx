@@ -568,7 +568,7 @@ const MonitoringDashboardsPage: React.FC<MonitoringDashboardsPageProps> = ({ mat
   const dispatch = useDispatch();
 
   const [board, setBoard] = React.useState<string>();
-  const [boards, setBoards] = React.useState<Board[]>([]);
+  const [boards, setBoards] = React.useState<BoardType[]>([]);
   const [error, setError] = React.useState<string>();
   const [isLoading, , , setLoaded] = useBoolean(true);
 
@@ -583,7 +583,7 @@ const MonitoringDashboardsPage: React.FC<MonitoringDashboardsPageProps> = ({ mat
         setLoaded();
         setError(undefined);
 
-        const getBoardData = (item): Board => {
+        const getBoardData = (item): BoardType => {
           try {
             return {
               data: JSON.parse(_.values(item.data)[0]),
@@ -741,7 +741,7 @@ type Row = {
   title?: string;
 };
 
-type Board = {
+type BoardType = {
   data: {
     panels: Panel[];
     rows: Row[];

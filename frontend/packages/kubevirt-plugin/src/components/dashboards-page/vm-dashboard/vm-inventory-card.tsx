@@ -55,9 +55,8 @@ export const VMInventoryCard: React.FC<VMInventoryCardProps> = () => {
     [namespace],
   );
 
-  const [snapshots, snapshotsLoaded, snapshotsError] = useK8sWatchResource<VMSnapshot[]>(
-    snapshotResource,
-  );
+  const [snapshots, snapshotsLoaded, snapshotsError] =
+    useK8sWatchResource<VMSnapshot[]>(snapshotResource);
   const filteredSnapshots = snapshots.filter((snap) => getVmSnapshotVmName(snap) === name);
   const basePath = resourcePath(
     kubevirtReferenceForModel(getVMLikeModel(vmiLike)),

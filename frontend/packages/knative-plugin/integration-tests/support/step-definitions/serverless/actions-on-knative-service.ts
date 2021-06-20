@@ -137,9 +137,7 @@ When('user enters {string} into the Split text box of new revision', (splitPerce
 
 When('user selects another revision from Revision drop down', () => {
   cy.byLegacyTestID('dropdown-button').click();
-  cy.byLegacyTestID('dropdown-menu')
-    .last()
-    .click();
+  cy.byLegacyTestID('dropdown-menu').last().click();
 });
 
 Then(
@@ -159,9 +157,7 @@ Then(
     topologySidePane.verify();
     topologySidePane.selectTab('Details');
     cy.get('[data-test-selector="details-item-label__Labels"]').should('be.visible');
-    cy.get('[data-test="label-list"] a')
-      .contains(label)
-      .should('not.be.visible');
+    cy.get('[data-test="label-list"] a').contains(label).should('not.be.visible');
   },
 );
 

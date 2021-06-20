@@ -12,11 +12,13 @@ interface TaskRunsListPageProps {
   showPipelineColumn?: boolean;
 }
 
-const TaskRunsListPage: React.FC<Omit<
-  React.ComponentProps<typeof ListPage>,
-  'canCreate' | 'kind' | 'ListComponent' | 'rowFilters'
-> &
-  TaskRunsListPageProps> = ({ hideBadge, showPipelineColumn = true, namespace, ...props }) => {
+const TaskRunsListPage: React.FC<
+  Omit<
+    React.ComponentProps<typeof ListPage>,
+    'canCreate' | 'kind' | 'ListComponent' | 'rowFilters'
+  > &
+    TaskRunsListPageProps
+> = ({ hideBadge, showPipelineColumn = true, namespace, ...props }) => {
   const searchParams = getURLSearchParams();
   const kind = searchParams?.kind;
   const badge = usePipelineTechPreviewBadge(namespace);

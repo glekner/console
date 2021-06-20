@@ -75,17 +75,8 @@ const getMemorySizeAndUnits = (combinedMemVal) => {
 };
 
 const VMFlavorModal = withHandlePromise((props: VMFlavornModalProps) => {
-  const {
-    vmLike,
-    template,
-    errorMessage,
-    handlePromise,
-    close,
-    cancel,
-    loadError,
-    loaded,
-    vmis,
-  } = props;
+  const { vmLike, template, errorMessage, handlePromise, close, cancel, loadError, loaded, vmis } =
+    props;
   const { t } = useTranslation();
   const inProgress = props.inProgress || !loaded;
   const vm = asVM(vmLike);

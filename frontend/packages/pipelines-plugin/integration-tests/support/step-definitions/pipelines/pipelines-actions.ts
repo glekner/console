@@ -209,19 +209,13 @@ Then('Name field will be disabled', () => {
 });
 
 Then('Add Parameters, Add Resources, Task should be displayed', () => {
-  cy.get(pipelineBuilderPO.add)
-    .eq(0)
-    .should('be.enabled');
-  cy.get(pipelineBuilderPO.add)
-    .eq(1)
-    .should('be.enabled');
+  cy.get(pipelineBuilderPO.add).eq(0).should('be.enabled');
+  cy.get(pipelineBuilderPO.add).eq(1).should('be.enabled');
   cy.get(pipelineBuilderPO.formView.task).should('be.visible');
 });
 
 Then('{string} is not displayed on Pipelines page', (pipelineName: string) => {
-  cy.get(pipelinesPO.search)
-    .clear()
-    .type(pipelineName);
+  cy.get(pipelinesPO.search).clear().type(pipelineName);
   cy.byTestID('empty-message').should('be.visible');
 });
 

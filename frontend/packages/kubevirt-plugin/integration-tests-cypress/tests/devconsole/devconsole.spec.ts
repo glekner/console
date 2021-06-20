@@ -77,14 +77,10 @@ describe('test dev console', () => {
     it('ID(CNV-5699) create virtual machine', () => {
       cy.byLegacyTestID(addHeader).click();
       cy.get('[data-test="item dev-catalog-virtualization"]').click();
-      cy.contains(TEMPLATE_NAME)
-        .should('be.visible')
-        .click();
+      cy.contains(TEMPLATE_NAME).should('be.visible').click();
       cy.contains('Create from template').click({ force: true });
       cy.viewport(1536, 960);
-      cy.get('input[id="vm-name"]')
-        .clear()
-        .type(vm.name);
+      cy.get('input[id="vm-name"]').clear().type(vm.name);
       cy.get('#ssh-service-checkbox').click();
       cy.get('button[type="submit"]').click();
       cy.get('button[type="submit"]').should('not.exist');
@@ -94,9 +90,7 @@ describe('test dev console', () => {
 
   describe('review vm tabs', () => {
     after(() => {
-      cy.get('button[type="button"]')
-        .contains('Details')
-        .click();
+      cy.get('button[type="button"]').contains('Details').click();
     });
 
     it('ID(CNV-5700) review details tab', () => {
@@ -113,9 +107,7 @@ describe('test dev console', () => {
 
     it('ID(CNV-5701) review resources tab', () => {
       // navigate to resource tab
-      cy.get('button[type="button"]')
-        .contains('Resources')
-        .click();
+      cy.get('button[type="button"]').contains('Resources').click();
 
       // check pod status is running in this tab
       cy.get(detailsTab.vmStatus).should('contain', VM_STATUS.Running);
@@ -156,9 +148,7 @@ describe('test dev console', () => {
 
     it('ID(CNV-5702) clone vm', () => {
       selectActionFromDropdown(VM_ACTION.Clone, detailViewDropdown);
-      cy.get(modalTitle)
-        .contains('Clone Virtual Machine')
-        .should('exist');
+      cy.get(modalTitle).contains('Clone Virtual Machine').should('exist');
       cy.get(alertTitle).should('be.visible');
       cy.get(confirmCloneButton).click();
 
@@ -172,9 +162,7 @@ describe('test dev console', () => {
     // delete cloned vm
     it('ID(CNV-5702) delete vm', () => {
       detailViewAction(VM_ACTION.Delete);
-      cy.get('.odc-topology__empty-state')
-        .should('be.visible')
-        .contains('No resources found');
+      cy.get('.odc-topology__empty-state').should('be.visible').contains('No resources found');
     });
   });
 });

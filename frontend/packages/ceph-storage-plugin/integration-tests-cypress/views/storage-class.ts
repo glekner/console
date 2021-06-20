@@ -19,9 +19,7 @@ const configureKms = () => {
 export const createStorageClass = (scName: string, poolName?: string, encrypted?: boolean) => {
   cy.clickNavLink(['Storage', 'StorageClasses']);
   cy.byTestID('item-create').click();
-  cy.byLegacyTestID('storage-class-form')
-    .get('input#storage-class-name')
-    .type(scName);
+  cy.byLegacyTestID('storage-class-form').get('input#storage-class-name').type(scName);
 
   cy.log('Selecting Ceph RBD provisioner');
   cy.byTestID('storage-class-provisioner-dropdown').click();
@@ -37,9 +35,7 @@ export const createStorageClass = (scName: string, poolName?: string, encrypted?
   cy.byTestID(poolName || 'ocs-storagecluster-cephblockpool').click();
 
   cy.log('Creating new StorageClass');
-  cy.byLegacyTestID('storage-class-form')
-    .get('button#save-changes')
-    .click();
+  cy.byLegacyTestID('storage-class-form').get('button#save-changes').click();
   cy.byLegacyTestID('resource-title').contains(scName);
 };
 

@@ -41,15 +41,12 @@ const TopologyPage: React.FC<TopologyPageProps> = ({
   defaultViewType = TopologyViewType.graph,
 }) => {
   const { t } = useTranslation();
-  const [
-    topologyViewState,
-    setTopologyViewState,
-    isTopologyViewStateLoaded,
-  ] = useUserSettingsCompatibility<TopologyViewType>(
-    TOPOLOGY_VIEW_CONFIG_STORAGE_KEY,
-    activeViewStorageKey,
-    defaultViewType,
-  );
+  const [topologyViewState, setTopologyViewState, isTopologyViewStateLoaded] =
+    useUserSettingsCompatibility<TopologyViewType>(
+      TOPOLOGY_VIEW_CONFIG_STORAGE_KEY,
+      activeViewStorageKey,
+      defaultViewType,
+    );
   const namespace = match.params.name;
   const queryParams = useQueryParams();
   let viewType = queryParams.get('view') as TopologyViewType;

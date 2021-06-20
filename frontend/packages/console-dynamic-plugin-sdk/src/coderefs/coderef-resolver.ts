@@ -135,10 +135,10 @@ export const resolveCodeRefProperties = async <E extends Extension<P>, P = Exten
 export const resolveExtension = async <
   E extends Extension<P>,
   P = ExtensionProperties<E>,
-  R = UpdateExtensionProperties<E, ResolvedCodeRefProperties<P>, P>
+  R = UpdateExtensionProperties<E, ResolvedCodeRefProperties<P>, P>,
 >(
   extension: E,
 ): Promise<R> => {
   const resolvedProperties = await resolveCodeRefProperties<E, P>(extension);
-  return (mergeExtensionProperties(extension, resolvedProperties) as unknown) as R;
+  return mergeExtensionProperties(extension, resolvedProperties) as unknown as R;
 };

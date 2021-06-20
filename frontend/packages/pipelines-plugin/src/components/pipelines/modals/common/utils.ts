@@ -150,36 +150,36 @@ export const getDefaultVolumeClaimTemplate = (pipelineName: string): VolumeClaim
   };
 };
 
-const supportWorkspaceDefaults = (preselectPVC: string) => (
-  workspace: TektonWorkspace,
-): PipelineModalFormWorkspace => {
-  let workspaceSetting: PipelineModalFormWorkspaceStructure = {
-    type: VolumeTypes.EmptyDirectory,
-    data: { emptyDir: {} },
-  };
+const supportWorkspaceDefaults =
+  (preselectPVC: string) =>
+  (workspace: TektonWorkspace): PipelineModalFormWorkspace => {
+    let workspaceSetting: PipelineModalFormWorkspaceStructure = {
+      type: VolumeTypes.EmptyDirectory,
+      data: { emptyDir: {} },
+    };
 
-  if (preselectPVC) {
-    workspaceSetting = {
-      type: VolumeTypes.PVC,
-      data: {
-        persistentVolumeClaim: {
-          claimName: preselectPVC,
+    if (preselectPVC) {
+      workspaceSetting = {
+        type: VolumeTypes.PVC,
+        data: {
+          persistentVolumeClaim: {
+            claimName: preselectPVC,
+          },
         },
-      },
-    };
-  }
-  if (workspace.optional) {
-    workspaceSetting = {
-      type: VolumeTypes.NoWorkspace,
-      data: {},
-    };
-  }
+      };
+    }
+    if (workspace.optional) {
+      workspaceSetting = {
+        type: VolumeTypes.NoWorkspace,
+        data: {},
+      };
+    }
 
-  return {
-    ...workspace,
-    ...workspaceSetting,
+    return {
+      ...workspace,
+      ...workspaceSetting,
+    };
   };
-};
 
 export const convertPipelineToModalData = (
   pipeline: PipelineKind,

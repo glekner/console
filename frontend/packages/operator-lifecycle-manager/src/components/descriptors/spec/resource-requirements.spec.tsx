@@ -52,18 +52,8 @@ describe(ResourceRequirementsModal.name, () => {
 
   it('renders a modal form with given title and description', () => {
     expect(wrapper.find('form').exists()).toBe(true);
-    expect(
-      wrapper
-        .find(modal.ModalTitle)
-        .childAt(0)
-        .text(),
-    ).toEqual(title);
-    expect(
-      wrapper
-        .find(modal.ModalBody)
-        .childAt(0)
-        .text(),
-    ).toContain(description);
+    expect(wrapper.find(modal.ModalTitle).childAt(0).text()).toEqual(title);
+    expect(wrapper.find(modal.ModalBody).childAt(0).text()).toContain(description);
     expect(wrapper.find(modal.ModalSubmitFooter).props().submitText).toEqual('public~Save');
   });
 
@@ -114,34 +104,25 @@ describe(ResourceRequirementsModalLink.displayName, () => {
     const { memory, cpu, 'ephemeral-storage': storage } = obj.spec.resources.limits;
     wrapper = wrapper.setProps({ type: 'requests' });
 
-    expect(
-      wrapper
-        .find(Button)
-        .render()
-        .text(),
-    ).toEqual(`CPU: ${cpu}, Memory: ${memory}, Storage: ${storage}`);
+    expect(wrapper.find(Button).render().text()).toEqual(
+      `CPU: ${cpu}, Memory: ${memory}, Storage: ${storage}`,
+    );
   });
 
   it('renders a button link with the resource limits', () => {
     const { memory, cpu, 'ephemeral-storage': storage } = obj.spec.resources.requests;
-    expect(
-      wrapper
-        .find(Button)
-        .render()
-        .text(),
-    ).toEqual(`CPU: ${cpu}, Memory: ${memory}, Storage: ${storage}`);
+    expect(wrapper.find(Button).render().text()).toEqual(
+      `CPU: ${cpu}, Memory: ${memory}, Storage: ${storage}`,
+    );
   });
 
   it('renders default values if undefined', () => {
     obj.spec.resources = undefined;
     wrapper.setProps({ obj });
 
-    expect(
-      wrapper
-        .find(Button)
-        .render()
-        .text(),
-    ).toEqual('CPU: public~None, Memory: public~None, Storage: public~None');
+    expect(wrapper.find(Button).render().text()).toEqual(
+      'CPU: public~None, Memory: public~None, Storage: public~None',
+    );
   });
 
   it('opens resource requirements modal when clicked', (done) => {

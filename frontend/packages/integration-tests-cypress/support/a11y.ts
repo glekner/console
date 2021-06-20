@@ -4,6 +4,7 @@ import { Result } from 'axe-core';
 
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       logA11yViolations(violations: Result[], target: string): Chainable<Element>;
       testA11y(target: string, selector?: string): Chainable<Element>;

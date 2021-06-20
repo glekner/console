@@ -5,14 +5,9 @@ export const helmPage = {
   verifyMessage: () =>
     cy.get(helmPO.noHelmReleasesMessage).should('contain.text', messages.helm.noHelmReleasesFound),
   verifyInstallHelmLink: () =>
-    cy
-      .get('a')
-      .contains('Install a Helm Chart from the developer catalog')
-      .should('be.visible'),
+    cy.get('a').contains('Install a Helm Chart from the developer catalog').should('be.visible'),
   search: (name: string) => {
-    cy.get(helmPO.search)
-      .clear()
-      .type(name);
+    cy.get(helmPO.search).clear().type(name);
   },
   verifyHelmReleasesDisplayed: () => cy.get(helmPO.table).should('be.visible'),
   clickHelmReleaseName: (name: string) => cy.get(`a[title="${name}"]`).click(),
@@ -50,10 +45,7 @@ export const helmPage = {
     cy.get('tr td:nth-child(1)').each(($el, index) => {
       const text = $el.text();
       if (text.includes(helmReleaseName)) {
-        cy.get('tbody tr')
-          .eq(index)
-          .find('td:nth-child(4) button')
-          .click();
+        cy.get('tbody tr').eq(index).find('td:nth-child(4) button').click();
       }
     });
   },
@@ -90,33 +82,21 @@ export const helmPage = {
     helmPage.selectHelmFilterDropDown();
     switch (filterName) {
       case 'Deployed': {
-        cy.get(helmPO.deployedCheckbox)
-          .uncheck()
-          .should('not.be.checked');
+        cy.get(helmPO.deployedCheckbox).uncheck().should('not.be.checked');
         break;
       }
       case 'Failed': {
-        cy.get(helmPO.failedCheckbox)
-          .uncheck()
-          .should('not.be.checked');
+        cy.get(helmPO.failedCheckbox).uncheck().should('not.be.checked');
         break;
       }
       case 'Other': {
-        cy.get(helmPO.failedCheckbox)
-          .uncheck()
-          .should('not.be.checked');
+        cy.get(helmPO.failedCheckbox).uncheck().should('not.be.checked');
         break;
       }
       case 'All': {
-        cy.get(helmPO.deployedCheckbox)
-          .uncheck()
-          .should('not.be.checked');
-        cy.get(helmPO.failedCheckbox)
-          .uncheck()
-          .should('not.be.checked');
-        cy.get(helmPO.otherCheckbox)
-          .uncheck()
-          .should('not.be.checked');
+        cy.get(helmPO.deployedCheckbox).uncheck().should('not.be.checked');
+        cy.get(helmPO.failedCheckbox).uncheck().should('not.be.checked');
+        cy.get(helmPO.otherCheckbox).uncheck().should('not.be.checked');
         break;
       }
       default: {
@@ -155,9 +135,7 @@ export const helmPage = {
     // eslint-disable-next-line promise/catch-or-return
     cy.get(helmPO.filterToolBar).then((body) => {
       if (body.find(helmPO.clearAllFilter).length >= 0) {
-        cy.get(helmPO.clearAllFilter)
-          .eq(1)
-          .click();
+        cy.get(helmPO.clearAllFilter).eq(1).click();
       }
     });
   },

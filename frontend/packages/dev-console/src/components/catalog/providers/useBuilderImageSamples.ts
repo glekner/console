@@ -26,7 +26,7 @@ const normalizeBuilderImages = (
     const icon = getImageStreamIcon(tag);
     const imgUrl = getImageForIconClass(icon);
     const iconClass = imgUrl ? null : icon;
-    const description = tag?.['annotations']?.['description'] ?? '';
+    const description = tag?.annotations?.description ?? '';
     const provider = annotations?.[ANNOTATIONS.providerDisplayName] ?? '';
     const creationTimestamp = imageStream.metadata?.creationTimestamp;
     const href = `/samples/ns/${activeNamespace}/${name}/${imageStreamNS}`;
@@ -63,13 +63,13 @@ const useBuilderImageSamples: ExtensionHook<CatalogItem[]> = ({ namespace }) => 
     prop: 'imageStreams',
   };
   const { t } = useTranslation();
-  const [imageStreams, loaded, loadedError] = useK8sWatchResource<K8sResourceKind[]>(
-    resourceSelector,
-  );
+  const [imageStreams, loaded, loadedError] =
+    useK8sWatchResource<K8sResourceKind[]>(resourceSelector);
 
-  const builderImageStreams = React.useMemo(() => _.filter(imageStreams, isBuilder), [
-    imageStreams,
-  ]);
+  const builderImageStreams = React.useMemo(
+    () => _.filter(imageStreams, isBuilder),
+    [imageStreams],
+  );
 
   const normalizedBuilderImages = React.useMemo(
     () => normalizeBuilderImages(builderImageStreams, namespace, t),

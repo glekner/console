@@ -174,8 +174,9 @@ export function getValidCapabilitiesForDataType<CapabilityType extends string = 
     deprecated.forEach((deprecatedCapability) => {
       // eslint-disable-next-line no-console
       console.warn(
-        `[Deprecated x-descriptor] "${deprecatedCapability}" is no longer supported ${!allowDeprecated &&
-          'and will have no effect'}`,
+        `[Deprecated x-descriptor] "${deprecatedCapability}" is no longer supported ${
+          !allowDeprecated && 'and will have no effect'
+        }`,
         descriptor,
       );
     });

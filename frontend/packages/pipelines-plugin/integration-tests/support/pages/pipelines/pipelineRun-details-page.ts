@@ -57,15 +57,9 @@ export const pipelineRunDetailsPage = {
       cy.get(pipelineDetailsPO.details.fieldNames.owner).should('be.visible');
     });
     cy.get('.odc-pipeline-run-details__customDetails').within(() => {
-      cy.get('dl dt')
-        .eq(0)
-        .should('have.text', 'Status');
-      cy.get('dl dt')
-        .eq(1)
-        .should('have.text', 'Pipeline');
-      cy.get('dl dt')
-        .eq(2)
-        .should('have.text', 'Triggered by:');
+      cy.get('dl dt').eq(0).should('have.text', 'Status');
+      cy.get('dl dt').eq(1).should('have.text', 'Pipeline');
+      cy.get('dl dt').eq(2).should('have.text', 'Triggered by:');
     });
   },
   selectPipeline: () => cy.get(pipelineRunDetailsPO.details.pipelineLink).click(),
@@ -104,9 +98,7 @@ export const pipelineRunDetailsPage = {
     }
   },
   verifyWorkspacesSection: () => {
-    cy.get(pipelineRunDetailsPO.details.workspacesSection)
-      .scrollIntoView()
-      .should('be.visible');
+    cy.get(pipelineRunDetailsPO.details.workspacesSection).scrollIntoView().should('be.visible');
   },
 };
 
@@ -118,19 +110,14 @@ export const pipelineRunsPage = {
     cy.get(pipelineRunsPO.pipelineRunsTable.pipelineRunName).each(($el, index) => {
       const text = $el.text();
       if (text.includes(pipelineRunName)) {
-        cy.get('tbody tr')
-          .eq(index)
-          .find('td:nth-child(6) button')
-          .click();
+        cy.get('tbody tr').eq(index).find('td:nth-child(6) button').click();
       }
     });
   },
   verifyPipelineRunsTableDisplay: () =>
     cy.get(pipelineRunsPO.pipelineRunsTable.table).should('be.visible'),
   filterByStatus: (status: string = 'Succeeded') => {
-    cy.byLegacyTestID('filter-dropdown-toggle')
-      .find('button')
-      .click();
+    cy.byLegacyTestID('filter-dropdown-toggle').find('button').click();
     switch (status) {
       case 'Succeeded': {
         cy.get('#Succeeded').click();
@@ -152,9 +139,7 @@ export const pipelineRunsPage = {
         throw new Error('operator is not available');
       }
     }
-    cy.byLegacyTestID('filter-dropdown-toggle')
-      .find('button')
-      .click();
+    cy.byLegacyTestID('filter-dropdown-toggle').find('button').click();
   },
   verifyStatusInPipelineRunsTable: (status: string) => {
     cy.get(pipelineRunsPO.pipelineRunsTable.status).should('have.text', status);

@@ -46,9 +46,8 @@ const EditApplicationPage: React.FunctionComponent<EditApplicationPageProps> = (
     [kind, appName, namespace],
   );
 
-  const [editResData, isEditResDataLoaded, editResDataLoadError] = useK8sWatchResource<
-    K8sResourceKind
-  >(watchedEditResource);
+  const [editResData, isEditResDataLoaded, editResDataLoadError] =
+    useK8sWatchResource<K8sResourceKind>(watchedEditResource);
 
   const watchedResources = React.useMemo(() => {
     const NAME_LABEL = 'app.kubernetes.io/name';
@@ -107,9 +106,8 @@ const EditApplicationPage: React.FunctionComponent<EditApplicationPageProps> = (
     };
   }, [namespace, appName, editResData, isEditResDataLoaded, editResDataLoadError]);
 
-  const resources: WatchK8sResults<WatchResource> = useK8sWatchResources<WatchResource>(
-    watchedResources,
-  );
+  const resources: WatchK8sResults<WatchResource> =
+    useK8sWatchResources<WatchResource>(watchedResources);
 
   const isResourcesLoaded =
     Object.keys(resources).length > 0 &&

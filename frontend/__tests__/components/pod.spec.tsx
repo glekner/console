@@ -60,12 +60,7 @@ describe('ContainerRow', () => {
   });
 
   it('renders the container link', () => {
-    expect(
-      wrapper
-        .find('ContainerLink')
-        .find({ name: 'hello-openshift' })
-        .exists(),
-    ).toBe(true);
+    expect(wrapper.find('ContainerLink').find({ name: 'hello-openshift' }).exists()).toBe(true);
   });
 
   it('renders the container image', () => {
@@ -73,12 +68,7 @@ describe('ContainerRow', () => {
   });
 
   it('renders the container state', () => {
-    expect(
-      wrapper
-        .childAt(2)
-        .find({ status: 'Running' })
-        .exists(),
-    ).toBe(true);
+    expect(wrapper.childAt(2).find({ status: 'Running' }).exists()).toBe(true);
   });
 
   it('renders the container restart times', () => {
@@ -86,21 +76,11 @@ describe('ContainerRow', () => {
   });
 
   it('renders the container started time', () => {
-    expect(
-      wrapper
-        .childAt(4)
-        .find({ timestamp: { startTime } })
-        .exists(),
-    ).toBe(true);
+    expect(wrapper.childAt(4).find({ timestamp: { startTime } }).exists()).toBe(true);
   });
 
   it('renders the container finished time', () => {
-    expect(
-      wrapper
-        .childAt(5)
-        .find({ timestamp: { finishTime } })
-        .exists(),
-    ).toBe(true);
+    expect(wrapper.childAt(5).find({ timestamp: { finishTime } }).exists()).toBe(true);
   });
 
   it('renders the container exit code', () => {

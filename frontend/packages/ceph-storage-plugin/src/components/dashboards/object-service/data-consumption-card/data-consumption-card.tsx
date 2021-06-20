@@ -48,9 +48,8 @@ const DataConsumptionCard: React.FC = () => {
   const [metric, setMetric] = React.useState(Metrics.IOPS);
   const [serviceType, setServiceType] = React.useState(ServiceType.MCG);
   const RGW = useFlag(RGW_FLAG);
-  const [csvList, csvLoaded, csvLoadError] = useK8sWatchResource<ClusterServiceVersionKind[]>(
-    csvResource,
-  );
+  const [csvList, csvLoaded, csvLoadError] =
+    useK8sWatchResource<ClusterServiceVersionKind[]>(csvResource);
   const isOCS45 =
     csvLoaded &&
     !csvLoadError &&

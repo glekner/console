@@ -15,6 +15,7 @@ import {
 
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       install(encrypted?: boolean): Chainable<Element>;
     }

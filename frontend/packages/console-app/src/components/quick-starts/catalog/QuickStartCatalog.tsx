@@ -32,12 +32,13 @@ type QuickStartCatalogProps = {
 
 const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) => {
   const { t } = useTranslation();
-  const { activeQuickStartID, allQuickStartStates, setActiveQuickStart } = React.useContext<
-    QuickStartContextValues
-  >(QuickStartContext);
+  const { activeQuickStartID, allQuickStartStates, setActiveQuickStart } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   const queryParams = useQueryParams();
   const searchQuery = queryParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
-  const statusFilters = queryParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
+  const statusFilters = React.useMemo(() => {
+    return queryParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
+  }, [queryParams]);
 
   const clearFilters = () => {
     removeQueryArgument(QUICKSTART_SEARCH_FILTER_KEY);
@@ -46,12 +47,9 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
 
   const filteredQuickStarts = React.useMemo(
     () =>
-      filterQuickStarts(
-        quickStarts,
-        searchQuery,
-        statusFilters,
-        allQuickStartStates,
-      ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
+      filterQuickStarts(quickStarts, searchQuery, statusFilters, allQuickStartStates).sort(
+        (q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName),
+      ),
     [quickStarts, searchQuery, statusFilters, allQuickStartStates],
   );
 

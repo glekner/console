@@ -71,9 +71,8 @@ const useAllEventListeners = (namespace: string) => {
     }),
     [namespace],
   );
-  const [resources, eventListenerLoaded, error] = useK8sWatchResource<EventListenerKind[]>(
-    eventListenerResource,
-  );
+  const [resources, eventListenerLoaded, error] =
+    useK8sWatchResource<EventListenerKind[]>(eventListenerResource);
 
   return eventListenerLoaded && !error ? resources : null;
 };
@@ -108,14 +107,12 @@ export const usePipelineTriggerTemplateNames = (
         {},
       );
   }, [eventListenerResources, namespace]);
-  const triggerTemplates: WatchK8sResults<TriggerTemplateMapping> = useK8sWatchResources(
-    triggerTemplateResources,
-  );
+  const triggerTemplates: WatchK8sResults<TriggerTemplateMapping> =
+    useK8sWatchResources(triggerTemplateResources);
   const routes: RouteMap = useEventListenerRoutes(namespace, eventListenerResources);
 
-  const triggerTemplateResults: WatchK8sResultsObject<TriggerTemplateKind>[] = Object.values(
-    triggerTemplates,
-  );
+  const triggerTemplateResults: WatchK8sResultsObject<TriggerTemplateKind>[] =
+    Object.values(triggerTemplates);
   const countExpected = Object.keys(triggerTemplateResources).length;
   const countLoaded = triggerTemplateResults.filter(({ loaded }) => loaded).length;
   const countErrored = triggerTemplateResults.filter(({ loadError }) => !!loadError).length;

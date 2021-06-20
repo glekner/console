@@ -149,10 +149,10 @@ const CatalogView: React.FC<CatalogViewProps> = ({
     return [allCategory, ...(categories ?? []), otherCategory];
   }, [categories, t]);
 
-  const categorizedIds = React.useMemo(() => categorize(items, catalogCategories), [
-    catalogCategories,
-    items,
-  ]);
+  const categorizedIds = React.useMemo(
+    () => categorize(items, catalogCategories),
+    [catalogCategories, items],
+  );
 
   const activeCategory = React.useMemo(
     () =>

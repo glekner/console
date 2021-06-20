@@ -70,9 +70,10 @@ const KnativeServiceGroup: React.FC<KnativeServiceGroupProps> = ({
   const { t } = useTranslation();
   const [hover, hoverRef] = useHover();
   const [innerHover, innerHoverRef] = useHover();
-  const dragSpec = React.useMemo(() => nodeDragSourceSpec(TYPE_KNATIVE_SERVICE, true, editAccess), [
-    editAccess,
-  ]);
+  const dragSpec = React.useMemo(
+    () => nodeDragSourceSpec(TYPE_KNATIVE_SERVICE, true, editAccess),
+    [editAccess],
+  );
   const dragProps = React.useMemo(() => ({ element }), [element]);
   const [{ dragging, regrouping }, dragNodeRef] = useDragNode(dragSpec, dragProps);
   const [{ dragging: labelDragging, regrouping: labelRegrouping }, dragLabelRef] = useDragNode(

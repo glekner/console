@@ -63,12 +63,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () =>
   });
 
   it('renders YAML editor by default', () => {
-    expect(
-      wrapper
-        .find(Button)
-        .childAt(0)
-        .text(),
-    ).toEqual('Edit Form');
+    expect(wrapper.find(Button).childAt(0).text()).toEqual('Edit Form');
     expect(wrapper.find(OperandYAML).exists()).toBe(true);
     expect(wrapper.find(OperandForm).exists()).toBe(false);
   });
@@ -85,12 +80,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () =>
   it('switches to form component when button is clicked', () => {
     wrapper.find(Button).simulate('click');
 
-    expect(
-      wrapper
-        .find(Button)
-        .childAt(0)
-        .text(),
-    ).toEqual('Edit YAML');
+    expect(wrapper.find(Button).childAt(0).text()).toEqual('Edit YAML');
     expect(wrapper.find(OperandYAML).exists()).toBe(false);
     expect(wrapper.find(OperandForm).exists()).toBe(true);
   });
@@ -159,9 +149,10 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2136] CreateOperandForm', (
 
   it('renders input component for each field', () => {
     wrapper.find('.co-dynamic-form__form-group').forEach((formGroup) => {
-      const descriptor = testClusterServiceVersion.spec.customresourcedefinitions.owned[0].specDescriptors.find(
-        (d) => d.displayName === formGroup.find('.form-label').text(),
-      );
+      const descriptor =
+        testClusterServiceVersion.spec.customresourcedefinitions.owned[0].specDescriptors.find(
+          (d) => d.displayName === formGroup.find('.form-label').text(),
+        );
 
       expect(descriptor).toBeDefined();
     });
@@ -193,16 +184,9 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2136] CreateOperandForm', (
     const error = { message: 'Failed to create' } as k8s.Status;
     /* eslint-disable-next-line prefer-promise-reject-errors */
     spyAndExpect(spyOn(k8s, 'k8sCreate'))(Promise.reject({ json: error }))
-      .then(
-        () => new Promise<void>((resolve) => setTimeout(() => resolve(), 10)),
-      )
+      .then(() => new Promise<void>((resolve) => setTimeout(() => resolve(), 10)))
       .then(() => {
-        expect(
-          wrapper
-            .find(Alert)
-            .at(0)
-            .props().title,
-        ).toEqual(error.message);
+        expect(wrapper.find(Alert).at(0).props().title).toEqual(error.message);
         done();
       })
       .catch((err) => fail(err));

@@ -19,9 +19,8 @@ export const useAddActionsAccessReviews = (
   namespace: string,
   addActionExtensions: ResolvedExtension<AddAction>[],
 ): AddAccessReviewResults => {
-  const [namespacedAccessReviewResults, setNamespacedAccessReviewResults] = React.useState<
-    NamespacedAddAccessReviewResults
-  >({});
+  const [namespacedAccessReviewResults, setNamespacedAccessReviewResults] =
+    React.useState<NamespacedAddAccessReviewResults>({});
   const setAccessReviewResults = React.useCallback(
     (newResults: AddAccessReviewResults) => {
       setNamespacedAccessReviewResults((oldResults) => ({

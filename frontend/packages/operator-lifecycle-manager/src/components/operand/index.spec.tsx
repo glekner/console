@@ -196,10 +196,7 @@ describe(OperandDetails.displayName, () => {
   });
 
   it('renders description title', () => {
-    const title = wrapper
-      .find('SectionHeading')
-      .first()
-      .prop('text');
+    const title = wrapper.find('SectionHeading').first().prop('text');
     expect(title).toEqual('olm~{{kind}} overview');
   });
 
@@ -231,11 +228,7 @@ describe(OperandDetails.displayName, () => {
 
   xit('[CONSOLE-2336] renders spec descriptor fields if the custom resource is `owned`', () => {
     expect(
-      wrapper
-        .find(DescriptorDetailsItemList)
-        .last()
-        .shallow()
-        .find(DescriptorDetailsItem).length,
+      wrapper.find(DescriptorDetailsItemList).last().shallow().find(DescriptorDetailsItem).length,
     ).toEqual(
       testClusterServiceVersion.spec.customresourcedefinitions.owned[0].specDescriptors.length,
     );
@@ -250,21 +243,12 @@ describe(OperandDetails.displayName, () => {
     wrapper = wrapper.setProps({ csv });
 
     expect(
-      wrapper
-        .find(DescriptorDetailsItemList)
-        .last()
-        .shallow()
-        .find(DescriptorDetailsItem).length,
+      wrapper.find(DescriptorDetailsItemList).last().shallow().find(DescriptorDetailsItem).length,
     ).toEqual(csv.spec.customresourcedefinitions.required[0].specDescriptors.length);
   });
 
   it('renders a Condtions table', () => {
-    expect(
-      wrapper
-        .find('SectionHeading')
-        .at(1)
-        .prop('text'),
-    ).toEqual('public~Conditions');
+    expect(wrapper.find('SectionHeading').at(1).prop('text')).toEqual('public~Conditions');
 
     expect(wrapper.find('Conditions').prop('conditions')).toEqual(
       testResourceInstance.status.conditions,
@@ -366,26 +350,17 @@ describe(OperandDetailsPage.displayName, () => {
 
   it('menu actions to `DetailsPage`', () => {
     expect(
-      wrapper
-        .find(DetailsPage)
-        .props()
-        .menuActions[0](testModel, testOwnedResourceInstance).labelKey,
+      wrapper.find(DetailsPage).props().menuActions[0](testModel, testOwnedResourceInstance)
+        .labelKey,
     ).toEqual('olm~Edit {{item}}');
     expect(
-      wrapper
-        .find(DetailsPage)
-        .props()
-        .menuActions[1](testModel, testOwnedResourceInstance).labelKey,
+      wrapper.find(DetailsPage).props().menuActions[1](testModel, testOwnedResourceInstance)
+        .labelKey,
     ).toEqual('olm~Delete {{item}}');
   });
 
   it('passes function to create breadcrumbs for resource to `DetailsPage`', () => {
-    expect(
-      wrapper
-        .find(DetailsPage)
-        .props()
-        .breadcrumbsFor(null),
-    ).toEqual([
+    expect(wrapper.find(DetailsPage).props().breadcrumbsFor(null)).toEqual([
       {
         name: 'olm~Installed Operators',
         path: `/k8s/ns/default/${ClusterServiceVersionModel.plural}`,
@@ -409,12 +384,7 @@ describe(OperandDetailsPage.displayName, () => {
     match.url = `/k8s/ns/${ClusterServiceVersionModel.plural}/example/example/example`;
     wrapper.setProps({ match });
 
-    expect(
-      wrapper
-        .find(DetailsPage)
-        .props()
-        .breadcrumbsFor(null),
-    ).toEqual([
+    expect(wrapper.find(DetailsPage).props().breadcrumbsFor(null)).toEqual([
       {
         name: 'olm~Installed Operators',
         path: `/k8s/ns/example/${ClusterServiceVersionModel.plural}`,

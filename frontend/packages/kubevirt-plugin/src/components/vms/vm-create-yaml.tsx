@@ -35,9 +35,8 @@ const VMCreateYAMLLConnected = connectToPlural(
         },
       })
         .then(async (templates) => {
-          const { osSelection, template: commonTemplate } = OSSelection.findSuitableOSAndTemplate(
-            templates,
-          );
+          const { osSelection, template: commonTemplate } =
+            OSSelection.findSuitableOSAndTemplate(templates);
 
           if (!commonTemplate) {
             throw new Error('no matching template');

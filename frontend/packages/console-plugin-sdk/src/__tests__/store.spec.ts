@@ -289,11 +289,8 @@ describe('PluginStore', () => {
         },
       ]);
 
-      const {
-        staticPluginExtensions,
-        dynamicPluginExtensions,
-        dynamicPlugins,
-      } = store.getStateForTestPurposes();
+      const { staticPluginExtensions, dynamicPluginExtensions, dynamicPlugins } =
+        store.getStateForTestPurposes();
 
       expect(staticPluginExtensions).toEqual([
         {
@@ -502,11 +499,8 @@ describe('PluginStore', () => {
 
       store.addDynamicPlugin('Test@1.2.3', manifest, resolvedExtensions);
 
-      const {
-        staticPluginExtensions,
-        dynamicPluginExtensions,
-        dynamicPlugins,
-      } = store.getStateForTestPurposes();
+      const { staticPluginExtensions, dynamicPluginExtensions, dynamicPlugins } =
+        store.getStateForTestPurposes();
 
       expect(staticPluginExtensions).toEqual([]);
       expect(dynamicPluginExtensions).toEqual([]);
@@ -536,10 +530,8 @@ describe('PluginStore', () => {
         enabled: false,
       });
 
-      const {
-        manifest: testedManifest,
-        processedExtensions: testedProcessedExtensions,
-      } = dynamicPlugins.get('Test@1.2.3');
+      const { manifest: testedManifest, processedExtensions: testedProcessedExtensions } =
+        dynamicPlugins.get('Test@1.2.3');
 
       expect(Object.isFrozen(testedManifest)).toBe(true);
 

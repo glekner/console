@@ -31,19 +31,12 @@ const ChannelForm: React.FC<FormikProps<FormikValues> & OwnProps> = ({
   namespace,
   channels,
 }) => {
-  const {
-    values,
-    setFieldValue,
-    setFieldTouched,
-    validateForm,
-    setErrors,
-    setStatus,
-  } = useFormikContext<FormikValues>();
+  const { values, setFieldValue, setFieldTouched, validateForm, setErrors, setStatus } =
+    useFormikContext<FormikValues>();
   const { t } = useTranslation();
   useFormikValidationFix(values);
-  const [defaultConfiguredChannel, defaultConfiguredChannelLoaded] = useDefaultChannelConfiguration(
-    namespace,
-  );
+  const [defaultConfiguredChannel, defaultConfiguredChannelLoaded] =
+    useDefaultChannelConfiguration(namespace);
   const channelHasFormView = values.type && isDefaultChannel(getChannelKind(values.type));
   const channelKind = getChannelKind(values.type);
   const onTypeChange = React.useCallback(

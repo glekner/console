@@ -65,9 +65,8 @@ export const AffinityModal = withHandlePromise<AffinityModalProps>(
     const [affinities, setAffinities] = React.useState<AffinityRowData[]>(
       getRowsDataFromAffinity(currentAffinity),
     );
-    const [focusedAffinity, setFocusedAffinity] = React.useState<AffinityRowData>(
-      defaultNewAffinity,
-    );
+    const [focusedAffinity, setFocusedAffinity] =
+      React.useState<AffinityRowData>(defaultNewAffinity);
 
     const [isEditing, setIsEditing] = React.useState(false);
     const [isCreating, setIsCreating] = React.useState(false);

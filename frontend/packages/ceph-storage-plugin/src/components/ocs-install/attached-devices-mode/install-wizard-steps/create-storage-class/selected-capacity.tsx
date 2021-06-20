@@ -90,9 +90,8 @@ export const SelectedCapacity: React.FC<SelectedCapacityProps> = ({ ns, state, d
   };
 
   const { t } = useTranslation();
-  const [lvdResults, lvdResultsLoaded, lvdResultsLoadError] = useK8sWatchResource<
-    LocalVolumeDiscoveryResultKind[]
-  >(lvdResultResource);
+  const [lvdResults, lvdResultsLoaded, lvdResultsLoadError] =
+    useK8sWatchResource<LocalVolumeDiscoveryResultKind[]>(lvdResultResource);
   const [showNodeList, setShowNodeList] = React.useState(false);
   const [showDiskList, setShowDiskList] = React.useState(false);
 

@@ -66,82 +66,79 @@ export const OperatorHubList: React.FC<OperatorHubListProps> = ({
           currentCSVDesc.annotations?.[OPERATOR_TYPE_ANNOTATION] === NON_STANDALONE_ANNOTATION_VALUE
         );
       })
-      .map(
-        (pkg): OperatorHubItem => {
-          const { channels, defaultChannel } = pkg.status ?? {};
-          const { currentCSVDesc } = (channels || []).find(({ name }) => name === defaultChannel);
-          const currentCSVAnnotations: OperatorHubCSVAnnotations =
-            currentCSVDesc?.annotations ?? {};
-          const [parsedInfraFeatures = [], validSubscription] = ANNOTATIONS_WITH_JSON.map(
-            (annotationKey) => {
-              return parseJSONAnnotation(currentCSVAnnotations, annotationKey, () =>
-                // eslint-disable-next-line no-console
-                console.warn(`Error parsing annotation in PackageManifest ${pkg.metadata.name}`),
-              );
-            },
-          );
-          const filteredInfraFeatures = _.uniq(
-            _.compact(_.map(parsedInfraFeatures, (key) => InfraFeatures[key])),
-          );
+      .map((pkg): OperatorHubItem => {
+        const { channels, defaultChannel } = pkg.status ?? {};
+        const { currentCSVDesc } = (channels || []).find(({ name }) => name === defaultChannel);
+        const currentCSVAnnotations: OperatorHubCSVAnnotations = currentCSVDesc?.annotations ?? {};
+        const [parsedInfraFeatures = [], validSubscription] = ANNOTATIONS_WITH_JSON.map(
+          (annotationKey) => {
+            return parseJSONAnnotation(currentCSVAnnotations, annotationKey, () =>
+              // eslint-disable-next-line no-console
+              console.warn(`Error parsing annotation in PackageManifest ${pkg.metadata.name}`),
+            );
+          },
+        );
+        const filteredInfraFeatures = _.uniq(
+          _.compact(_.map(parsedInfraFeatures, (key) => InfraFeatures[key])),
+        );
 
-          const {
-            certifiedLevel,
-            healthIndex,
-            repository,
-            containerImage,
-            createdAt,
-            support,
-            capabilities: capabilityLevel,
-            [OperatorHubCSVAnnotationKey.actionText]: marketplaceActionText,
-            [OperatorHubCSVAnnotationKey.remoteWorkflow]: marketplaceRemoteWorkflow,
-            [OperatorHubCSVAnnotationKey.supportWorkflow]: marketplaceSupportWorkflow,
-          } = currentCSVAnnotations;
+        const {
+          certifiedLevel,
+          healthIndex,
+          repository,
+          containerImage,
+          createdAt,
+          support,
+          capabilities: capabilityLevel,
+          [OperatorHubCSVAnnotationKey.actionText]: marketplaceActionText,
+          [OperatorHubCSVAnnotationKey.remoteWorkflow]: marketplaceRemoteWorkflow,
+          [OperatorHubCSVAnnotationKey.supportWorkflow]: marketplaceSupportWorkflow,
+        } = currentCSVAnnotations;
 
-          return {
-            obj: pkg,
-            kind: PackageManifestModel.kind,
-            name: currentCSVDesc?.displayName ?? pkg.metadata.name,
-            uid: `${pkg.metadata.name}-${pkg.status.catalogSource}-${pkg.status.catalogSourceNamespace}`,
-            installed: installedFor(subscription.data)(operatorGroup.data)(pkg.status.packageName)(
-              namespace,
-            ),
-            subscription: subscriptionFor(subscription.data)(operatorGroup.data)(
-              pkg.status.packageName,
-            )(namespace),
-            // FIXME: Just use `installed`
-            installState: installedFor(subscription.data)(operatorGroup.data)(
-              pkg.status.packageName,
-            )(namespace)
-              ? InstalledState.Installed
-              : InstalledState.NotInstalled,
-            imgUrl: iconFor(pkg),
-            description: currentCSVAnnotations.description || currentCSVDesc.description,
-            longDescription: currentCSVDesc.description || currentCSVAnnotations.description,
-            provider: pkg.status.provider?.name ?? pkg.metadata.labels?.provider,
-            tags: [],
-            version: currentCSVDesc?.version,
-            categories: (currentCSVAnnotations?.categories ?? '')
-              .split(',')
-              .map((category) => category.trim()),
-            catalogSource: pkg.status.catalogSource,
-            catalogSourceDisplayName: getCatalogSourceDisplayName(pkg),
-            catalogSourceNamespace: pkg.status.catalogSourceNamespace,
-            certifiedLevel,
-            healthIndex,
-            repository,
-            containerImage,
-            createdAt,
-            support,
-            capabilityLevel,
-            marketplaceActionText,
-            marketplaceRemoteWorkflow,
-            marketplaceSupportWorkflow,
-            validSubscription,
-            infraFeatures: filteredInfraFeatures,
-            keywords: currentCSVDesc?.keywords ?? [],
-          };
-        },
-      );
+        return {
+          obj: pkg,
+          kind: PackageManifestModel.kind,
+          name: currentCSVDesc?.displayName ?? pkg.metadata.name,
+          uid: `${pkg.metadata.name}-${pkg.status.catalogSource}-${pkg.status.catalogSourceNamespace}`,
+          installed: installedFor(subscription.data)(operatorGroup.data)(pkg.status.packageName)(
+            namespace,
+          ),
+          subscription: subscriptionFor(subscription.data)(operatorGroup.data)(
+            pkg.status.packageName,
+          )(namespace),
+          // FIXME: Just use `installed`
+          installState: installedFor(subscription.data)(operatorGroup.data)(pkg.status.packageName)(
+            namespace,
+          )
+            ? InstalledState.Installed
+            : InstalledState.NotInstalled,
+          imgUrl: iconFor(pkg),
+          description: currentCSVAnnotations.description || currentCSVDesc.description,
+          longDescription: currentCSVDesc.description || currentCSVAnnotations.description,
+          provider: pkg.status.provider?.name ?? pkg.metadata.labels?.provider,
+          tags: [],
+          version: currentCSVDesc?.version,
+          categories: (currentCSVAnnotations?.categories ?? '')
+            .split(',')
+            .map((category) => category.trim()),
+          catalogSource: pkg.status.catalogSource,
+          catalogSourceDisplayName: getCatalogSourceDisplayName(pkg),
+          catalogSourceNamespace: pkg.status.catalogSourceNamespace,
+          certifiedLevel,
+          healthIndex,
+          repository,
+          containerImage,
+          createdAt,
+          support,
+          capabilityLevel,
+          marketplaceActionText,
+          marketplaceRemoteWorkflow,
+          marketplaceSupportWorkflow,
+          validSubscription,
+          infraFeatures: filteredInfraFeatures,
+          keywords: currentCSVDesc?.keywords ?? [],
+        };
+      });
   }, [
     marketplacePackageManifest,
     namespace,

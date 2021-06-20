@@ -21,10 +21,12 @@ import {
 
 import { DataPoint } from '.';
 
-export const ChartLegendTooltipContent: React.FunctionComponent<ChartLegendTooltipContentProps & {
-  stack?: boolean;
-  mainDataName?: string;
-}> = ({
+export const ChartLegendTooltipContent: React.FunctionComponent<
+  ChartLegendTooltipContentProps & {
+    stack?: boolean;
+    mainDataName?: string;
+  }
+> = ({
   activePoints,
   center,
   dx = 0,
@@ -214,12 +216,14 @@ export const ChartLegendTooltipLabel: React.FunctionComponent<ChartLegendLabelPr
 };
 ChartLegendTooltipLabel.displayName = 'ChartLegendTooltipLabel';
 
-export const ChartLegendTooltip: React.FunctionComponent<Omit<ChartLegendTooltipProps, 'title'> & {
-  stack?: boolean;
-  formatDate: (data: DataPoint<Date>[]) => string;
-  getLabel?: (prop: { datum: DataPoint<Date> }) => string;
-  mainDataName: string;
-}> = ({
+export const ChartLegendTooltip: React.FunctionComponent<
+  Omit<ChartLegendTooltipProps, 'title'> & {
+    stack?: boolean;
+    formatDate: (data: DataPoint<Date>[]) => string;
+    getLabel?: (prop: { datum: DataPoint<Date> }) => string;
+    mainDataName: string;
+  }
+> = ({
   activePoints,
   datum,
   center = { x: 0, y: 0 },

@@ -115,10 +115,9 @@ interface TopologyProps {
   setVisualization: (vis: Visualization) => void;
 }
 
-const Topology: React.FC<TopologyProps &
-  StateProps &
-  DispatchProps &
-  WithUserSettingsCompatibilityProps<object>> = ({
+const Topology: React.FC<
+  TopologyProps & StateProps & DispatchProps & WithUserSettingsCompatibilityProps<object>
+> = ({
   model,
   application,
   namespace,

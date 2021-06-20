@@ -307,9 +307,7 @@ export const keywordCompare = (filterString, item) => {
 
   return (
     item.name.toLowerCase().includes(filterString) ||
-    _.get(item, 'obj.metadata.name', '')
-      .toLowerCase()
-      .includes(filterString) ||
+    _.get(item, 'obj.metadata.name', '').toLowerCase().includes(filterString) ||
     (item.description && item.description.toLowerCase().includes(filterString)) ||
     (item.tags && item.tags.includes(filterString)) ||
     keywords.includes(filterString)
@@ -331,10 +329,9 @@ const OperatorHubTile: React.FC<OperatorHubTileProps> = ({ item, onClick }) => {
 
   const { uid, name, imgUrl, provider, description, installed } = item;
   const vendor = provider ? t('olm~provided by {{provider}}', { provider }) : null;
-  const badges = ([
-    DefaultCatalogSource.CommunityOperators,
-    DefaultCatalogSource.RedHatMarketPlace,
-  ] as string[]).includes(item.catalogSource)
+  const badges = (
+    [DefaultCatalogSource.CommunityOperators, DefaultCatalogSource.RedHatMarketPlace] as string[]
+  ).includes(item.catalogSource)
     ? [<Badge text={item.catalogSourceDisplayName} />]
     : [];
   const icon = (
@@ -371,9 +368,8 @@ export const OperatorHubTileView: React.FC<OperatorHubTileViewProps> = (props) =
   const { t } = useTranslation();
   const [detailsItem, setDetailsItem] = React.useState(null);
   const [showDetails, setShowDetails] = React.useState(false);
-  const [ignoreOperatorWarning, setIgnoreOperatorWarning, loaded] = useUserSettingsCompatibility<
-    boolean
-  >(userSettingsKey, storeKey, false);
+  const [ignoreOperatorWarning, setIgnoreOperatorWarning, loaded] =
+    useUserSettingsCompatibility<boolean>(userSettingsKey, storeKey, false);
 
   const filteredItems = filterByArchAndOS(props.items);
 
@@ -384,17 +380,19 @@ export const OperatorHubTileView: React.FC<OperatorHubTileViewProps> = (props) =
     setShowDetails(!_.isNil(currentItem));
   }, [filteredItems]);
 
-  const showCommunityOperator = (item: OperatorHubItem) => (ignoreWarning = false) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set('details-item', item.uid);
-    setURLParams(params);
-    setDetailsItem(item);
-    setShowDetails(true);
+  const showCommunityOperator =
+    (item: OperatorHubItem) =>
+    (ignoreWarning = false) => {
+      const params = new URLSearchParams(window.location.search);
+      params.set('details-item', item.uid);
+      setURLParams(params);
+      setDetailsItem(item);
+      setShowDetails(true);
 
-    if (loaded && ignoreWarning) {
-      setIgnoreOperatorWarning(true);
-    }
-  };
+      if (loaded && ignoreWarning) {
+        setIgnoreOperatorWarning(true);
+      }
+    };
 
   const closeOverlay = () => {
     const params = new URLSearchParams(window.location.search);

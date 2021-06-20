@@ -49,9 +49,8 @@ const SinkUri: React.FC = () => {
 const SinkResources: React.FC<SinkResourcesProps> = ({ namespace, isMoveSink }) => {
   const { t } = useTranslation();
   const [resourceAlert, setResourceAlert] = React.useState(false);
-  const { setFieldValue, setFieldTouched, validateForm, initialValues } = useFormikContext<
-    FormikValues
-  >();
+  const { setFieldValue, setFieldTouched, validateForm, initialValues } =
+    useFormikContext<FormikValues>();
   const [, { touched: sinkTypeTouched }] = useField('formData.sinkType');
   const autocompleteFilter = (strText, item): boolean => fuzzy(strText, item?.props?.name);
   const fieldId = getFieldId('sink-name', 'dropdown');

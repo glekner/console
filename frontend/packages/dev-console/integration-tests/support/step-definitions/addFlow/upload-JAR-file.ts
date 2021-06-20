@@ -44,15 +44,10 @@ Then('Application Name, Name fields displayed in General section', () => {
 });
 
 Then('Resources section, Advanced options sections are displayed', () => {
-  cy.get(gitPO.sectionTitle)
-    .contains('Resources')
-    .should('be.visible');
+  cy.get(gitPO.sectionTitle).contains('Resources').should('be.visible');
   cy.get(gitPO.resources.deployment).should('be.enabled');
   cy.get(gitPO.resources.deploymentConfig).should('be.enabled');
-  cy.get(gitPO.sectionTitle)
-    .contains('Advanced options')
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(gitPO.sectionTitle).contains('Advanced options').scrollIntoView().should('be.visible');
 });
 
 Given('user is at Upload JAR file form', () => {

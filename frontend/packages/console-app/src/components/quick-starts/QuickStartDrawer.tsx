@@ -8,9 +8,8 @@ import { QuickStartStatus } from './utils/quick-start-types';
 import './QuickStartDrawer.scss';
 
 const QuickStartDrawer: React.FC = ({ children }) => {
-  const { activeQuickStartID, activeQuickStartState, setActiveQuickStart } = React.useContext<
-    QuickStartContextValues
-  >(QuickStartContext);
+  const { activeQuickStartID, activeQuickStartState, setActiveQuickStart } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const activeQuickStartStatus = activeQuickStartState?.status;
   const onClose = () => setActiveQuickStart('');

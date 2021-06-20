@@ -3,6 +3,7 @@ import { masthead } from '../views/masthead';
 
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       login(providerName?: string, username?: string, password?: string): Chainable<Element>;
       logout(): Chainable<Element>;
@@ -32,9 +33,7 @@ Cypress.Commands.add('login', (provider: string, username: string, password: str
     const idp = provider || KUBEADMIN_IDP;
     cy.task('log', `  Logging in as ${username || KUBEADMIN_USERNAME}`);
     cy.byLegacyTestID('login').should('be.visible');
-    cy.contains(idp)
-      .should('be.visible')
-      .click();
+    cy.contains(idp).should('be.visible').click();
     cy.get('#inputUsername').type(username || KUBEADMIN_USERNAME);
     cy.get('#inputPassword').type(password || Cypress.env('BRIDGE_KUBEADMIN_PASSWORD'));
     cy.get(submitButton).click();

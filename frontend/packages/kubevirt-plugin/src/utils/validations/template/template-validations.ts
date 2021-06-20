@@ -67,9 +67,9 @@ export class TemplateValidations {
 
   getRecommendedBuses = (diskType: DiskType): Set<DiskBus> => {
     const allowedBuses = this.getAllowedBuses(diskType);
-    const recommendedBuses = [
-      ...this.getAllowedBuses(diskType, ValidationErrorType.Warn),
-    ].filter((b) => allowedBuses.has(b));
+    const recommendedBuses = [...this.getAllowedBuses(diskType, ValidationErrorType.Warn)].filter(
+      (b) => allowedBuses.has(b),
+    );
     return recommendedBuses.length === 0 ? allowedBuses : new Set(recommendedBuses);
   };
 

@@ -558,9 +558,8 @@ export const UploadPVCPage: React.FC<UploadPVCPageProps> = (props) => {
   const [error, setError] = React.useState<string>('');
   const [isAllocating, setIsAllocating] = React.useState(false);
   const [dvObj, setDvObj] = React.useState<V1alpha1DataVolume>(null);
-  const [commonTemplates, loadedTemplates, errorTemplates] = useK8sWatchResource<TemplateKind[]>(
-    templatesResource,
-  );
+  const [commonTemplates, loadedTemplates, errorTemplates] =
+    useK8sWatchResource<TemplateKind[]>(templatesResource);
 
   const goldenNamespacesResources = React.useMemo(() => {
     const goldenNamespaces = [

@@ -6,12 +6,8 @@ export default ({ vmName }) =>
         .then((link) => cy.visit(link.attr('href')));
       cy.byLegacyTestID('item-create').click();
       cy.byLegacyTestID('vm-wizard').click();
-      cy.get('.kv-select-template__tile')
-        .eq(1)
-        .click();
-      cy.byLegacyTestID('wizard-next')
-        .as('nextButton')
-        .click();
+      cy.get('.kv-select-template__tile').eq(1).click();
+      cy.byLegacyTestID('wizard-next').as('nextButton').click();
       cy.get('body').then(($body) => {
         if ($body.find('[data-test-id="modal-title"]').length) {
           cy.get('[id=confirm-action]').click();
@@ -21,9 +17,7 @@ export default ({ vmName }) =>
       cy.contains('Import via Registry (creates PVC)').click();
       cy.get('[id=provision-source-container').type('kubevirt/fedora-cloud-container-disk-demo');
       cy.get('@nextButton').click();
-      cy.get('[id=vm-name]')
-        .clear()
-        .type(vmName);
+      cy.get('[id=vm-name]').clear().type(vmName);
     });
 
     it('checking if ssh keys message is visible', () => {
@@ -54,15 +48,11 @@ export default ({ vmName }) =>
     });
 
     it('checking remember ssh key is not checked', () => {
-      cy.get('[id=ssh-service-checkbox]')
-        .first()
-        .should('not.be.checked');
+      cy.get('[id=ssh-service-checkbox]').first().should('not.be.checked');
     });
 
     it('should check remember ssh key', () => {
-      cy.get('[id=ssh-service-checkbox]')
-        .first()
-        .check();
+      cy.get('[id=ssh-service-checkbox]').first().check();
     });
 
     it('checking if ssh  helper modal exist', () => {
@@ -71,9 +61,7 @@ export default ({ vmName }) =>
     });
 
     it('checking if expose ssh service is checked by default', () => {
-      cy.get('[id=ssh-service-checkbox]')
-        .eq(1)
-        .should('be.checked');
+      cy.get('[id=ssh-service-checkbox]').eq(1).should('be.checked');
     });
 
     it('checking if ssh keys message is not visible', () => {

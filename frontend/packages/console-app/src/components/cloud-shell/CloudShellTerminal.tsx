@@ -32,13 +32,9 @@ type Props = {
 
 type CloudShellTerminalProps = StateProps & Props;
 
-const CloudShellTerminal: React.FC<CloudShellTerminalProps &
-  WithUserSettingsCompatibilityProps<string>> = ({
-  user,
-  onCancel,
-  userSettingState: namespace,
-  setUserSettingState: setNamespace,
-}) => {
+const CloudShellTerminal: React.FC<
+  CloudShellTerminalProps & WithUserSettingsCompatibilityProps<string>
+> = ({ user, onCancel, userSettingState: namespace, setUserSettingState: setNamespace }) => {
   const [initData, setInitData] = React.useState<TerminalInitData>();
   const [initError, setInitError] = React.useState<string>();
   const [isAdmin, isAdminCheckLoading] = useAccessReview2({

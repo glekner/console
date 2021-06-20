@@ -36,9 +36,10 @@ const OvirtImportProviderConnected: React.FC<OvirtImportProviderProps> = ({
   onFieldChange,
 }) => {
   const { t } = useTranslation();
-  const getField = React.useCallback((key: OvirtProviderRenderableField) => iGet(ovirtData, key), [
-    ovirtData,
-  ]);
+  const getField = React.useCallback(
+    (key: OvirtProviderRenderableField) => iGet(ovirtData, key),
+    [ovirtData],
+  );
   const onChange = React.useCallback(
     (key: OvirtProviderRenderableField) => (value) => onFieldChange(key, { value }),
     [onFieldChange],

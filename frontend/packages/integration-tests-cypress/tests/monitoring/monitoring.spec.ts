@@ -58,17 +58,13 @@ describe('Monitoring: Alerts', () => {
     cy.testA11y('Alerting details page');
 
     cy.log('drill down to the Alerting rule details page');
-    cy.byTestID('alert-rules-detail-resource-link')
-      .contains('Watchdog')
-      .click();
+    cy.byTestID('alert-rules-detail-resource-link').contains('Watchdog').click();
     shouldBeWatchdogAlertRulesPage();
     cy.testA11y('Alerting rule details page');
 
     cy.log('drill back up to the Alert details page');
     // Active alerts list should contain a link back to the Alert details page
-    cy.byTestID('active-alerts')
-      .first()
-      .click();
+    cy.byTestID('active-alerts').first().click();
     shouldBeWatchdogAlertDetailsPage();
   });
 
@@ -90,10 +86,7 @@ describe('Monitoring: Alerts', () => {
     cy.byLegacyTestID('dropdown-button').should('contain', '2h');
     cy.byTestID('until').should('have.value', '2h from now');
     // Change duration
-    cy.byLegacyTestID('dropdown-button')
-      .click()
-      .get('[data-test-dropdown-menu="1h"]')
-      .click();
+    cy.byLegacyTestID('dropdown-button').click().get('[data-test-dropdown-menu="1h"]').click();
     cy.byTestID('until').should('have.value', '1h from now');
     // Change to not start now
     cy.byTestID('start-immediately').click();
@@ -118,10 +111,7 @@ describe('Monitoring: Alerts', () => {
     cy.byTestID('start-immediately').should('be.checked');
     cy.byTestID('until').should('have.value', '1h from now');
     // Change duration back again
-    cy.byLegacyTestID('dropdown-button')
-      .click()
-      .get('[data-test-dropdown-menu="2h"]')
-      .click();
+    cy.byLegacyTestID('dropdown-button').click().get('[data-test-dropdown-menu="2h"]').click();
     cy.byTestID('until').should('have.value', '2h from now');
     // add comment and submit
     cy.byTestID('silence-comment').type('test comment');
@@ -132,18 +122,12 @@ describe('Monitoring: Alerts', () => {
     cy.testA11y('Silence details page');
     cy.log('shows the silenced Alert in the Silenced Alerts list');
     // Click the link to navigate back to the Alert details link
-    cy.byTestID('firing-alerts')
-      .first()
-      .should('have.text', 'Watchdog')
-      .click();
+    cy.byTestID('firing-alerts').first().should('have.text', 'Watchdog').click();
     shouldBeWatchdogAlertDetailsPage();
 
     cy.log('shows the newly created Silence in the Silenced By list');
     // Click the link to navigate back to the Silence details page
-    cy.byLegacyTestID('silence-resource-link')
-      .first()
-      .should('have.text', 'Watchdog')
-      .click();
+    cy.byLegacyTestID('silence-resource-link').first().should('have.text', 'Watchdog').click();
     shouldBeWatchdogSilencePage();
 
     cy.log('expires the Silence');

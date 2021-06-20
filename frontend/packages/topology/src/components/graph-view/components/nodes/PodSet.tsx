@@ -55,9 +55,8 @@ export const podSetInnerRadius = (size: number, data: PodRCData) => {
 
 const PodSet: React.FC<PodSetProps> = React.memo(({ size, data, x = 0, y = 0, showPodCount }) => {
   const { t } = useTranslation();
-  const { podStatusOuterRadius, podStatusInnerRadius, podStatusStrokeWidth } = calculateRadius(
-    size,
-  );
+  const { podStatusOuterRadius, podStatusInnerRadius, podStatusStrokeWidth } =
+    calculateRadius(size);
   const { innerPodStatusOuterRadius, innerPodStatusInnerRadius } = calculateInnerPodStatusRadius(
     podStatusInnerRadius,
     podStatusStrokeWidth,

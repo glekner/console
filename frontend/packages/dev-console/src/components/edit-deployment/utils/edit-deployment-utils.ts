@@ -105,8 +105,12 @@ export const getStrategyData = (
   switch (type) {
     case DeploymentStrategyType.recreateParams: {
       if (resourceType === Resources.Kubernetes) return {};
-      const { mid: midHook, post: postHook, pre: preHook, timeoutSeconds } =
-        strategy.recreateParams ?? {};
+      const {
+        mid: midHook,
+        post: postHook,
+        pre: preHook,
+        timeoutSeconds,
+      } = strategy.recreateParams ?? {};
       return {
         recreateParams: {
           timeoutSeconds,
@@ -360,8 +364,12 @@ export const getUpdatedStrategy = (strategy: DeploymentStrategy, resourceType: s
   ]);
   switch (type) {
     case DeploymentStrategyType.recreateParams: {
-      const { mid: midHook, post: postHook, pre: preHook, timeoutSeconds } =
-        strategy.recreateParams ?? {};
+      const {
+        mid: midHook,
+        post: postHook,
+        pre: preHook,
+        timeoutSeconds,
+      } = strategy.recreateParams ?? {};
       return {
         ...newStrategy,
         ...(resourceType === Resources.OpenShift

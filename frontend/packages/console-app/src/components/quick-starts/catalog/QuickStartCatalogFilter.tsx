@@ -29,18 +29,23 @@ const QuickStartCatalogFilter: React.FC<QuickStartCatalogFilterProps> = ({
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const queryParams = useQueryParams();
   const searchQuery = queryParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
-  const statusFilters = queryParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
-  const statusTypes = {
-    [QuickStartStatus.COMPLETE]: t('quickstart~Complete ({{statusCount, number}})', {
-      statusCount: quickStartStatusCount[QuickStartStatus.COMPLETE],
-    }),
-    [QuickStartStatus.IN_PROGRESS]: t('quickstart~In progress ({{statusCount, number}})', {
-      statusCount: quickStartStatusCount[QuickStartStatus.IN_PROGRESS],
-    }),
-    [QuickStartStatus.NOT_STARTED]: t('quickstart~Not started ({{statusCount, number}})', {
-      statusCount: quickStartStatusCount[QuickStartStatus.NOT_STARTED],
-    }),
-  };
+  const statusFilters = React.useMemo(() => {
+    return queryParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
+  }, [queryParams]);
+
+  const statusTypes = React.useMemo(() => {
+    return {
+      [QuickStartStatus.COMPLETE]: t('quickstart~Complete ({{statusCount, number}})', {
+        statusCount: quickStartStatusCount[QuickStartStatus.COMPLETE],
+      }),
+      [QuickStartStatus.IN_PROGRESS]: t('quickstart~In progress ({{statusCount, number}})', {
+        statusCount: quickStartStatusCount[QuickStartStatus.IN_PROGRESS],
+      }),
+      [QuickStartStatus.NOT_STARTED]: t('quickstart~Not started ({{statusCount, number}})', {
+        statusCount: quickStartStatusCount[QuickStartStatus.NOT_STARTED],
+      }),
+    };
+  }, [quickStartStatusCount, t]);
 
   const [selectedFilters, setSelectedFilters] = React.useState(
     statusFilters.map((filter) => statusTypes[filter]),

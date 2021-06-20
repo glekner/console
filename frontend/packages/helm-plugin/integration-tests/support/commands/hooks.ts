@@ -1,8 +1,6 @@
 before(() => {
   cy.login();
-  cy.document()
-    .its('readyState')
-    .should('eq', 'complete');
+  cy.document().its('readyState').should('eq', 'complete');
   // Default helm repo has been changed to a new repo, so executing below line to fix that issue
   cy.exec('oc apply -f test-data/red-hat-helm-charts.yaml');
 });

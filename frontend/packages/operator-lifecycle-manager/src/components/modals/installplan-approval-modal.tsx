@@ -101,9 +101,8 @@ export const InstallPlanApprovalModal: React.FC<InstallPlanApprovalModalProps> =
   );
 };
 
-export const createInstallPlanApprovalModal = createModalLauncher<InstallPlanApprovalModalProps>(
-  InstallPlanApprovalModal,
-);
+export const createInstallPlanApprovalModal =
+  createModalLauncher<InstallPlanApprovalModalProps>(InstallPlanApprovalModal);
 
 export type InstallPlanApprovalModalProps = {
   cancel?: () => void;

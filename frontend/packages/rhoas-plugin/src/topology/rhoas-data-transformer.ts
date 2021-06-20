@@ -94,22 +94,24 @@ export const getRhoasServiceBindingEdges = (
 
   return edges;
 };
-export const getRhoasTopologyDataModel = () => (
-  namespace: string,
-  resources: TopologyDataResources,
-  workloads: K8sResourceKind[],
-): Promise<Model> => {
-  const serviceBindingRequests = resources?.serviceBindingRequests?.data;
-  const rhoasDataModel: Model = {
-    nodes: getTopologyRhoasNodes(resources.kafkaConnections.data),
-    edges: [],
+export const getRhoasTopologyDataModel =
+  () =>
+  (
+    namespace: string,
+    resources: TopologyDataResources,
+    workloads: K8sResourceKind[],
+  ): Promise<Model> => {
+    const serviceBindingRequests = resources?.serviceBindingRequests?.data;
+    const rhoasDataModel: Model = {
+      nodes: getTopologyRhoasNodes(resources.kafkaConnections.data),
+      edges: [],
+    };
+    if (rhoasDataModel.nodes?.length) {
+      workloads.forEach((dc) => {
+        rhoasDataModel.edges.push(
+          ...getRhoasServiceBindingEdges(dc, rhoasDataModel.nodes, serviceBindingRequests),
+        );
+      });
+    }
+    return Promise.resolve(rhoasDataModel);
   };
-  if (rhoasDataModel.nodes?.length) {
-    workloads.forEach((dc) => {
-      rhoasDataModel.edges.push(
-        ...getRhoasServiceBindingEdges(dc, rhoasDataModel.nodes, serviceBindingRequests),
-      );
-    });
-  }
-  return Promise.resolve(rhoasDataModel);
-};

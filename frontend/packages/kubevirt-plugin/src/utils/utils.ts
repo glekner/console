@@ -28,17 +28,16 @@ export const getNextIDResolver = (entities: { id?: string }[] = []) => {
   return () => _.toString(++lastID);
 };
 
-export const wrapWithProgress = (setProgress: (inProgress: boolean) => void) => (
-  promise: Promise<any>,
-) => {
-  setProgress(true);
-  promise
-    .then(() => setProgress(false))
-    .catch((reason) => {
-      setProgress(false);
-      throw reason;
-    });
-};
+export const wrapWithProgress =
+  (setProgress: (inProgress: boolean) => void) => (promise: Promise<any>) => {
+    setProgress(true);
+    promise
+      .then(() => setProgress(false))
+      .catch((reason) => {
+        setProgress(false);
+        throw reason;
+      });
+  };
 
 export const getVMLikeModelListPath = (isCreateTemplate: boolean, namespace: string) =>
   isCreateTemplate

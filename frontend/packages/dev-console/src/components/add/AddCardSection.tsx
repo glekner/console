@@ -34,9 +34,8 @@ const AddCardSection: React.FC<AddCardSectionProps> = ({
     if (!extensionsLoaded) {
       return [];
     }
-    const sortedActionGroup: LoadedExtension<AddActionGroup>[] = getSortedExtensionItems<
-      LoadedExtension<AddActionGroup>
-    >(addActionGroupExtensions);
+    const sortedActionGroup: LoadedExtension<AddActionGroup>[] =
+      getSortedExtensionItems<LoadedExtension<AddActionGroup>>(addActionGroupExtensions);
 
     const addGroups: AddGroup[] = getAddGroups(addActionExtensions, sortedActionGroup);
 

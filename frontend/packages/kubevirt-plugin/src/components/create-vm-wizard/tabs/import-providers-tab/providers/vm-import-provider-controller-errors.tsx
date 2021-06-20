@@ -51,8 +51,8 @@ const resolveUIMessageTemplating = (t: TFunction, message: string, provider: VMI
   );
 };
 
-const VmImportProviderControllerErrorsComponent: React.FC<VmImportProviderControllerErrorsComponentProps> = React.memo(
-  ({ errors, provider }) => {
+const VmImportProviderControllerErrorsComponent: React.FC<VmImportProviderControllerErrorsComponentProps> =
+  React.memo(({ errors, provider }) => {
     const { t } = useTranslation();
     if (!errors) {
       return null;
@@ -88,8 +88,7 @@ const VmImportProviderControllerErrorsComponent: React.FC<VmImportProviderContro
         )}
       </div>
     );
-  },
-);
+  });
 
 type VmImportProviderControllerErrorsComponentProps = {
   errors: any;

@@ -421,9 +421,8 @@ const APIResourceInstances: React.FC<APIResourceTabProps> = ({
   customData: { kindObj, namespace },
 }) => {
   const resourceListPageExtensions = useExtensions<ResourceListPage>(isResourceListPage);
-  const dynamicResourceListPageExtensions = useExtensions<DynamicResourceListPage>(
-    isDynamicResourceListPage,
-  );
+  const dynamicResourceListPageExtensions =
+    useExtensions<DynamicResourceListPage>(isDynamicResourceListPage);
   const componentLoader = getResourceListPages(
     resourceListPageExtensions,
     dynamicResourceListPageExtensions,
@@ -488,9 +487,7 @@ const APIResourceAccessReview: React.FC<APIResourceTabProps> = ({
       resource: plural,
       verb,
     };
-    k8sCreate(accessReviewModel, req, { ns: namespace })
-      .then(setAccessResponse)
-      .catch(setError);
+    k8sCreate(accessReviewModel, req, { ns: namespace }).then(setAccessResponse).catch(setError);
   }, [apiGroup, apiVersion, plural, namespace, verb]);
 
   if (error) {

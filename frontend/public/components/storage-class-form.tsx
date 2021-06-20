@@ -789,7 +789,7 @@ class StorageClassFormWithTranslation extends React.Component<
         returnVal.error = 'Storage name is required'; // t('public~Storage name is required')
         returnVal.nameIsValid = false;
       } else if (this.resources) {
-        _.each(this.resources.data, function(storageClass) {
+        _.each(this.resources.data, function (storageClass) {
           if (storageClass.metadata.name === updatedName.toLowerCase()) {
             returnVal.error = 'Storage name must be unique'; // t('public~Storage name must be unique')
             returnVal.nameIsValid = false;

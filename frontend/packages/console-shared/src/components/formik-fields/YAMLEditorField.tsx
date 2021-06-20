@@ -35,9 +35,8 @@ const YAMLEditorField: React.FC<YAMLEditorFieldProps> = ({
 
   const [sidebarOpen, setSidebarOpen] = React.useState<boolean>(true);
 
-  const [sampleResources, loaded, loadError] = useK8sWatchResource<K8sResourceCommon[]>(
-    SampleResource,
-  );
+  const [sampleResources, loaded, loadError] =
+    useK8sWatchResource<K8sResourceCommon[]>(SampleResource);
 
   const { samples, snippets } = model
     ? getResourceSidebarSamples(

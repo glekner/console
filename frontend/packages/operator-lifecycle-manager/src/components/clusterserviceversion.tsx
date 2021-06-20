@@ -1187,10 +1187,10 @@ export const CSVSubscription: React.FC<CSVSubscriptionProps> = ({
     />
   );
 
-  const subscription = React.useMemo(() => subscriptionForCSV(subscriptions, obj), [
-    obj,
-    subscriptions,
-  ]);
+  const subscription = React.useMemo(
+    () => subscriptionForCSV(subscriptions, obj),
+    [obj, subscriptions],
+  );
 
   return (
     <StatusBox EmptyMsg={EmptyMsg} loaded data={subscription}>

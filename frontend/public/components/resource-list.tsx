@@ -37,9 +37,8 @@ const allParams = (props) => Object.assign({}, _.get(props, 'match.params'), pro
 export const ResourceListPage = connectToPlural(
   withStartGuide((props: ResourceListPageProps) => {
     const resourceListPageExtensions = useExtensions<ResourceListPageExt>(isResourceListPage);
-    const dynamicResourceListPageExtensions = useExtensions<DynamicResourceListPage>(
-      isDynamicResourceListPage,
-    );
+    const dynamicResourceListPageExtensions =
+      useExtensions<DynamicResourceListPage>(isDynamicResourceListPage);
     const { kindObj, kindsInFlight, modelRef, noProjectsAvailable, ns, plural } = allParams(props);
 
     if (!kindObj) {

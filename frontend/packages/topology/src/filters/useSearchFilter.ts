@@ -8,10 +8,10 @@ const fuzzyCaseInsensitive = (a: string, b: string): boolean => fuzzy(toLower(a)
 const useSearchFilter = (text: string): [boolean, string] => {
   const queryParams = useQueryParams();
   const searchQuery = queryParams.get('searchQuery');
-  const filtered = React.useMemo(() => fuzzyCaseInsensitive(searchQuery, text), [
-    searchQuery,
-    text,
-  ]);
+  const filtered = React.useMemo(
+    () => fuzzyCaseInsensitive(searchQuery, text),
+    [searchQuery, text],
+  );
   return [filtered && !!searchQuery, searchQuery];
 };
 

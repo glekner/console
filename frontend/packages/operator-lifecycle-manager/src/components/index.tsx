@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
@@ -125,8 +126,9 @@ export const ClusterServiceVersionLogo: React.FC<ClusterServiceVersionLogoProps>
           {displayName}
         </h1>
         {provider && (
-          <span className="co-clusterserviceversion-logo__name__provider text-muted">{`${version ||
-            ''} provided by ${_.get(provider, 'name', provider)}`}</span>
+          <span className="co-clusterserviceversion-logo__name__provider text-muted">{`${
+            version || ''
+          } provided by ${_.get(provider, 'name', provider)}`}</span>
         )}
       </div>
     </div>

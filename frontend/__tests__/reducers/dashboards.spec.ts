@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import * as Immutable from 'immutable';
 import { noop } from 'lodash-es';
 

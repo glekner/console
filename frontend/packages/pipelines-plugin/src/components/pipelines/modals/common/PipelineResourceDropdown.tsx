@@ -59,15 +59,13 @@ const PipelineResourceDropdown: React.FC<PipelineResourceDropdownProps> = (props
       label: t('pipelines-plugin~Create Pipeline resource'),
       value: CREATE_PIPELINE_RESOURCE,
     },
-    ...availableResources.map(
-      (resource): FormSelectFieldOption => {
-        const resourceName = resource.metadata.name;
-        const url = _.find(resource.spec.params, ['name', 'url'])?.value || '';
-        const label = url.trim().length > 0 ? `${url} (${resourceName})` : resourceName;
+    ...availableResources.map((resource): FormSelectFieldOption => {
+      const resourceName = resource.metadata.name;
+      const url = _.find(resource.spec.params, ['name', 'url'])?.value || '';
+      const label = url.trim().length > 0 ? `${url} (${resourceName})` : resourceName;
 
-        return { label, value: resourceName };
-      },
-    ),
+      return { label, value: resourceName };
+    }),
   ];
 
   if (!loaded) {

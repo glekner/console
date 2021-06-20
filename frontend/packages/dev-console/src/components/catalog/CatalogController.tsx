@@ -125,11 +125,10 @@ const CatalogController: React.FC<CatalogControllerProps> = ({
     return _.sortBy(types, ({ label }) => label.toLowerCase());
   }, [catalogExtensions]);
 
-  const catalogItems = React.useMemo(() => (type ? itemsMap[type] : items), [
-    items,
-    itemsMap,
-    type,
-  ]);
+  const catalogItems = React.useMemo(
+    () => (type ? itemsMap[type] : items),
+    [items, itemsMap, type],
+  );
 
   const availableFilters: CatalogFilters = React.useMemo(
     () => determineAvailableFilters({}, catalogItems, filterGroups),

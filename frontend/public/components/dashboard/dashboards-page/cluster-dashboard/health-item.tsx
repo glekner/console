@@ -37,12 +37,14 @@ import { uniqueResource } from './utils';
 import { getPrometheusQueryResponse } from '../../../../actions/dashboards';
 import { ClusterDashboardContext } from './context';
 
-const OperatorRow: React.FC<OperatorRowProps & {
-  LoadingComponent: () => JSX.Element;
-  Component: React.ComponentType<OperatorRowProps> | LazyLoader<OperatorRowProps>;
-  key: string;
-  isResolved: boolean;
-}> = ({ operatorStatus, isResolved, key, Component, LoadingComponent }) => {
+const OperatorRow: React.FC<
+  OperatorRowProps & {
+    LoadingComponent: () => JSX.Element;
+    Component: React.ComponentType<OperatorRowProps> | LazyLoader<OperatorRowProps>;
+    key: string;
+    isResolved: boolean;
+  }
+> = ({ operatorStatus, isResolved, key, Component, LoadingComponent }) => {
   const ResolvedComponent = Component as React.ComponentType<OperatorRowProps>;
   return isResolved ? (
     <ResolvedComponent key={key} operatorStatus={operatorStatus} />
@@ -314,9 +316,8 @@ export const ResourceHealthItem: React.FC<ResourceHealthItemProps> = ({ subsyste
     };
   }, [resources, namespace]);
 
-  const resourcesResult: WatchK8sResults<ResourcesObject> = useK8sWatchResources(
-    resourcesWithNamespace,
-  );
+  const resourcesResult: WatchK8sResults<ResourcesObject> =
+    useK8sWatchResources(resourcesWithNamespace);
   const healthState: SubsystemHealth = healthHandler(resourcesResult, t);
 
   return (
@@ -335,9 +336,7 @@ export const ResourceHealthItem: React.FC<ResourceHealthItemProps> = ({ subsyste
 
 type OperatorHealthItemProps = DashboardItemProps & {
   operatorExtensions: DashboardsOverviewHealthOperator['properties'][];
-  dynamicOperatorSubsystems: ResolvedExtension<
-    DynamicDashboardsOverviewHealthOperator
-  >['properties'][];
+  dynamicOperatorSubsystems: ResolvedExtension<DynamicDashboardsOverviewHealthOperator>['properties'][];
 };
 
 type URLHealthItemProps = DashboardItemProps & {
@@ -364,7 +363,5 @@ type ResourceHealthItemProps = {
 type OperatorsPopupProps = {
   resources: FirehoseResourcesResult;
   operatorExtensions: DashboardsOverviewHealthOperator['properties'][];
-  dynamicOperatorSubsystems: ResolvedExtension<
-    DynamicDashboardsOverviewHealthOperator
-  >['properties'][];
+  dynamicOperatorSubsystems: ResolvedExtension<DynamicDashboardsOverviewHealthOperator>['properties'][];
 };

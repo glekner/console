@@ -54,9 +54,10 @@ const KnativeServiceNode: React.FC<KnativeServiceNodeProps> = ({
 }) => {
   const { t } = useTranslation();
   const [hover, hoverRef] = useHover();
-  const dragSpec = React.useMemo(() => nodeDragSourceSpec(TYPE_KNATIVE_SERVICE, true, editAccess), [
-    editAccess,
-  ]);
+  const dragSpec = React.useMemo(
+    () => nodeDragSourceSpec(TYPE_KNATIVE_SERVICE, true, editAccess),
+    [editAccess],
+  );
   const dragProps = React.useMemo(() => ({ element }), [element]);
   const [{ dragging }, dragNodeRef] = useDragNode(dragSpec, dragProps);
   const refs = useCombineRefs<SVGRectElement>(hoverRef, dragNodeRef);

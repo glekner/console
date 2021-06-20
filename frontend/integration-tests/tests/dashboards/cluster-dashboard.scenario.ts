@@ -80,12 +80,7 @@ describe('Cluster Dashboard', () => {
       const items = clusterDashboardView.utilizationItems;
       expect(items.count()).toBe(utilizationItems.length);
       utilizationItems.forEach((item, index) =>
-        expect(
-          items
-            .get(index)
-            .$('h4')
-            .getText(),
-        ).toEqual(item),
+        expect(items.get(index).$('h4').getText()).toEqual(item),
       );
     });
     it('has duration dropdown', () => {

@@ -45,18 +45,16 @@ const processResources = async (
   const indexLookup = Object.keys(toCreateResources);
   return {
     ...values,
-    resources: resources.map(
-      (resource, index): PipelineModalFormResource => {
-        if (toCreateResources[index]) {
-          const creationIndex = indexLookup.indexOf(index.toString());
-          return {
-            ...resource,
-            selection: createdResources[creationIndex].metadata.name,
-          };
-        }
-        return resource;
-      },
-    ),
+    resources: resources.map((resource, index): PipelineModalFormResource => {
+      if (toCreateResources[index]) {
+        const creationIndex = indexLookup.indexOf(index.toString());
+        return {
+          ...resource,
+          selection: createdResources[creationIndex].metadata.name,
+        };
+      }
+      return resource;
+    }),
   };
 };
 

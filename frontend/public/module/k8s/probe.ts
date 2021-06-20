@@ -26,13 +26,13 @@ const HookAction = Object.freeze({
 });
 
 const parsers = {
-  exec: function(str: string) {
+  exec: function (str: string) {
     return {
       command: str.split(' '),
     };
   },
 
-  httpGet: function(str: string) {
+  httpGet: function (str: string) {
     if (!str) {
       return null;
     }
@@ -63,7 +63,7 @@ const parsers = {
     };
   },
 
-  tcpSocket: function(str: string) {
+  tcpSocket: function (str: string) {
     if (str == null || str === '') {
       return null;
     }
@@ -77,14 +77,14 @@ const parsers = {
 };
 
 const flatteners = {
-  exec: function(cmd: ExecProbe): string {
+  exec: function (cmd: ExecProbe): string {
     if (_.isEmpty(cmd) || _.isEmpty(cmd.command)) {
       return '';
     }
     return cmd.command.join(' ');
   },
 
-  httpGet: function(cmd: HTTPGetProbe, podIP: string): string {
+  httpGet: function (cmd: HTTPGetProbe, podIP: string): string {
     let c = '';
     if (_.isEmpty(cmd)) {
       return c;
@@ -105,7 +105,7 @@ const flatteners = {
     return c;
   },
 
-  tcpSocket: function(cmd: TCPSocketProbe): string {
+  tcpSocket: function (cmd: TCPSocketProbe): string {
     if (!cmd || !cmd.port) {
       return '';
     }
@@ -144,7 +144,7 @@ export function getActionLabelFromObject(obj: Handler): string {
   return getActionLabel(a);
 }
 
-export const getLifecycleHookLabel = function(
+export const getLifecycleHookLabel = function (
   lifecycle: ContainerLifecycle,
   stage: ContainerLifecycleStage,
 ) {
@@ -155,7 +155,7 @@ export const getLifecycleHookLabel = function(
 };
 
 // Maps an api config object to a simple flattened type and command field.
-export const mapLifecycleConfigToFields = function(lifecycle: ContainerLifecycle) {
+export const mapLifecycleConfigToFields = function (lifecycle: ContainerLifecycle) {
   const f = {
     postStart: {
       type: 'exec',
@@ -186,7 +186,7 @@ export const mapLifecycleConfigToFields = function(lifecycle: ContainerLifecycle
   return f;
 };
 
-export const mapProbeToFields = function(probe: ContainerProbe, podIP: string) {
+export const mapProbeToFields = function (probe: ContainerProbe, podIP: string) {
   const f = {
     type: 'exec',
     cmd: '',

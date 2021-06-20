@@ -168,30 +168,28 @@ export const CreateInitializationResourceButton: React.FC<InitializationResource
   );
 };
 
-const InitializationResourceRequiredMessage: React.FC<InitializationResourceRequiredMessageProps> = ({
-  initializationResource,
-  obj,
-}) => {
-  const { t } = useTranslation();
-  const initializationResourceKind = initializationResource?.kind;
-  const initializationResourceNamespace = initializationResource?.metadata?.namespace;
-  const description = obj?.metadata?.annotations?.description;
-  return (
-    <div className="co-clusterserviceversion__box">
-      <span className="co-resource-item">
-        <ResourceLink
-          kind={initializationResourceKind}
-          name={initializationResourceKind}
-          namepace={initializationResourceNamespace}
-        />
-        <ResourceStatus badgeAlt>
-          <StatusIconAndText icon={<RedExclamationCircleIcon />} title={t('olm~Required')} />
-        </ResourceStatus>
-      </span>
-      <SyncMarkdownView content={description} />
-    </div>
-  );
-};
+const InitializationResourceRequiredMessage: React.FC<InitializationResourceRequiredMessageProps> =
+  ({ initializationResource, obj }) => {
+    const { t } = useTranslation();
+    const initializationResourceKind = initializationResource?.kind;
+    const initializationResourceNamespace = initializationResource?.metadata?.namespace;
+    const description = obj?.metadata?.annotations?.description;
+    return (
+      <div className="co-clusterserviceversion__box">
+        <span className="co-resource-item">
+          <ResourceLink
+            kind={initializationResourceKind}
+            name={initializationResourceKind}
+            namepace={initializationResourceNamespace}
+          />
+          <ResourceStatus badgeAlt>
+            <StatusIconAndText icon={<RedExclamationCircleIcon />} title={t('olm~Required')} />
+          </ResourceStatus>
+        </span>
+        <SyncMarkdownView content={description} />
+      </div>
+    );
+  };
 
 const InstallSucceededMessage: React.FC<InstallSuccededMessageProps> = ({
   namespace,

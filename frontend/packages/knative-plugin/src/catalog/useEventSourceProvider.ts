@@ -33,9 +33,8 @@ const useEventSourceProvider: ExtensionHook<CatalogItem[]> = ({
   namespace,
 }): [CatalogItem[], boolean, any] => {
   const { t } = useTranslation();
-  const { loaded, eventSourceModelsList: eventSourceModels } = useEventSourceModelsWithAccess(
-    namespace,
-  );
+  const { loaded, eventSourceModelsList: eventSourceModels } =
+    useEventSourceModelsWithAccess(namespace);
   const normalizedSources = React.useMemo(
     () => (loaded ? normalizeEventSources(eventSourceModels, namespace, t) : []),
 

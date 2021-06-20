@@ -261,9 +261,19 @@ export const getFinallyTaskWidth = (allTasksLength: number): number => {
 
 export const getLastRegularTasks = (regularTasks: PipelineMixedNodeModel[]): string[] => {
   const runAfters = _.uniq(
-    regularTasks.reduce((acc, { data: { task: { runAfter } } }) => {
-      return runAfter ? acc.concat(runAfter) : acc;
-    }, []),
+    regularTasks.reduce(
+      (
+        acc,
+        {
+          data: {
+            task: { runAfter },
+          },
+        },
+      ) => {
+        return runAfter ? acc.concat(runAfter) : acc;
+      },
+      [],
+    ),
   );
   return _.difference(
     regularTasks.map((n) => n.id),

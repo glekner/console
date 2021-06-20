@@ -38,20 +38,21 @@ import { VMDetailsFirehose } from './vm-details';
 import { VMEnvironmentFirehose } from './vm-environment/vm-environment-page';
 import { VMEvents } from './vm-events';
 
-export const breadcrumbsForVMPage = (t: TFunction, match: any) => () => [
-  {
-    name: t('kubevirt-plugin~Virtualization'),
-    path: `/k8s/ns/${match.params.ns || 'default'}/virtualization`,
-  },
-  {
-    name: t('kubevirt-plugin~Virtual Machines'),
-    path: `/k8s/ns/${match.params.ns || 'default'}/virtualization`,
-  },
-  {
-    name: t('kubevirt-plugin~{{name}} Details', { name: match.params.name }),
-    path: `${match.url}`,
-  },
-];
+export const breadcrumbsForVMPage = (t: TFunction, match: any) => () =>
+  [
+    {
+      name: t('kubevirt-plugin~Virtualization'),
+      path: `/k8s/ns/${match.params.ns || 'default'}/virtualization`,
+    },
+    {
+      name: t('kubevirt-plugin~Virtual Machines'),
+      path: `/k8s/ns/${match.params.ns || 'default'}/virtualization`,
+    },
+    {
+      name: t('kubevirt-plugin~{{name}} Details', { name: match.params.name }),
+      path: `${match.url}`,
+    },
+  ];
 
 export const VirtualMachinesDetailsPage: React.FC<VirtualMachinesDetailsPageProps> = (props) => {
   const { name, ns: namespace } = props.match.params;

@@ -74,12 +74,9 @@ const UploadJar: React.FunctionComponent<UploadJarProps> = ({
       project: { name: projectName },
     } = values;
 
-    const resourceActions = createOrUpdateJarFile(
-      values,
-      imageStream,
-      createNewProject,
-      true,
-    ).then(() => createOrUpdateJarFile(values, imageStream));
+    const resourceActions = createOrUpdateJarFile(values, imageStream, createNewProject, true).then(
+      () => createOrUpdateJarFile(values, imageStream),
+    );
 
     return resourceActions
       .then((resp) => {

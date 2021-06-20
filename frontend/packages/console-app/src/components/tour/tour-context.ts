@@ -95,9 +95,10 @@ const TOUR_CONFIGMAP_KEY = `console.guidedTour`;
 export const useTourStateForPerspective = (
   perspective: string,
 ): [TourLocalStorageType, (completed: boolean) => void, boolean] => {
-  const [tourLocalState, setTourLocalState, loaded] = useUserSettingsCompatibility<
-    TourLocalStorageData
-  >(TOUR_CONFIGMAP_KEY, TOUR_LOCAL_STORAGE_KEY, { [perspective]: { completed: false } });
+  const [tourLocalState, setTourLocalState, loaded] =
+    useUserSettingsCompatibility<TourLocalStorageData>(TOUR_CONFIGMAP_KEY, TOUR_LOCAL_STORAGE_KEY, {
+      [perspective]: { completed: false },
+    });
   useEffect(() => {
     if (loaded && !tourLocalState.hasOwnProperty(perspective)) {
       setTourLocalState((state) => ({ ...state, [perspective]: { completed: false } }));
@@ -132,9 +133,8 @@ export const useTourValuesForContext = (): TourContextType => {
     (state: RootState) => getRequiredFlagsByTour(state, selectorSteps),
     isEqual,
   );
-  const [tourCompletionState, setTourCompletionState, loaded] = useTourStateForPerspective(
-    activePerspective,
-  );
+  const [tourCompletionState, setTourCompletionState, loaded] =
+    useTourStateForPerspective(activePerspective);
   const completed = tourCompletionState?.completed;
   const onComplete = () => {
     if (completed === false) {

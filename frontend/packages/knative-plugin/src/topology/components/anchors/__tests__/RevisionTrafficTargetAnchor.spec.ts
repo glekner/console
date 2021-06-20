@@ -2,9 +2,9 @@ import { Node, Point, Rect } from '@patternfly/react-topology';
 import RevisionTrafficTargetAnchor from '../RevisionTrafficTargetAnchor';
 
 function createMockNode(bounds: Rect): Node {
-  return ({
+  return {
     getBounds: () => bounds,
-  } as any) as Node;
+  } as any as Node;
 }
 
 describe('RevisionTrafficTargetAnchor', () => {

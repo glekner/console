@@ -3,9 +3,9 @@ import { EVENT_MARKER_RADIUS } from '../../../const';
 import PubSubTargetAnchor from '../PubSubTargetAnchor';
 
 function createMockNode(bounds: Rect): Node {
-  return ({
+  return {
     getBounds: () => bounds,
-  } as any) as Node;
+  } as any as Node;
 }
 
 describe('PubSubTargetAnchor', () => {

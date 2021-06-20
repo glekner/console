@@ -37,10 +37,10 @@ export const MasonryLayout: React.FC<MasonryLayoutProps> = ({
     },
     [resizeThreshold],
   );
-  const columnCount = React.useMemo(() => (width ? Math.floor(width / columnWidth) || 1 : null), [
-    columnWidth,
-    width,
-  ]);
+  const columnCount = React.useMemo(
+    () => (width ? Math.floor(width / columnWidth) || 1 : null),
+    [columnWidth, width],
+  );
 
   const columns: React.ReactElement[] =
     loading && LoadingComponent

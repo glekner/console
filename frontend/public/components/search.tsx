@@ -48,9 +48,8 @@ import {
 
 const ResourceList = connectToModel(({ kindObj, mock, namespace, selector, nameFilter }) => {
   const resourceListPageExtensions = useExtensions<ResourceListPage>(isResourceListPage);
-  const dynamicResourceListPageExtensions = useExtensions<DynamicResourceListPage>(
-    isDynamicResourceListPage,
-  );
+  const dynamicResourceListPageExtensions =
+    useExtensions<DynamicResourceListPage>(isDynamicResourceListPage);
   if (!kindObj) {
     return <LoadingBox />;
   }

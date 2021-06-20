@@ -11,9 +11,8 @@ import {
 type UseConfigMapResult = [ConfigMapKind, boolean, string];
 
 export const useStorageClassConfigMap = (): UseConfigMapResult => {
-  const [storageClassConfigMap, setStorageClassConfigMap] = React.useState<ConfigMapKind>(
-    undefined,
-  );
+  const [storageClassConfigMap, setStorageClassConfigMap] =
+    React.useState<ConfigMapKind>(undefined);
   const [error, setError] = React.useState<string>(undefined);
 
   React.useEffect(() => {
@@ -55,11 +54,10 @@ export const useStorageClassConfigMap = (): UseConfigMapResult => {
 
   const isLoaded = storageClassConfigMap !== undefined;
 
-  return React.useMemo<UseConfigMapResult>(() => [storageClassConfigMap, isLoaded, error], [
-    storageClassConfigMap,
-    isLoaded,
-    error,
-  ]);
+  return React.useMemo<UseConfigMapResult>(
+    () => [storageClassConfigMap, isLoaded, error],
+    [storageClassConfigMap, isLoaded, error],
+  );
 };
 
 export const useStorageClassConfigMapWrapped = (): FirehoseResult<ConfigMapKind> => {

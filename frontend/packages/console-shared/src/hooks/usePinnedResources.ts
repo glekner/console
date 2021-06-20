@@ -24,9 +24,13 @@ export const usePinnedResources = (): [string[], (pinnedResources: string[]) => 
       ),
     [perspectiveExtensions],
   );
-  const [pinnedResources, setPinnedResources, loaded] = useUserSettingsCompatibility<
-    PinnedResourcesType
-  >(PINNED_RESOURCES_CONFIG_MAP_KEY, PINNED_RESOURCES_LOCAL_STORAGE_KEY, defaultPins, true);
+  const [pinnedResources, setPinnedResources, loaded] =
+    useUserSettingsCompatibility<PinnedResourcesType>(
+      PINNED_RESOURCES_CONFIG_MAP_KEY,
+      PINNED_RESOURCES_LOCAL_STORAGE_KEY,
+      defaultPins,
+      true,
+    );
 
   const pins = useMemo(() => {
     if (!loaded) {

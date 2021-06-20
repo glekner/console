@@ -52,48 +52,46 @@ export const getActions = (
   opts: VMWizardStorageRowActionOpts,
 ) => [menuActionEdit, menuActionRemove].map((a) => a(wizardStorageData, opts));
 
-export const VmWizardStorageRow: RowFunction<
-  VMWizardStorageBundle,
-  VMWizardStorageRowCustomData
-> = ({
-  obj: { name, wizardStorageData, ...restData },
-  customData: {
-    isDisabled,
-    columnClasses,
-    removeStorage,
-    withProgress,
-    wizardReduxID,
-    isDeleteDisabled,
-    isUpdateDisabled,
-  },
-  index,
-  style,
-}) => {
-  const validations = _.get(wizardStorageData, ['validation', 'validations'], {});
-  return (
-    <DiskSimpleRow
-      data={{ ...restData, name }}
-      validation={{
-        name: validations.name || validations.url || validations.container || validations.pvc,
-        size: validations.size,
-        diskInterface: validations.diskInterface,
-      }}
-      columnClasses={columnClasses}
-      index={index}
-      style={style}
-      actionsComponent={
-        <Kebab
-          options={getActions(wizardStorageData, {
-            wizardReduxID,
-            removeStorage,
-            withProgress,
-            isDeleteDisabled,
-            isUpdateDisabled,
-          })}
-          isDisabled={isDisabled}
-          id={`kebab-for-${name}`}
-        />
-      }
-    />
-  );
-};
+export const VmWizardStorageRow: RowFunction<VMWizardStorageBundle, VMWizardStorageRowCustomData> =
+  ({
+    obj: { name, wizardStorageData, ...restData },
+    customData: {
+      isDisabled,
+      columnClasses,
+      removeStorage,
+      withProgress,
+      wizardReduxID,
+      isDeleteDisabled,
+      isUpdateDisabled,
+    },
+    index,
+    style,
+  }) => {
+    const validations = _.get(wizardStorageData, ['validation', 'validations'], {});
+    return (
+      <DiskSimpleRow
+        data={{ ...restData, name }}
+        validation={{
+          name: validations.name || validations.url || validations.container || validations.pvc,
+          size: validations.size,
+          diskInterface: validations.diskInterface,
+        }}
+        columnClasses={columnClasses}
+        index={index}
+        style={style}
+        actionsComponent={
+          <Kebab
+            options={getActions(wizardStorageData, {
+              wizardReduxID,
+              removeStorage,
+              withProgress,
+              isDeleteDisabled,
+              isUpdateDisabled,
+            })}
+            isDisabled={isDisabled}
+            id={`kebab-for-${name}`}
+          />
+        }
+      />
+    );
+  };

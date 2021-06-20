@@ -58,20 +58,8 @@ describe('Create Route', () => {
 
   it('should render control buttons in a button bar with create disabled', () => {
     expect(wrapper.find(ButtonBar).exists()).toBe(true);
-    expect(
-      wrapper
-        .find(Button)
-        .at(0)
-        .childAt(0)
-        .text(),
-    ).toEqual(`${i18nNS}~Create`);
-    expect(
-      wrapper
-        .find(Button)
-        .at(1)
-        .childAt(0)
-        .text(),
-    ).toEqual(`${i18nNS}~Cancel`);
+    expect(wrapper.find(Button).at(0).childAt(0).text()).toEqual(`${i18nNS}~Create`);
+    expect(wrapper.find(Button).at(1).childAt(0).text()).toEqual(`${i18nNS}~Cancel`);
   });
 
   it('should display the Add alternate Service link when a service is selected', () => {
@@ -136,10 +124,7 @@ describe('Create Route', () => {
 
     expect(wrapper.find(AlternateServicesGroup).exists()).toBe(true);
     expect(wrapper.contains(`${i18nNS}~Remove alternate Service`)).toBeTruthy();
-    wrapper
-      .find(Button)
-      .at(0)
-      .simulate('click');
+    wrapper.find(Button).at(0).simulate('click');
     expect(wrapper.find(AlternateServicesGroup).exists()).toBe(false);
     expect(wrapper.contains(`${i18nNS}~Remove alternate Service`)).not.toBeTruthy();
   });

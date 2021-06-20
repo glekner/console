@@ -27,8 +27,8 @@ type VMBundle = {
   clusterName: string;
 };
 
-const OvirtProviderClustersVMsConnected: React.FC<OvirtProviderClustersVMsConnectedProps> = React.memo(
-  ({ vmField, clusterField, ovirtProviderCR, onClusterChange, onVMChange }) => {
+const OvirtProviderClustersVMsConnected: React.FC<OvirtProviderClustersVMsConnectedProps> =
+  React.memo(({ vmField, clusterField, ovirtProviderCR, onClusterChange, onVMChange }) => {
     const { t } = useTranslation();
     const iVMs = iGetIn(ovirtProviderCR, ['data', 'spec', 'vms']);
 
@@ -109,8 +109,7 @@ const OvirtProviderClustersVMsConnected: React.FC<OvirtProviderClustersVMsConnec
         </FormFieldRow>
       </>
     );
-  },
-);
+  });
 
 type OvirtProviderClustersVMsConnectedProps = {
   vmField: any;

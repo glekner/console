@@ -73,9 +73,10 @@ const OngoingActivity = connect(mapStateToProps)(
       const resourceActivityExtensions = useExtensions<DashboardsOverviewResourceActivity>(
         isDashboardsOverviewResourceActivity,
       );
-      const [dynamicResourceActivityExtensions] = useResolvedExtensions<
-        DynamicDashboardsOverviewResourceActivity
-      >(isDynamicDashboardsOverviewResourceActivity);
+      const [dynamicResourceActivityExtensions] =
+        useResolvedExtensions<DynamicDashboardsOverviewResourceActivity>(
+          isDynamicDashboardsOverviewResourceActivity,
+        );
 
       const resourceActivities = React.useMemo(
         () =>
@@ -88,9 +89,10 @@ const OngoingActivity = connect(mapStateToProps)(
       const prometheusActivities = useExtensions<DashboardsOverviewPrometheusActivity>(
         isDashboardsOverviewPrometheusActivity,
       );
-      const [dynamicPrometheusActivities] = useResolvedExtensions<
-        DynamicDashboardsOverviewPrometheusActivity
-      >(isDynamicDashboardsOverviewPrometheusActivity);
+      const [dynamicPrometheusActivities] =
+        useResolvedExtensions<DynamicDashboardsOverviewPrometheusActivity>(
+          isDynamicDashboardsOverviewPrometheusActivity,
+        );
 
       React.useEffect(() => {
         resourceActivities.forEach((a, index) => {

@@ -58,9 +58,8 @@ export const CreateBlockPoolModal = withHandlePromise((props: CreateBlockPoolMod
     };
   }, [state.poolName]);
 
-  const [newPool, newPoolLoaded, newPoolLoadError] = useK8sWatchResource<StoragePoolKind>(
-    poolResource,
-  );
+  const [newPool, newPoolLoaded, newPoolLoadError] =
+    useK8sWatchResource<StoragePoolKind>(poolResource);
 
   React.useEffect(() => {
     if (isSubmit) {

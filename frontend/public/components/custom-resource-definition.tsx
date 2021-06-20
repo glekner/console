@@ -193,9 +193,8 @@ const Details: React.FC<{ obj: CustomResourceDefinitionKind }> = ({ obj: crd }) 
 
 const Instances: React.FC<InstancesProps> = ({ obj, namespace }) => {
   const resourceListPageExtensions = useExtensions<ResourceListPage>(isResourceListPage);
-  const dynamicResourceListPageExtensions = useExtensions<DynamicResourceListPage>(
-    isDynamicResourceListPage,
-  );
+  const dynamicResourceListPageExtensions =
+    useExtensions<DynamicResourceListPage>(isDynamicResourceListPage);
   const crdKind = referenceForCRD(obj);
   const componentLoader = getResourceListPages(
     resourceListPageExtensions,
@@ -311,27 +310,26 @@ export const CustomResourceDefinitionsPage: React.FC<CustomResourceDefinitionsPa
     canCreate={true}
   />
 );
-export const CustomResourceDefinitionsDetailsPage: React.FC<CustomResourceDefinitionsDetailsPageProps> = (
-  props,
-) => {
-  const { t } = useTranslation();
-  return (
-    <DetailsPage
-      {...props}
-      kind="CustomResourceDefinition"
-      menuActions={menuActions}
-      pages={[
-        navFactory.details(Details),
-        navFactory.editYaml(),
-        {
-          name: t('public~Instances'),
-          href: 'instances',
-          component: Instances,
-        },
-      ]}
-    />
-  );
-};
+export const CustomResourceDefinitionsDetailsPage: React.FC<CustomResourceDefinitionsDetailsPageProps> =
+  (props) => {
+    const { t } = useTranslation();
+    return (
+      <DetailsPage
+        {...props}
+        kind="CustomResourceDefinition"
+        menuActions={menuActions}
+        pages={[
+          navFactory.details(Details),
+          navFactory.editYaml(),
+          {
+            name: t('public~Instances'),
+            href: 'instances',
+            component: Instances,
+          },
+        ]}
+      />
+    );
+  };
 
 export type CustomResourceDefinitionsListProps = {};
 

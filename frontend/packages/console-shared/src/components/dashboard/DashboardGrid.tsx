@@ -26,18 +26,18 @@ const DashboardGrid: React.FC<DashboardGridProps> = ({ mainCards, leftCards, rig
   const [containerRef, width] = useRefWidth();
   const smallGrid = !!containerRef.current && width <= parseInt(breakpointLG.value, 10);
 
-  const mainGridCards = React.useMemo(() => mapCardsToGrid(mainCards, 'main', smallGrid), [
-    mainCards,
-    smallGrid,
-  ]);
-  const leftGridCards = React.useMemo(() => mapCardsToGrid(leftCards, 'left', smallGrid), [
-    leftCards,
-    smallGrid,
-  ]);
-  const rightGridCards = React.useMemo(() => mapCardsToGrid(rightCards, 'right', smallGrid), [
-    rightCards,
-    smallGrid,
-  ]);
+  const mainGridCards = React.useMemo(
+    () => mapCardsToGrid(mainCards, 'main', smallGrid),
+    [mainCards, smallGrid],
+  );
+  const leftGridCards = React.useMemo(
+    () => mapCardsToGrid(leftCards, 'left', smallGrid),
+    [leftCards, smallGrid],
+  );
+  const rightGridCards = React.useMemo(
+    () => mapCardsToGrid(rightCards, 'right', smallGrid),
+    [rightCards, smallGrid],
+  );
 
   return (
     <div ref={containerRef}>

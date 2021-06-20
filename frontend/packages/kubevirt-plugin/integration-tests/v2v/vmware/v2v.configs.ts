@@ -5,11 +5,8 @@ import {
 } from '../../tests/utils/constants/common';
 import { Flavor, OperatingSystem, Workload } from '../../tests/utils/constants/wizard';
 
-const {
-  V2V_VMWARE_INSTANCE_API_URL,
-  V2V_VMWARE_INSTANCE_USERNAME,
-  V2V_VMWARE_INSTANCE_PASSWORD,
-} = process.env;
+const { V2V_VMWARE_INSTANCE_API_URL, V2V_VMWARE_INSTANCE_USERNAME, V2V_VMWARE_INSTANCE_PASSWORD } =
+  process.env;
 
 const vmProvider = 'VMware';
 

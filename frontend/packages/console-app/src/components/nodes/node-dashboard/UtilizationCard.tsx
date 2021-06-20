@@ -193,10 +193,10 @@ const UtilizationCard: React.FC = () => {
     [consumers, t],
   );
 
-  const networkPopovers = React.useMemo(() => [networkPopoverIn, networkPopoverOut], [
-    networkPopoverIn,
-    networkPopoverOut,
-  ]);
+  const networkPopovers = React.useMemo(
+    () => [networkPopoverIn, networkPopoverOut],
+    [networkPopoverIn, networkPopoverOut],
+  );
 
   return (
     <DashboardCard data-test-id="utilization-card">

@@ -35,9 +35,8 @@ import { GreenCheckCircleIcon, YellowExclamationTriangleIcon } from '@console/sh
 import RelatedObjectsPage from './related-objects';
 import { ClusterVersionConditionsLink, UpdatingMessageText } from './cluster-settings';
 
-export const clusterOperatorReference: K8sResourceKindReference = referenceForModel(
-  ClusterOperatorModel,
-);
+export const clusterOperatorReference: K8sResourceKindReference =
+  referenceForModel(ClusterOperatorModel);
 
 const getIcon = (status: OperatorStatus) => {
   return {

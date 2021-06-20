@@ -1,15 +1,6 @@
 import { cellWidth, expandable, IFormatter, ITransform, sortable } from '@patternfly/react-table';
 import { TFunction } from 'i18next';
 
-type MonitoringAlertColumn = {
-  title: string;
-  cellFormatters?: IFormatter[];
-  transforms?: ITransform[];
-  fieldName?: string;
-  sortFunc?: string;
-  props?: { [className: string]: string };
-};
-
 export const MonitoringAlertColumn = (t: TFunction): MonitoringAlertColumn[] => [
   {
     title: t('devconsole~Name'),
@@ -39,3 +30,12 @@ export const MonitoringAlertColumn = (t: TFunction): MonitoringAlertColumn[] => 
   },
   { title: '' },
 ];
+
+type MonitoringAlertColumn = {
+  title: string;
+  cellFormatters?: IFormatter[];
+  transforms?: ITransform[];
+  fieldName?: string;
+  sortFunc?: string;
+  props?: { [className: string]: string };
+};

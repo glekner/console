@@ -16,9 +16,8 @@ const dispatchToProps = (dispatch): PropsFromDispatch => ({
   onClickTab: (name) => dispatch(UIActions.selectOverviewDetailsTab(name)),
 });
 
-const getResourceTabComp = (t) => (props) => (
-  <AsyncComponent {...props} loader={t.properties.loader} />
-);
+const getResourceTabComp = (t) => (props) =>
+  <AsyncComponent {...props} loader={t.properties.loader} />;
 
 const getPluginTabResources = (
   item,

@@ -2,9 +2,7 @@ import { verifyAndInstallKnativeOperator } from '@console/dev-console/integratio
 
 before(() => {
   cy.login();
-  cy.document()
-    .its('readyState')
-    .should('eq', 'complete');
+  cy.document().its('readyState').should('eq', 'complete');
   verifyAndInstallKnativeOperator();
 });
 

@@ -100,9 +100,8 @@ export const VMSnapshotsPage: React.FC<VMTabProps> = ({ obj: vmLikeEntity, vmis:
     namespace,
   };
 
-  const [snapshots, snapshotsLoaded, snapshotsError] = useK8sWatchResource<VMSnapshot[]>(
-    snapshotResource,
-  );
+  const [snapshots, snapshotsLoaded, snapshotsError] =
+    useK8sWatchResource<VMSnapshot[]>(snapshotResource);
   const [mappedRelevantRestores, restoresLoaded, restoresError] = useMappedVMRestores(namespace);
 
   const [isLocked, setIsLocked] = useSafetyFirst(false);

@@ -91,14 +91,14 @@ const VMTemplateTable: React.FC<VMTemplateTableProps> = (props) => {
     () => [...props.resources.dataVolumes.data, ...(baseImageDVs || [])],
     [props.resources.dataVolumes.data, baseImageDVs],
   );
-  const pvcs = React.useMemo(() => [...props.resources.pvcs.data, ...(baseImages || [])], [
-    props.resources.pvcs.data,
-    baseImages,
-  ]);
-  const pods = React.useMemo(() => [...props.resources.pods.data, ...(baseImagePods || [])], [
-    props.resources.pods.data,
-    baseImagePods,
-  ]);
+  const pvcs = React.useMemo(
+    () => [...props.resources.pvcs.data, ...(baseImages || [])],
+    [props.resources.pvcs.data, baseImages],
+  );
+  const pods = React.useMemo(
+    () => [...props.resources.pods.data, ...(baseImagePods || [])],
+    [props.resources.pods.data, baseImagePods],
+  );
 
   const row = React.useCallback<RowFunction<VirtualMachineTemplateBundle>>(
     (rowProps) =>

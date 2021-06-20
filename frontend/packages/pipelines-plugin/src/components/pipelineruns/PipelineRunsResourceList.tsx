@@ -11,11 +11,10 @@ interface PipelineRunsResourceListProps {
   canCreate?: boolean;
 }
 
-const PipelineRunsResourceList: React.FC<Omit<
-  React.ComponentProps<typeof ListPage>,
-  'kind' | 'ListComponent' | 'rowFilters'
-> &
-  PipelineRunsResourceListProps> = (props) => {
+const PipelineRunsResourceList: React.FC<
+  Omit<React.ComponentProps<typeof ListPage>, 'kind' | 'ListComponent' | 'rowFilters'> &
+    PipelineRunsResourceListProps
+> = (props) => {
   const badge = usePipelineTechPreviewBadge(props.namespace);
   return (
     <ListPage

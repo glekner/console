@@ -8,24 +8,18 @@ export const gitPage = {
     cy.get(gitPO.noWorkLoadsText).should('contain.text', text),
   verifyPipelinesSection: () => {
     cy.get('.odc-namespaced-page__content').scrollTo('bottom', { ensureScrollable: false });
-    cy.get(gitPO.sectionTitle)
-      .contains('Pipelines')
-      .should('be.visible');
+    cy.get(gitPO.sectionTitle).contains('Pipelines').should('be.visible');
   },
   verifyPipelineInfoMessage: (message: string) => {
     cy.get(gitPO.pipeline.infoMessage).should('contain.text', `Info alert:${message}`);
   },
   enterGitUrl: (gitUrl: string) => {
-    cy.get(gitPO.gitRepoUrl)
-      .clear()
-      .type(gitUrl);
+    cy.get(gitPO.gitRepoUrl).clear().type(gitUrl);
     app.waitForDocumentLoad();
   },
 
   verifyPipelineCheckBox: () => {
-    cy.get(gitPO.pipeline.addPipeline)
-      .scrollIntoView()
-      .should('be.visible');
+    cy.get(gitPO.pipeline.addPipeline).scrollIntoView().should('be.visible');
   },
   enterAppName: (appName: string) => {
     cy.get('body').then(($body) => {
@@ -60,9 +54,7 @@ export const gitPage = {
   verifyAppName: (appName: string) => {
     cy.get(gitPO.appName).then(($el) => {
       if ($el.prop('tagName').includes('button')) {
-        cy.get(gitPO.appName)
-          .find('span')
-          .should('contain.text', appName);
+        cy.get(gitPO.appName).find('span').should('contain.text', appName);
       } else if ($el.prop('tagName').includes('input')) {
         cy.get(gitPO.appName).should('have.value', appName);
       } else {
@@ -73,29 +65,18 @@ export const gitPage = {
   },
   editAppName: (newAppName: string) => {
     cy.get(gitPO.appName).click();
-    cy.get(gitPO.createNewApp)
-      .first()
-      .click();
-    cy.get(gitPO.newAppName)
-      .clear()
-      .type(newAppName);
+    cy.get(gitPO.createNewApp).first().click();
+    cy.get(gitPO.newAppName).clear().type(newAppName);
   },
   enterComponentName: (name: string) => {
     app.waitForLoad();
-    cy.get(gitPO.nodeName)
-      .scrollIntoView()
-      .invoke('val')
-      .should('not.be.empty');
+    cy.get(gitPO.nodeName).scrollIntoView().invoke('val').should('not.be.empty');
     cy.get(gitPO.nodeName).clear();
-    cy.get(gitPO.nodeName)
-      .type(name)
-      .should('have.value', name);
+    cy.get(gitPO.nodeName).type(name).should('have.value', name);
   },
   enterWorkloadName: (name: string) => {
     cy.get(gitPO.nodeName).clear();
-    cy.get(gitPO.nodeName)
-      .type(name)
-      .should('have.value', name);
+    cy.get(gitPO.nodeName).type(name).should('have.value', name);
   },
   verifyNodeName: (componentName: string) =>
     cy.get(gitPO.nodeName).should('have.value', componentName),
@@ -103,22 +84,16 @@ export const gitPage = {
     switch (resource) {
       case 'deployment':
       case 'Deployment':
-        cy.get(gitPO.resources.deployment)
-          .scrollIntoView()
-          .check();
+        cy.get(gitPO.resources.deployment).scrollIntoView().check();
         break;
       case 'deployment config':
       case 'Deployment Config':
-        cy.get(gitPO.resources.deploymentConfig)
-          .scrollIntoView()
-          .check();
+        cy.get(gitPO.resources.deploymentConfig).scrollIntoView().check();
         break;
       case 'Knative':
       case 'knative':
       case 'Knative Service':
-        cy.get(gitPO.resources.knative)
-          .scrollIntoView()
-          .check();
+        cy.get(gitPO.resources.knative).scrollIntoView().check();
         break;
       default:
         throw new Error('Resource option is not available');
@@ -154,22 +129,9 @@ export const gitPage = {
         break;
     }
   },
-  selectAddPipeline: () =>
-    cy
-      .get(gitPO.pipeline.addPipeline)
-      .scrollIntoView()
-      .check(),
-  clickCreate: () =>
-    cy
-      .get(gitPO.create)
-      .scrollIntoView()
-      .should('be.enabled')
-      .click(),
-  clickCancel: () =>
-    cy
-      .get(gitPO.cancel)
-      .should('be.enabled')
-      .click(),
+  selectAddPipeline: () => cy.get(gitPO.pipeline.addPipeline).scrollIntoView().check(),
+  clickCreate: () => cy.get(gitPO.create).scrollIntoView().should('be.enabled').click(),
+  clickCancel: () => cy.get(gitPO.cancel).should('be.enabled').click(),
   selectBuilderImageForGitUrl: (gitUrl: string) => {
     switch (gitUrl) {
       case 'https://github.com/sclorg/dancer-ex.git':
@@ -246,10 +208,7 @@ export const gitPage = {
   verifyBuilderImageVersion: () =>
     cy.get(gitPO.builderSection.builderImageVersion).should('be.visible'),
   selectTargetPortForRouting: () => {
-    cy.get(gitPO.advancedOptions.routing.targetPort)
-      .scrollIntoView()
-      .clear()
-      .type('8080');
+    cy.get(gitPO.advancedOptions.routing.targetPort).scrollIntoView().clear().type('8080');
   },
   enterRoutingHostName: (hostName: string) =>
     cy.get(gitPO.advancedOptions.routing.hostname).type(hostName),
@@ -262,9 +221,7 @@ export const gitPage = {
           .uncheck();
         break;
       case buildConfigOptions.automaticBuildImage:
-        cy.get(gitPO.advancedOptions.buildConfig.buildTriggerImage)
-          .should('be.visible')
-          .uncheck();
+        cy.get(gitPO.advancedOptions.buildConfig.buildTriggerImage).should('be.visible').uncheck();
         break;
       case buildConfigOptions.launchBuildOnCreatingBuildConfig:
         cy.get(gitPO.advancedOptions.buildConfig.buildTriggerConfigField)

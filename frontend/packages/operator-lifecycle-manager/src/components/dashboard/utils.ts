@@ -55,16 +55,15 @@ const getCSVPriorityStatus = (
   return getOperatorStatus(subscriptionStatus, csvStatus);
 };
 
-export const getClusterServiceVersionsWithStatuses: GetOperatorsWithStatuses<ClusterServiceVersionKind> = (
-  resources,
-) => {
-  const grouppedOperators = _.groupBy(
-    resources.clusterServiceVersions.data as ClusterServiceVersionKind[],
-    (o) => o.metadata.name,
-  );
-  return _.values(grouppedOperators).map((operators) =>
-    getOperatorsStatus<ClusterServiceVersionKind>(operators, (csv) =>
-      getCSVPriorityStatus(csv, resources.subscriptions.data as SubscriptionKind[]),
-    ),
-  );
-};
+export const getClusterServiceVersionsWithStatuses: GetOperatorsWithStatuses<ClusterServiceVersionKind> =
+  (resources) => {
+    const grouppedOperators = _.groupBy(
+      resources.clusterServiceVersions.data as ClusterServiceVersionKind[],
+      (o) => o.metadata.name,
+    );
+    return _.values(grouppedOperators).map((operators) =>
+      getOperatorsStatus<ClusterServiceVersionKind>(operators, (csv) =>
+        getCSVPriorityStatus(csv, resources.subscriptions.data as SubscriptionKind[]),
+      ),
+    );
+  };

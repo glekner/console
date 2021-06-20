@@ -29,15 +29,8 @@ import { TemplateValidations } from '../../../utils/validations/template/templat
 import { DiskModal } from './disk-modal';
 
 const DiskModalFirehoseComponent: React.FC<DiskModalFirehoseComponentProps> = (props) => {
-  const {
-    disk,
-    volume,
-    dataVolume,
-    vmLikeEntity,
-    vmLikeEntityLoading,
-    isVMRunning,
-    ...restProps
-  } = props;
+  const { disk, volume, dataVolume, vmLikeEntity, vmLikeEntityLoading, isVMRunning, ...restProps } =
+    props;
 
   const vmLikeFinal = getLoadedData(vmLikeEntityLoading, vmLikeEntity); // default old snapshot before loading a new one
 

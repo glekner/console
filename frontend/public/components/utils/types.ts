@@ -5,15 +5,14 @@ import {
   K8sResourceCommon,
 } from '../../module/k8s';
 
-export type FirehoseResult<
-  R extends K8sResourceCommon | K8sResourceCommon[] = K8sResourceKind[]
-> = {
-  loaded: boolean;
-  loadError: string;
-  optional?: boolean;
-  data: R;
-  kind?: string;
-};
+export type FirehoseResult<R extends K8sResourceCommon | K8sResourceCommon[] = K8sResourceKind[]> =
+  {
+    loaded: boolean;
+    loadError: string;
+    optional?: boolean;
+    data: R;
+    kind?: string;
+  };
 
 export type FirehoseResourcesResult = {
   [key: string]: FirehoseResult<K8sResourceCommon | K8sResourceCommon[]>;

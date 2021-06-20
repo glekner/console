@@ -107,34 +107,18 @@ describe('Project Access Form', () => {
     expect(formWrapper.getElements()[0].props.headers).toEqual(['Name', 'Role']);
     expect(formWrapper.getElements()[0].props.addLabel).toEqual('Add access');
     expect(formWrapper.children()).toHaveLength(2);
-    expect(
-      formWrapper
-        .children()
-        .at(0)
-        .is(InputField),
-    ).toBe(true);
-    expect(
-      formWrapper
-        .children()
-        .at(1)
-        .is(DropdownField),
-    ).toBe(true);
+    expect(formWrapper.children().at(0).is(InputField)).toBe(true);
+    expect(formWrapper.children().at(1).is(DropdownField)).toBe(true);
     expect(projectAccessForm.find(FormFooter).exists()).toBe(true);
   });
 
   it('should load the dropdown with access roles', () => {
     const formWrapper = projectAccessForm.find(MultiColumnField);
-    expect(
-      formWrapper
-        .children()
-        .at(1)
-        .props().name,
-    ).toBe('role');
-    expect(
-      formWrapper
-        .children()
-        .at(1)
-        .props().items,
-    ).toEqual({ admin: 'Admin', view: 'View', edit: 'Edit' });
+    expect(formWrapper.children().at(1).props().name).toBe('role');
+    expect(formWrapper.children().at(1).props().items).toEqual({
+      admin: 'Admin',
+      view: 'View',
+      edit: 'Edit',
+    });
   });
 });

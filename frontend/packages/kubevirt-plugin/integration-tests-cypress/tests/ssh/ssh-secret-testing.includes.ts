@@ -17,9 +17,7 @@ export default ({ vmName }) =>
       cy.byTestID('copy-to-clipboard')
         .invoke('text')
         .then((val) => {
-          cy.fixture('ssh')
-            .its('key')
-            .should('eq', val);
+          cy.fixture('ssh').its('key').should('eq', val);
         });
     });
 
@@ -30,9 +28,7 @@ export default ({ vmName }) =>
         .invoke('text')
         .then((val) => {
           console.log('val: ', val);
-          cy.fixture('ssh')
-            .its('key')
-            .should('eq', val);
+          cy.fixture('ssh').its('key').should('eq', val);
         });
     });
   });

@@ -76,12 +76,10 @@ class MastheadToolbarContents_ extends React.Component {
     this._onKebabDropdownToggle = this._onKebabDropdownToggle.bind(this);
     this._onKebabDropdownSelect = this._onKebabDropdownSelect.bind(this);
     this._renderMenu = this._renderMenu.bind(this);
-    this._onApplicationLauncherDropdownSelect = this._onApplicationLauncherDropdownSelect.bind(
-      this,
-    );
-    this._onApplicationLauncherDropdownToggle = this._onApplicationLauncherDropdownToggle.bind(
-      this,
-    );
+    this._onApplicationLauncherDropdownSelect =
+      this._onApplicationLauncherDropdownSelect.bind(this);
+    this._onApplicationLauncherDropdownToggle =
+      this._onApplicationLauncherDropdownToggle.bind(this);
     this._onHelpDropdownSelect = this._onHelpDropdownSelect.bind(this);
     this._onHelpDropdownToggle = this._onHelpDropdownToggle.bind(this);
     this._onAboutModal = this._onAboutModal.bind(this);
@@ -600,20 +598,22 @@ class MastheadToolbarContents_ extends React.Component {
                 />
               </PageHeaderToolsItem>
             )}
-            {/* desktop -- (notification drawer button) */
-            alertAccess && (
-              <PageHeaderToolsItem>
-                <NotificationBadge
-                  aria-label={t('public~Notification drawer')}
-                  onClick={drawerToggle}
-                  variant="read"
-                  count={notificationAlerts?.data?.length || 0}
-                  data-quickstart-id="qs-masthead-notifications"
-                >
-                  <BellIcon alt="" />
-                </NotificationBadge>
-              </PageHeaderToolsItem>
-            )}
+            {
+              /* desktop -- (notification drawer button) */
+              alertAccess && (
+                <PageHeaderToolsItem>
+                  <NotificationBadge
+                    aria-label={t('public~Notification drawer')}
+                    onClick={drawerToggle}
+                    variant="read"
+                    count={notificationAlerts?.data?.length || 0}
+                    data-quickstart-id="qs-masthead-notifications"
+                  >
+                    <BellIcon alt="" />
+                  </NotificationBadge>
+                </PageHeaderToolsItem>
+              )
+            }
             <PageHeaderToolsItem>
               <Link
                 to={this._getImportYAMLPath()}
@@ -650,20 +650,22 @@ class MastheadToolbarContents_ extends React.Component {
             </PageHeaderToolsItem>
           </PageHeaderToolsGroup>
           <PageHeaderToolsGroup>
-            {/* mobile -- (notification drawer button) */
-            alertAccess && notificationAlerts?.data?.length > 0 && (
-              <PageHeaderToolsItem className="visible-xs-block">
-                <NotificationBadge
-                  aria-label={t('public~Notification drawer')}
-                  onClick={drawerToggle}
-                  variant="read"
-                  count={notificationAlerts?.data?.length}
-                  data-quickstart-id="qs-masthead-notifications"
-                >
-                  <BellIcon />
-                </NotificationBadge>
-              </PageHeaderToolsItem>
-            )}
+            {
+              /* mobile -- (notification drawer button) */
+              alertAccess && notificationAlerts?.data?.length > 0 && (
+                <PageHeaderToolsItem className="visible-xs-block">
+                  <NotificationBadge
+                    aria-label={t('public~Notification drawer')}
+                    onClick={drawerToggle}
+                    variant="read"
+                    count={notificationAlerts?.data?.length}
+                    data-quickstart-id="qs-masthead-notifications"
+                  >
+                    <BellIcon />
+                  </NotificationBadge>
+                </PageHeaderToolsItem>
+              )
+            }
             {/* mobile -- (system status button) */}
             <SystemStatusButton statuspageData={statuspageData} className="visible-xs-block" />
             {/* mobile -- kebab dropdown [(application launcher |) import yaml | documentation, about (| logout)] */}

@@ -66,18 +66,18 @@ const RestorePVCModal = withHandlePromise<RestorePVCModalProps>(
     const namespace = getNamespace(resource);
     const snapshotName = getName(resource);
 
-    const [pvcResource, pvcResourceLoaded, pvcResourceLoadError] = useK8sGet<
-      PersistentVolumeClaimKind
-    >(PersistentVolumeClaimModel, resource?.spec?.source?.persistentVolumeClaimName, namespace);
+    const [pvcResource, pvcResourceLoaded, pvcResourceLoadError] =
+      useK8sGet<PersistentVolumeClaimKind>(
+        PersistentVolumeClaimModel,
+        resource?.spec?.source?.persistentVolumeClaimName,
+        namespace,
+      );
 
-    const [
-      snapshotClassResource,
-      snapshotClassResourceLoaded,
-      snapshotClassResourceLoadError,
-    ] = useK8sGet<VolumeSnapshotClassKind>(
-      VolumeSnapshotClassModel,
-      resource?.spec?.volumeSnapshotClassName,
-    );
+    const [snapshotClassResource, snapshotClassResourceLoaded, snapshotClassResourceLoadError] =
+      useK8sGet<VolumeSnapshotClassKind>(
+        VolumeSnapshotClassModel,
+        resource?.spec?.volumeSnapshotClassName,
+      );
 
     const [volumeMode, setVolumeMode] = React.useState('');
     const onlyPvcSCs = (scObj: StorageClassResourceKind) =>

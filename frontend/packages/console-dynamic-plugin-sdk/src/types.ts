@@ -108,7 +108,7 @@ export type ExtensionProperties<E> = E extends Extension<infer P> ? P : never;
 export type UpdateExtensionProperties<
   E extends Extension<P>,
   U extends {},
-  P = ExtensionProperties<E>
+  P = ExtensionProperties<E>,
 > = Update<
   E,
   {

@@ -106,8 +106,9 @@ export const createUniqueNameResolver = (data: { name: string }[]) => {
 
 export const generateVMName = (template: TemplateKind): string =>
   alignWithDNS1123(
-    `${getParameterValue(template, TEMPLATE_BASE_IMAGE_NAME_PARAMETER) ||
-      getTemplateName(template)}-${uniqueNamesGenerator({
+    `${
+      getParameterValue(template, TEMPLATE_BASE_IMAGE_NAME_PARAMETER) || getTemplateName(template)
+    }-${uniqueNamesGenerator({
       dictionaries: [adjectives, animals],
       separator: '-',
     })}`,

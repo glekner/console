@@ -61,21 +61,15 @@ Then('user will see the dropdown selected with All Workloads by default', () => 
 });
 
 Then('user will see the CPU Usage on Metrics tab', () => {
-  cy.get(monitoringPO.dashboardTab.sections.cpuUsage)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(monitoringPO.dashboardTab.sections.cpuUsage).scrollIntoView().should('be.visible');
 });
 
 Then('user will see the Memory Usage on Metrics tab', () => {
-  cy.get(monitoringPO.dashboardTab.sections.memoryUsage)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(monitoringPO.dashboardTab.sections.memoryUsage).scrollIntoView().should('be.visible');
 });
 
 Then('user will see Receive Bandwidth on Metrics tab', () => {
-  cy.get(monitoringPO.dashboardTab.sections.receiveBandwidth)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(monitoringPO.dashboardTab.sections.receiveBandwidth).scrollIntoView().should('be.visible');
 });
 
 Then('user will see Transmit Bandwidth on Metrics tab', () => {
@@ -138,21 +132,15 @@ Then('user is able to see Name, Severity, Alert State and Notifications', () => 
 });
 
 Then('user will see the CPU Usage on Dashboard tab', () => {
-  cy.get(monitoringPO.dashboardTab.sections.cpuUsage)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(monitoringPO.dashboardTab.sections.cpuUsage).scrollIntoView().should('be.visible');
 });
 
 Then('user will see the Memory Usage on Dashboard tab', () => {
-  cy.get(monitoringPO.dashboardTab.sections.memoryUsage)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(monitoringPO.dashboardTab.sections.memoryUsage).scrollIntoView().should('be.visible');
 });
 
 Then('user will see Receive Bandwidth on Dashboard tab', () => {
-  cy.get(monitoringPO.dashboardTab.sections.receiveBandwidth)
-    .scrollIntoView()
-    .should('be.visible');
+  cy.get(monitoringPO.dashboardTab.sections.receiveBandwidth).scrollIntoView().should('be.visible');
 });
 
 Then('user will see Transmit Bandwidth on Dashboard tab', () => {

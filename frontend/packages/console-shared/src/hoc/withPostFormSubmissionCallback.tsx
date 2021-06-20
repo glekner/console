@@ -6,12 +6,11 @@ type WithPostFormSubmissionCallbackProps<R> = {
   postFormSubmissionCallback: (arg: R) => Promise<R>;
 };
 
-export const withPostFormSubmissionCallback = <
-  Props extends WithPostFormSubmissionCallbackProps<R>,
-  R = K8sResourceCommon
->(
-  Component: React.ComponentType<Props>,
-): React.FC<Omit<Props, keyof WithPostFormSubmissionCallbackProps<R>>> => (props: Props) => {
-  const postFormSubmissionCallback = usePostFormSubmitAction<R>();
-  return <Component {...props} postFormSubmissionCallback={postFormSubmissionCallback} />;
-};
+export const withPostFormSubmissionCallback =
+  <Props extends WithPostFormSubmissionCallbackProps<R>, R = K8sResourceCommon>(
+    Component: React.ComponentType<Props>,
+  ): React.FC<Omit<Props, keyof WithPostFormSubmissionCallbackProps<R>>> =>
+  (props: Props) => {
+    const postFormSubmissionCallback = usePostFormSubmitAction<R>();
+    return <Component {...props} postFormSubmissionCallback={postFormSubmissionCallback} />;
+  };

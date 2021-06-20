@@ -36,46 +36,46 @@ import { useExtensions } from './useExtensions';
  *
  * @returns `withExtensions` higher-order component creator function.
  */
-export const withExtensions = <
-  TExtensionProps extends ExtensionProps<E>,
-  E extends Extension = Extension,
-  TCombinedProps extends TExtensionProps = TExtensionProps
->(
-  typeGuardMapper: ExtensionTypeGuardMapper<E, TExtensionProps>,
-): ((C: React.ComponentType<TCombinedProps>) => ExtensionHOC<TCombinedProps, TExtensionProps>) => (
-  WrappedComponent,
-) => {
-  const typeGuards = Object.values(typeGuardMapper);
+export const withExtensions =
+  <
+    TExtensionProps extends ExtensionProps<E>,
+    E extends Extension = Extension,
+    TCombinedProps extends TExtensionProps = TExtensionProps,
+  >(
+    typeGuardMapper: ExtensionTypeGuardMapper<E, TExtensionProps>,
+  ): ((C: React.ComponentType<TCombinedProps>) => ExtensionHOC<TCombinedProps, TExtensionProps>) =>
+  (WrappedComponent) => {
+    const typeGuards = Object.values(typeGuardMapper);
 
-  if (typeGuards.length === 0) {
-    throw new Error('The object passed to withExtensions must contain at least one type guard');
-  }
+    if (typeGuards.length === 0) {
+      throw new Error('The object passed to withExtensions must contain at least one type guard');
+    }
 
-  const HOC: ExtensionHOC<TCombinedProps, TExtensionProps> = (props) => {
-    const extensionsInUse = useExtensions(...typeGuards);
+    const HOC: ExtensionHOC<TCombinedProps, TExtensionProps> = (props) => {
+      const extensionsInUse = useExtensions(...typeGuards);
 
-    const extensionProps = React.useMemo(
-      () =>
-        Object.keys(typeGuardMapper).reduce((acc, propName) => {
-          acc[propName] = extensionsInUse.filter(typeGuardMapper[propName]);
-          return acc;
-        }, {} as ExtensionProps<E>),
-      [extensionsInUse],
-    );
+      const extensionProps = React.useMemo(
+        () =>
+          Object.keys(typeGuardMapper).reduce((acc, propName) => {
+            acc[propName] = extensionsInUse.filter(typeGuardMapper[propName]);
+            return acc;
+          }, {} as ExtensionProps<E>),
+        [extensionsInUse],
+      );
 
-    const combinedProps = {
-      ...props,
-      ...extensionProps,
-    } as TCombinedProps;
+      const combinedProps = {
+        ...props,
+        ...extensionProps,
+      } as TCombinedProps;
 
-    return <WrappedComponent {...combinedProps} />;
+      return <WrappedComponent {...combinedProps} />;
+    };
+
+    HOC.displayName = `withExtensions(${WrappedComponent.displayName || WrappedComponent.name})`;
+    HOC.WrappedComponent = WrappedComponent;
+
+    return hoistStatics(HOC, WrappedComponent);
   };
-
-  HOC.displayName = `withExtensions(${WrappedComponent.displayName || WrappedComponent.name})`;
-  HOC.WrappedComponent = WrappedComponent;
-
-  return hoistStatics(HOC, WrappedComponent);
-};
 
 type ExtensionHOC<TCombinedProps, TExtensionProps> = React.ComponentType<
   Omit<TCombinedProps, keyof TExtensionProps>

@@ -9,9 +9,7 @@ import { selectorToString } from '../../module/k8s/selector';
 
 const Requirement: React.FC<RequirementProps> = ({ kind, requirements, namespace = '' }) => {
   // Strip off any trailing '=' characters for valueless selectors
-  const requirementAsString = selectorToString(requirements)
-    .replace(/=,/g, ',')
-    .replace(/=$/g, '');
+  const requirementAsString = selectorToString(requirements).replace(/=,/g, ',').replace(/=$/g, '');
   const requirementAsUrlEncodedString = encodeURIComponent(requirementAsString);
 
   const to = namespace

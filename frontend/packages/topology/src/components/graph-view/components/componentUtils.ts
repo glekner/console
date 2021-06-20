@@ -342,26 +342,28 @@ const createVisualConnector = (source: Node, target: Node | Graph): React.ReactE
   return null;
 };
 
-const createConnectorCallback = () => (
-  source: Node,
-  target: Node | Graph,
-  event: DragEvent,
-  dropHints: string[] | undefined,
-): Promise<React.ReactElement[] | null> => {
-  if (source === target) {
-    return null;
-  }
-  const createConnectors = target.getGraph()?.getData()?.createConnectorExtensions;
-  if (isGraph(target) || !createConnectors) {
-    return Promise.resolve(createVisualConnector(source, target));
-  }
+const createConnectorCallback =
+  () =>
+  (
+    source: Node,
+    target: Node | Graph,
+    event: DragEvent,
+    dropHints: string[] | undefined,
+  ): Promise<React.ReactElement[] | null> => {
+    if (source === target) {
+      return null;
+    }
+    const createConnectors = target.getGraph()?.getData()?.createConnectorExtensions;
+    if (isGraph(target) || !createConnectors) {
+      return Promise.resolve(createVisualConnector(source, target));
+    }
 
-  const creator = createConnectors.find((getter) => !!getter(dropHints, source, target));
-  if (creator) {
-    return creator(dropHints, source, target)(source, target);
-  }
-  return Promise.resolve(createVisualConnector(source, target));
-};
+    const creator = createConnectors.find((getter) => !!getter(dropHints, source, target));
+    if (creator) {
+      return creator(dropHints, source, target)(source, target);
+    }
+    return Promise.resolve(createVisualConnector(source, target));
+  };
 
 export {
   GraphComponentProps,

@@ -284,16 +284,8 @@ export const convertBuilderFormToPipeline = (
   namespace: string,
   existingPipeline?: PipelineKind,
 ): PipelineKind => {
-  const {
-    name,
-    resources,
-    params,
-    workspaces,
-    tasks,
-    listTasks,
-    finallyTasks,
-    ...others
-  } = formValues;
+  const { name, resources, params, workspaces, tasks, listTasks, finallyTasks, ...others } =
+    formValues;
   const listIds = listTasks.map((listTask) => listTask.name);
   // Strip remaining builder-only properties
   const unhandledSpec = _.omit(others, 'finallyListTasks');

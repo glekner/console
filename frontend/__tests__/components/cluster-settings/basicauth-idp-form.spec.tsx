@@ -26,20 +26,8 @@ const i18nNS = 'public';
 
 export const controlButtonTest = (wrapper: ShallowWrapper, i18nNamespace) => {
   expect(wrapper.find(ButtonBar).exists()).toBe(true);
-  expect(
-    wrapper
-      .find(Button)
-      .at(0)
-      .childAt(0)
-      .text(),
-  ).toEqual(`${i18nNamespace}~Add`);
-  expect(
-    wrapper
-      .find(Button)
-      .at(1)
-      .childAt(0)
-      .text(),
-  ).toEqual(`${i18nNamespace}~Cancel`);
+  expect(wrapper.find(Button).at(0).childAt(0).text()).toEqual(`${i18nNamespace}~Add`);
+  expect(wrapper.find(Button).at(1).childAt(0).text()).toEqual(`${i18nNamespace}~Cancel`);
 };
 
 describe('Add Identity Provider: BasicAuthentication', () => {

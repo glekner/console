@@ -184,8 +184,7 @@ export const loadedCatalogService: CatalogService = {
       tags: ['NodeJS', 'Express'],
       cta: {
         label: 'Create Devfile Sample',
-        href:
-          '/import?importType=devfile&formType=sample&devfileName=nodejs-basic&gitRepo=https://github.com/redhat-developer/devfile-sample.git',
+        href: '/import?importType=devfile&formType=sample&devfileName=nodejs-basic&gitRepo=https://github.com/redhat-developer/devfile-sample.git',
       },
       icon: {
         url: 'data:image/png;base64,.....',
@@ -199,8 +198,7 @@ export const loadedCatalogService: CatalogService = {
       tags: ['Python'],
       cta: {
         label: 'Create Devfile Sample',
-        href:
-          '/import?importType=devfile&formType=sample&devfileName=python-basic&gitRepo=https://github.com/elsony/devfile-sample-python-basic.git',
+        href: '/import?importType=devfile&formType=sample&devfileName=python-basic&gitRepo=https://github.com/elsony/devfile-sample-python-basic.git',
       },
       icon: {
         url: 'data:image/png;base64,.....',
@@ -214,8 +212,7 @@ export const loadedCatalogService: CatalogService = {
       tags: ['Java', 'Quarkus'],
       cta: {
         label: 'Create Devfile Sample',
-        href:
-          '/import?importType=devfile&formType=sample&devfileName=code-with-quarkus&gitRepo=https://github.com/elsony/devfile-sample-code-with-quarkus.git',
+        href: '/import?importType=devfile&formType=sample&devfileName=code-with-quarkus&gitRepo=https://github.com/elsony/devfile-sample-code-with-quarkus.git',
       },
       icon: {
         url: 'data:image/png;base64,.....',
@@ -229,8 +226,7 @@ export const loadedCatalogService: CatalogService = {
       tags: ['Java', 'Spring'],
       cta: {
         label: 'Create Devfile Sample',
-        href:
-          '/import?importType=devfile&formType=sample&devfileName=java-springboot-basic&gitRepo=https://github.com/elsony/devfile-sample-java-springboot-basic.git',
+        href: '/import?importType=devfile&formType=sample&devfileName=java-springboot-basic&gitRepo=https://github.com/elsony/devfile-sample-java-springboot-basic.git',
       },
       icon: {
         url: 'data:image/png;base64,.....',
@@ -416,8 +412,7 @@ export const loadedCatalogService: CatalogService = {
         tags: ['NodeJS', 'Express'],
         cta: {
           label: 'Create Devfile Sample',
-          href:
-            '/import?importType=devfile&formType=sample&devfileName=nodejs-basic&gitRepo=https://github.com/redhat-developer/devfile-sample.git',
+          href: '/import?importType=devfile&formType=sample&devfileName=nodejs-basic&gitRepo=https://github.com/redhat-developer/devfile-sample.git',
         },
         icon: {
           url: 'data:image/png;base64,.....',
@@ -431,8 +426,7 @@ export const loadedCatalogService: CatalogService = {
         tags: ['Python'],
         cta: {
           label: 'Create Devfile Sample',
-          href:
-            '/import?importType=devfile&formType=sample&devfileName=python-basic&gitRepo=https://github.com/elsony/devfile-sample-python-basic.git',
+          href: '/import?importType=devfile&formType=sample&devfileName=python-basic&gitRepo=https://github.com/elsony/devfile-sample-python-basic.git',
         },
         icon: {
           url: 'data:image/png;base64,.....',
@@ -446,8 +440,7 @@ export const loadedCatalogService: CatalogService = {
         tags: ['Java', 'Quarkus'],
         cta: {
           label: 'Create Devfile Sample',
-          href:
-            '/import?importType=devfile&formType=sample&devfileName=code-with-quarkus&gitRepo=https://github.com/elsony/devfile-sample-code-with-quarkus.git',
+          href: '/import?importType=devfile&formType=sample&devfileName=code-with-quarkus&gitRepo=https://github.com/elsony/devfile-sample-code-with-quarkus.git',
         },
         icon: {
           url: 'data:image/png;base64,.....',
@@ -461,8 +454,7 @@ export const loadedCatalogService: CatalogService = {
         tags: ['Java', 'Spring'],
         cta: {
           label: 'Create Devfile Sample',
-          href:
-            '/import?importType=devfile&formType=sample&devfileName=java-springboot-basic&gitRepo=https://github.com/elsony/devfile-sample-java-springboot-basic.git',
+          href: '/import?importType=devfile&formType=sample&devfileName=java-springboot-basic&gitRepo=https://github.com/elsony/devfile-sample-java-springboot-basic.git',
         },
         icon: {
           url: 'data:image/png;base64,.....',

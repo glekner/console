@@ -23,10 +23,10 @@ export const useRoutesWatcher = (
     [watchedServices.loadError, watchedServices.loaded, watchedServices.services],
   );
 
-  const routes = React.useMemo(() => getRoutesForServices(servicesNames, allRoutes), [
-    servicesNames,
-    allRoutes,
-  ]);
+  const routes = React.useMemo(
+    () => getRoutesForServices(servicesNames, allRoutes),
+    [servicesNames, allRoutes],
+  );
 
   return {
     loaded: loaded && watchedServices.loaded,

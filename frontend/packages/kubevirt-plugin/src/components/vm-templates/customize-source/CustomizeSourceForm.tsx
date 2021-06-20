@@ -90,20 +90,17 @@ const CustomizeSourceForm: React.FC<RouteComponentProps> = ({ location }) => {
     },
   });
 
-  const [
-    vmWithCustomBootSource,
-    loadvmWithCutomBootSource,
-    vmWithCustomBootSourceError,
-  ] = useK8sWatchResource<VMKind[]>({
-    kind: kubevirtReferenceForModel(VirtualMachineModel),
-    isList: true,
-    namespace,
-    selector: {
-      matchLabels: {
-        [VM_CUSTOMIZE_LABEL]: 'true',
+  const [vmWithCustomBootSource, loadvmWithCutomBootSource, vmWithCustomBootSourceError] =
+    useK8sWatchResource<VMKind[]>({
+      kind: kubevirtReferenceForModel(VirtualMachineModel),
+      isList: true,
+      namespace,
+      selector: {
+        matchLabels: {
+          [VM_CUSTOMIZE_LABEL]: 'true',
+        },
       },
-    },
-  });
+    });
 
   const templatesFromVms = React.useMemo(
     () =>

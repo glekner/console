@@ -20,16 +20,8 @@ import { V1Disk, V1Volume } from '../../../types/api';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 
 export const DeleteDiskModal = withHandlePromise((props: DeleteDiskModalProps) => {
-  const {
-    vmLikeEntity,
-    disk,
-    volume,
-    inProgress,
-    errorMessage,
-    handlePromise,
-    close,
-    cancel,
-  } = props;
+  const { vmLikeEntity, disk, volume, inProgress, errorMessage, handlePromise, close, cancel } =
+    props;
   const { t } = useTranslation();
   const [deleteReferencedResource, setDeleteReferencedResource] = React.useState<boolean>(true);
 

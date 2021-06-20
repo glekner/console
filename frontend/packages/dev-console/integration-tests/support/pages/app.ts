@@ -8,9 +8,7 @@ import { devNavigationMenuPO, formPO, gitPO, yamlPO } from '../pageObjects';
 
 export const app = {
   waitForDocumentLoad: () => {
-    cy.document()
-      .its('readyState')
-      .should('eq', 'complete');
+    cy.document().its('readyState').should('eq', 'complete');
   },
   waitForLoad: (timeout: number = 80000) => {
     cy.get('.co-m-loader', { timeout }).should('not.exist');
@@ -43,9 +41,7 @@ export const perspective = {
     cy.get('body').then(($body) => {
       if ($body.find('[aria-label="Close drawer panel"]').length) {
         cy.get('[aria-label="Close drawer panel"]').click();
-        cy.get('button')
-          .contains('Leave')
-          .click();
+        cy.get('button').contains('Leave').click();
       }
     });
   },
@@ -142,10 +138,7 @@ export const navigateTo = (opt: devNavigationMenu) => {
 
 export const projectNameSpace = {
   clickProjectDropdown: () => {
-    cy.byLegacyTestID('namespace-bar-dropdown')
-      .find('button')
-      .first()
-      .click();
+    cy.byLegacyTestID('namespace-bar-dropdown').find('button').first().click();
   },
   selectCreateProjectOption: () => {
     cy.document().then((doc) => {
@@ -211,16 +204,8 @@ export const projectNameSpace = {
 export const createForm = {
   clickOnFormView: () => cy.get(formPO.configureVia.formView).click(),
   clickOnYAMLView: () => cy.get(formPO.configureVia.yamlView).click(),
-  clickCreate: () =>
-    cy
-      .get(formPO.create)
-      .should('be.enabled')
-      .click(),
-  clickCancel: () =>
-    cy
-      .get(formPO.cancel)
-      .should('be.enabled')
-      .click(),
+  clickCreate: () => cy.get(formPO.create).should('be.enabled').click(),
+  clickCancel: () => cy.get(formPO.cancel).should('be.enabled').click(),
   sectionTitleShouldContain: (sectionTitle: string) =>
     cy.get(gitPO.sectionTitle).should('have.text', sectionTitle),
 };
@@ -232,11 +217,7 @@ export const yamlEditor = {
   },
 
   clearYAMLEditor: () => {
-    cy.get(yamlPO.yamlEditor)
-      .click()
-      .focused()
-      .type('{ctrl}a')
-      .clear();
+    cy.get(yamlPO.yamlEditor).click().focused().type('{ctrl}a').clear();
   },
 
   setEditorContent: (yamlLocation: string) => {

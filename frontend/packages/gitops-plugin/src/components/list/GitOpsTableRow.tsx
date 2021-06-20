@@ -23,14 +23,12 @@ const tableColumnClasses = [
   classNames('pf-m-hidden', 'pf-m-visible-on-lg', 'pf-m-width-30'), // Last deployment
 ];
 
-const getMatchingEnvs = (envs: string[], desiredStatus: string) => (
-  acc: string[],
-  status: string,
-  idx: number,
-): string[] =>
-  desiredStatus === status
-    ? [...acc, envs[idx]] // 1:1 between a status and an env
-    : acc;
+const getMatchingEnvs =
+  (envs: string[], desiredStatus: string) =>
+  (acc: string[], status: string, idx: number): string[] =>
+    desiredStatus === status
+      ? [...acc, envs[idx]] // 1:1 between a status and an env
+      : acc;
 
 const GitOpsTableRow: RowFunction<GitOpsAppGroupData> = (props) => {
   const { obj: appGroup, index, key, style } = props;

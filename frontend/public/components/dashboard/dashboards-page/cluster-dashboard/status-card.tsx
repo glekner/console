@@ -109,8 +109,11 @@ const ClusterAlerts = withDashboardResources(
       return stopWatchAlerts;
     }, [watchAlerts, stopWatchAlerts]);
 
-    const { data: alerts, loaded: alertsLoaded, loadError: alertsResponseError } =
-      notificationAlerts || {};
+    const {
+      data: alerts,
+      loaded: alertsLoaded,
+      loadError: alertsResponseError,
+    } = notificationAlerts || {};
 
     const UpdateIcon = React.useCallback(() => <BlueArrowCircleUpIcon />, []);
 
@@ -155,9 +158,10 @@ export const StatusCard = connect<StatusCardProps>(mapStateToProps)(({ k8sModels
   const subsystemExtensions = useExtensions<DashboardsOverviewHealthSubsystem>(
     isDashboardsOverviewHealthSubsystem,
   );
-  const [dynamicSubsystemExtensions] = useResolvedExtensions<
-    DynamicDashboardsOverviewHealthSubsystem
-  >(isDynamicDashboardsOverviewHealthSubsystem);
+  const [dynamicSubsystemExtensions] =
+    useResolvedExtensions<DynamicDashboardsOverviewHealthSubsystem>(
+      isDynamicDashboardsOverviewHealthSubsystem,
+    );
 
   const subsystems = React.useMemo(
     () => filterSubsystems([...subsystemExtensions, ...dynamicSubsystemExtensions], k8sModels),
@@ -213,9 +217,8 @@ export const StatusCard = connect<StatusCardProps>(mapStateToProps)(({ k8sModels
 
   if (operatorSubsystemIndex !== -1) {
     const operatorSubsystems: DashboardsOverviewHealthOperator['properties'][] = [];
-    const dynamicOperatorSubsystems: ResolvedExtension<
-      DynamicDashboardsOverviewHealthOperator
-    >['properties'][] = [];
+    const dynamicOperatorSubsystems: ResolvedExtension<DynamicDashboardsOverviewHealthOperator>['properties'][] =
+      [];
     subsystems.forEach((e) => {
       if (isResolvedDashboardsOverviewHealthOperator(e)) {
         dynamicOperatorSubsystems.push(e.properties);

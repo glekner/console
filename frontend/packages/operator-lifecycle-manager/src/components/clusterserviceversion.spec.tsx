@@ -122,12 +122,7 @@ describe(ClusterServiceVersionTableRow.displayName, () => {
     expect(col.find(Link).props().to).toEqual(
       resourceObjPath(testClusterServiceVersion, referenceForModel(ClusterServiceVersionModel)),
     );
-    expect(
-      col
-        .find(Link)
-        .find(ClusterServiceVersionLogo)
-        .exists(),
-    ).toBe(true);
+    expect(col.find(Link).find(ClusterServiceVersionLogo).exists()).toBe(true);
   });
 
   it('renders column for managedNamespace', () => {
@@ -156,30 +151,14 @@ describe(ClusterServiceVersionTableRow.displayName, () => {
     });
     const col = wrapper.find(TableRow).childAt(2);
 
-    expect(
-      col
-        .childAt(0)
-        .find('ClusterServiceVersionStatus')
-        .render()
-        .text(),
-    ).toEqual('Deleting');
+    expect(col.childAt(0).find('ClusterServiceVersionStatus').render().text()).toEqual('Deleting');
   });
 
   it('renders column with each CRD provided by the Operator', () => {
     const col = wrapper.find(TableRow).childAt(4);
     testClusterServiceVersion.spec.customresourcedefinitions.owned.forEach((desc, i) => {
-      expect(
-        col
-          .find(Link)
-          .at(i)
-          .props().title,
-      ).toEqual(desc.name);
-      expect(
-        col
-          .find(Link)
-          .at(i)
-          .props().to,
-      ).toEqual(
+      expect(col.find(Link).at(i).props().title).toEqual(desc.name);
+      expect(col.find(Link).at(i).props().to).toEqual(
         `${resourceObjPath(
           testClusterServiceVersion,
           referenceForModel(ClusterServiceVersionModel),
@@ -278,12 +257,7 @@ describe(CRDCard.displayName, () => {
   it('renders a link to create a new instance', () => {
     const wrapper = shallow(<CRDCard canCreate crd={crd} csv={testClusterServiceVersion} />);
 
-    expect(
-      wrapper
-        .find(CardFooter)
-        .find(Link)
-        .props().to,
-    ).toEqual(
+    expect(wrapper.find(CardFooter).find(Link).props().to).toEqual(
       `/k8s/ns/${testClusterServiceVersion.metadata.namespace}/${
         ClusterServiceVersionModel.plural
       }/${testClusterServiceVersion.metadata.name}/${referenceForProvidedAPI(crd)}/~new`,
@@ -295,12 +269,7 @@ describe(CRDCard.displayName, () => {
       <CRDCard canCreate={false} crd={crd} csv={testClusterServiceVersion} />,
     );
 
-    expect(
-      wrapper
-        .find(CardFooter)
-        .find(Link)
-        .exists(),
-    ).toBe(false);
+    expect(wrapper.find(CardFooter).find(Link).exists()).toBe(false);
   });
 });
 
@@ -328,14 +297,9 @@ describe(ClusterServiceVersionDetails.displayName, () => {
   });
 
   it('renders description section for ClusterServiceVersion', () => {
-    expect(
-      wrapper
-        .find('.co-m-pane__body')
-        .at(0)
-        .find(SectionHeading)
-        .at(1)
-        .props().text,
-    ).toEqual('olm~Description');
+    expect(wrapper.find('.co-m-pane__body').at(0).find(SectionHeading).at(1).props().text).toEqual(
+      'olm~Description',
+    );
   });
 
   it('renders creation date from ClusterServiceVersion', () => {
@@ -355,18 +319,10 @@ describe(ClusterServiceVersionDetails.displayName, () => {
 
     testClusterServiceVersion.spec.maintainers.forEach((maintainer, i) => {
       expect(maintainers.at(i).text()).toContain(maintainer.name);
-      expect(
-        maintainers
-          .at(i)
-          .find('.co-break-all')
-          .text(),
-      ).toEqual(maintainer.email);
-      expect(
-        maintainers
-          .at(i)
-          .find('.co-break-all')
-          .props().href,
-      ).toEqual(`mailto:${maintainer.email}`);
+      expect(maintainers.at(i).find('.co-break-all').text()).toEqual(maintainer.email);
+      expect(maintainers.at(i).find('.co-break-all').props().href).toEqual(
+        `mailto:${maintainer.email}`,
+      );
     });
   });
 
@@ -381,9 +337,8 @@ describe(ClusterServiceVersionDetails.displayName, () => {
   });
 
   it('renders empty state for unfulfilled outputs and metadata', () => {
-    const emptyClusterServiceVersion: ClusterServiceVersionKind = _.cloneDeep(
-      testClusterServiceVersion,
-    );
+    const emptyClusterServiceVersion: ClusterServiceVersionKind =
+      _.cloneDeep(testClusterServiceVersion);
     emptyClusterServiceVersion.spec.description = '';
     emptyClusterServiceVersion.spec.provider = undefined;
     emptyClusterServiceVersion.spec.links = [];
@@ -413,23 +368,15 @@ describe(ClusterServiceVersionDetails.displayName, () => {
   });
 
   it('renders info section for ClusterServiceVersion', () => {
-    expect(
-      wrapper
-        .find('.co-m-pane__body')
-        .at(1)
-        .find(SectionHeading)
-        .props().text,
-    ).toEqual('olm~ClusterServiceVersion details');
+    expect(wrapper.find('.co-m-pane__body').at(1).find(SectionHeading).props().text).toEqual(
+      'olm~ClusterServiceVersion details',
+    );
   });
 
   it('renders conditions section for ClusterServiceVersion', () => {
-    expect(
-      wrapper
-        .find('.co-m-pane__body')
-        .at(2)
-        .find(SectionHeading)
-        .props().text,
-    ).toEqual('olm~Conditions');
+    expect(wrapper.find('.co-m-pane__body').at(2).find(SectionHeading).props().text).toEqual(
+      'olm~Conditions',
+    );
   });
 });
 
@@ -504,12 +451,8 @@ describe(CSVSubscription.displayName, () => {
     );
 
     expect(
-      wrapper
-        .find(StatusBox)
-        .find(SubscriptionDetails)
-        .dive()
-        .find(SubscriptionUpdates)
-        .props().pkg,
+      wrapper.find(StatusBox).find(SubscriptionDetails).dive().find(SubscriptionUpdates).props()
+        .pkg,
     ).toEqual(testPackageManifest);
   });
 });

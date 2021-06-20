@@ -13,10 +13,7 @@ describe(CopyToClipboard.displayName, () => {
 
   it('displays "Copied" message when clicked', () => {
     wrapper = shallow(<CopyToClipboard value="FizzBuzz" />);
-    wrapper
-      .find<any>(CTC)
-      .props()
-      .onCopy();
+    wrapper.find<any>(CTC).props().onCopy();
 
     // re-render component created via React.memo
     wrapper.setProps({ value: 'FuzzBizz' });
@@ -26,10 +23,7 @@ describe(CopyToClipboard.displayName, () => {
 
   it('dismisses "Copied" message when mouse moves over button', () => {
     wrapper = shallow(<CopyToClipboard value="FizzBuzz" />);
-    wrapper
-      .find<any>(CTC)
-      .props()
-      .onCopy();
+    wrapper.find<any>(CTC).props().onCopy();
 
     wrapper.find('.co-copy-to-clipboard__btn').simulate('mouseenter');
 

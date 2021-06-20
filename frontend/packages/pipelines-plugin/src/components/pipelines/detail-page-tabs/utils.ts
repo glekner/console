@@ -56,26 +56,24 @@ export const getPipelineResourceLinks = (
   definitionResources: TektonResource[] = [],
   runResources: PipelineRunResource[],
 ): ResourceModelLink[] => {
-  return runResources?.map(
-    (resource): ResourceModelLink => {
-      const definitionResource = definitionResources.find(({ name }) => name === resource.name);
-      const qualifier = definitionResource ? definitionResource.type : undefined;
+  return runResources?.map((resource): ResourceModelLink => {
+    const definitionResource = definitionResources.find(({ name }) => name === resource.name);
+    const qualifier = definitionResource ? definitionResource.type : undefined;
 
-      if (isResourceRef(resource)) {
-        return {
-          resourceKind: PipelineResourceModel.kind,
-          name: resource.resourceRef.name,
-          qualifier,
-        };
-      }
-
+    if (isResourceRef(resource)) {
       return {
-        resourceKind: 'EmbeddedPipelineResource',
-        name: i18next.t('pipelines-plugin~Embedded PipelineResource'),
+        resourceKind: PipelineResourceModel.kind,
+        name: resource.resourceRef.name,
         qualifier,
       };
-    },
-  );
+    }
+
+    return {
+      resourceKind: 'EmbeddedPipelineResource',
+      name: i18next.t('pipelines-plugin~Embedded PipelineResource'),
+      qualifier,
+    };
+  });
 };
 
 export const convertBackingPipelineToPipelineResourceRefProps = (

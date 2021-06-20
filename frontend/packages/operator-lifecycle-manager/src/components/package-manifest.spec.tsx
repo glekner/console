@@ -33,10 +33,9 @@ describe(PackageManifestTableHeaderWithCatalogSource.displayName, () => {
 });
 
 describe('PackageManifestTableRow', () => {
-  let wrapper: ShallowWrapper<RowFunction<
-    PackageManifestKind,
-    { catalogSource: CatalogSourceKind }
-  >>;
+  let wrapper: ShallowWrapper<
+    RowFunction<PackageManifestKind, { catalogSource: CatalogSourceKind }>
+  >;
 
   beforeEach(() => {
     jest.spyOn(UIActions, 'getActiveNamespace').mockReturnValue('default');
@@ -57,12 +56,7 @@ describe('PackageManifestTableRow', () => {
 
   it('renders column for package name and logo', () => {
     expect(
-      wrapper
-        .find(TableRow)
-        .childAt(0)
-        .dive()
-        .find(ClusterServiceVersionLogo)
-        .props().displayName,
+      wrapper.find(TableRow).childAt(0).dive().find(ClusterServiceVersionLogo).props().displayName,
     ).toEqual(testPackageManifest.status.channels[0].currentCSVDesc.displayName);
   });
 
@@ -71,25 +65,14 @@ describe('PackageManifestTableRow', () => {
       name,
       currentCSVDesc: { version },
     } = testPackageManifest.status.channels[0];
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(1)
-        .dive()
-        .text(),
-    ).toEqual(`${version} (${name})`);
+    expect(wrapper.find(TableRow).childAt(1).dive().text()).toEqual(`${version} (${name})`);
   });
 
   it('renders column for creation timestamp', () => {
     const pkgManifestCreationTimestamp = testPackageManifest.metadata.creationTimestamp;
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(2)
-        .dive()
-        .find(Timestamp)
-        .props().timestamp,
-    ).toEqual(`${pkgManifestCreationTimestamp}`);
+    expect(wrapper.find(TableRow).childAt(2).dive().find(Timestamp).props().timestamp).toEqual(
+      `${pkgManifestCreationTimestamp}`,
+    );
   });
 
   // This is to verify cataloSource column gets rendered on the Search page for PackageManifest resource
@@ -108,13 +91,8 @@ describe('PackageManifestTableRow', () => {
         columns={columns}
       />,
     );
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(3)
-        .dive()
-        .find(ResourceLink)
-        .props().name,
-    ).toEqual(`${catalogSourceName}`);
+    expect(wrapper.find(TableRow).childAt(3).dive().find(ResourceLink).props().name).toEqual(
+      `${catalogSourceName}`,
+    );
   });
 });

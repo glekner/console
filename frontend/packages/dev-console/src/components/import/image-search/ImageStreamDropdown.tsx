@@ -13,15 +13,15 @@ const ImageStreamDropdown: React.FC<{ disabled?: boolean; formContextField?: str
   formContextField,
 }) => {
   const { t } = useTranslation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const imgCollection = {};
 
   const { values, setFieldValue, initialValues } = useFormikContext<FormikValues>();
   const { imageStream } = _.get(values, formContextField) || values;
   const { imageStream: initialImageStream, isi: initialIsi } =
     _.get(initialValues, formContextField) || initialValues;
-  const { state, dispatch, hasImageStreams, setHasImageStreams } = React.useContext(
-    ImageStreamContext,
-  );
+  const { state, dispatch, hasImageStreams, setHasImageStreams } =
+    React.useContext(ImageStreamContext);
   const { accessLoading, loading } = state;
   const isNamespaceSelected = imageStream.namespace !== '' && !accessLoading;
   const isStreamsAvailable = isNamespaceSelected && hasImageStreams && !loading;
@@ -81,7 +81,7 @@ const ImageStreamDropdown: React.FC<{ disabled?: boolean; formContextField?: str
     if (initialImageStream.image !== imageStream.image) {
       initialImageStream.tag = '';
     }
-  }, [imageStream.image, initialImageStream.image, initialImageStream.tag]);
+  }, [imageStream.image, initialImageStream]);
 
   return (
     <ResourceDropdownField

@@ -12,6 +12,7 @@ export * from '../../../integration-tests-cypress/support';
 
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       deleteResource(resource: any, ignoreNotFound?: boolean): void;
       applyResource(resource: any): void;

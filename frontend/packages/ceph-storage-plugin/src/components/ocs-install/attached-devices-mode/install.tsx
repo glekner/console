@@ -39,9 +39,8 @@ export const CreateAttachedDevicesCluster: React.FC<CreateAttachedDevicesCluster
     kind: referenceForModel(SubscriptionModel),
     isList: true,
   };
-  const [subscriptions, subscriptionsLoaded, subscriptionsLoadError] = useK8sWatchResource<
-    K8sResourceKind[]
-  >(subscriptionResource);
+  const [subscriptions, subscriptionsLoaded, subscriptionsLoadError] =
+    useK8sWatchResource<K8sResourceKind[]>(subscriptionResource);
 
   const csvResource = {
     kind: referenceForModel(ClusterServiceVersionModel),

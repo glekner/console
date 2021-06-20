@@ -151,68 +151,74 @@ export const createConnectionObjects = async (
     });
 };
 
-export const getCheckConnectionAction = (id, prevState = null) => (dispatch, getState) => {
-  const state = getState();
+export const getCheckConnectionAction =
+  (id, prevState = null) =>
+  (dispatch, getState) => {
+    const state = getState();
 
-  const beforeMetadata = {
-    isDisabled: asDisabled(true, VMWareProviderField.PASSWORD),
-  };
-  const afterMetadata = {
-    isDisabled: asDisabled(false, VMWareProviderField.PASSWORD),
-  };
+    const beforeMetadata = {
+      isDisabled: asDisabled(true, VMWareProviderField.PASSWORD),
+    };
+    const afterMetadata = {
+      isDisabled: asDisabled(false, VMWareProviderField.PASSWORD),
+    };
 
-  const namespace = iGetCommonData(state, id, VMWizardProps.activeNamespace);
-  const url = iGetVMWareFieldValue(state, id, VMWareProviderField.HOSTNAME);
-  const username = iGetVMWareFieldValue(state, id, VMWareProviderField.USERNAME);
-  const password = iGetVMWareFieldValue(state, id, VMWareProviderField.PASSWORD);
+    const namespace = iGetCommonData(state, id, VMWizardProps.activeNamespace);
+    const url = iGetVMWareFieldValue(state, id, VMWareProviderField.HOSTNAME);
+    const username = iGetVMWareFieldValue(state, id, VMWareProviderField.USERNAME);
+    const password = iGetVMWareFieldValue(state, id, VMWareProviderField.PASSWORD);
 
-  if (!namespace || !url || !username || !password) {
-    return;
-  }
+    if (!namespace || !url || !username || !password) {
+      return;
+    }
 
-  // start connecting
-  dispatch(
-    vmWizardInternalActions[InternalActionType.UpdateImportProvider](id, VMImportProvider.VMWARE, {
-      [VMWareProviderField.HOSTNAME]: beforeMetadata,
-      [VMWareProviderField.USERNAME]: beforeMetadata,
-      [VMWareProviderField.PASSWORD]: beforeMetadata,
-      [VMWareProviderField.REMEMBER_PASSWORD]: beforeMetadata,
-    }),
-  );
-
-  // side effect
-  // eslint-disable-next-line promise/catch-or-return
-  createConnectionObjects(
-    { id, dispatch },
-    {
-      namespace,
-      url,
-      username,
-      password,
-      prevNamespace: iGetCommonData(prevState || state, id, VMWizardProps.activeNamespace),
-      prevV2VName: iGetVMWareField(
-        prevState || state,
+    // start connecting
+    dispatch(
+      vmWizardInternalActions[InternalActionType.UpdateImportProvider](
         id,
-        VMWareProviderField.CURRENT_V2V_VMWARE_CR_NAME,
-      ),
-    },
-  )
-    .catch(consoleError)
-    .then(() =>
-      dispatch(
-        vmWizardInternalActions[InternalActionType.UpdateImportProvider](
-          id,
-          VMImportProvider.VMWARE,
-          {
-            [VMWareProviderField.HOSTNAME]: afterMetadata,
-            [VMWareProviderField.USERNAME]: afterMetadata,
-            [VMWareProviderField.PASSWORD]: afterMetadata,
-            [VMWareProviderField.REMEMBER_PASSWORD]: afterMetadata,
-          },
-        ),
+        VMImportProvider.VMWARE,
+        {
+          [VMWareProviderField.HOSTNAME]: beforeMetadata,
+          [VMWareProviderField.USERNAME]: beforeMetadata,
+          [VMWareProviderField.PASSWORD]: beforeMetadata,
+          [VMWareProviderField.REMEMBER_PASSWORD]: beforeMetadata,
+        },
       ),
     );
-};
+
+    // side effect
+    // eslint-disable-next-line promise/catch-or-return
+    createConnectionObjects(
+      { id, dispatch },
+      {
+        namespace,
+        url,
+        username,
+        password,
+        prevNamespace: iGetCommonData(prevState || state, id, VMWizardProps.activeNamespace),
+        prevV2VName: iGetVMWareField(
+          prevState || state,
+          id,
+          VMWareProviderField.CURRENT_V2V_VMWARE_CR_NAME,
+        ),
+      },
+    )
+      .catch(consoleError)
+      .then(() =>
+        dispatch(
+          vmWizardInternalActions[InternalActionType.UpdateImportProvider](
+            id,
+            VMImportProvider.VMWARE,
+            {
+              [VMWareProviderField.HOSTNAME]: afterMetadata,
+              [VMWareProviderField.USERNAME]: afterMetadata,
+              [VMWareProviderField.PASSWORD]: afterMetadata,
+              [VMWareProviderField.REMEMBER_PASSWORD]: afterMetadata,
+            },
+          ),
+        ),
+      );
+  };
 
 export const requestVmDetails = (id: string, vmName: string) => (dispatch, getState) => {
   const state = getState();

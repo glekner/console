@@ -119,21 +119,21 @@ export const ResourceTable: React.FC<ResourceTableProps> = (props) => {
   );
 };
 
-export const flattenCsvResources = (parentObj: K8sResourceKind) => (resources: {
-  [kind: string]: { data: K8sResourceKind[] };
-}): K8sResourceKind[] => {
-  return _.flatMap(resources, (resource, kind: string) =>
-    _.map(resource.data, (item) => ({ ...item, kind })),
-  ).reduce((owned, resource) => {
-    return (resource.metadata.ownerReferences || []).some(
-      (ref) =>
-        ref.uid === parentObj.metadata.uid ||
-        owned.some(({ metadata }) => metadata.uid === ref.uid),
-    )
-      ? owned.concat([resource])
-      : owned;
-  }, [] as K8sResourceKind[]);
-};
+export const flattenCsvResources =
+  (parentObj: K8sResourceKind) =>
+  (resources: { [kind: string]: { data: K8sResourceKind[] } }): K8sResourceKind[] => {
+    return _.flatMap(resources, (resource, kind: string) =>
+      _.map(resource.data, (item) => ({ ...item, kind })),
+    ).reduce((owned, resource) => {
+      return (resource.metadata.ownerReferences || []).some(
+        (ref) =>
+          ref.uid === parentObj.metadata.uid ||
+          owned.some(({ metadata }) => metadata.uid === ref.uid),
+      )
+        ? owned.concat([resource])
+        : owned;
+    }, [] as K8sResourceKind[]);
+  };
 
 // NOTE: This is us building the `ownerReferences` graph client-side
 // FIXME: Comparing `kind` is not enough to determine if an object is a custom resource

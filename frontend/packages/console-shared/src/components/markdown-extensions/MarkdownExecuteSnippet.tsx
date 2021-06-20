@@ -22,9 +22,11 @@ export const ExecuteSnippet: React.FC<ExecuteSnippetProps> = ({
   const [showRunning, setShowRunning] = React.useState<boolean>(false);
   const textToExecute = React.useMemo(() => {
     const executeTextId = element.getAttribute(MARKDOWN_EXECUTE_BUTTON_ID);
-    return (docContext.querySelector(
-      `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${executeTextId}"]`,
-    ) as HTMLElement).innerText;
+    return (
+      docContext.querySelector(
+        `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${executeTextId}"]`,
+      ) as HTMLElement
+    ).innerText;
   }, [element, rootSelector, docContext]);
 
   useEventListener(

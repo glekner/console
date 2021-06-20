@@ -68,9 +68,8 @@ const ClusterInventoryItem = withDashboardResources<ClusterInventoryItemProps>(
       const mainResource = React.useMemo(() => getFirehoseResource(model), [model]);
       const otherResources = React.useMemo(() => additionalResources || {}, [additionalResources]);
       const [mapper, setMapper] = React.useState<StatusGroupMapper>();
-      const [resourceData, resourceLoaded, resourceLoadError] = useK8sWatchResource<
-        K8sResourceCommon[]
-      >(mainResource);
+      const [resourceData, resourceLoaded, resourceLoadError] =
+        useK8sWatchResource<K8sResourceCommon[]>(mainResource);
       const resources = useK8sWatchResources(otherResources);
       React.useEffect(() => {
         mapperLoader &&
@@ -134,14 +133,15 @@ export const InventoryCard = () => {
   const replacementExtensions = useExtensions<DashboardsOverviewInventoryItemReplacement>(
     isDashboardsOverviewInventoryItemReplacement,
   );
-  const [dynamicReplacementExtensions] = useResolvedExtensions<
-    DynamicDashboardsOverviewInventoryItemReplacement
-  >(isDynamicDashboardsOverviewInventoryItemReplacement);
+  const [dynamicReplacementExtensions] =
+    useResolvedExtensions<DynamicDashboardsOverviewInventoryItemReplacement>(
+      isDynamicDashboardsOverviewInventoryItemReplacement,
+    );
 
-  const mergedItems = React.useMemo(() => mergeItems(itemExtensions, replacementExtensions), [
-    itemExtensions,
-    replacementExtensions,
-  ]);
+  const mergedItems = React.useMemo(
+    () => mergeItems(itemExtensions, replacementExtensions),
+    [itemExtensions, replacementExtensions],
+  );
 
   const dynamicMergedItems = React.useMemo(
     () => mergeDynamicItems(dynamicItemExtensions, dynamicReplacementExtensions),

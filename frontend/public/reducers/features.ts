@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Map as ImmutableMap } from 'immutable';
 import * as _ from 'lodash-es';
@@ -142,9 +143,7 @@ export type WithFlagsProps = {
 
 export type ConnectToFlags = <P extends WithFlagsProps>(
   ...flags: (FLAGS | string)[]
-) => (
-  C: React.ComponentType<P>,
-) => React.ComponentType<Omit<P, keyof WithFlagsProps>> & {
+) => (C: React.ComponentType<P>) => React.ComponentType<Omit<P, keyof WithFlagsProps>> & {
   WrappedComponent: React.ComponentType<P>;
 };
 

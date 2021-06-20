@@ -35,13 +35,11 @@ export const GetSecret: React.FC<GetSecretProps> = ({ obj }) => {
     [name, namespace],
   );
 
-  const [secretData, secretLoaded, secretLoadError] = useK8sWatchResource<SecretKind>(
-    secretResource,
-  );
+  const [secretData, secretLoaded, secretLoadError] =
+    useK8sWatchResource<SecretKind>(secretResource);
 
-  const [configData, configLoaded, configLoadError] = useK8sWatchResource<ConfigMapKind>(
-    cmResource,
-  );
+  const [configData, configLoaded, configLoadError] =
+    useK8sWatchResource<ConfigMapKind>(cmResource);
   const isLoaded = secretLoaded && configLoaded;
   const error = secretLoadError || configLoadError;
   const bucketName = configData?.data?.BUCKET_NAME;

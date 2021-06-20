@@ -37,9 +37,10 @@ export const CreateYAML = connectToPlural((props: CreateYAMLProps) => {
       [kindObj],
     ),
   );
-  const yamlTemplates = React.useMemo(() => getYAMLTemplates(templateExtensions), [
-    templateExtensions,
-  ]);
+  const yamlTemplates = React.useMemo(
+    () => getYAMLTemplates(templateExtensions),
+    [templateExtensions],
+  );
 
   if (!kindObj) {
     if (kindsInFlight || !resolvedTemplates) {

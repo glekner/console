@@ -15,12 +15,14 @@ import { ObjectWithTypePropertyWrapper } from './object-with-type-property-wrapp
 import { clearMetadata, clearRuntimeMetadata, initK8sObject, K8sInitAddon } from './util/k8s-mixin';
 
 export abstract class K8sResourceObjectWithTypePropertyWrapper<
-  RESOURCE extends K8sResourceKind,
-  TYPE extends ObjectEnum<string>,
-  COMBINED_TYPE_DATA,
-  SELF extends K8sResourceObjectWithTypePropertyWrapper<RESOURCE, TYPE, COMBINED_TYPE_DATA, SELF>
-> extends ObjectWithTypePropertyWrapper<RESOURCE, TYPE, COMBINED_TYPE_DATA, SELF>
-  implements K8sResourceKindMethods {
+    RESOURCE extends K8sResourceKind,
+    TYPE extends ObjectEnum<string>,
+    COMBINED_TYPE_DATA,
+    SELF extends K8sResourceObjectWithTypePropertyWrapper<RESOURCE, TYPE, COMBINED_TYPE_DATA, SELF>,
+  >
+  extends ObjectWithTypePropertyWrapper<RESOURCE, TYPE, COMBINED_TYPE_DATA, SELF>
+  implements K8sResourceKindMethods
+{
   private readonly model: K8sKind;
 
   protected constructor(
@@ -39,17 +41,17 @@ export abstract class K8sResourceObjectWithTypePropertyWrapper<
 
   init(data: K8sInitAddon = {}) {
     initK8sObject(this.data, this.model, data);
-    return (this as any) as SELF;
+    return this as any as SELF;
   }
 
   clearMetadata() {
     clearMetadata(this.data);
-    return (this as any) as SELF;
+    return this as any as SELF;
   }
 
   clearRuntimeMetadata() {
     clearRuntimeMetadata(this.data);
-    return (this as any) as SELF;
+    return this as any as SELF;
   }
 
   getModel = () => this.model;
@@ -63,13 +65,13 @@ export abstract class K8sResourceObjectWithTypePropertyWrapper<
   setName = (name: string) => {
     this.ensurePath('metadata');
     this.data.metadata.name = name;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   setNamespace = (namespace: string) => {
     this.ensurePath('metadata');
     this.data.metadata.namespace = namespace;
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   addAnotation = (key: string, value: string) => {
@@ -77,7 +79,7 @@ export abstract class K8sResourceObjectWithTypePropertyWrapper<
       this.ensurePath('metadata.annotations');
       this.data.metadata.annotations[key] = value;
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   addLabel = (key: string, value: string) => {
@@ -85,7 +87,7 @@ export abstract class K8sResourceObjectWithTypePropertyWrapper<
       this.ensurePath('metadata.labels');
       this.data.metadata.labels[key] = value;
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   addOwnerReferences = (...additionalOwnerReferences: OwnerReference[]) => {
@@ -100,6 +102,6 @@ export abstract class K8sResourceObjectWithTypePropertyWrapper<
         }
       });
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 }

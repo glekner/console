@@ -96,10 +96,7 @@ describe('ToastProvider', () => {
     expect(alertActionLinks.length).toBe(1);
 
     act(() => {
-      alertActionLinks
-        .at(0)
-        .find('button')
-        .simulate('click');
+      alertActionLinks.at(0).find('button').simulate('click');
     });
 
     wrapper.update();

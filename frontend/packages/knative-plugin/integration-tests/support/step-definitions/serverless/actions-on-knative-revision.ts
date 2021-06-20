@@ -122,9 +122,7 @@ Then(
   'user can see the label {string} in the Details tab of the Sidebar of {string}',
   (label: string, serviceName: string) => {
     cy.log(`knative revision of service ${serviceName}`);
-    cy.byLegacyTestID('base-node-handler')
-      .find('g.odc-resource-icon')
-      .click({ force: true });
+    cy.byLegacyTestID('base-node-handler').find('g.odc-resource-icon').click({ force: true });
     topologySidePane.verify();
     topologySidePane.selectTab('Details');
     topologySidePane.verifyLabel(label);
@@ -132,12 +130,8 @@ Then(
 );
 
 Then('key, value columns are displayed with respecitve text fields', () => {
-  cy.get('input[placeholder="key"]')
-    .its('length')
-    .should('be.gte', 1);
-  cy.get('input[placeholder="value"]')
-    .its('length')
-    .should('be.gte', 1);
+  cy.get('input[placeholder="key"]').its('length').should('be.gte', 1);
+  cy.get('input[placeholder="value"]').its('length').should('be.gte', 1);
 });
 
 Then('Add more link is enabled', () => {
@@ -147,9 +141,7 @@ Then('Add more link is enabled', () => {
 Then(
   'user can see the annotation {string} in the Details tab of the Sidebar of {string}',
   (numOfAnnotations: string, serviceName: string) => {
-    cy.byLegacyTestID('base-node-handler')
-      .find('g.odc-resource-icon')
-      .click({ force: true });
+    cy.byLegacyTestID('base-node-handler').find('g.odc-resource-icon').click({ force: true });
     cy.log(numOfAnnotations, serviceName);
     topologySidePane.verify();
     topologySidePane.selectTab('Details');
@@ -185,9 +177,7 @@ Then(
 Then(
   'number of Annotations increased to {string} in revision side bar details of service {string}',
   (numOfAnnotations: string, serviceName: string) => {
-    cy.byLegacyTestID('base-node-handler')
-      .find('g.odc-resource-icon')
-      .click({ force: true });
+    cy.byLegacyTestID('base-node-handler').find('g.odc-resource-icon').click({ force: true });
     cy.log(serviceName);
     topologySidePane.verify();
     topologySidePane.selectTab('Details');

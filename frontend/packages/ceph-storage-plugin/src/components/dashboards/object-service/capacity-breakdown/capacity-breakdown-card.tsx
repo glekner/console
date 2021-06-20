@@ -79,18 +79,20 @@ const BreakdownCard: React.FC = () => {
     }
   }, [isRGWSupported]);
 
-  const [secretData, secretLoaded, secretLoadError] = useK8sWatchResource<K8sResourceKind>(
-    secretResource,
-  );
+  const [secretData, secretLoaded, secretLoadError] =
+    useK8sWatchResource<K8sResourceKind>(secretResource);
   const rgwPrefix = React.useMemo(
     () => (isRGWSupported && secretLoaded && !secretLoadError ? decodeRGWPrefix(secretData) : ''),
     [secretData, secretLoaded, secretLoadError, isRGWSupported],
   );
 
   const { queries, model, metric } = React.useMemo(() => {
-    const { queries: q, model: mo, metric: me } =
-      breakdownQueryMap[serviceType][metricType] ??
-      breakdownQueryMap[serviceType][CapacityBreakdown.defaultMetrics[serviceType]];
+    const {
+      queries: q,
+      model: mo,
+      metric: me,
+    } = breakdownQueryMap[serviceType][metricType] ??
+    breakdownQueryMap[serviceType][CapacityBreakdown.defaultMetrics[serviceType]];
     return { queries: isFunctionThenApply(q)(rgwPrefix), model: mo, metric: me };
   }, [serviceType, metricType, rgwPrefix]);
   const prometheusQueries = React.useMemo(() => Object.values(queries) as string[], [queries]);
@@ -99,9 +101,8 @@ const BreakdownCard: React.FC = () => {
     [metric],
   );
 
-  const [subscription, loaded, loadError] = useK8sWatchResource<SubscriptionKind>(
-    subscriptionResource,
-  );
+  const [subscription, loaded, loadError] =
+    useK8sWatchResource<SubscriptionKind>(subscriptionResource);
   const [response, loading, queriesLoadError] = usePrometheusQueries<DataPoint[]>(
     prometheusQueries,
     parser,

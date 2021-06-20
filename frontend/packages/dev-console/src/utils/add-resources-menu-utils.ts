@@ -139,31 +139,33 @@ export type KebabAction = (
 
 export type MenuOptions = (KebabAction | KebabOption)[];
 
-export const createKebabAction: KebabFactory = (labelKey, icon, importType, checkAccess) => (
-  obj: K8sResourceKind,
-  namespace: string,
-  hasApplication: boolean,
-  connectorSourceObj: K8sResourceKind,
-  accessData: string[],
-) => {
-  if (checkAccess && !accessData.includes(checkAccess)) {
-    return null;
-  }
-  const connectorSourceContext: string = connectorSourceObj?.metadata
-    ? `${referenceFor(connectorSourceObj)}/${connectorSourceObj?.metadata?.name}`
-    : null;
+export const createKebabAction: KebabFactory =
+  (labelKey, icon, importType, checkAccess) =>
+  (
+    obj: K8sResourceKind,
+    namespace: string,
+    hasApplication: boolean,
+    connectorSourceObj: K8sResourceKind,
+    accessData: string[],
+  ) => {
+    if (checkAccess && !accessData.includes(checkAccess)) {
+      return null;
+    }
+    const connectorSourceContext: string = connectorSourceObj?.metadata
+      ? `${referenceFor(connectorSourceObj)}/${connectorSourceObj?.metadata?.name}`
+      : null;
 
-  return {
-    labelKey,
-    icon,
-    pathKey: getMenuPath(hasApplication, connectorSourceContext),
-    href: getAddPageUrl(
-      obj,
-      namespace,
-      importType,
-      hasApplication,
-      connectorSourceContext,
-      accessData.includes(SERVICE_BINDING_ENABLED),
-    ),
+    return {
+      labelKey,
+      icon,
+      pathKey: getMenuPath(hasApplication, connectorSourceContext),
+      href: getAddPageUrl(
+        obj,
+        namespace,
+        importType,
+        hasApplication,
+        connectorSourceContext,
+        accessData.includes(SERVICE_BINDING_ENABLED),
+      ),
+    };
   };
-};

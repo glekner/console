@@ -49,14 +49,8 @@ export const AffinityEdit: React.FC<AffinityEditProps> = ({
   const onLabelExpressionAdd = () =>
     onExpressionAdd({ id: null, key: '', values: [], operator: 'In' } as AffinityLabel);
 
-  const [
-    affinityFields,
-    ,
-    onFieldAdd,
-    onFieldChange,
-    onFieldDelete,
-    initialAffinityFieldChanged,
-  ] = useIDEntities<AffinityLabel>(affinity?.fields);
+  const [affinityFields, , onFieldAdd, onFieldChange, onFieldDelete, initialAffinityFieldChanged] =
+    useIDEntities<AffinityLabel>(affinity?.fields);
 
   const initialAffinityChanged = initialAffinityFieldChanged || initialAffinityExpressionChanged;
 
@@ -64,11 +58,8 @@ export const AffinityEdit: React.FC<AffinityEditProps> = ({
     onFieldAdd({ id: null, key: '', values: [], operator: 'In' } as AffinityLabel);
 
   const isNodeAffinity = focusedAffinity.type === 'nodeAffinity';
-  const {
-    isTopologyDisabled,
-    isTopologyInvalid,
-    topologyValidationMessage,
-  } = getTopologyKeyValidation(focusedAffinity, t);
+  const { isTopologyDisabled, isTopologyInvalid, topologyValidationMessage } =
+    getTopologyKeyValidation(focusedAffinity, t);
 
   React.useEffect(() => {
     if (isTopologyDisabled && focusedAffinity.topologyKey !== 'kubernetes.io/hostname')

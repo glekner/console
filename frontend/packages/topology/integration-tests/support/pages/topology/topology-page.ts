@@ -35,10 +35,7 @@ export const topologyPage = {
     topologyHelper.verifyWorkloadInTopologyPage(appName);
   },
   clickDisplayOptionDropdown: () =>
-    cy
-      .get(topologyPO.graph.filterDropdown)
-      .contains('Display Options')
-      .click(),
+    cy.get(topologyPO.graph.filterDropdown).contains('Display Options').click(),
   selectDisplayOption: (opt: displayOptions) => {
     topologyPage.clickDisplayOptionDropdown();
     switch (opt) {
@@ -69,9 +66,7 @@ export const topologyPage = {
     }
   },
   filterByResource: (resourceName: string) => {
-    cy.get(topologyPO.graph.filterDropdown)
-      .contains('Filter by Resource')
-      .click();
+    cy.get(topologyPO.graph.filterDropdown).contains('Filter by Resource').click();
     cy.get(`[id$="${resourceName}"]`).check();
   },
   verifyPipelineRunStatus: (status: string) =>
@@ -93,15 +88,9 @@ export const topologyPage = {
     });
   },
   verifyHelmReleaseSidePaneTabs: () => {
-    cy.get(topologyPO.sidePane.tabName)
-      .eq(0)
-      .should('contain.text', sideBarTabs.details);
-    cy.get(topologyPO.sidePane.tabName)
-      .eq(1)
-      .should('contain.text', sideBarTabs.resources);
-    cy.get(topologyPO.sidePane.tabs)
-      .eq(2)
-      .should('contain.text', sideBarTabs.releaseNotes);
+    cy.get(topologyPO.sidePane.tabName).eq(0).should('contain.text', sideBarTabs.details);
+    cy.get(topologyPO.sidePane.tabName).eq(1).should('contain.text', sideBarTabs.resources);
+    cy.get(topologyPO.sidePane.tabs).eq(2).should('contain.text', sideBarTabs.releaseNotes);
   },
   getAppNode: (appName: string) => {
     return cy.get(`[data-id="group:${appName}"] g.odc-resource-icon text`).contains('A');
@@ -135,20 +124,12 @@ export const topologyPage = {
     });
   },
   verifyDecorators: (nodeName: string, numOfDecorators: number) =>
-    topologyPage
-      .componentNode(nodeName)
-      .siblings('a')
-      .should('have.length', numOfDecorators),
+    topologyPage.componentNode(nodeName).siblings('a').should('have.length', numOfDecorators),
   selectContextMenuAction: (action: nodeActions | string) => {
-    cy.byTestActionID(action)
-      .should('be.visible')
-      .click();
+    cy.byTestActionID(action).should('be.visible').click();
   },
   getNode: (nodeName: string) => {
-    return cy
-      .get(topologyPO.graph.nodeLabel)
-      .should('be.visible')
-      .contains(nodeName);
+    return cy.get(topologyPO.graph.nodeLabel).should('be.visible').contains(nodeName);
   },
   rightClickOnNode: (releaseName: string) => {
     topologyPage.getNode(releaseName).trigger('contextmenu', { force: true });
@@ -166,14 +147,10 @@ export const topologyPage = {
     cy.get(topologyPO.graph.node, { timeout: 300000 }).should('be.visible');
   },
   rightClickOnHelmWorkload: () => {
-    cy.get(topologyPO.graph.node)
-      .find('circle')
-      .trigger('contextmenu', { force: true });
+    cy.get(topologyPO.graph.node).find('circle').trigger('contextmenu', { force: true });
   },
   clickOnHelmWorkload: () => {
-    cy.get(topologyPO.graph.node)
-      .find('circle')
-      .click({ force: true });
+    cy.get(topologyPO.graph.node).find('circle').click({ force: true });
   },
   clickWorkloadUrl: (workloadName: string) => {
     cy.get('[data-type="workload"] text')
@@ -201,10 +178,7 @@ export const topologyPage = {
         selectStorageClass: (storageClass: string = 'standard') => {
           cy.get(topologyPO.addStorage.pvc.createNewClaim.storageClass).click();
           cy.byLegacyTestID('dropdown-text-filter').type(storageClass);
-          cy.get('ul[role="listbox"]')
-            .find('li')
-            .contains(storageClass)
-            .click();
+          cy.get('ul[role="listbox"]').find('li').contains(storageClass).click();
         },
         enterPVCName: (name: string) => {
           cy.get(topologyPO.addStorage.pvc.createNewClaim.pvcName).type(name);

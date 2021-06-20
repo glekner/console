@@ -4,6 +4,7 @@ import { modal } from '../views/modal';
 
 declare global {
   namespace Cypress {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface Chainable<Subject> {
       createProject(name: string): Chainable<Element>;
       deleteProject(name: string): Chainable<Element>;

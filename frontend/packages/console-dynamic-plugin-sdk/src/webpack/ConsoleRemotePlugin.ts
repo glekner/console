@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import * as _ from 'lodash';
 import * as readPkg from 'read-pkg';
 import * as webpack from 'webpack';

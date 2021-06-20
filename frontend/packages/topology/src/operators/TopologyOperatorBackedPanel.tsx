@@ -46,9 +46,9 @@ type TopologyOperatorBackedPanelProps = {
   item: TopologyDataObject<OperatorGroupData>;
 };
 
-const ConnectedTopologyOperatorBackedPanel: React.FC<PropsFromState &
-  PropsFromDispatch &
-  TopologyOperatorBackedPanelProps> = ({ item, onClickTab, selectedDetailsTab }) => {
+const ConnectedTopologyOperatorBackedPanel: React.FC<
+  PropsFromState & PropsFromDispatch & TopologyOperatorBackedPanelProps
+> = ({ item, onClickTab, selectedDetailsTab }) => {
   const { t } = useTranslation();
   const { name, resource, data } = item;
   const { namespace } = resource.metadata;
@@ -57,11 +57,10 @@ const ConnectedTopologyOperatorBackedPanel: React.FC<PropsFromState &
   const actionExtensions = useExtensions<ClusterServiceVersionAction>(
     isClusterServiceVersionAction,
   );
-  const menuActions = React.useMemo(() => getOperandActions(reference, actionExtensions, csvName), [
-    reference,
-    actionExtensions,
-    csvName,
-  ]);
+  const menuActions = React.useMemo(
+    () => getOperandActions(reference, actionExtensions, csvName),
+    [reference, actionExtensions, csvName],
+  );
   const actions = menuActions.map((a) => a(modelFor(reference), resource));
   const resourcesList = React.useMemo(() => {
     return {

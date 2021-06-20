@@ -37,6 +37,7 @@ module.exports = {
         '@typescript-eslint/require-array-sort-compare': 'off',
         '@typescript-eslint/restrict-plus-operands': 'off',
         '@typescript-eslint/unbound-method': 'off',
+        'no-undef': 'off',
       }),
     },
 

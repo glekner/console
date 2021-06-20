@@ -84,7 +84,7 @@ describe('PipelineDetailsPage:', () => {
 
   it('should use the new metrics endpoint if the pipeline operator is greater than 1.4.0', () => {
     (useK8sGet as jest.Mock).mockReturnValue([mockData.pipeline, true, null]);
-    ((operatorVersion as unknown) as jest.Mock).mockReturnValue(new SemVer('1.8.0'));
+    (operatorVersion as unknown as jest.Mock).mockReturnValue(new SemVer('1.8.0'));
     const wrapper = shallow(<PipelineDetailsPage {...PipelineDetailsPageProps} />);
     expect(wrapper.find(DetailsPage).props().customData.queryPrefix).toBe(
       MetricsQueryPrefix.TEKTON_PIPELINES_CONTROLLER,
@@ -93,7 +93,7 @@ describe('PipelineDetailsPage:', () => {
 
   it('should use the old metrics endpoint if the pipeline operator is less than 1.4.0', () => {
     (useK8sGet as jest.Mock).mockReturnValue([mockData.pipeline, true, null]);
-    ((operatorVersion as unknown) as jest.Mock).mockReturnValue(new SemVer('1.2.1'));
+    (operatorVersion as unknown as jest.Mock).mockReturnValue(new SemVer('1.2.1'));
     const wrapper = shallow(<PipelineDetailsPage {...PipelineDetailsPageProps} />);
     expect(wrapper.find(DetailsPage).props().customData.queryPrefix).toBe(
       MetricsQueryPrefix.TEKTON,

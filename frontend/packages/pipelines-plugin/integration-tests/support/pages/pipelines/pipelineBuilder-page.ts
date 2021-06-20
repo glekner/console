@@ -39,9 +39,7 @@ export const pipelineBuilderSidePane = {
 
   selectWorkspace: (workspaceName: string) => {
     pipelineBuilderSidePane.verifyDialog();
-    cy.get(pipelineBuilderPO.formView.sidePane.workspaces)
-      .scrollIntoView()
-      .select(workspaceName);
+    cy.get(pipelineBuilderPO.formView.sidePane.workspaces).scrollIntoView().select(workspaceName);
   },
 };
 
@@ -53,9 +51,7 @@ export const pipelineBuilderPage = {
   verifyDefaultPipelineName: (pipelineName: string = pipelineBuilderText.pipelineName) =>
     cy.get(pipelineBuilderPO.formView.name).should('have.value', pipelineName),
   enterPipelineName: (pipelineName: string) => {
-    cy.get(pipelineBuilderPO.formView.name)
-      .clear()
-      .type(pipelineName);
+    cy.get(pipelineBuilderPO.formView.name).clear().type(pipelineName);
   },
   selectTask: (taskName: string = 'kn') => {
     cy.get('body').then(($body) => {
@@ -69,17 +65,13 @@ export const pipelineBuilderPage = {
   clickOnTask: (taskName: string) => cy.get(`[data-id="${taskName}"] text`).click({ force: true }),
   selectParallelTask: (taskName: string) => {
     cy.mouseHover(pipelineBuilderPO.formView.task);
-    cy.get(pipelineBuilderPO.formView.plusTaskIcon)
-      .eq(2)
-      .click({ force: true });
+    cy.get(pipelineBuilderPO.formView.plusTaskIcon).eq(2).click({ force: true });
     cy.get(pipelineBuilderPO.formView.parallelTask).click();
     cy.byTestActionID(taskName).click();
   },
   selectSeriesTask: (taskName: string) => {
     cy.mouseHover(pipelineBuilderPO.formView.task);
-    cy.get(pipelineBuilderPO.formView.plusTaskIcon)
-      .first()
-      .click({ force: true });
+    cy.get(pipelineBuilderPO.formView.plusTaskIcon).first().click({ force: true });
     cy.get(pipelineBuilderPO.formView.seriesTask).click();
     cy.byTestActionID(taskName).click();
   },
@@ -98,26 +90,16 @@ export const pipelineBuilderPage = {
     cy.get(pipelineBuilderPO.formView.addParams.defaultValue).type(defaultValue);
   },
   addResource: (resourceName: string, resourceType: string = 'Git') => {
-    cy.get(pipelineBuilderPO.formView.addResourcesLink)
-      .eq(1)
-      .click();
+    cy.get(pipelineBuilderPO.formView.addResourcesLink).eq(1).click();
     cy.get(pipelineBuilderPO.formView.addResources.name).type(resourceName);
     cy.get(pipelineBuilderPO.formView.addResources.resourceType).select(resourceType);
   },
   verifySection: () => {
     cy.get(pipelineBuilderPO.formView.sectionTitle).as('sectionTitle');
-    cy.get('@sectionTitle')
-      .eq(0)
-      .should('contain.text', pipelineBuilderText.formView.Tasks);
-    cy.get('@sectionTitle')
-      .eq(1)
-      .should('contain.text', pipelineBuilderText.formView.Parameters);
-    cy.get('@sectionTitle')
-      .eq(2)
-      .should('contain.text', pipelineBuilderText.formView.Resources);
-    cy.get('@sectionTitle')
-      .eq(3)
-      .should('contain.text', pipelineBuilderText.formView.Workspaces);
+    cy.get('@sectionTitle').eq(0).should('contain.text', pipelineBuilderText.formView.Tasks);
+    cy.get('@sectionTitle').eq(1).should('contain.text', pipelineBuilderText.formView.Parameters);
+    cy.get('@sectionTitle').eq(2).should('contain.text', pipelineBuilderText.formView.Resources);
+    cy.get('@sectionTitle').eq(3).should('contain.text', pipelineBuilderText.formView.Workspaces);
   },
   clickCreateButton: () => {
     cy.get(pipelineBuilderPO.create).click();

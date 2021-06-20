@@ -29,42 +29,43 @@ const tableColumnClasses = {
   kebab: Kebab.columnClass,
 };
 
-const BareMetalNodesTableHeader = (t: TFunction) => () => [
-  {
-    title: t('metal3-plugin~Name'),
-    sortField: 'name',
-    transforms: [sortable],
-    props: { className: tableColumnClasses.name },
-  },
-  {
-    title: t('metal3-plugin~Status'),
-    sortField: 'status.status',
-    transforms: [sortable],
-    props: { className: tableColumnClasses.status },
-  },
-  {
-    title: t('metal3-plugin~Role'),
-    sortField: 'machine.metadata.labels["machine.openshift.io/cluster-api-machine-role"]',
-    transforms: [sortable],
-    props: { className: tableColumnClasses.role },
-  },
-  {
-    title: t('metal3-plugin~Machine'),
-    sortField: "metadata.annotations['machine.openshift.io/machine']",
-    transforms: [sortable],
-    props: { className: tableColumnClasses.machine },
-  },
-  {
-    title: t('metal3-plugin~Management Address'),
-    sortField: 'host.spec.bmc.address',
-    transforms: [sortable],
-    props: { className: tableColumnClasses.address },
-  },
-  {
-    title: '',
-    props: { className: tableColumnClasses.kebab },
-  },
-];
+const BareMetalNodesTableHeader = (t: TFunction) => () =>
+  [
+    {
+      title: t('metal3-plugin~Name'),
+      sortField: 'name',
+      transforms: [sortable],
+      props: { className: tableColumnClasses.name },
+    },
+    {
+      title: t('metal3-plugin~Status'),
+      sortField: 'status.status',
+      transforms: [sortable],
+      props: { className: tableColumnClasses.status },
+    },
+    {
+      title: t('metal3-plugin~Role'),
+      sortField: 'machine.metadata.labels["machine.openshift.io/cluster-api-machine-role"]',
+      transforms: [sortable],
+      props: { className: tableColumnClasses.role },
+    },
+    {
+      title: t('metal3-plugin~Machine'),
+      sortField: "metadata.annotations['machine.openshift.io/machine']",
+      transforms: [sortable],
+      props: { className: tableColumnClasses.machine },
+    },
+    {
+      title: t('metal3-plugin~Management Address'),
+      sortField: 'host.spec.bmc.address',
+      transforms: [sortable],
+      props: { className: tableColumnClasses.address },
+    },
+    {
+      title: '',
+      props: { className: tableColumnClasses.kebab },
+    },
+  ];
 
 const CSRTableRow: React.FC<BareMetalNodesTableRowProps<CSRBundle>> = ({
   obj,

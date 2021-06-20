@@ -30,8 +30,11 @@ const EventSourceResources: React.FC<EventSourceResourcesProps> = ({ obj, ownedS
     spec,
     status,
   } = obj;
-  const { name: sinkName, kind: sinkKind, apiVersion: sinkApiversion } =
-    spec?.sink?.ref || spec?.sink || {};
+  const {
+    name: sinkName,
+    kind: sinkKind,
+    apiVersion: sinkApiversion,
+  } = spec?.sink?.ref || spec?.sink || {};
   const sinkUri = spec?.sink?.uri || status?.sinkUri;
   const apiGroup = apiVersion.split('/')[0];
   const linkUrl = `/search/ns/${namespace}?kind=${PodModel.kind}&q=${encodeURIComponent(

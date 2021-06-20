@@ -25,9 +25,7 @@ When('user clicks Create button in side bar', () => {
 
 When('user enters name as {string} in Create knative Serving page', (name: string) => {
   cy.get(catalogPO.createKnativeServing.logo).should('be.visible');
-  cy.get(catalogPO.createKnativeServing.name)
-    .clear()
-    .type(name);
+  cy.get(catalogPO.createKnativeServing.name).clear().type(name);
 });
 
 When('user clicks create button in Create knative Serving page', () => {

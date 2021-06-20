@@ -3,10 +3,7 @@ import { monitoringPO } from '../../pageObjects';
 
 export const detailsPage = {
   isTabSelected: (tabSelector: string) =>
-    cy
-      .get(tabSelector)
-      .parent('li')
-      .should('have.class', 'active'),
+    cy.get(tabSelector).parent('li').should('have.class', 'active'),
   selectTab: (tabSelector: string) => cy.get(tabSelector).click(),
 };
 
@@ -48,18 +45,12 @@ export const monitoringPage = {
       alertState: string[] = new Array('firing'),
       severity: string[] = new Array('Critical'),
     ) => {
-      cy.byLegacyTestID('filter-dropdown-toggle')
-        .find('button')
-        .click();
+      cy.byLegacyTestID('filter-dropdown-toggle').find('button').click();
       cy.get(`[data-test-row-filter="${alertState}"]`).click();
       //  To Do
       cy.byLegacyTestID(`[data-test-row-filter="${severity}"]`).click();
     },
-    clickFilter: () =>
-      cy
-        .byLegacyTestID('filter-dropdown-toggle')
-        .find('button')
-        .click(),
+    clickFilter: () => cy.byLegacyTestID('filter-dropdown-toggle').find('button').click(),
   },
   events: {
     selectResources: (resourceName: string) => {

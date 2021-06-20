@@ -45,9 +45,10 @@ const KafkaNode: React.FC<KafkaNodeProps> = ({
   const size = Math.min(width, height);
   const iconRadius = Math.min(width, height) * 0.25;
   const { radius } = calculateRadius(size);
-  const spec = React.useMemo(() => obsOrKafkaConnectionDropTargetSpec(serviceBinding), [
-    serviceBinding,
-  ]);
+  const spec = React.useMemo(
+    () => obsOrKafkaConnectionDropTargetSpec(serviceBinding),
+    [serviceBinding],
+  );
   const [dndDropProps, dndDropRef] = useDndDrop(spec, { element, ...props });
 
   return (

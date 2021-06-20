@@ -540,13 +540,8 @@ export class TileViewPage extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { activeFilters, selectedCategoryId, groupBy } = this.state;
-    const {
-      items,
-      itemsSorter,
-      filterGroups,
-      getAvailableCategories,
-      getAvailableFilters,
-    } = this.props;
+    const { items, itemsSorter, filterGroups, getAvailableCategories, getAvailableFilters } =
+      this.props;
 
     if (!_.isEqual(items, prevProps.items)) {
       const availableFilters = getAvailableFilters(defaultFilters, items, filterGroups);

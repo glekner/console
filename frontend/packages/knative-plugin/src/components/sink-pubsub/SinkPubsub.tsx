@@ -19,9 +19,11 @@ const SinkPubsub: React.FC<SinkPubsubProps> = ({ source, cancel, close }) => {
     spec,
   } = source;
   const isSinkRef = !!spec?.subscriber?.ref;
-  const { name: sinkName = '', apiVersion = '', kind = '' } = isSinkRef
-    ? spec?.subscriber?.ref
-    : {};
+  const {
+    name: sinkName = '',
+    apiVersion = '',
+    kind = '',
+  } = isSinkRef ? spec?.subscriber?.ref : {};
   const initialValues = {
     ref: {
       apiVersion,

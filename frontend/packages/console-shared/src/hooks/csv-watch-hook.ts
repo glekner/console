@@ -22,8 +22,7 @@ export const useCsvWatchResource = (ns: string): CsvWatchResource => {
     [ns],
   );
 
-  const [csvData, csvLoaded, csvError] = useK8sWatchResource<ClusterServiceVersionKind[]>(
-    csvResource,
-  );
+  const [csvData, csvLoaded, csvError] =
+    useK8sWatchResource<ClusterServiceVersionKind[]>(csvResource);
   return { csvData, csvLoaded, csvError };
 };

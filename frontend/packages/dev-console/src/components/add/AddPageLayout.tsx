@@ -24,13 +24,11 @@ const AddPageLayout: React.FC<AddPageLayoutProps> = ({ title, hintBlock: additio
   const [activeNamespace] = useActiveNamespace();
   const addActionGroupExtensions = useExtensions<AddActionGroup>(isAddActionGroup);
   const [addActionExtensions, addActionExtensionsResolved] = useAddActionExtensions();
-  const [
-    filteredAddActionExtensions,
-    filteredAddActionExtensionsLoaded,
-  ] = useAccessFilterExtensions(
-    activeNamespace,
-    filterNamespaceScopedUrl(activeNamespace, addActionExtensions),
-  );
+  const [filteredAddActionExtensions, filteredAddActionExtensionsLoaded] =
+    useAccessFilterExtensions(
+      activeNamespace,
+      filterNamespaceScopedUrl(activeNamespace, addActionExtensions),
+    );
   const [showDetails, setShowDetails] = useShowAddCardItemDetails();
 
   const extensionsLoaded: boolean =

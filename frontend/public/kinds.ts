@@ -1,3 +1,4 @@
+import * as React from 'react';
 import * as _ from 'lodash-es';
 import { connect } from 'react-redux';
 import { match } from 'react-router-dom';

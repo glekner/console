@@ -77,9 +77,9 @@ export const clusterChannelModal = (props) =>
   );
 
 export const clusterMoreUpdatesModal = (props) =>
-  import(
-    './cluster-more-updates-modal' /* webpackChunkName: "cluster-more-updates-modal" */
-  ).then((m) => m.clusterMoreUpdatesModal(props));
+  import('./cluster-more-updates-modal' /* webpackChunkName: "cluster-more-updates-modal" */).then(
+    (m) => m.clusterMoreUpdatesModal(props),
+  );
 
 export const clusterUpdateModal = (props) =>
   import('./cluster-update-modal' /* webpackChunkName: "cluster-update-modal" */).then((m) =>
@@ -145,6 +145,6 @@ export const managedResourceSaveModal = (props) =>
   ).then((m) => m.managedResourceSaveModal(props));
 
 export const languagePreferencesModal = (props) =>
-  import(
-    './language-preferences-modal' /* webpackChunkName: "language-preferences-modal" */
-  ).then((m) => m.languagePreferencesModal(props));
+  import('./language-preferences-modal' /* webpackChunkName: "language-preferences-modal" */).then(
+    (m) => m.languagePreferencesModal(props),
+  );

@@ -42,11 +42,11 @@ export const toRequirements = (selector: Selector = {}) => {
 
   Object.keys(matchLabels || {})
     .sort()
-    .forEach(function(k) {
+    .forEach(function (k) {
       requirements.push(createEquals(k, matchLabels[k]));
     });
 
-  (matchExpressions || []).forEach(function(me) {
+  (matchExpressions || []).forEach(function (me) {
     requirements.push(me);
   });
 

@@ -14,8 +14,9 @@ export const vmStatusFilter: RowFilter = {
     title: status,
   })),
   filter: (statuses, obj) => {
-    const status = ((obj?.metadata as any)
-      ?.vmStatusBundle as VMStatusBundle)?.status.getSimpleLabel();
+    const status = (
+      (obj?.metadata as any)?.vmStatusBundle as VMStatusBundle
+    )?.status.getSimpleLabel();
     return (
       statuses.selected.size === 0 ||
       statuses.selected.has(status) ||

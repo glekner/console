@@ -70,16 +70,8 @@ export class UploadForm {
   }
 
   async fillAll(data: PVCData) {
-    const {
-      image,
-      os,
-      pvcName,
-      pvcSize,
-      pvcSizeUnits,
-      storageClass,
-      accessMode,
-      volumeMode,
-    } = data;
+    const { image, os, pvcName, pvcSize, pvcSizeUnits, storageClass, accessMode, volumeMode } =
+      data;
     if (os) {
       this.selectGoldenOS(os);
     } else {

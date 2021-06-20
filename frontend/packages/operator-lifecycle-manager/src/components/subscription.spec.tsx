@@ -75,60 +75,29 @@ describe('SubscriptionTableRow', () => {
   });
 
   it('renders column for subscription name', () => {
+    expect(wrapper.find(TableRow).childAt(0).shallow().find(ResourceLink).props().name).toEqual(
+      subscription.metadata.name,
+    );
+    expect(wrapper.find(TableRow).childAt(0).shallow().find(ResourceLink).props().title).toEqual(
+      subscription.metadata.name,
+    );
     expect(
-      wrapper
-        .find(TableRow)
-        .childAt(0)
-        .shallow()
-        .find(ResourceLink)
-        .props().name,
-    ).toEqual(subscription.metadata.name);
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(0)
-        .shallow()
-        .find(ResourceLink)
-        .props().title,
-    ).toEqual(subscription.metadata.name);
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(0)
-        .shallow()
-        .find(ResourceLink)
-        .props().namespace,
+      wrapper.find(TableRow).childAt(0).shallow().find(ResourceLink).props().namespace,
     ).toEqual(subscription.metadata.namespace);
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(0)
-        .shallow()
-        .find(ResourceLink)
-        .props().kind,
-    ).toEqual(referenceForModel(SubscriptionModel));
+    expect(wrapper.find(TableRow).childAt(0).shallow().find(ResourceLink).props().kind).toEqual(
+      referenceForModel(SubscriptionModel),
+    );
   });
 
   it('renders actions kebab', () => {
     const menuArgs = [ClusterServiceVersionModel, subscription];
-    expect(
-      wrapper
-        .find(TableRow)
-        .find(ResourceKebab)
-        .props().kind,
-    ).toEqual(referenceForModel(SubscriptionModel));
-    expect(
-      wrapper
-        .find(TableRow)
-        .find(ResourceKebab)
-        .props().resource,
-    ).toEqual(subscription);
-    expect(
-      wrapper
-        .find(TableRow)
-        .find(ResourceKebab)
-        .props().actions[0],
-    ).toEqual(Kebab.factory.Edit);
+    expect(wrapper.find(TableRow).find(ResourceKebab).props().kind).toEqual(
+      referenceForModel(SubscriptionModel),
+    );
+    expect(wrapper.find(TableRow).find(ResourceKebab).props().resource).toEqual(subscription);
+    expect(wrapper.find(TableRow).find(ResourceKebab).props().actions[0]).toEqual(
+      Kebab.factory.Edit,
+    );
     expect(
       wrapper
         .find(TableRow)
@@ -160,111 +129,59 @@ describe('SubscriptionTableRow', () => {
   });
 
   it('renders column for namespace name', () => {
+    expect(wrapper.find(TableRow).childAt(1).shallow().find(ResourceLink).props().name).toEqual(
+      subscription.metadata.namespace,
+    );
+    expect(wrapper.find(TableRow).childAt(1).shallow().find(ResourceLink).props().title).toEqual(
+      subscription.metadata.namespace,
+    );
     expect(
-      wrapper
-        .find(TableRow)
-        .childAt(1)
-        .shallow()
-        .find(ResourceLink)
-        .props().name,
+      wrapper.find(TableRow).childAt(1).shallow().find(ResourceLink).props().displayName,
     ).toEqual(subscription.metadata.namespace);
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(1)
-        .shallow()
-        .find(ResourceLink)
-        .props().title,
-    ).toEqual(subscription.metadata.namespace);
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(1)
-        .shallow()
-        .find(ResourceLink)
-        .props().displayName,
-    ).toEqual(subscription.metadata.namespace);
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(1)
-        .shallow()
-        .find(ResourceLink)
-        .props().kind,
-    ).toEqual('Namespace');
+    expect(wrapper.find(TableRow).childAt(1).shallow().find(ResourceLink).props().kind).toEqual(
+      'Namespace',
+    );
   });
 
   it('renders column for subscription state when update available', () => {
     subscription.status.state = SubscriptionState.SubscriptionStateUpgradeAvailable;
     wrapper = updateWrapper();
 
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(2)
-        .find(SubscriptionStatus)
-        .shallow()
-        .text(),
-    ).toContain('Upgrade available');
+    expect(wrapper.find(TableRow).childAt(2).find(SubscriptionStatus).shallow().text()).toContain(
+      'Upgrade available',
+    );
   });
 
   it('renders column for subscription state when unknown state', () => {
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(2)
-        .find(SubscriptionStatus)
-        .shallow()
-        .text(),
-    ).toEqual('olm~Unknown failure');
+    expect(wrapper.find(TableRow).childAt(2).find(SubscriptionStatus).shallow().text()).toEqual(
+      'olm~Unknown failure',
+    );
   });
 
   it('renders column for subscription state when update in progress', () => {
     subscription.status.state = SubscriptionState.SubscriptionStateUpgradePending;
     wrapper = updateWrapper();
 
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(2)
-        .find(SubscriptionStatus)
-        .shallow()
-        .text(),
-    ).toContain('Upgrading');
+    expect(wrapper.find(TableRow).childAt(2).find(SubscriptionStatus).shallow().text()).toContain(
+      'Upgrading',
+    );
   });
 
   it('renders column for subscription state when no updates available', () => {
     subscription.status.state = SubscriptionState.SubscriptionStateAtLatest;
     wrapper = updateWrapper();
 
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(2)
-        .find(SubscriptionStatus)
-        .shallow()
-        .text(),
-    ).toContain('Up to date');
+    expect(wrapper.find(TableRow).childAt(2).find(SubscriptionStatus).shallow().text()).toContain(
+      'Up to date',
+    );
   });
 
   it('renders column for current subscription channel', () => {
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(3)
-        .shallow()
-        .text(),
-    ).toEqual(subscription.spec.channel);
+    expect(wrapper.find(TableRow).childAt(3).shallow().text()).toEqual(subscription.spec.channel);
   });
 
   it('renders column for approval strategy', () => {
-    expect(
-      wrapper
-        .find(TableRow)
-        .childAt(4)
-        .shallow()
-        .text(),
-    ).toEqual('olm~Automatic');
+    expect(wrapper.find(TableRow).childAt(4).shallow().text()).toEqual('olm~Automatic');
   });
 });
 

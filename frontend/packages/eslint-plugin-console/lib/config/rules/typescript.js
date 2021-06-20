@@ -21,6 +21,8 @@ module.exports = {
       extendDefaults: true,
       types: {
         '{}': false,
+        Function: false,
+        object: false,
       },
     },
   ],
@@ -165,7 +167,7 @@ module.exports = {
 
   // Disallow the use of variables before they are defined
   'no-use-before-define': 'off',
-  '@typescript-eslint/no-use-before-define': 'error',
+  '@typescript-eslint/no-use-before-define': 'off',
 
   // Disallow unnecessary constructors
   'no-useless-constructor': 'off',
@@ -262,4 +264,7 @@ module.exports = {
   // disable eslint no-shadow in favour of @typescript-eslint/no-shadow
   'no-shadow': 'off',
   '@typescript-eslint/no-shadow': ['error'],
+  'react/require-default-props': 'off',
+  'react/forbid-prop-types': 'off',
+  'react/no-unused-prop-types': 'off',
 };

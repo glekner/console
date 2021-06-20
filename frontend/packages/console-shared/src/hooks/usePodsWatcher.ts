@@ -16,10 +16,10 @@ export const usePodsWatcher = (
   const [podData, setPodData] = React.useState<PodRCData>();
   const watchKind = kind || resource.kind;
   const watchNS = namespace || resource.metadata.namespace;
-  const watchedResources = React.useMemo(() => getResourcesToWatchForPods(watchKind, watchNS), [
-    watchKind,
-    watchNS,
-  ]);
+  const watchedResources = React.useMemo(
+    () => getResourcesToWatchForPods(watchKind, watchNS),
+    [watchKind, watchNS],
+  );
 
   const resources = useK8sWatchResources(watchedResources);
 

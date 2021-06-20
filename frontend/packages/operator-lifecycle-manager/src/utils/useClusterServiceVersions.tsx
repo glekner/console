@@ -148,9 +148,8 @@ const useClusterServiceVersions: ExtensionHook<CatalogItem[]> = ({
     [namespace],
   );
 
-  const [clusterServiceVersions, loaded, loadedError] = useK8sWatchResource<
-    ClusterServiceVersionKind[]
-  >(resourceSelector);
+  const [clusterServiceVersions, loaded, loadedError] =
+    useK8sWatchResource<ClusterServiceVersionKind[]>(resourceSelector);
 
   const normalizedCSVs = React.useMemo(
     () => normalizeClusterServiceVersions(clusterServiceVersions, t),

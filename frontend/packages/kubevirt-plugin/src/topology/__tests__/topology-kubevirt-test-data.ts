@@ -1627,8 +1627,7 @@ const builds = {
           sourceStrategy: {
             from: {
               kind: 'DockerImage',
-              name:
-                'registry.redhat.io/rhscl/php-73-rhel7@sha256:9f4e437729b5cba25ec38054b29059db5ceafed49dc36fd0e354a33c2628fdfe',
+              name: 'registry.redhat.io/rhscl/php-73-rhel7@sha256:9f4e437729b5cba25ec38054b29059db5ceafed49dc36fd0e354a33c2628fdfe',
             },
             env: [
               {
@@ -1733,8 +1732,7 @@ const builds = {
           sourceStrategy: {
             from: {
               kind: 'DockerImage',
-              name:
-                'registry.redhat.io/dotnet/dotnet-31-rhel7@sha256:efbab79b55b28ca25f3e62a48648a179218a403bb539aa3440edffada5cc0dc9',
+              name: 'registry.redhat.io/dotnet/dotnet-31-rhel7@sha256:efbab79b55b28ca25f3e62a48648a179218a403bb539aa3440edffada5cc0dc9',
             },
           },
         },

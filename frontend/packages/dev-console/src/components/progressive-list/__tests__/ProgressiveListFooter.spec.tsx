@@ -26,12 +26,7 @@ describe(ProgressiveListFooter.name, () => {
         onShowItem={() => {}}
       />,
     );
-    expect(
-      wrapper
-        .find('div')
-        .render()
-        .text(),
-    ).toEqual('Dummy text Foo, Bar and One.');
+    expect(wrapper.find('div').render().text()).toEqual('Dummy text Foo, Bar and One.');
   });
 
   it('should have number of button equals to items in array', () => {

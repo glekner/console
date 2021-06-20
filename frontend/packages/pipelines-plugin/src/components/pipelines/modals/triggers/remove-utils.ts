@@ -26,9 +26,8 @@ export const removeTrigger = async (values: RemoveTriggerFormValues, pipeline: P
   const singleTriggers = ({ spec: { triggers } }) => triggers.length === 1;
 
   // Delete all EventListeners that only had the one trigger
-  const deletableEventListeners: EventListenerKind[] = matchingEventListeners.filter(
-    singleTriggers,
-  );
+  const deletableEventListeners: EventListenerKind[] =
+    matchingEventListeners.filter(singleTriggers);
   await Promise.all(
     deletableEventListeners.map((eventListener) => k8sKill(EventListenerModel, eventListener)),
   );

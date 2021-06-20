@@ -15,13 +15,15 @@ const composeEnhancers =
  * (https://github.com/reduxjs/redux-thunk/issues/231), so just including it here.
  */
 function createThunkMiddleware(extraArgument?) {
-  return ({ dispatch, getState }) => (next) => (action) => {
-    if (typeof action === 'function') {
-      return action(dispatch, getState, extraArgument);
-    }
+  return ({ dispatch, getState }) =>
+    (next) =>
+    (action) => {
+      if (typeof action === 'function') {
+        return action(dispatch, getState, extraArgument);
+      }
 
-    return next(action);
-  };
+      return next(action);
+    };
 }
 
 const thunk = createThunkMiddleware();

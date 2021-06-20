@@ -38,9 +38,8 @@ const InstallPlanPreview: React.FC<InstallPlanPreviewModalProps> = ({ cancel, st
   );
 };
 
-export const installPlanPreviewModal = createModalLauncher<InstallPlanPreviewModalProps>(
-  InstallPlanPreview,
-);
+export const installPlanPreviewModal =
+  createModalLauncher<InstallPlanPreviewModalProps>(InstallPlanPreview);
 
 export type InstallPlanPreviewModalProps = {
   stepResource: StepResource;

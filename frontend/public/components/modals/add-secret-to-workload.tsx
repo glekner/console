@@ -272,9 +272,8 @@ export class AddSecretToWorkloadModalWithTrans extends React.Component<
 
 const AddSecretToWorkloadModal = withTranslation()(AddSecretToWorkloadModalWithTrans);
 
-export const configureAddSecretToWorkloadModal = createModalLauncher<AddSecretToWorkloadModalProps>(
-  AddSecretToWorkloadModal,
-);
+export const configureAddSecretToWorkloadModal =
+  createModalLauncher<AddSecretToWorkloadModalProps>(AddSecretToWorkloadModal);
 
 type WorkloadItem = {
   model: K8sKind;

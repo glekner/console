@@ -22,12 +22,12 @@ export abstract class Wrapper<RESOURCE extends {}, SELF extends Wrapper<RESOURCE
 
       _.merge(this.data, _.cloneDeep(update)); // clone to dispose of all old references
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   }
 
   omitEmpty = (path?: string[] | string, justUndefined = true) => {
     omitEmpty(path ? this.getIn(path) : this.data, justUndefined);
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   protected get = (key: string) => (this.data && key ? this.data[key] : null);
@@ -47,7 +47,7 @@ export abstract class Wrapper<RESOURCE extends {}, SELF extends Wrapper<RESOURCE
         delete parent[childKey];
       }
     }
-    return (this as any) as SELF;
+    return this as any as SELF;
   };
 
   protected uncheckedData = () => this.data as any;

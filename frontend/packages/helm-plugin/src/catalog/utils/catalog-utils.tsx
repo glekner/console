@@ -30,16 +30,8 @@ export const normalizeHelmCharts = (
       const chartRepositoryTitle = getChartRepositoryTitle(chartRepositories, chartRepoName);
 
       charts.forEach((chart: HelmChartMetaData) => {
-        const {
-          name,
-          digest,
-          created,
-          version,
-          appVersion,
-          description,
-          keywords,
-          annotations,
-        } = chart;
+        const { name, digest, created, version, appVersion, description, keywords, annotations } =
+          chart;
 
         const annotatedName = annotations?.[CHART_NAME_ANNOTATION] ?? '';
         const providerType = annotations?.[PROVIDER_TYPE_ANNOTATION] ?? '';
@@ -64,6 +56,7 @@ export const normalizeHelmCharts = (
         const maintainers = chart.maintainers?.length > 0 && (
           <>
             {chart.maintainers?.map((maintainer, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
                 {maintainer.name}
                 <br />

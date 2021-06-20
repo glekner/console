@@ -137,9 +137,8 @@ const CreateSnapshotForm = withHandlePromise<SnapshotResourceProps>((props) => {
   const [snapshotName, setSnapshotName] = React.useState(`${pvcName || 'pvc'}-snapshot`);
   const [snapshotClassName, setSnapshotClassName] = React.useState('');
   const [vscObj, , vscErr] = useK8sGet<ListKind<VolumeSnapshotClassKind>>(VolumeSnapshotClassModel);
-  const [scObjList, scObjListLoaded, scObjListErr] = useK8sGet<ListKind<StorageClassResourceKind>>(
-    StorageClassModel,
-  );
+  const [scObjList, scObjListLoaded, scObjListErr] =
+    useK8sGet<ListKind<StorageClassResourceKind>>(StorageClassModel);
   const title = t('console-app~Create VolumeSnapshot');
   const resourceWatch = React.useMemo(() => {
     return Object.assign(
@@ -154,13 +153,16 @@ const CreateSnapshotForm = withHandlePromise<SnapshotResourceProps>((props) => {
 
   const [data, loaded, loadError] = useK8sWatchResource<PersistentVolumeClaimKind[]>(resourceWatch);
   const scList = scObjListLoaded ? scObjList.items : [];
-  const provisioner = scList.find((sc) => sc.metadata.name === pvcObj?.spec?.storageClassName)
-    ?.provisioner;
+  const provisioner = scList.find(
+    (sc) => sc.metadata.name === pvcObj?.spec?.storageClassName,
+  )?.provisioner;
   const snapshotClassFilter = React.useCallback(
     (snapshotClass: VolumeSnapshotClassKind) => provisioner?.includes(snapshotClass?.driver),
     [provisioner],
   );
-  const vscList = vscObj?.items || [];
+  const vscList = React.useMemo(() => {
+    return vscObj?.items || [];
+  }, [vscObj?.items]);
   const getDefaultItem = React.useCallback(
     (snapFilter) => {
       const filteredVSC = vscList.filter(snapFilter);

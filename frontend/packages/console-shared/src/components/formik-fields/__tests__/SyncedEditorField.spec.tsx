@@ -48,12 +48,7 @@ describe('DropdownField', () => {
   it('should render radio group field inline', () => {
     const wrapper = shallow(<SyncedEditorField {...props} />);
     expect(wrapper.find(RadioGroupField).exists()).toBe(true);
-    expect(
-      wrapper
-        .find(RadioGroupField)
-        .first()
-        .props().isInline,
-    ).toBe(true);
+    expect(wrapper.find(RadioGroupField).first().props().isInline).toBe(true);
   });
 
   it('should render dynamic form field if initial editor type is form', () => {
@@ -71,12 +66,7 @@ describe('DropdownField', () => {
     const newProps = _.cloneDeep(props);
     newProps.yamlContext.isDisabled = true;
     const wrapper = shallow(<SyncedEditorField {...newProps} />);
-    expect(
-      wrapper
-        .find(RadioGroupField)
-        .first()
-        .props().options[1].isDisabled,
-    ).toBe(true);
+    expect(wrapper.find(RadioGroupField).first().props().options[1].isDisabled).toBe(true);
   });
 
   it('should show an alert if form context is disaled', () => {
@@ -84,11 +74,8 @@ describe('DropdownField', () => {
     newProps.formContext.isDisabled = true;
     const wrapper = shallow(<SyncedEditorField {...newProps} />);
     expect(wrapper.find(Alert).exists()).toBe(true);
-    expect(
-      wrapper
-        .find(Alert)
-        .first()
-        .props().title,
-    ).toBe(`${i18nNS}~Form view is disabled for this chart because the schema is not available`);
+    expect(wrapper.find(Alert).first().props().title).toBe(
+      `${i18nNS}~Form view is disabled for this chart because the schema is not available`,
+    );
   });
 });

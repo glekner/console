@@ -1,4 +1,4 @@
-import { alignWithDNS1123 } from '@console/shared/src';
+import { alignWithDNS1123 } from '@console/dynamic-plugin-sdk';
 
 /**
  * Based on V2V Provider Pod manifest.yaml

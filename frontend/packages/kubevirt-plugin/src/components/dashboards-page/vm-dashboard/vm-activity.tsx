@@ -2,22 +2,24 @@ import * as React from 'react';
 import { CardActions } from '@patternfly/react-core';
 import { useTranslation } from 'react-i18next';
 import {
+  getName,
+  getNamespace,
+  DashboardCard,
+  DashboardCardBody,
+  DashboardCardHeader,
+  DashboardCardLink,
+  DashboardCardTitle,
+  ActivityBody,
+  PauseButton,
+  RecentEventsBodyContent,
+} from '@console/dynamic-plugin-sdk';
+import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
 import { FirehoseResource, FirehoseResult, resourcePath } from '@console/internal/components/utils';
 import { EventModel } from '@console/internal/models';
 import { EventKind } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared';
-import ActivityBody, {
-  PauseButton,
-  RecentEventsBodyContent,
-} from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
-import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
-import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
-import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
-import DashboardCardLink from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardLink';
-import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import { VirtualMachineInstanceModel, VirtualMachineModel } from '../../../models';
 import { kubevirtReferenceForModel } from '../../../models/kubevirtReferenceForModel';
 import { getVmEventsFilters } from '../../../selectors/event';

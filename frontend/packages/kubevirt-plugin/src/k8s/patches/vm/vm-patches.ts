@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
+import { getLabels, PatchBuilder } from '@console/dynamic-plugin-sdk';
 import { K8sResourceKind, Patch, TemplateKind } from '@console/internal/module/k8s';
-import { getLabels } from '@console/shared/src';
-import { PatchBuilder } from '@console/shared/src/k8s';
 import { TEMPLATE_FLAVOR_LABEL, TEMPLATE_VM_SIZE_LABEL } from '../../../constants';
 import { isTemplate, isVM } from '../../../selectors/check-type';
 import { getAnnotations, getDescription } from '../../../selectors/selectors';

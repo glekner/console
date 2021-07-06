@@ -1,4 +1,3 @@
-import { K8sKind, K8sResourceCommon, OwnerReference } from '@console/internal/module/k8s';
 /* eslint-disable lines-between-class-members */
 import {
   getAnnotations,
@@ -8,8 +7,9 @@ import {
   getNamespace,
   getOwnerReferences,
   hasLabel,
-} from '@console/shared/src';
-import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
+  compareOwnerReference,
+} from '@console/dynamic-plugin-sdk';
+import { K8sKind, K8sResourceCommon, OwnerReference } from '@console/internal/module/k8s';
 import { K8sResourceKindMethods } from '../types/types';
 import { clearRuntimeMetadata, initK8sObject, K8sInitAddon } from './util/k8s-mixin';
 import { Wrapper } from './wrapper';

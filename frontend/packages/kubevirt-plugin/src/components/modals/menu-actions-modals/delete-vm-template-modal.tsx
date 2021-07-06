@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import { getName, getNamespace, YellowExclamationTriangleIcon } from '@console/dynamic-plugin-sdk';
 import {
   createModalLauncher,
   ModalBody,
@@ -10,8 +11,6 @@ import {
 import { HandlePromiseProps, withHandlePromise } from '@console/internal/components/utils';
 import { TemplateModel } from '@console/internal/models';
 import { apiVersionForModel, TemplateKind } from '@console/internal/module/k8s';
-import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
-import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { useOwnedVolumeReferencedResources } from '../../../hooks/use-owned-volume-referenced-resources';
 import { useUpToDateVMLikeEntity } from '../../../hooks/use-vm-like-entity';
 import { deleteVMTemplate } from '../../../k8s/requests/vmtemplate/actions';

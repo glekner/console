@@ -1,6 +1,5 @@
 /* eslint-disable lines-between-class-members */
-import { getName, getNamespace } from '@console/shared/src';
-import { ObjectEnum } from '@console/shared/src/constants/object-enum';
+import { ObjectEnum, getName, getNamespace } from '@console/dynamic-plugin-sdk';
 import { StorageUISource } from '../../components/modals/disk-modal/storage-ui-source';
 import { DataVolumeWrapper } from '../../k8s/wrapper/vm/data-volume-wrapper';
 import { VolumeWrapper } from '../../k8s/wrapper/vm/volume-wrapper';

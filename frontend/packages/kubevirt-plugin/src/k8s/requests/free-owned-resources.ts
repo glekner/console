@@ -1,7 +1,9 @@
+import {
+  getOwnerReferences,
+  PatchBuilder,
+  compareOwnerReference,
+} from '@console/dynamic-plugin-sdk';
 import { k8sKill, k8sPatch, OwnerReference } from '@console/internal/module/k8s';
-import { getOwnerReferences } from '@console/shared/src';
-import { PatchBuilder } from '@console/shared/src/k8s';
-import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { K8sResourceWithModel } from '../../types/k8s-resource-with-model';
 
 export const freeOwnedResources = async (

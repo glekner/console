@@ -1,8 +1,6 @@
+import { getName, PatchBuilder, compareOwnerReference } from '@console/dynamic-plugin-sdk';
 import { DeploymentModel, RoleModel } from '@console/internal/models';
 import { ConfigMapKind, DeploymentKind, K8sResourceCommon } from '@console/internal/module/k8s';
-import { getName } from '@console/shared/src';
-import { PatchBuilder } from '@console/shared/src/k8s';
-import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { VMImportProvider } from 'packages/kubevirt-plugin/src/components/create-vm-wizard/types';
 import { V2VVMWARE_DEPLOYMENT_NAME } from '../../../constants/v2v';
 import { getContainerImage } from '../../../selectors/pod/container';

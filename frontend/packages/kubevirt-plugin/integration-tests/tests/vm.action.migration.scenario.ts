@@ -1,13 +1,11 @@
 import { $, browser, ExpectedConditions as until } from 'protractor';
 import {
-  detailViewAction,
-  getDetailActionDropdownOptions,
-} from '@console/shared/src/test-utils/actions.view';
-import {
   click,
   deleteResource,
   waitForStringInElement,
-} from '@console/shared/src/test-utils/utils';
+  detailViewAction,
+  getDetailActionDropdownOptions,
+} from '@console/dynamic-plugin-sdk';
 import { confirmButton } from '../views/uiResource.view';
 import { vmDetailNode } from '../views/virtualMachine.view';
 import { getBasicVMBuilder } from './mocks/vmBuilderPresets';

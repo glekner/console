@@ -1,6 +1,5 @@
+import { getName, ObjectEnum } from '@console/dynamic-plugin-sdk';
 import { TemplateKind } from '@console/internal/module/k8s';
-import { getName } from '@console/shared/src';
-import { ObjectEnum } from '@console/shared/src/constants/object-enum';
 import { isUpstream } from '../../utils/common';
 
 export class OSSelection extends ObjectEnum<string> {

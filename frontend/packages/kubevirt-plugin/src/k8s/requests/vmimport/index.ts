@@ -1,5 +1,5 @@
+import { getDeletetionTimestamp, getName, getNamespace } from '@console/dynamic-plugin-sdk';
 import { k8sGet, k8sKill } from '@console/internal/module/k8s';
-import { getDeletetionTimestamp, getName, getNamespace } from '@console/shared/src';
 import { VirtualMachineImportModel, VirtualMachineModel } from '../../../models';
 import { getKubevirtAvailableModel } from '../../../models/kubevirtReferenceForModel';
 import { VMKind } from '../../../types/vm';

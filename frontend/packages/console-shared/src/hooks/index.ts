@@ -32,3 +32,5 @@ export * from './useScrollContainer';
 export * from './useEventListener';
 export * from './useTelemetry';
 export * from './useForceRender';
+export * from './previous';
+export * from './useK8sModel';

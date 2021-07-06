@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
+import { asyncForEach, createResource, deleteResource } from '@console/dynamic-plugin-sdk';
 import { testName } from '@console/internal-integration-tests/protractor.conf';
 import { isLoaded, resourceTitle } from '@console/internal-integration-tests/views/crud.view';
-import { asyncForEach, createResource, deleteResource } from '@console/shared/src/test-utils/utils';
 import * as vmView from '../views/virtualMachine.view';
 import { vmiDetailFlavor } from '../views/virtualMachineInstance.view';
 import { getVMIManifest } from './mocks/mocks';

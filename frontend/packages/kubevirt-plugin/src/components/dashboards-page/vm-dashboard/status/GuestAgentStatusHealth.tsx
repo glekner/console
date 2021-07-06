@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { OffIcon } from '@patternfly/react-icons';
 import { useTranslation } from 'react-i18next';
+import { HealthState, HealthItem } from '@console/dynamic-plugin-sdk';
 import { VMIKind } from '@console/kubevirt-plugin/src/types';
-import HealthItem from '@console/shared/src/components/dashboard/status-card/HealthItem';
-import { HealthState } from '@console/shared/src/components/dashboard/status-card/states';
 import {
   isGuestAgentInstalled,
   isGuestAgentVersionSupported,

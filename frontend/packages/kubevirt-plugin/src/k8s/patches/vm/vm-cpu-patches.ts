@@ -1,5 +1,5 @@
+import { PatchBuilder } from '@console/dynamic-plugin-sdk';
 import { Patch } from '@console/internal/module/k8s';
-import { PatchBuilder } from '@console/shared/src/k8s';
 import {
   asVM,
   getCPU,

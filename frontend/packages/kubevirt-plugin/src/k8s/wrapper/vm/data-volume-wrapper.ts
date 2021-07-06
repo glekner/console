@@ -1,5 +1,4 @@
-import { getOwnerReferences } from '@console/shared/src';
-import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
+import { getOwnerReferences, compareOwnerReference } from '@console/dynamic-plugin-sdk';
 import {
   BinaryUnit,
   stringValueUnitSplit,

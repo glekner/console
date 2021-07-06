@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
-import DashboardGrid from '@console/shared/src/components/dashboard/DashboardGrid';
+import { Dashboard, DashboardGrid } from '@console/dynamic-plugin-sdk';
 import { isVM, isVMI } from '../../selectors/check-type';
 import { asVM } from '../../selectors/vm/vmlike';
 import { getVMStatus } from '../../statuses/vm/vm-status';
